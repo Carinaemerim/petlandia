@@ -1,17 +1,24 @@
 <div th:fragment="main">
-    <footer class="main-footer">
-
-        <div class="pull-right hidden-xs">
-            <b th:text="#{footer.version}">Version</b>
-            <span th:text="#{footer.version.number}" />
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <h3 class="title"><i class="fa fa-paw"></i>PetLandia</h3>
+                </div>
+                <div class="col-md-3">
+                    <b th:text="#{footer.version}">Version</b>
+                    <span th:text="#{footer.version.number}" />
+                </div>
+                <div class="col-md-3">
+                    <strong>
+                        <span th:text="#{footer.copyrights}" />
+                        <a href="http://canoas.ifrs.edu.br"> <span th:text="#{ifrs}" /></a>.
+                    </strong>
+                </div>
+                <div class="col-md-3">
+                    <span th:text="#{footer.copyrights.pt}" />
+                </div>
+            </div>
         </div>
-
-        <strong>
-            <span th:text="#{footer.copyrights}" />
-            <a href="http://canoas.ifrs.edu.br"> <span th:text="#{ifrs}" /></a>.
-        </strong>
-
-        <span th:text="#{footer.copyrights.pt}" />
-
     </footer>
 </div>

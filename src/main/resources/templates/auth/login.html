@@ -3,66 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml"layouts>
 
 <head th:include="/layouts/fragments/scripts :: head" />
-
-<style>
-div {
-	background-color: white;
-}
-</style>
-
-<body class="hold-transition login-page">
-	<div class="login-box">
-
-		<!-- /.login-logo -->
-		<div class="login-box-body">
-            <img th:src="@{/img/canoasLogo.jpg}" style="width: 80%"/>
-			<p class="login-box-msg" th:text="#{login.info}"></p>
-
-			<form name="f" th:action="@{/login}" method="post"
-				class="form-signin">
-
-				<div th:if="${param.error}" class="alert alert-danger"
-					th:text="#{login.error}"></div>
-
-				<div th:if="${param.logout}" class="alert alert-success"
-					th:text="#{login.disconnect}"></div>
-
-				<div class="form-group has-feedback">
-					<input type="text" id="username" name="username"
-						class="form-control" th:placeholder="#{login.user}"
-						required="true" /> <span
-						class="glyphicon glyphicon-user form-control-feedback"></span>
-				</div>
-
-				<div class="form-group has-feedback">
-					<input type="password" id="password" name="password"
-						class="form-control" th:placeholder="#{login.password}"
-						required="true" /> <span
-						class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-8"></div>
-
-					<!-- /.col -->
-					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat" id="submit-button"
-							th:text="#{login.enter}"></button>
+	<body class="login-page">
+		<div class="content">
+			<div class="col-md-4 ml-auto mr-auto">
+				<div class="card card-login card-plain">
+					<div class="card-header text-center">
+						<img class="card-img" src="/photos/dogs.jpg" alt="Card image">
+						<h4 class="card-title"> <i class="fa fa-paw"></i> Entrar na PetLandia</h4>
 					</div>
-
-					<!-- /.col -->
+					<div class="card-body">
+						<form class="form" th:action="@{/login}" method="post">
+							<div class="input-group">
+								<div class="input-group-prepend">
+								</div>
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="tim-icons icon-user-run"></i>
+									</div>
+								</div>
+								<input type="text" placeholder="username" class="form-control"
+									   th:placeholder="#{login.user}" required="true" name="username">
+							</div>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="tim-icons icon-lock-circle"></i>
+									</div>
+								</div>
+								<input type="password" class="form-control" placeholder="password"
+									   th:placeholder="#{login.password}" required="true" name="password">
+							</div>
+							<div class="card-footer text-center">
+								<button type="submit" class="btn btn-info btn-round btn-lg text"
+										id="submit-button" th:text="#{login.enter}"> </button>
+							</div>
+						</form>
+					</div>
 				</div>
-			</form>
-
-			<!-- /.social-auth-links -->
+			</div>
 		</div>
 
-		<!-- /.login-box-body -->
-	</div>
-
-	<!-- /.login-box -->
-	<div th:include="/layouts/fragments/scripts :: javascripts" />
-
-</body>
+	<head th:include="/layouts/fragments/scripts :: javascripts" />
+	</body>
 
 </html>
