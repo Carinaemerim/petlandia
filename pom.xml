@@ -244,6 +244,11 @@
             <version>1.4.01</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>select2</artifactId>
+            <version>4.0.5</version>
+        </dependency>
         <!-- FIM FLUENTLENIUM -->
 
     </dependencies>

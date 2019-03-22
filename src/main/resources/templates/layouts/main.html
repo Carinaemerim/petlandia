@@ -3,9 +3,9 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-	<head th:insert="/layouts/fragments/scripts :: head" />
+	<head th:include="/layouts/fragments/scripts :: head" />
 	<body class="landing-page">
-	<div th:insert="/layouts/fragments/static-top :: main"/>
+	<div th:include="/layouts/fragments/static-top :: main"/>
 	<div class="wrapper">
 		<div id="content-header">
 			<div layout:fragment="content-header"></div>
@@ -15,9 +15,9 @@
 		<div id="content-body">
 			<div layout:fragment="content-body"></div>
 		</div>
-		<div th:insert="/layouts/fragments/footer :: main"/>
+		<footer th:include="/layouts/fragments/footer :: main"/>
 	</div>
-		<div th:insert="/layouts/fragments/scripts :: javascripts"/>
+		<div th:include="/layouts/fragments/scripts :: javascripts"/>
 
 	</body>
 </html>

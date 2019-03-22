@@ -15,7 +15,4 @@ public class HomeController {
 		return new ModelAndView("/index");
 	}
 
-	@GetMapping("/dashboard")
-		public ModelAndView dashboard() { return new ModelAndView("/LandingPage"); }
-
 }
