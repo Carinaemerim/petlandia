@@ -48,6 +48,7 @@ public class MVCConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setDefaultEncoding("utf-8");
         messageSource.setBasenames("classpath:messages", "classpath:ValidationMessages");
         return messageSource;
     }

@@ -40,13 +40,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
-                      <h3 class="title"> Sobre nós </h3>
+                      <h3 class="title" th:text="#{text.about}"></h3>
                     </div>
-                    <h4 class="description">
-                        Seja muito bem-vindo! Somos o PetLandia e nosso
-                        objetivo é auxiliar a encontrar um lar para todos os animais que
-                        conseguirmos.
-                        Temos um ótimo cardápio de amigos aqui, divirta-se!
+                    <h4 class="description" th:text="#{text.us}">
                     </h4>
                 </div>
             </div>
@@ -57,14 +53,14 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <label for="filtroCidade"> Escolha a cidade: </label>
+                    <label for="filtroCidade" th:text="#{filter.type.city}"> </label>
                     <select id="filtroCidade">
                         <option></option>
                         <option value="1"> Canoas </option>
                         <option value="2"> Porto Alegre </option>
                         <option value="3"> Sapucaia Do Sul </option>
                     </select>
-                    <label for="filtroTipo" class="ml-5"> Escolha o Tipo do Animal: </label>
+                    <label for="filtroTipo" th:text="#{filter.type.animal}" class="ml-5"> </label>
                     <select id="filtroTipo">
                         <option></option>
                         <option value="1"> Cão </option>
@@ -91,7 +87,7 @@
                         <p> Nome da cidade </p>
                         <div class="text-center mt-5">
                             <button class="btn btn-primary btn-round" type="button">
-                                <i class="tim-icons icon-heart-2"></i> Ver Detalhes
+                                <i class="tim-icons icon-heart-2" th:text="#{button.detail}"></i>
                             </button>
                         </div>
                     </div>

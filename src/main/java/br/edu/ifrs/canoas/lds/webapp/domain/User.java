@@ -3,12 +3,7 @@ package br.edu.ifrs.canoas.lds.webapp.domain;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -41,5 +36,9 @@ public class User {
 	private String skill;
     @OneToOne
     private File picture;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="user_id")
+	private Set<Announce> announces;
 
 }
