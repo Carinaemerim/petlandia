@@ -3,8 +3,8 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="https://demos.creative-tim.com/blk-design-system/index.html" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-                    <i class="fa fa-paw"></i> <span> PetLandia </span> Adote um amigo.
+                <a class="navbar-brand" href="/" rel="tooltip"  data-placement="bottom">
+                    <i class="fa fa-paw"></i> <span th:text="#{login.title}"></span>
                 </a>
                 <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
@@ -16,8 +16,7 @@
                 <div class="navbar-collapse-header">
                     <div class="row">
                         <div class="col-6 collapse-brand">
-                            <a>
-                                PetLandia
+                            <a th:text="#{login.title1}">
                             </a>
                         </div>
                         <div class="col-6 collapse-close text-right">
@@ -29,30 +28,42 @@
                 </div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="criarAnuncio" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i> Criar Anúncio </i>
+                        <a class="nav-link" rel="tooltip" title="criarAnuncio" href="/criaranuncio">
+                            <i th:text="#{menu.create}"> </i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="dashboard" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i> Ver Anúncios </i>
+                        <a class="nav-link" rel="tooltip" title="dashboard" href="/">
+                            <i th:text="#{menu.dashboard}"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="faleconosco" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i> Fale Conosco </i>
+                        <a class="nav-link" rel="tooltip" title="faleconosco" href="/faleconosco">
+                            <i th:text="#{menu.speak}"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="login" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i> Login </i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="logout" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i> Log Out </i>
-                        </a>
-                    </li>
+                    <div sec:authorize="isAnonymous()">
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="login" href="/login">
+                                <i th:text="#{menu.login}"></i>
+                            </a>
+                        </li>
+                    </div>
+
+                    <div sec:authorize="isAuthenticated()">
+
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="logout" href="/logout">
+                                <i th:text ="${#authentication.getPrincipal().getUser().getUsername()}"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="logout" href="/logout">
+                                <i th:text="#{menu.logout}"></i>
+                            </a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>

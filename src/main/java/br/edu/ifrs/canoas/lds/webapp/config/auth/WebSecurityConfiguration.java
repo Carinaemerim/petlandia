@@ -39,7 +39,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
             //Se especifica múltiplos padrões de URL autorizados para qualquer usuário autenticado
             //Independente da role, todos usuários tem acesso a essas requisições abaixo
-            .antMatchers("/login**", "/dist/**", "/webjars**", "/db/**").permitAll()
+            .antMatchers("/login**", "/dist/**", "/webjars**", "/db/**", "/**").permitAll()
             //Apenas usuários ROLE_ADMIN tem acesso ao subdomínio localhost:8080/admin
             .antMatchers("/admin/**").hasRole("ADMIN")
             //Qualquer URL que não foi previamente mapeada necessita que o usuário seja autenticado
@@ -51,7 +51,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
         .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout")
+            .logoutSuccessUrl("/")
             .invalidateHttpSession(true) //Invalidar a HttpSession durante o logout.
             .and()
         .csrf()

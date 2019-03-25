@@ -62,9 +62,10 @@
                     </select>
                     <label for="filtroTipo" th:text="#{filter.type.animal}" class="ml-5"> </label>
                     <select id="filtroTipo">
-                        <option></option>
-                        <option value="1"> Cão </option>
-                        <option value="2"> Gato </option>
+                        <option value=""></option>
+                        <th:block th:each="animalType : ${animalTypes}">
+                            <option value="1" th:value="${animalType.id}" th:text="${animalType.name}"> Cão </option>
+                        </th:block>
                     </select>
                 </div>
             </div>
@@ -72,53 +73,33 @@
     </section>
 
 
-    <section class="section section-lg section-safe" style="z-index:-99999999999">
-        <img src="/blk/blk-design-system-master/assets/img/path5.png" class="path">
-        <div class="container">
-            <div class="row row-grid justify-content-between">
-                <div class="col-md-5">
-                    <img src="/photos/dogs.jpg" class="img-fluid floating">
-                </div>
-                <div class="col-md-6">
-                    <div class="px-md-5">
-                        <hr class="line-success">
-                        <h3>Nome do Doggo</h3>
-                        <p> Tipo do animal vai aqui </p>
-                        <p> Nome da cidade </p>
-                        <div class="text-center mt-5">
-                            <button class="btn btn-primary btn-round" type="button">
-                                <i class="tim-icons icon-heart-2" th:text="#{button.detail}"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <section class="section section-lg section-safe">
+    <th:block th:each="announce : ${announces.getContent()}">
+        <div class="section section-lg section-safe">
             <img src="/blk/blk-design-system-master/assets/img/path5.png" class="path">
             <div class="container">
                 <div class="row row-grid justify-content-between">
                     <div class="col-md-5">
-                        <img src="/photos/dogs.jpg" class="img-fluid floating">
+                        <img src="/photos/dogs.jpg" th:src="${announce.photo.getPictureBase64()}"
+                             class="img-fluid floating">
                     </div>
                     <div class="col-md-6">
                         <div class="px-md-5">
                             <hr class="line-success">
-                            <h3>Nome do Doggo</h3>
-                            <p> Tipo do animal vai aqui </p>
-                            <p> Aqui vai uma descrição do animal, e primeiramente ira um lore ypsum apenas para teste
-                                porque ta tudo estatico então né.</p>
+                            <h3 th:text="${announce.name}">Nome do Doggo</h3>
+                            <p th:text="${announce.type.name}"> Tipo do animal vai aqui </p>
+                            <p th:text="${announce.size}"> Porte </p>
+                            <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data </p>
+                            <p th:text="${announce.city}"> Nome da cidade </p>
                             <div class="text-center mt-5">
-                                <button class="btn btn-primary btn-round" type="button">
-                                    <i class="tim-icons icon-heart-2"></i> Ver Detalhes
-                                </button>
+                                <a class="btn btn-primary btn-round" style="position:relative; z-index: 1"
+                                   th:href="@{/announce/details(id = ${announce.id})}">
+                                    <i class="tim-icons icon-heart-2" th:text="#{button.detail}"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-    </section>
+    </th:block>
 </div>
