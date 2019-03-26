@@ -1,4 +1,4 @@
-<html layout:decorate="~{/layouts/main}">
+<html layout:decorate="~{/layouts/main}" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title th:text="#{item.header}"/>
@@ -53,13 +53,15 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <label for="filtroCidade" th:text="#{filter.type.city}"> </label>
+
+                    <label for="filtroCidade" th:text="#{filter.type.city}" class="ml-5"> </label>
                     <select id="filtroCidade">
-                        <option></option>
-                        <option value="1"> Canoas </option>
-                        <option value="2"> Porto Alegre </option>
-                        <option value="3"> Sapucaia Do Sul </option>
+                        <option value=""></option>
+                        <th:block th:each="city : ${cities}">
+                            <option value="2" th:value="${city.id}" th:text="${city.description}"> Canoas </option>
+                        </th:block>
                     </select>
+
                     <label for="filtroTipo" th:text="#{filter.type.animal}" class="ml-5"> </label>
                     <select id="filtroTipo">
                         <option value=""></option>
@@ -74,9 +76,8 @@
 
 
     <th:block th:each="announce : ${announces.getContent()}">
-        <div class="section section-lg section-safe">
-            <img src="/blk/blk-design-system-master/assets/img/path5.png" class="path">
-            <div class="container">
+            <img class="path">
+            <div class="container" style="padding-top: 30px">
                 <div class="row row-grid justify-content-between">
                     <div class="col-md-5">
                         <img src="/photos/dogs.jpg" th:src="${announce.photo.getPictureBase64()}"
@@ -85,11 +86,14 @@
                     <div class="col-md-6">
                         <div class="px-md-5">
                             <hr class="line-success">
+                            <span th:text="#{announce.name}"></span>
                             <h3 th:text="${announce.name}">Nome do Doggo</h3>
-                            <p th:text="${announce.type.name}"> Tipo do animal vai aqui </p>
-                            <p th:text="${announce.size}"> Porte </p>
-                            <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data </p>
-                            <p th:text="${announce.city}"> Nome da cidade </p>
+                            <span th:text="#{announce.type}"></span>
+                                <p th:text="${announce.type.name}"> Tipo do animal vai aqui </p>
+                            <span th:text="#{announce.size}"></span>
+                                <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data </p>
+                            <span th:text="#{announce.city}"></span>
+                                <p th:text="${announce.city.description}"> Nome da cidade </p>
                             <div class="text-center mt-5">
                                 <a class="btn btn-primary btn-round" style="position:relative; z-index: 1"
                                    th:href="@{/announce/details(id = ${announce.id})}">
@@ -100,6 +104,28 @@
                     </div>
                 </div>
             </div>
-        </section>
     </th:block>
+    <div>
+        <ul class="pagination" style="float: right">
+            <li class="page-item">
+                <a class="page-link" href="#link" aria-label="Previous">
+                    <span aria-hidden="true"><i class="tim-icons icon-double-left" aria-hidden="true"></i></span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/?page=1">1</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="/?page=2">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/?page=3">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/?page=1" aria-label="Next">
+                    <span aria-hidden="true"><i class="tim-icons icon-double-right" aria-hidden="true"></i></span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

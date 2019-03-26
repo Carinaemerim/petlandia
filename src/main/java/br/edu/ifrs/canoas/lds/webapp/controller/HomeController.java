@@ -2,6 +2,7 @@ package br.edu.ifrs.canoas.lds.webapp.controller;
 
 import br.edu.ifrs.canoas.lds.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.lds.webapp.domain.Announce;
+import br.edu.ifrs.canoas.lds.webapp.domain.City;
 import br.edu.ifrs.canoas.lds.webapp.service.AnnounceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,7 @@ public class HomeController {
 		Page<Announce> announces = announceService.findAll(page);
 
 		List<AnimalType> animalTypes = announceService.getAnimalTypes();
+		List<City> cities = announceService.getCityTypes();
 
 
 		ModelAndView mav = new ModelAndView("/index");
@@ -40,6 +42,7 @@ public class HomeController {
 		mav.addObject("announces", announces);
 		mav.addObject("currentPage", page);
 		mav.addObject("animalTypes", animalTypes);
+		mav.addObject("cities", cities);
 
 		return mav;
 	}
