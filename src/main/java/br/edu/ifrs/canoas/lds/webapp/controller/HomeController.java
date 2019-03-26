@@ -23,15 +23,8 @@ public class HomeController {
 	private final AnnounceService announceService;
 
 	@GetMapping("/")
-	public ModelAndView greetings(@RequestParam(value = "page", defaultValue = "1") int page) {
+	public ModelAndView greetings() {
 
-		page -= 1;
-
-		if(page < 0){
-			page=0;
-		}
-
-		Page<Announce> announces = announceService.findAll(page);
 
 		List<AnimalType> animalTypes = announceService.getAnimalTypes();
 		List<City> cities = announceService.getCityTypes();
@@ -39,14 +32,11 @@ public class HomeController {
 
 		ModelAndView mav = new ModelAndView("/index");
 
-		mav.addObject("announces", announces);
-		mav.addObject("currentPage", page);
 		mav.addObject("animalTypes", animalTypes);
 		mav.addObject("cities", cities);
 
 		return mav;
 	}
-
 
 
 }

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-//TODO RGN02
+//TODO RNG02
 public interface AnimalTypeRepository extends JpaRepository<AnimalType, Long> {
     List<AnimalType> findAllByOrderByNameAsc();
 

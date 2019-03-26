@@ -1,0 +1,50 @@
+<th:block th:each="announce : ${announces.getContent()}">
+    <img class="path">
+    <div class="container" style="padding-top: 30px">
+        <div class="row row-grid justify-content-between">
+            <div class="col-md-5">
+                <img src="/photos/dogs.jpg" th:src="${announce.photo.getPictureBase64()}"
+                     class="img-fluid floating">
+            </div>
+            <div class="col-md-6">
+                <div class="px-md-5">
+                    <hr class="line-success">
+                    <span th:text="#{announce.name}"></span>
+                    <h3 th:text="${announce.name}">Nome do Doggo</h3>
+                    <span th:text="#{announce.type}"></span>
+                    <p th:text="${announce.type.name}"> Tipo do animal vai aqui </p>
+                    <span th:text="#{announce.size}"></span>
+                    <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data </p>
+                    <span th:text="#{announce.city}"></span>
+                    <p th:text="${announce.city.description}"> Nome da cidade </p>
+                    <div class="text-center mt-5">
+                        <a class="btn btn-primary btn-round" style="position:relative; z-index: 1"
+                           th:href="@{/announce/details(id = ${announce.id})}">
+                            <i class="tim-icons icon-heart-2" th:text="#{button.detail}"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+<div>
+    <div class="container">
+        <ul class="pagination pull-right"  th:if="${announces.getNumberOfElements() > 0}">
+            <li class="page-item" th:if="${currentPage > 1}">
+                <a class="page-link" href="#"
+                   th:text="${currentPage -1}">1</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#"
+                   th:text="${currentPage}">1</a>
+            </li>
+            <li class="page-item" th:if="${currentPage < announces.getTotalPages()}">
+                <span class="page-link" href="#"
+                   th:text="${currentPage + 1}">1</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--MSG005 -->
+<h1 class="text-center" th:if="${announces.getNumberOfElements() <= 0}">Não existem mais Anúncios </h1>

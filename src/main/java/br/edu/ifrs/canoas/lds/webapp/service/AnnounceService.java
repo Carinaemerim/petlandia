@@ -28,16 +28,19 @@ public class AnnounceService {
 
     public Page<Announce> findAll(int pageNumber){
 
+        pageNumber -= 1;
+
         if(pageNumber < 0){
-            pageNumber = 1;
+            pageNumber = 0;
         }
 
+        //TODO RNG03
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH, Sort.by("date").descending());
         return announceRepository.findAll(page);
 
     }
 
-    //TODO RGN02
+    //TODO RNG02
     public List<AnimalType> getAnimalTypes(){
         return animalTypeRepository.findAllByOrderByNameAsc();
     }
@@ -46,7 +49,7 @@ public class AnnounceService {
         return announceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
     }
 
-    //TODO RGN01
+    //TODO RNG01
     public List<City> getCityTypes() { return cityRepository.findAllByOrderByDescriptionAsc(); }
 
 
