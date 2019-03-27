@@ -20,14 +20,22 @@
 
         function reloadAnnounces(page){
 
+            //https://www.google.com/search?client=ubuntu&channel=fs&q=get+text+of+selected+option+jquery&ie=utf-8&oe=utf-8
             page = parseInt(page) || 1;
             let query = $.param({"page": page,
                 "animalTypeId": $("#filtroTipo").val(), "cityId": $("#filtroCidade").val()});
 
-            console.log(query);
+            $("#badge-label").show();
+            $("#city").text($("#filtroCidade option:selected").text());
+            $("#animal-type").text($("#filtroTipo option:selected").text());
+
+            if(!$("#filtroCidade option:selected").text() && !$("#filtroTipo option:selected").text()){
+                $("#badge-label").hide();
+            }
 
             $("#announce-list-container").load("/announce/filter?"+query, function(){
                 $(".page-link").click(function(){
+
                     $("html, body").animate({ scrollTop: 0 }, "slow");
                     reloadAnnounces($(this).text());
                 });
@@ -105,7 +113,7 @@
 
     <div class="row text-center" style="padding-top: 10px">
         <div class="col-md-12">
-            <label th:text="#{filter.who}"></label>
+            <label th:text="#{filter.who}" id="badge-label"></label>
             <a href="#" class="badge badge-primary" id="city"> Canoas </a>
             <a href="#" class="badge badge-primary" id="animal-type">Cachorro Fêmea </a>
         </div>
