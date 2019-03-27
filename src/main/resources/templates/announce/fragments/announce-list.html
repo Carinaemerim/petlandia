@@ -46,5 +46,5 @@
         </ul>
     </div>
 </div>
-<!--MSG005 -->
-<h1 class="text-center" th:if="${announces.getNumberOfElements() <= 0}">Não existem mais Anúncios </h1>
+<!--TODO MSG005 -->
+<h1 class="text-center" th:if="${announces.getNumberOfElements() <= 0}" th:text="#{announce.semAnuncios}"> </h1>

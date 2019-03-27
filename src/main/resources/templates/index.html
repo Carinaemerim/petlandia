@@ -47,6 +47,7 @@
             $("#filtroCidade, #filtroTipo").select2({
                 "language": {
                     "noResults": function(){
+                        //TODO MSG04
                         return "Não foram localizados registros. ";
                     }
                 },
@@ -82,7 +83,6 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12 align">
-
                     <label for="filtroCidade" th:text="#{filter.type.city}" class="ml-5"> </label>
                     <select id="filtroCidade">
                         <option value=""></option>
@@ -102,6 +102,15 @@
             </div>
         </div>
     </section>
+
+    <div class="row text-center" style="padding-top: 10px">
+        <div class="col-md-12">
+            <label th:text="#{filter.who}"></label>
+            <a href="#" class="badge badge-primary"> Canoas </a>
+            <a href="#" class="badge badge-primary">Cachorro Fêmea</a>
+        </div>
+    </div>
+
     <div id="announce-list-container">
 
     </div>

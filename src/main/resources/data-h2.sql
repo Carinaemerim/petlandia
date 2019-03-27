@@ -67,7 +67,7 @@ insert into announce(id, name, type_id, date, description, city_id, size, photo_
    'e carrapatos, mas agora está limpinho. Gostaria muito de encontrar um lar permanente pra ele. Ele precisa tanto ' ||
     'de uma família.' ,1,'Medio',100,100),
 (70, 'Nerinho', 1, CURRENT_TIMESTAMP, 'O Nerinho foi perdido ou abandonado no domingo dia 02/02/2013, ele é muito carinhoso ' ||
- 'e brincalhão, adora outros cães e pessoas, ele é muito lindinho.' ,3,'Medio',100,100),
+ 'e brincalhão, adora outros cães e pessoas, ele é muito lindinho.' ,3,'Medio',100,200),
 (71, 'Joey', 3, CURRENT_TIMESTAMP, 'O gato Joey apareceu no meu telhado no final de junho bem magrinho e miando muito. ' ||
  'Tiramos ele do telhado, demos água, comida e um lugar quentinho pra ele dormir, já que estava fazendo muito frio.
 Ele é dócil, falante, um pouco medroso, mas adora um cafuné. Sabe usar a caixa de areia e come ração seca numa boa.
@@ -76,4 +76,4 @@ Ele é muito fofo e inteligente. Se dá super bem com cães e gatos.' ,4,'Pequen
  ' que tenha paciência. Ela é castrada e vermifugada recentemente. Ela é irmã de criação da Felicia que também está ' ||
   'para adoção.' ,3,'Medio',100, 100),
 (73, 'Ronron', 3, CURRENT_TIMESTAMP, 'Gato calmo, bonito, gordo preciso doar pois trouxe para casa apenas para alimentar' ||
- ' e acabei ficando mas, como pátio não é meu, preciso doar' ,5,'Medio', 100, 100);
+ ' e acabei ficando mas, como pátio não é meu, preciso doar' ,5,'Medio', 100, 200);
