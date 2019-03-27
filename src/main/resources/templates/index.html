@@ -22,7 +22,7 @@
 
             page = parseInt(page) || 1;
             let query = $.param({"page": page,
-                "filtroTipo": $("#filtroTipo").val(), "filtroCidade": $("#filtroCidade").val()});
+                "animalTypeId": $("#filtroTipo").val(), "cityId": $("#filtroCidade").val()});
 
             console.log(query);
 
@@ -106,8 +106,8 @@
     <div class="row text-center" style="padding-top: 10px">
         <div class="col-md-12">
             <label th:text="#{filter.who}"></label>
-            <a href="#" class="badge badge-primary"> Canoas </a>
-            <a href="#" class="badge badge-primary">Cachorro Fêmea</a>
+            <a href="#" class="badge badge-primary" id="city"> Canoas </a>
+            <a href="#" class="badge badge-primary" id="animal-type">Cachorro Fêmea </a>
         </div>
     </div>
 
