@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.transaction.Transactional;
 
+import br.edu.ifrs.canoas.lds.webapp.domain.Announce;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,4 +68,5 @@ public class UserServiceTest {
         // then
         assertThat(saved).isNull();
     }
+
 }
