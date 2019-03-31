@@ -14,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import br.edu.ifrs.canoas.lds.webapp.service.UserDetailsImplService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -34,6 +35,8 @@ public class UserControllerTest extends BaseControllerTest{
     UserService userService;
     @MockBean
     UserImpl userImpl;
+    @MockBean
+    UserDetailsImplService userDetailsImplService;
 
     @Test
     public void view_user_profile() throws Exception{
