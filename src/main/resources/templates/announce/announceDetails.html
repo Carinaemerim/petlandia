@@ -1,0 +1,88 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+    <title th:text="#{item.header}"/>
+</head>
+<div layout:fragment="content-body">
+
+        <div class="container">
+            <div class="row justify-content-end">
+                <th:block th:if="${announce.canAlter()}">
+                    <div class="col justify-content-end btn-group">
+                        <a href="#" class="btn btn-primary btn-round"><i class="far fa-edit" th:text="#{button.edit}
+                        "></i> </a>
+                        <a href="#" class="btn btn-primary btn-round"><i class="fa fa-trash" th:text="#{button.remove}
+                        "></i> </a>
+                    </div>
+                </th:block>
+            </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0 ">
+                    <h1 class="text-white font-weight-light" th:text="${announce.name}">Nome do doggo</h1>
+                    <span th:text="#{announce.type}"></span>
+                    <p th:text="${announce.type.name}"> Tipo no animal </p>
+                    <span th:text="#{announce.size}"></span>
+                    <p th:text="${announce.size}">Porte do animal</p>
+                    <span th:text="#{announce.date}"></span>
+                    <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data Anúncio </p>
+                    <p class="text-white mt-4 text-center" th:text="${announce.description}">
+                        Inserir aqui a descrição completa do animal, texto livre.
+                    Será possível explicar onde encontrá-lo ou disponibilizar telefones, e-mails e blablabla.
+                    Poderá inserir o que achar relevante para auxiliar no processo de adoção.</p>
+
+                    <span class="center-container" th:text="#{announce.city}"> </span>
+                    <p class="text-center" th:text="${announce.city.description}"> Cidade </p>
+                    <span class="text-center" th:text="#{announce.user}"> </span>
+                    <p class="text-center" th:text="${announce.user.name}"> Autor </p>
+
+                </div>
+                <div class="col-lg-6">
+                    <div id="carouselExampleControls" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-90 p-4 img-fluid floating" src="/photos/dogs.jpg"
+                                     alt="First slide" th:src="${announce.photo.getPictureBase64()}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="card">
+                <div class="card-title">
+                    <h3 class="text-white font-weight-light" th:text="#{comment}"> </h3>
+                </div>
+                <p class="description">
+                    <label><i th:text="#{comment.info}"></i> <i> Rosa às 18:23 ------ </i></iRosa> </label> Amei.
+                </p>
+            </div>
+            <div class="card">
+                <p class="description">
+                    <label><i th:text="#{comment.info}"> </i> <i> Bidu às 17:12 ------ </i> </label> Pode disponibilizar seu e-mail, por favor?
+                </p>
+            </div>
+        </div>
+
+
+        <form class="form col-md-12" sec:authorize="isAuthenticated()">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i></i>
+                    </div>
+                </div>
+                <textarea type="text" class="form-control" placeholder="Comentário"></textarea>
+            </div>
+
+            <div class="text-center mb-5">
+                <button class="btn btn-primary btn-round" type="button">
+                    <i class="tim-icons icon-heart-2" th:text="#{button.comment}"></i>
+                </button>
+            </div>
+        </form>
+        </div>
+
+</div>
