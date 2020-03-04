@@ -2,7 +2,6 @@ package br.edu.ifrs.canoas.lds.webapp.controller;
 
 import br.edu.ifrs.canoas.lds.webapp.domain.Announce;
 import br.edu.ifrs.canoas.lds.webapp.service.AnnounceService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;

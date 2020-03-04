@@ -3,25 +3,18 @@ package br.edu.ifrs.canoas.lds.webapp.repository;
 import br.edu.ifrs.canoas.lds.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.lds.webapp.domain.Announce;
 import br.edu.ifrs.canoas.lds.webapp.domain.City;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class AnnounceRepositoryTest {
 

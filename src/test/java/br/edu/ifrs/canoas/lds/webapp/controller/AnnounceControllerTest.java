@@ -6,8 +6,7 @@ import br.edu.ifrs.canoas.lds.webapp.domain.City;
 import br.edu.ifrs.canoas.lds.webapp.domain.File;
 import br.edu.ifrs.canoas.lds.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.lds.webapp.service.UserDetailsImplService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package br.edu.ifrs.canoas.lds.webapp.web.test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.fluentlenium.core.annotation.Page;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import br.edu.ifrs.canoas.lds.webapp.web.config.MyFluentTest;
 import br.edu.ifrs.canoas.lds.webapp.web.page.LoginPage;

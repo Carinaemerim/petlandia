@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"layouts>
 
-<head th:include="/layouts/fragments/scripts :: head" />
-	<body class="login-page">
-		<div class="content">
-			<div class="col-md-4 ml-auto mr-auto">
-				<div class="card card-login card-plain">
-					<div class="card-header text-center">
-						<img class="card-img" src="/photos/dogs.jpg" alt="Card image">
-						<h4 class="card-title"> <i class="fa fa-paw" th:text="#{login.message}" ></i></h4>
-					</div>
-					<div class="card-body">
-						<form class="form" th:action="@{/login}" method="post">
-							<div class="input-group">
-								<div class="input-group-prepend">
-								</div>
-							</div>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="tim-icons icon-single-02"></i>
-									</div>
-								</div>
-								<input type="text" placeholder="username" class="form-control"
-									   th:placeholder="#{login.user}" required="true" name="username">
-							</div>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="tim-icons icon-lock-circle"></i>
-									</div>
-								</div>
-								<input type="password" class="form-control" placeholder="password"
-									   th:placeholder="#{login.password}" required="true" name="password">
-							</div>
-							<div class="card-footer text-center">
-								<button type="submit" class="btn btn-primary btn-round"
-										id="submit-button" th:text="#{login.enter}"> </button>
-							</div>
-						</form>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:include="/layouts/fragments/scripts :: head" ></head>
+
+<body class="login-page bg-login">
+<div class="login-box">
+	<div class="login-logo">
+		<span th:text="#{login.title1}">Petlandia</span> <i class="fas fa-paw"></i>
+	</div>
+	<div class="card">
+		<div class="card-body login-card-body">
+			<p class="login-box-msg" th:text="#{login.message}"></p>
+
+			<form action="" th:action="@{/login}" method="POST" autocomplete="off" id="login-user-form">
+
+				<div th:if="${param.error}" class="alert alert-danger"
+					 th:text="#{login.error}"></div>
+
+				<div th:if="${param.logout}" class="alert alert-success"
+					 th:text="#{login.disconnect}"></div>
+
+				<div class="input-group mb-3">
+					<input type="text" name="username" class="form-control" th:placeholder="#{login.user}">
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-user"></span>
+						</div>
 					</div>
 				</div>
-			</div>
+
+				<div class="input-group mb-3">
+					<input type="password" name="password" class="form-control" th:placeholder="#{login.password}">
+					<div class="input-group-append">
+						<div class="input-group-text">
+							<span class="fas fa-lock"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-4">
+					<button type="submit" class="btn btn-secondary btn-block" th:text="#{login.submit}"
+							id="submit-button"></button>
+				</div>
+
+			</form>
 		</div>
-
-	<head th:include="/layouts/fragments/scripts :: javascripts" />
-	</body>
-
+	</div>
+</div>
+<div th:include="/layouts/fragments/scripts :: javascripts" />
+</body>
 </html>

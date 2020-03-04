@@ -1,22 +1,21 @@
 package br.edu.ifrs.canoas.lds.webapp.controller;
 
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import br.edu.ifrs.canoas.lds.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.lds.webapp.domain.User;
-import lombok.Data;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public abstract class BaseControllerTest {
 
     protected static final Long   USER_ID= 101L;
@@ -31,7 +30,7 @@ public abstract class BaseControllerTest {
     protected User user;
 
 
-    @Before
+    @BeforeEach
     public void setup() {
     	user = new User();
     	user.setId(USER_ID);

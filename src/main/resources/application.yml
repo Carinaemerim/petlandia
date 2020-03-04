@@ -14,5 +14,11 @@ spring:
     hibernate:
         ddl-auto: create-drop
   datasource:
-    url: jdbc:h2:~/dev;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:./h2;DB_CLOSE_ON_EXIT=FALSE
     platform: h2
+  profiles:
+    - development
+---
+spring:
+  profiles:
+    active: development

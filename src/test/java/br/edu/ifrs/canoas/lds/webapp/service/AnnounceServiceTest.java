@@ -7,13 +7,13 @@ import br.edu.ifrs.canoas.lds.webapp.domain.City;
 import br.edu.ifrs.canoas.lds.webapp.repository.AnimalTypeRepository;
 import br.edu.ifrs.canoas.lds.webapp.repository.AnnounceRepository;
 import br.edu.ifrs.canoas.lds.webapp.repository.CityRepository;
-import org.assertj.core.internal.bytebuddy.implementation.bytecode.Throw;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
 public class AnnounceServiceTest {
@@ -41,7 +41,7 @@ public class AnnounceServiceTest {
     private static final String CITY_NAME = "my_city";
 
     @Test
-    public void testPaginationNegative(){
+    public void testPaginationNegative() {
         //given
         Announce announce = new Announce();
         announce.setDescription("Um dog que come muita comida");
@@ -51,7 +51,7 @@ public class AnnounceServiceTest {
         announceRepository.save(announce);
 
         //when
-        Page<Announce> announces = announceService.findAll(-1,100L, 200L);
+        Page<Announce> announces = announceService.findAll(-1, 100L, 200L);
 
         //then
         assertThat(announces.getPageable().getPageNumber()).isEqualTo(0);
@@ -59,11 +59,11 @@ public class AnnounceServiceTest {
     }
 
     @Test
-    public void testFindAllCitiesNull(){
+    public void testFindAllCitiesNull() {
         //given
 
         //when
-        Page<Announce> announces = announceService.findAll(0,null, 200L);
+        Page<Announce> announces = announceService.findAll(0, null, 200L);
 
         //then
         assertThat(announces).isNotNull();
@@ -71,10 +71,10 @@ public class AnnounceServiceTest {
     }
 
     @Test
-    public void testFindAllAnimalTypesNull(){
+    public void testFindAllAnimalTypesNull() {
 
         //when
-        Page<Announce> announces = announceService.findAll(0,100L, null);
+        Page<Announce> announces = announceService.findAll(0, 100L, null);
 
         //then
         assertThat(announces).isNotNull();
@@ -82,7 +82,7 @@ public class AnnounceServiceTest {
     }
 
     @Test
-    public void testGetCityTypesNotNull(){
+    public void testGetCityTypesNotNull() {
 
         //when
         List<City> cities = announceService.getCityTypes();
@@ -94,7 +94,7 @@ public class AnnounceServiceTest {
     }
 
     @Test
-    public void testGetAnimalTypesNotNull(){
+    public void testGetAnimalTypesNotNull() {
         //given
 
         //when
@@ -107,7 +107,7 @@ public class AnnounceServiceTest {
     }
 
     @Test
-    public void testFindById(){
+    public void testFindById() {
 
         //when
         Announce announce = announceService.findById(66L);
@@ -115,22 +115,18 @@ public class AnnounceServiceTest {
         assertThat(announce.getId()).isEqualTo(66L);
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void testFindByIdNotExisting(){
+    public void testFindByIdNotExisting() {
 
-        //when
-        try {
-            Announce announce = announceService.findById(555L);
-        } catch(EntityNotFoundException e){
-            //then
-            assertThat(e.getMessage()).isEqualTo("Entity not found");
-            throw e;
-        }
+        Assertions.assertThrows(EntityNotFoundException.class,
+
+                () -> {
+                    Announce announce = announceService.findById(555L);
+                });
 
     }
 
 
-    private City createCity(){
+    private City createCity() {
         City city = new City();
         city.setDescription(CITY_NAME);
         return city;

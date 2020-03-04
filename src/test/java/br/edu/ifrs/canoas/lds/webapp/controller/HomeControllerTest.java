@@ -3,22 +3,17 @@ package br.edu.ifrs.canoas.lds.webapp.controller;
 
 import br.edu.ifrs.canoas.lds.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.lds.webapp.domain.City;
-import br.edu.ifrs.canoas.lds.webapp.domain.File;
 import br.edu.ifrs.canoas.lds.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.lds.webapp.service.UserDetailsImplService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

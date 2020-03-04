@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-	<head th:include="/layouts/fragments/scripts :: head" />
-	<body class="landing-page">
-	<div th:include="/layouts/fragments/static-top :: main"/>
-	<div class="wrapper">
-		<div id="content-header">
-			<div layout:fragment="content-header"></div>
-		</div>
-		<section class="section section-lg">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:insert="/layouts/fragments/scripts :: head" />
+<body class="layout-top-nav layout-navbar-fixed">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	<nav th:insert="/layouts/fragments/static-top :: navbar" />
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div layout:fragment="content-header"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<div layout:fragment="content-body"></div>
+					</div>
+				</div>
+			</div>
 		</section>
-		<div id="content-body">
-			<div layout:fragment="content-body"></div>
-		</div>
-		<footer th:include="/layouts/fragments/footer :: main"/>
 	</div>
-		<div th:include="/layouts/fragments/scripts :: javascripts"/>
+	<footer th:insert="/layouts/fragments/footer ::footer"></footer>
+</div>
+<div th:insert="/layouts/fragments/scripts :: javascripts" />
+</body>
 
-	</body>
+
 </html>

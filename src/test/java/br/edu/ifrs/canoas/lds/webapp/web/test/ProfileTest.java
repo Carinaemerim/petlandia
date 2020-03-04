@@ -1,8 +1,8 @@
 package br.edu.ifrs.canoas.lds.webapp.web.test;
 
 import org.fluentlenium.core.annotation.Page;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import br.edu.ifrs.canoas.lds.webapp.web.config.MyFluentTest;
 import br.edu.ifrs.canoas.lds.webapp.web.page.ProfilePage;
@@ -13,7 +13,7 @@ public class ProfileTest extends MyFluentTest {
     @Page
     ProfilePage profilePage;
 
-    @Before
+    @BeforeEach
     public void loginUser(){
         super.loginUser();
     }
