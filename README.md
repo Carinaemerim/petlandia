@@ -14,6 +14,3 @@ Spring Boot Web app with:
  - Thymeleaf Extras Spring Security4
  - Thymeleaf Layout Dialect
  - WebJars (several dependencies)
-
-# Git Commit Message Convention:
-http://karma-runner.github.io/1.0/dev/git-commit-msg.html
