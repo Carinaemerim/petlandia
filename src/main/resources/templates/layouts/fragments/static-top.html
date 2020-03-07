@@ -1,8 +1,21 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-gray-dark navbar-dark" th:fragment="navbar">
+<nav class="main-header navbar navbar-expand" th:fragment="navbar">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
+            <a href="#" class="nav-link text-white" th:text="#{menu.create}" id="menucreate">
+                Criar anúncio
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link text-white" th:text="#{menu.account}" id="menuaccount">
+                Criar anúncio
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link text-white" th:text="#{menu.speak}" id="menuspeak">
+                Fale conosco
+            </a>
         </li>
     </ul>
 
@@ -10,23 +23,22 @@
     <ul class="navbar-nav ml-auto">
         <li class="dropdown user user-menu nav-item">
             <div sec:authorize="isAnonymous()">
-                <a href="#" th:href="@{/login}" class="nav-link" id="user-login">
-                    Login
+                <a href="#" th:href="@{/login}" class="nav-link text-white" id="user-login">
+                    <span th:text="#{login.enter}">Login</span>
                 </a>
             </div>
 
             <div sec:authorize="isAuthenticated()">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="user-info">
+                <a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown" id="user-info">
                     <i class="fas fa-user"></i>
                     <span th:text="${#authentication.principal.user.name}"><span
                             class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="user-header bg-info">
+                    <li class="user-header bg-white text-center" style="padding: 5px; height: 100%; width: 100%;">
                         <p>
-                            <span th:text="${#authentication.principal.user.username}"></span>
                             <small>
-                                <a class="text-light"
+                                <a class="text-gray-dark"
                                    href="#" th:text="${#authentication.principal.user.email}">
                                 </a>
                             </small>
@@ -35,7 +47,7 @@
                     <li class="user-footer">
                         <div class="text-center">
                             <a href="#" th:href="@{/logout}" id="logout-button"
-                               class="btn btn-default btn-flat" th:text="#{login.logout}"></a>
+                                   class="btn btn-secondary btn-flat" th:text="#{login.logout}"></a>
                         </div>
                     </li>
                 </ul>

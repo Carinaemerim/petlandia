@@ -7,10 +7,10 @@
 }
 
 
-.btn-secondary
+.btn-secondary, .navbar-expand
 {
     background-color: var(--mypink);
-    color: var(--mywhite);
+    color: var(--mywhite) !important;
     border-color: var(--mypink);
 }
 
