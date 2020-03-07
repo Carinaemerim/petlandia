@@ -1,0 +1,32 @@
+:root{
+
+    --mypink:       #e83e8c;
+    --mywhite:      #f8f9fa;
+    --mysoftpink:   #ff80bf;
+    --mypurple:     #7300e6;
+}
+
+
+.btn-secondary
+{
+    background-color: var(--mypink);
+    color: var(--mywhite);
+    border-color: var(--mypink);
+}
+
+.btn-secondary:hover
+{
+    background-color: var(--mysoftpink);
+    color: var(--mywhite);
+    border-color: var(--mysoftpink);
+}
+
+.btn-secondary:focus,
+.btn-secondary:visited,
+.btn-secondary:active,
+.btn-secondary:link
+{
+    background-color: var(--mypurple) !important;
+    color: var(--mywhite) !important;
+    border-color: var(--mypurple) !important;
+}
