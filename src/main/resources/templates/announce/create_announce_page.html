@@ -1,0 +1,31 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+    <title th:text="#{item.header}"/>
+</head>
+<div layout:fragment="content-body">
+
+    <form action="#" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+        <div th:replace="/announce/fragments/announce_form_buttons" :: announce_form_buttons></div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="announce_form_title" th:text="#{announce.form.title}"> </label>
+                    <input type="text" class="form-control" id="announce_form_title" name="title" required minlength="15" maxlength="120">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-4">
+                <div th:replace="/announce/fragments/announce_left_fields" :: announce_left_fields></div>
+            </div>
+            <div class="col col">
+                <div th:replace="/announce/fragments/announce_right_fields" :: announce_right_fields></div>
+            </div>
+        </div>
+
+        <div th:replace="/announce/fragments/announce_form_buttons" :: announce_form_buttons></div>
+    </form>
+
+</div>

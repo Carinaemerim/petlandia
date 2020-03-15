@@ -44,6 +44,31 @@
     <script src="/webjars/select2/js/select2.min.js/"></script>
     <script src="/webjars/select2/js/i18n/pt-BR.js"></script>
     <script src="/webjars/popper.js/umd/popper.min.js"></script>
+    <script src="/js/holder.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            $(".image-placeholder").each(function _each() {
+                const element = $(this);
+                const img = $('img', element);
+                const field = $('input', element);
+
+                field.change(function _change() {
+                    const [input] = field;
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            img.attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                });
+            });
+        });
+    </script>
 
     <th:block layout:fragment="js-view"/>
 </div>

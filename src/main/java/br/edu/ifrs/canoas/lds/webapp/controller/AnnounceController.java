@@ -17,6 +17,14 @@ public class AnnounceController {
 
     private final AnnounceService announceService;
 
+    @GetMapping("/create")
+    public ModelAndView getCreate() {
+
+        ModelAndView mav = new ModelAndView("/announce/create_announce_page");
+
+        return mav;
+    }
+
     @GetMapping("/details")
     public ModelAndView dashboard(@RequestParam(value = "id") final Long id) {
 

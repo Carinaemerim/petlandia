@@ -1,0 +1,29 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="announce_left_fields">
+    <div class="row image-placeholder">
+        <div class="col">
+            <img class="img-fluid" src="/img/placeholder.svg">
+            <div class="form-group">
+                <label for="announce_form_main_photo" th:text="#{announce.form.title}"> </label>
+                <input type="file" class="custom-file" id="announce_form_main_photo" name="main_photo" required accept="image/*">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col image-placeholder">
+            <img class="img-fluid" src="/img/placeholder.svg">
+            <div class="form-group">
+                <label for="announce_form_second_photo" th:text="#{announce.form.title}"> </label>
+                <input type="file" class="custom-file" id="announce_form_second_photo" name="second_photo" required accept="image/*">
+            </div>
+        </div>
+
+        <div class="col image-placeholder">
+            <img class="img-fluid" src="/img/placeholder.svg">
+            <div class="form-group">
+                <label for="announce_form_third_photo" th:text="#{announce.form.title}"> </label>
+                <input type="file" class="custom-file" id="announce_form_third_photo" name="third_photo" required accept="image/*">
+            </div>
+        </div>
+    </div>
+</div>
