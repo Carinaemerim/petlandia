@@ -34,10 +34,25 @@ insert into user_roles (user_id, roles_id) values
 
 -- ANIMAL_TYPE
 insert into animal_type (id, name) values
-(101, 'Cachorro Macho'),
-(102, 'Cachorro Fêmea'),
-(103, 'Gato Macho'),
-(104, 'Gato Fêmea');
+(101, 'Cachorro'),
+(102, 'gato');
+
+-- ANIMAL_GENDER
+insert into animal_gender (id, name) values
+(101, 'Macho'),
+(102, 'Fêmea');
+
+-- ANIMAL_SIZE
+insert into animal_gender (id, name) values
+(101, 'Pequeno'),
+(102, 'Médio'),
+(103, 'Grande');
+
+-- ANIMAL_CASTRATED
+insert into animal_gender (id, name) values
+(101, 'Sim'),
+(102, 'Não'),
+(103, 'Não sei');
 
 -- CITY
 insert into city (id, description) values
@@ -55,25 +70,4 @@ insert into announce(id, name, type_id, date, description, city_id, size, photo_
 (66, 'Beijamin', 101, CURRENT_TIMESTAMP, 'Encontramos este cachorro perambulando pelas ruas do bairro Estancia Velha.' ||
  'No momento estamos cuidando dele, porém como já temos outros cinco cães, não poderemos ficar com ele e poder dar' ||
   'as condiçoes que ele precisa. è muito amigável e cheio de energia. Um companheiro sem igual! Pelos nossos cálculos' ||
-   'tem cerca de 2 anos de idade.',101,'Medio',100,100),
-(67, 'Lili', 104, CURRENT_TIMESTAMP, 'Estamos com esta gatinha linda no abrigo de PetFeliz. Ela chegou até nós muito ' ||
- 'timida e magrinha, porém graças aos nossos voluntários,agora ela está forte, feliz e pronta para receber um lar'
- ,104,'Pequeno',100,100),
-(68, 'Mary', 102, CURRENT_TIMESTAMP, 'Esta cadelinha simpática ainda é filhote e foi encontrada muito fraca por pessoas' ||
-  'que transitavam pela BR-116. Ela é muito brincalhona e se da bem com crianças.' ,104,'Pequeno',100,100),
-(69, 'Totó', 101, CURRENT_TIMESTAMP, '  Totó é um cachorrinho dócil e tranquilo, adora brincar com seu novo brinquedo, ' ||
- 'a bolinha. Está se habituando aos passeios na guia, o qual tem se comportado, ele é muito querido e obediente, ama' ||
-  ' um cafuné e um bom carinho em seu peito. Encontrei ele no centro de Canoas dias atrás, estava com muitas pulgas ' ||
-   'e carrapatos, mas agora está limpinho. Gostaria muito de encontrar um lar permanente pra ele. Ele precisa tanto ' ||
-    'de uma família.' ,101,'Medio',100,100),
-(70, 'Nerinho', 101, CURRENT_TIMESTAMP, 'O Nerinho foi perdido ou abandonado no domingo dia 02/02/2013, ele é muito carinhoso ' ||
- 'e brincalhão, adora outros cães e pessoas, ele é muito lindinho.' ,103,'Medio',100,200),
-(71, 'Joey', 103, CURRENT_TIMESTAMP, 'O gato Joey apareceu no meu telhado no final de junho bem magrinho e miando muito. ' ||
- 'Tiramos ele do telhado, demos água, comida e um lugar quentinho pra ele dormir, já que estava fazendo muito frio.
-Ele é dócil, falante, um pouco medroso, mas adora um cafuné. Sabe usar a caixa de areia e come ração seca numa boa.
-Ele é muito fofo e inteligente. Se dá super bem com cães e gatos.' ,104,'Pequeno', 100, 100),
-(72, 'Coraline', 104, CURRENT_TIMESTAMP, 'Olá, estou procurando um dono para a gatinha Coraline, que seja muito afetuoso e' ||
- ' que tenha paciência. Ela é castrada e vermifugada recentemente. Ela é irmã de criação da Felicia que também está ' ||
-  'para adoção.' ,103,'Medio',100, 100),
-(73, 'Ronron', 103, CURRENT_TIMESTAMP, 'Gato calmo, bonito, gordo preciso doar pois trouxe para casa apenas para alimentar' ||
- ' e acabei ficando mas, como pátio não é meu, preciso doar' ,105,'Medio', 100, 200);
+   'tem cerca de 2 anos de idade.',101,'Medio',100,100);

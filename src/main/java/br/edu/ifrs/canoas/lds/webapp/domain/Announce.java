@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -23,22 +23,39 @@ public class Announce {
     private Long id;
 
     @NotBlank
+    private String title;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
+    private int age;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AnimalGender animalGender;
 
     @ManyToOne(fetch= FetchType.EAGER)
     private AnimalType type;
 
     private Date date;
-    private String size;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AnimalSize animalSize;
+
+    @NotBlank
+    private String breed;
 
     @Column(length = 10000)
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private City city;
+    @NotBlank
+    private String neighborhood;
 
-    @OneToOne
-    private File photo;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AnimalCastrated animalCastrated;
+
+    @OneToMany
+    private ArrayList<Photo> photo;
 
     @ManyToOne(fetch= FetchType.EAGER)
     private User user;
@@ -50,9 +67,9 @@ public class Announce {
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", date=" + date +
-                ", size='" + size + '\'' +
+                ", AnimalSize='" + animalSize + '\'' +
                 ", description='" + description + '\'' +
-                ", city='" + city + '\'' +
+                ", neighborhood='" + neighborhood + '\'' +
                 ", user=" + user +
                 '}';
     }
