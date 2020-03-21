@@ -13,7 +13,7 @@ public class AnimalSizeService {
 
     private final AnimalSizeRepository animalSizeRepository;
 
-    public List<AnimalSize> listAnimalCastrated(){
+    public List<AnimalSize> listAnimalSize(){
         return animalSizeRepository.findAllByOrderByNameAsc();
     }
 

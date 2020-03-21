@@ -57,6 +57,15 @@ public class Announce {
     @ManyToOne(fetch= FetchType.EAGER)
     private User user;
 
+    @Lob
+    private String mainPhoto;
+
+    @Lob
+    private String secondPhoto;
+
+    @Lob
+    private String thirdPhoto;
+
     @Override
     public String toString() {
         return "Announce{" +
