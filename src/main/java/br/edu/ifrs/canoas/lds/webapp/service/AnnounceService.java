@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.lds.webapp.service;
 import br.edu.ifrs.canoas.lds.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.lds.webapp.domain.Announce;
 import br.edu.ifrs.canoas.lds.webapp.domain.City;
+import br.edu.ifrs.canoas.lds.webapp.repository.AnimalCastratedRepository;
 import br.edu.ifrs.canoas.lds.webapp.repository.AnimalTypeRepository;
 import br.edu.ifrs.canoas.lds.webapp.repository.AnnounceRepository;
 import br.edu.ifrs.canoas.lds.webapp.repository.CityRepository;
@@ -23,7 +24,6 @@ public class AnnounceService {
 
     private final AnnounceRepository announceRepository;
     private final AnimalTypeRepository animalTypeRepository;
-    private final CityRepository cityRepository;
 
     public Page<Announce> findAll(int pageNumber, Long cityId, Long animalTypeId){
 
@@ -44,12 +44,8 @@ public class AnnounceService {
     private Example<Announce> buildQuery(Long cityId, Long animalTypeId){
         Announce announce = new Announce();
 
-        if (cityId != null){
-            announce.setCity(cityRepository.findById(cityId).orElse(null));
-        }
-
         if(animalTypeId != null){
-            announce.setType(animalTypeRepository.findById(animalTypeId).orElse(null));
+            announce.setAnimalType(animalTypeRepository.findById(animalTypeId).orElse(null));
         }
 
         ExampleMatcher example = ExampleMatcher.matchingAll().withIgnoreNullValues()
@@ -58,18 +54,12 @@ public class AnnounceService {
 
         return Example.of(announce, example);
     }
-
-    //TODO RNG02
-    public List<AnimalType> getAnimalTypes(){
-        return animalTypeRepository.findAllByOrderByNameAsc();
-    }
-
     public Announce findById(Long id){
         return announceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
     }
 
-    //TODO RNG01
-    public List<City> getCityTypes() { return cityRepository.findAllByOrderByDescriptionAsc(); }
+    public void save(Announce announce) {
 
-
+        announceRepository.save(announce);
+    }
 }

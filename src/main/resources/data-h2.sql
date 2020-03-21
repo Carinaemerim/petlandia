@@ -43,31 +43,26 @@ insert into animal_gender (id, name) values
 (102, 'Fêmea');
 
 -- ANIMAL_SIZE
-insert into animal_gender (id, name) values
+insert into animal_size (id, name) values
 (101, 'Pequeno'),
 (102, 'Médio'),
 (103, 'Grande');
 
 -- ANIMAL_CASTRATED
-insert into animal_gender (id, name) values
+insert into animal_castrated (id, name) values
 (101, 'Sim'),
 (102, 'Não'),
 (103, 'Não sei');
 
 -- CITY
-insert into city (id, description) values
-(101, 'Canoas'),
-(102, 'Esteio'),
-(103, 'Sapucaia do Sul'),
-(104, 'Porto Alegre'),
-(105, 'São Leopoldo'),
-(106, 'Novo Hamburgo'),
-(107, 'Cachoeirinha'),
-(108, 'Viamão');
+-- insert into city (id, description) values
+--(101, 'Canoas'),
+--(102, 'Esteio'),
+--(103, 'Sapucaia do Sul'),
+--(104, 'Porto Alegre'),
+--(105, 'São Leopoldo'),
+--(106, 'Novo Hamburgo'),
+--(107, 'Cachoeirinha'),
+--(108, 'Viamão');
 
--- ANNOUNCE
-insert into announce(id, name, type_id, date, description, city_id, size, photo_id, user_id) values
-(66, 'Beijamin', 101, CURRENT_TIMESTAMP, 'Encontramos este cachorro perambulando pelas ruas do bairro Estancia Velha.' ||
- 'No momento estamos cuidando dele, porém como já temos outros cinco cães, não poderemos ficar com ele e poder dar' ||
-  'as condiçoes que ele precisa. è muito amigável e cheio de energia. Um companheiro sem igual! Pelos nossos cálculos' ||
-   'tem cerca de 2 anos de idade.',101,'Medio',100,100);
+

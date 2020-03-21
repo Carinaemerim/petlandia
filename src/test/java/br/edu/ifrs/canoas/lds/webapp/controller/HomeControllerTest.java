@@ -30,8 +30,8 @@ public class HomeControllerTest extends BaseControllerTest{
 
     @Test
     public void testGreetings() throws Exception{
-        given(announceService.getAnimalTypes()).willReturn(new ArrayList<AnimalType>());
-        given(announceService.getCityTypes()).willReturn(new ArrayList<City>());
+        //given(announceService.getAnimalTypes()).willReturn(new ArrayList<AnimalType>());
+        //given(announceService.getCityTypes()).willReturn(new ArrayList<City>());
         this.mvc.perform(get("/")
                 .with(user(userDetails))
                 .accept(MediaType.TEXT_HTML)

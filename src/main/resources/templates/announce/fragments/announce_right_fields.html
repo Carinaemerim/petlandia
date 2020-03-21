@@ -3,7 +3,8 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_name" th:text="#{announce.form.name}"> </label>
-                <input type="text" class="form-control" id="announce_form_animal_name" name="animal_name" required minlength="2" maxlength="120">
+                <input type="text" class="form-control" id="announce_form_animal_name" th:field="*{name}" required
+                       minlength="2" maxlength="120">
             </div>
         </div>
     </div>
@@ -11,22 +12,19 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_age" th:text="#{announce.form.age}"> </label>
-                <input type="number" class="form-control" id="announce_form_animal_age" name="animal_age" required max="99" min="0" step="1">
+                <input type="number" class="form-control" id="announce_form_animal_age" th:field="*{age}" required
+                       max="99" min="0" step="1">
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label th:text="#{announce.form.animalGender}"> </label>
                 <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_gender" checked id="announce_form_animal_gender_male">
-                    <label class="form-check-label" for="announce_form_animal_gender_male">Macho</label>
+                <div class="form-check form-check-inline" th:each="i : ${animalGender}">
+                    <input class="form-check-input" type="radio" th:field="*{animalGender}" th:value="${i.id}">
+                    <label class="form-check-label" th:for="${#ids.prev('animalGender')}" th:text="${i.name}"> </label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_gender" id="announce_form_animal_gender_female">
-                    <label class="form-check-label" for="announce_form_animal_gender_female">Fêmea</label>
-                </div>
             </div>
         </div>
     </div>
@@ -35,9 +33,8 @@
         <div class="col col-md-4">
             <div class="form-group">
                 <label for="announce_form_animal_size" th:text="#{announce.form.size}"> </label>
-                <select class="custom-select" id="announce_form_animal_size" name="animal_size" required>
-                    <option selected>Escolha o porte do cachorro</option>
-                    <option value="1">Pequeno</option>
+                <select class="custom-select" id="announce_form_animal_size" th:field="*{animalSize}" required>
+                    <option th:each="i : ${animalSize}" th:value="${i.id}" th:text="${i.name}"> </option>
                 </select>
             </div>
         </div>
@@ -45,7 +42,8 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_breed" th:text="#{announce.form.breed}"> </label>
-                <input type="text" maxlength="50" minlength="3" required class="form-control" id="announce_form_animal_breed" name="animal_breed">
+                <input type="text" class="form-control" id="announce_form_animal_breed" th:field="*{breed}" required
+                       minlength="2" maxlength="120">
             </div>
         </div>
     </div>
@@ -55,20 +53,12 @@
             <div class="form-group">
                 <label th:text="#{announce.form.castrated}"> </label>
                 <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_castrated" value="1" checked id="announce_form_animal_castrated_yes">
-                    <label class="form-check-label" for="announce_form_animal_castrated_yes" th:text="#{announce.form.castrated.yes}">Sim</label>
+
+                <div class="form-check form-check-inline" th:each="i : ${animalCastrated}">
+                    <input class="form-check-input" type="radio" th:field="*{animalCastrated}" th:value="${i.id}">
+                    <label class="form-check-label" th:for="${#ids.prev('animalCastrated')}" th:text="${i.name}"> </label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_castrated" value="2" id="announce_form_animal_castrated_no">
-                    <label class="form-check-label" for="announce_form_animal_castrated_no" th:text="#{announce.form.castrated.no}">No</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_castrated" value="3" id="announce_form_animal_castrated_doubt">
-                    <label class="form-check-label" for="announce_form_animal_castrated_doubt" th:text="#{announce.form.castrated.doubt}">Não sei</label>
-                </div>
             </div>
         </div>
 
@@ -76,15 +66,11 @@
             <div class="form-group">
                 <label th:text="#{announce.form.type}"> </label>
                 <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_type" value="1" checked id="announce_form_animal_type_dog">
-                    <label class="form-check-label" for="announce_form_animal_type_dog" th:text="#{announce.form.type.dog}">Cachorro</label>
+                <div class="form-check form-check-inline" th:each="i : ${animalType}">
+                    <input class="form-check-input" type="radio" th:field="*{animalType}" th:value="${i.id}">
+                    <label class="form-check-label" th:for="${#ids.prev('animalType')}" th:text="${i.name}"> </label>
                 </div>
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="animal_type" value="2" id="announce_form_animal_type_cat">
-                    <label class="form-check-label" for="announce_form_animal_type_cat" th:text="#{announce.form.type.cat}">Gato</label>
-                </div>
             </div>
         </div>
     </div>
@@ -93,7 +79,8 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_local" th:text="#{announce.form.place}"> </label>
-                <input type="text" class="form-control" id="announce_form_animal_local" name="animal_name" minlength="3" maxlength="200" required>
+                <input type="text" class="form-control" id="announce_form_animal_local" th:field="*{local}" minlength="3"
+                       maxlength="200" required>
             </div>
         </div>
     </div>
@@ -102,7 +89,8 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_description" th:text="#{announce.form.description}"> </label>
-                <textarea class="form-control" id="announce_form_description" name="description" rows="5" required maxlength="5000" minlength="40"></textarea>
+                <textarea class="form-control" id="announce_form_description" th:field="*{description}" rows="5" required
+                          maxlength="5000" minlength="10"></textarea>
             </div>
         </div>
     </div>

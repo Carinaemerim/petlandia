@@ -11,9 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Created by rodrigo on 3/18/17.
- */
+
 @Entity
 @Data
 @NoArgsConstructor

@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -28,14 +28,14 @@ public class Announce {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     private int age;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalGender animalGender;
 
     @ManyToOne(fetch= FetchType.EAGER)
-    private AnimalType type;
+    private AnimalType animalType;
 
     private Date date;
 
@@ -49,13 +49,10 @@ public class Announce {
     private String description;
 
     @NotBlank
-    private String neighborhood;
+    private String local;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalCastrated animalCastrated;
-
-    @OneToMany
-    private ArrayList<Photo> photo;
 
     @ManyToOne(fetch= FetchType.EAGER)
     private User user;
@@ -65,16 +62,15 @@ public class Announce {
         return "Announce{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type=" + type +
+                ", type=" + animalType +
                 ", date=" + date +
                 ", AnimalSize='" + animalSize + '\'' +
                 ", description='" + description + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
+                ", neighborhood='" + local + '\'' +
                 ", user=" + user +
                 '}';
     }
-    //TODO RNG004
-    //TODO RNG005
+
     public boolean canAlter() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

@@ -107,10 +107,8 @@ public class AnnounceControllerTest extends BaseControllerTest{
         Announce announce = new Announce();
         announce.setId(10L);
         announce.setName("Alice");
-        announce.setCity(createCity());
-        announce.setType(createAnimalType());
+        announce.setAnimalType(createAnimalType());
         announce.setUser(super.user);
-        announce.setPhoto(photo);
         return announce;
     }
 
