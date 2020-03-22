@@ -31,8 +31,6 @@ public class UserRepositoryTest {
         User user = new User();
         user.setUsername(TEST_STRING);
         user.setName(TEST_STRING);
-        user.setExperience(TEST_STRING);
-        user.setSkill(TEST_STRING);
         user.setActive(true);
         user.setEmail("email@email.com");
         entityManager.persist(user);

@@ -6,6 +6,11 @@
     --mypurple:     #7300e6;
 }
 
+.content-wrapper
+{
+    background-color: gainsboro !important;
+}
+
 
 .btn-secondary, .navbar-expand
 {

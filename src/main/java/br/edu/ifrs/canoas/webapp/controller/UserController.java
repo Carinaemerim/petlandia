@@ -27,10 +27,23 @@ public class UserController {
 	private final Messages messages;
 	private final UserService userService;
 
-	@GetMapping("/profile")
-    public ModelAndView viewProfile(@AuthenticationPrincipal UserImpl activeUser){
-        ModelAndView mav = new ModelAndView("/user/profile");
-        mav.addObject("user", userService.getOne(activeUser.getUser()));
+//	@GetMapping("/profile")
+//    public ModelAndView viewUserAccount(@AuthenticationPrincipal UserImpl activeUser){
+//        ModelAndView mav = new ModelAndView("create_user_page");
+//        mav.addObject("user", userService.getOne(activeUser.getUser()));
+//        return mav;
+//    }
+
+    @GetMapping("/create")
+    public ModelAndView createProfile(User user){
+
+        if (user == null) {
+            user = new User();
+        }
+
+        user.setPassword("");
+        ModelAndView mav = new ModelAndView("/user/create_user_page");
+        mav.addObject("user", user);
         return mav;
     }
 
@@ -39,7 +52,7 @@ public class UserController {
             RedirectAttributes redirectAttr, Locale locale){
 
     	if (bindingResult.hasErrors()) {
-            return new ModelAndView("/user/profile");
+            return new ModelAndView("create_user_page");
         }
 
     	ModelAndView mav = new ModelAndView("redirect:/user/profile");

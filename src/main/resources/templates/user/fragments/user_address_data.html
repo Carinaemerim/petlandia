@@ -1,0 +1,57 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="user_address_data">
+    <div class="row">
+        <div class="col col-md-5">
+            <div class="form-group">
+                <label for="user_form_zipCode" th:text="#{user_form_zipCode}"> </label>
+                <input type="text" class="form-control mask-zipcode" id="user_form_zipCode" th:field="*{zipCode}" required
+                       minlength="9" maxlength="9">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-3">
+            <div class="form-group">
+                <label for="user_form_state" th:text="#{user_form_state}"> </label>
+                <input type="text" class="form-control" id="user_form_state" th:field="*{state}" required
+                       minlength="2" maxlength="2">
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="user.form.city" th:text="#{user_form_city}"> </label>
+                <input type="text" class="form-control" id="user.form.city" th:field="*{city}" required
+                       minlength="3" maxlength="120">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="user_form_neighborhood" th:text="#{user_form_neighborhood}"> </label>
+                <input type="text" class="form-control" id="user_form_neighborhood" th:field="*{neighborhood}" required
+                       minlength="3" maxlength="120">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-9">
+            <div class="form-group">
+                <label for="user_form_address" th:text="#{user_form_address}"> </label>
+                <input type="text" class="form-control" id="user_form_address" th:field="*{address}" required
+                       minlength="4" maxlength="120">
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="user.form.address.number" th:text="#{user.form.addressNumber}"> </label>
+                <input type="text" class="form-control" id="user.form.address.number" th:field="*{addressNumber}"
+                       minlength="1" maxlength="5">
+            </div>
+        </div>
+    </div>
+
+</div>

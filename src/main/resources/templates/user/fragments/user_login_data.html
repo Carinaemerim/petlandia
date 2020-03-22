@@ -1,0 +1,28 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="user_login_data">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="user_form_username" th:text="#{user.form.username}"> </label>
+                <input type="text" class="form-control" id="user_form_username" th:field="*{username}" required
+                       minlength="2" maxlength="40">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="user_form_password" th:text="#{user.form.password}"> </label>
+                <input type="password" class="form-control" id="user_form_password" th:field="*{password}" required
+                       minlength="5" maxlength="40">
+            </div>
+        </div>
+
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="user_form_password_confirm" th:text="#{user.form.password.confirm}"> </label>
+                <input type="password" class="form-control" id="user_form_password_confirm" name="password.confirm" required
+                       minlength="5" maxlength="40">
+            </div>
+        </div>
+    </div>
+</div>

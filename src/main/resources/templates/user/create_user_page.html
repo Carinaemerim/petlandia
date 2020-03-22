@@ -1,0 +1,52 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+	<title th:text="#{item.header}"/>
+</head>
+<div layout:fragment="content-body">
+
+	<div class="row justify-content-center">
+		<div class="col-md-8 ">
+			<form action="#" method="post" th:action="@{/user/create}" th:object="${user}" accept-charset="UTF-8">
+				<div class="card">
+
+					<div class="card-header" th:text="#{user.form.access.data}">
+
+					</div>
+					<div class="card-body">
+						<div th:replace="/user/fragments/user_login_data" :: user_login_data></div>
+					</div>
+
+					<div class="card-header" th:text="#{user.form.address.data}">
+
+					</div>
+					<div class="card-body">
+						<div th:replace="/user/fragments/user_address_data" :: user_address_data></div>
+					</div>
+
+					<div class="card-header" th:text="#{user.form.contact.data}">
+
+					</div>
+					<div class="card-body">
+						<div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
+					</div>
+
+					<div class="row justify-content-between">
+						<div class="col">
+							<a class="btn btn-danger" th:text="#{user.form.cancel}">
+							</a>
+						</div>
+
+						<div class="col text-right">
+							<button class="btn btn-success" th:text="#{user.form.save}">
+							</button>
+						</div>
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</div>

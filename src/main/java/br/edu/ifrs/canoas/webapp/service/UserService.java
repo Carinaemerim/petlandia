@@ -20,8 +20,6 @@ public class UserService {
 
 		fetchedUser.setName(user.getName());
 		fetchedUser.setEmail(user.getEmail());
-		fetchedUser.setSkill(user.getSkill());
-		fetchedUser.setExperience(user.getExperience());
 		return userRepository.save(fetchedUser);
 	}
 

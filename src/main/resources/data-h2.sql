@@ -12,14 +12,9 @@ insert into file(id, content) values
 (100, FILE_READ('./src/main/resources/static/photos/dogs.jpg'));
 
 --AUTHENTICATION
-INSERT into user(id, username, password, name, email, experience, skill, active, picture_id) VALUES
-(100, 'user', @PASSWORD, 'Master Yoda','yoda@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn',
-'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death ' ||
- 'And Force-aided Acrobatics.',  TRUE, 0),
-(200, 'darth', @PASSWORD, 'Darth Vader', 'vader@star.wars', 'Lorde Sith', 'The force is strong in him, leader skills',
- TRUE, 1),
- (300, 'bb8', @PASSWORD, 'BB-8', 'bb2@star.wars','Jedi Robot' ,'A robot that can be everywhere and helps everyone',
- TRUE, 2);
+INSERT into user(id, username, birth_date, password, active,  name, email, address, zip_code, neighborhood, city, state , address_number, residential_phone, cel_phone) VALUES
+(100, 'user', '12.02.1998', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380',
+'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '');
 
 --ROLES
 insert into role(id, role) values
@@ -28,9 +23,7 @@ insert into role(id, role) values
 
 -- USER_ROLES
 insert into user_roles (user_id, roles_id) values
-(100, 1),
-(200, 1),
-(300, 2);
+(100, 1);
 
 -- ANIMAL_TYPE
 insert into animal_type (id, name) values
