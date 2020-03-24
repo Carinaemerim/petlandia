@@ -12,8 +12,8 @@ insert into file(id, content) values
 (100, FILE_READ('./src/main/resources/static/photos/dogs.jpg'));
 
 --AUTHENTICATION
-INSERT into user(id, username, birth_date, password, active,  name, email, address, zip_code, neighborhood, city, state , address_number, residential_phone, cel_phone) VALUES
-(100, 'user', '12.02.1998', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380',
+INSERT into user(id, username, password, active,  name, email, address, zip_code, neighborhood, city, state , address_number, residential_phone, cel_phone) VALUES
+(100, 'user', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380',
 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '');
 
 --ROLES

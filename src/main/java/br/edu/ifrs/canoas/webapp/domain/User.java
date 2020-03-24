@@ -28,9 +28,6 @@ public class User {
 	private boolean active;
 
 	@NotNull
-	private String birthDate;
-
-	@NotNull
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)

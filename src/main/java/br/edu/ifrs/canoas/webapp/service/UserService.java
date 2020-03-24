@@ -14,13 +14,9 @@ public class UserService {
 
 	private final UserRepository userRepository;
 
-	public User save(User user) {
-		User fetchedUser = this.getOne(user);
-		if (fetchedUser == null) return null;
+	public void save(User user) {
 
-		fetchedUser.setName(user.getName());
-		fetchedUser.setEmail(user.getEmail());
-		return userRepository.save(fetchedUser);
+		userRepository.save(user);
 	}
 
 	public User getOne(User user) {

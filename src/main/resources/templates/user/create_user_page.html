@@ -3,6 +3,12 @@
 <head>
 	<title th:text="#{item.header}"/>
 </head>
+
+<th:block layout:fragment="js-view">
+	<script src="/js/addressFinder.js"></script>
+	<script src="/js/create_user_page.js"></script>
+</th:block>
+
 <div layout:fragment="content-body">
 
 	<div class="row justify-content-center">

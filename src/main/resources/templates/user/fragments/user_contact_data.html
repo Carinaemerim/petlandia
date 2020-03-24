@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col col-md-5">
             <div class="form-group">
-                <label for="user_form_name" th:text="#{user_form_name}"> </label>
+                <label for="user_form_name" th:text="#{user.form.name}"> </label>
                 <input type="text" class="form-control" id="user_form_name" th:field="*{name}" required
                        minlength="3" maxlength="120">
             </div>
@@ -11,7 +11,7 @@
 
         <div class="col">
             <div class="form-group">
-                <label for="user.form.email" th:text="#{user_form_email}"> </label>
+                <label for="user.form.email" th:text="#{user.form.email}"> </label>
                 <input type="text" class="form-control" id="user.form.email" th:field="*{email}" required
                        minlength="5" maxlength="120">
             </div>
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label for="user_form_residentialPhone" th:text="#{user_form_residentialPhone}"> </label>
+                <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}"> </label>
                 <input type="text" class="form-control mask-residentialNumber" id="user_form_residentialPhone" th:field="*{residentialPhone}" required
                        minlength="4" maxlength="120">
             </div>
