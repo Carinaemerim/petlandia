@@ -32,19 +32,15 @@
 </head>
 
 <div th:fragment="javascripts">
-    <!-- jQuery 3.x -->
     <script src="/webjars/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 4.x -->
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="/webjars/AdminLTE/dist/js/adminlte.min.js"></script>
-
     <script src="/webjars/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/webjars/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="/webjars/select2/js/select2.min.js/"></script>
     <script src="/webjars/select2/js/i18n/pt-BR.js"></script>
     <script src="/webjars/popper.js/umd/popper.min.js"></script>
-    <script src="/js/holder.js"></script>
+    <script src="/js/jquery.mask.min.js"></script>
 
 
     <script>
@@ -68,6 +64,9 @@
                     }
                 });
             });
+            $('.mask-zipcode').mask('00000-000');
+            $('.mask-cpf').mask('000.000.000-00', {reverse: true});
+            $('.mask-celphone').mask('(00) 0000-00009');
         });
     </script>
 

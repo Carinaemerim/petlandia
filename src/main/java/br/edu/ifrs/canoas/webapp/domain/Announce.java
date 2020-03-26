@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -42,14 +43,25 @@ public class Announce {
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalSize animalSize;
 
-    @NotBlank
-    private String breed;
-
     @Column(length = 10000)
     private String description;
 
-    @NotBlank
-    private String local;
+    @NotNull
+    private String address;
+
+    @NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
+    private String zipCode;
+
+    @NotNull
+    private String neighborhood;
+
+    @NotNull
+    private String city;
+
+    @NotNull
+    private String state;
+
+    private int addressNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalCastrated animalCastrated;
@@ -75,7 +87,6 @@ public class Announce {
                 ", date=" + date +
                 ", AnimalSize='" + animalSize + '\'' +
                 ", description='" + description + '\'' +
-                ", neighborhood='" + local + '\'' +
                 ", user=" + user +
                 '}';
     }

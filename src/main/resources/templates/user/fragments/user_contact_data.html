@@ -22,7 +22,7 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}"> </label>
-                <input type="text" class="form-control mask-residentialNumber" id="user_form_residentialPhone" th:field="*{residentialPhone}" required
+                <input type="text" class="form-control mask-celphone" id="user_form_residentialPhone" th:field="*{residentialPhone}" required
                        minlength="4" maxlength="120">
             </div>
         </div>
@@ -30,7 +30,7 @@
         <div class="col">
             <div class="form-group">
                 <label for="user.form.celPhone" th:text="#{user.form.celPhone}"> </label>
-                <input type="text" class="form-control mask-celPhone" id="user.form.celPhone" th:field="*{celPhone}"
+                <input type="text" class="form-control mask-celphone" id="user.form.celPhone" th:field="*{celPhone}"
                        minlength="1" maxlength="5">
             </div>
         </div>

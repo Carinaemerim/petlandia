@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ModelAndView postCreateUser(@ModelAttribute User user,
-                                   BindingResult bindingResult) throws IOException {
+                                   BindingResult bindingResult) {
 
 
         if (bindingResult.hasErrors()){
@@ -60,7 +60,6 @@ public class UserController {
 
         userService.save(user);
         ModelAndView mav = new ModelAndView("/user/create_user_page");
-
 
         return mav;
     }

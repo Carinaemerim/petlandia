@@ -38,14 +38,6 @@
                 </select>
             </div>
         </div>
-
-        <div class="col">
-            <div class="form-group">
-                <label for="announce_form_animal_breed" th:text="#{announce.form.breed}"> </label>
-                <input type="text" class="form-control" id="announce_form_animal_breed" th:field="*{breed}" required
-                       minlength="2" maxlength="120">
-            </div>
-        </div>
     </div>
 
     <div class="row">
@@ -76,11 +68,56 @@
     </div>
 
     <div class="row">
+        <div class="col col-md-5">
+            <div class="form-group">
+                <label for="announce_form_zipCode" th:text="#{announce.form.zipCode}"> </label>
+                <input type="text" class="form-control mask-zipcode" id="announce_form_zipCode" th:field="*{zipCode}" required
+                       minlength="9" maxlength="9">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-3">
+            <div class="form-group">
+                <label for="announce_form_state" th:text="#{announce.form.state}"> </label>
+                <input type="text" class="form-control" id="announce_form_state" th:field="*{state}" required
+                       minlength="2" maxlength="2">
+            </div>
+        </div>
+
         <div class="col">
             <div class="form-group">
-                <label for="announce_form_animal_local" th:text="#{announce.form.place}"> </label>
-                <input type="text" class="form-control" id="announce_form_animal_local" th:field="*{local}" minlength="3"
-                       maxlength="200" required>
+                <label for="announce_form_city" th:text="#{announce.form.city}"> </label>
+                <input type="text" class="form-control" id="announce_form_city" th:field="*{city}" required
+                       minlength="3" maxlength="120">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="announce_form_neighborhood" th:text="#{announce.form.neighborhood}"> </label>
+                <input type="text" class="form-control" id="announce_form_neighborhood" th:field="*{neighborhood}" required
+                       minlength="3" maxlength="120">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-9">
+            <div class="form-group">
+                <label for="announce_form_address" th:text="#{announce.form.address}"> </label>
+                <input type="text" class="form-control" id="announce_form_address" th:field="*{address}" required
+                       minlength="4" maxlength="120">
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}"> </label>
+                <input type="text" class="form-control" id="announce_form_address_number" th:field="*{addressNumber}"
+                       minlength="1" maxlength="5">
             </div>
         </div>
     </div>

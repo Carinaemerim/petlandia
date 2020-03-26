@@ -8,9 +8,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 
 @Entity
@@ -36,13 +38,16 @@ public class User {
 	@NotBlank
 	private String name;
 
+	@NotBlank @CPF
+	private String cpf;
+
 	@Email @NotBlank
 	private String email;
 
 	@NotNull
 	private String address;
 
-	@NotNull
+	@NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
 	private String zipCode;
 
 	@NotNull

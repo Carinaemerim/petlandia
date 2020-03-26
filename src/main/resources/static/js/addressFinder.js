@@ -33,7 +33,7 @@ function handleAddress(){
     }
     $(zipField).blur(function() {
 
-        console.log("Fetching address ... ");
+        console.log("Localizando endereço ... ");
         var cep = $(this).val().replace(/\D/g, '');
 
         if (cep !== "") {

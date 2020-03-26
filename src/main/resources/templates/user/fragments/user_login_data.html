@@ -1,10 +1,17 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="user_login_data">
     <div class="row">
-        <div class="col">
+        <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_username" th:text="#{user.form.username}"> </label>
                 <input type="text" class="form-control" id="user_form_username" th:field="*{username}" required
                        minlength="2" maxlength="40">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="user_form_cpf" th:text="#{user.form.cpf}"> </label>
+                <input type="text" class="form-control mask-cpf" id="user_form_cpf" th:field="*{cpf}" required
+                       minlength="11" maxlength="14">
             </div>
         </div>
     </div>
