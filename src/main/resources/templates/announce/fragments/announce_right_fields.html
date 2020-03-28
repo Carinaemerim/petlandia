@@ -109,7 +109,7 @@
             <div class="form-group">
                 <label for="announce_form_address" th:text="#{announce.form.address}"> </label>
                 <input type="text" class="form-control" id="announce_form_address" th:field="*{address}" required
-                       minlength="4" maxlength="120">
+                       minlength="3" maxlength="120">
             </div>
         </div>
 
@@ -117,7 +117,7 @@
             <div class="form-group">
                 <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}"> </label>
                 <input type="text" class="form-control" id="announce_form_address_number" th:field="*{addressNumber}"
-                       minlength="1" maxlength="5">
+                       minlength="1" maxlength="6">
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
             <div class="form-group">
                 <label for="announce_form_description" th:text="#{announce.form.description}"> </label>
                 <textarea class="form-control" id="announce_form_description" th:field="*{description}" rows="5" required
-                          maxlength="5000" minlength="10"></textarea>
+                          maxlength="10000" minlength="10"></textarea>
             </div>
         </div>
     </div>

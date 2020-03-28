@@ -1,33 +1,28 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
-
-import java.io.IOException;
-import java.util.Locale;
-
-import javax.validation.Valid;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
 @AllArgsConstructor
 public class UserController {
 
-	private final Messages messages;
-	private final UserService userService;
+    private final UserService userService;
+    private final Messages messages;
 
 //	@GetMapping("/profile")
 //    public ModelAndView viewUserAccount(@AuthenticationPrincipal UserImpl activeUser){
@@ -37,30 +32,30 @@ public class UserController {
 //    }
 
     @GetMapping("/create")
-    public ModelAndView getCreateUser(User user){
-
-        if (user == null) {
-            user = new User();
-        }
-
-        user.setPassword("");
-        ModelAndView mav = new ModelAndView("/user/create_user_page");
-        mav.addObject("user", user);
-        return mav;
+    public String getCreateUser(Model model) {
+        UserCreateForm form = new UserCreateForm();
+        form.setUser(new User());
+        form.getUser().setPassword("");
+        form.setPasswordConfirm("");
+        model.addAttribute("form", new UserCreateForm());
+        return "/user/create_user_page";
     }
 
     @PostMapping("/create")
-    public ModelAndView postCreateUser(@ModelAttribute User user,
-                                   BindingResult bindingResult) {
-
-
-        if (bindingResult.hasErrors()){
-            return this.getCreateUser(user);
+    public String postCreateUser(@ModelAttribute("form") @Valid UserCreateForm form,
+                                 BindingResult bindingResult, Model model) {
+        if (!form.getPasswordConfirm().equals(form.getUser().getPassword())) {
+            String message = messages.get("form.validation.pwd_is_not_equal");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "passwordConfirm", message);
+            bindingResult.addError(error);
         }
 
-        userService.save(user);
-        ModelAndView mav = new ModelAndView("/user/create_user_page");
+        if (bindingResult.hasErrors()) {
+            return "/user/create_user_page";
+        }
 
-        return mav;
+        userService.save(form.getUser());
+
+        return "/user/create_user_page";
     }
 }

@@ -17,7 +17,8 @@
             <div class="col">
                 <div class="form-group">
                     <label for="announce_form_title" th:text="#{announce.form.title}"> </label>
-                    <input type="text" class="form-control" id="announce_form_title" th:field="*{title}" required minlength="15" maxlength="120">
+                    <input type="text" class="form-control" id="announce_form_title" th:field="*{title}" required
+                           minlength="9" maxlength="120">
                 </div>
             </div>
         </div>

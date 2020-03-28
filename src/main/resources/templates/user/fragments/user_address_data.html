@@ -3,8 +3,12 @@
         <div class="col col-md-5">
             <div class="form-group">
                 <label for="user_form_zipCode" th:text="#{user.form.zipCode}"> </label>
-                <input type="text" class="form-control mask-zipcode" id="user_form_zipCode" th:field="*{zipCode}" required
-                       minlength="9" maxlength="9">
+                <input type="text" class="form-control mask-zipcode" id="user_form_zipCode" th:field="*{user.zipCode}"
+                       required
+                       minlength="9" maxlength="9"
+                       th:classappend="${#fields.hasErrors('user.zipCode')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.zipCode')}"
+                     th:errors="*{user.zipCode}"></div>
             </div>
         </div>
     </div>
@@ -12,16 +16,21 @@
         <div class="col col-md-3">
             <div class="form-group">
                 <label for="user_form_state" th:text="#{user.form.state}"> </label>
-                <input type="text" class="form-control" id="user_form_state" th:field="*{state}" required
-                       minlength="2" maxlength="2">
+                <input type="text" class="form-control" id="user_form_state" th:field="*{user.state}" required
+                       minlength="2" maxlength="2"
+                       th:classappend="${#fields.hasErrors('user.state')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.state')}"
+                     th:errors="*{user.state}"></div>
             </div>
         </div>
 
         <div class="col">
             <div class="form-group">
                 <label for="user_form_city" th:text="#{user.form.city}"> </label>
-                <input type="text" class="form-control" id="user_form_city" th:field="*{city}" required
-                       minlength="3" maxlength="120">
+                <input type="text" class="form-control" id="user_form_city" th:field="*{user.city}" required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('user.city')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.city')}" th:errors="*{user.city}"></div>
             </div>
         </div>
     </div>
@@ -30,8 +39,12 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_neighborhood" th:text="#{user.form.neighborhood}"> </label>
-                <input type="text" class="form-control" id="user_form_neighborhood" th:field="*{neighborhood}" required
-                       minlength="3" maxlength="120">
+                <input type="text" class="form-control" id="user_form_neighborhood" th:field="*{user.neighborhood}"
+                       required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('user.neighborhood')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.neighborhood')}"
+                     th:errors="*{user.neighborhood}"></div>
             </div>
         </div>
     </div>
@@ -40,16 +53,22 @@
         <div class="col col-md-9">
             <div class="form-group">
                 <label for="user_form_address" th:text="#{user.form.address}"> </label>
-                <input type="text" class="form-control" id="user_form_address" th:field="*{address}" required
-                       minlength="4" maxlength="120">
+                <input type="text" class="form-control" id="user_form_address" th:field="*{user.address}" required
+                       minlength="4" maxlength="120"
+                       th:classappend="${#fields.hasErrors('user.address')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.address')}"
+                     th:errors="*{user.address}"></div>
             </div>
         </div>
 
         <div class="col">
             <div class="form-group">
                 <label for="user_form_address_number" th:text="#{user.form.addressNumber}"> </label>
-                <input type="text" class="form-control" id="user_form_address_number" th:field="*{addressNumber}"
-                       minlength="1" maxlength="5">
+                <input type="text" class="form-control" id="user_form_address_number" th:field="*{user.addressNumber}"
+                       minlength="1" maxlength="6"
+                       th:classappend="${#fields.hasErrors('user.addressNumber')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.addressNumber')}"
+                     th:errors="*{user.addressNumber}"></div>
             </div>
         </div>
     </div>

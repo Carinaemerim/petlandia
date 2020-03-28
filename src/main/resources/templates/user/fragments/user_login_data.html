@@ -3,15 +3,20 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_username" th:text="#{user.form.username}"> </label>
-                <input type="text" class="form-control" id="user_form_username" th:field="*{username}" required
-                       minlength="2" maxlength="40">
+                <input type="text" class="form-control" id="user_form_username" th:field="*{user.username}" required
+                       minlength="2" maxlength="40"
+                       th:classappend="${#fields.hasErrors('user.username')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.username')}"
+                     th:errors="*{user.username}"></div>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label for="user_form_cpf" th:text="#{user.form.cpf}"> </label>
-                <input type="text" class="form-control mask-cpf" id="user_form_cpf" th:field="*{cpf}" required
-                       minlength="11" maxlength="14">
+                <input type="text" class="form-control mask-cpf" id="user_form_cpf" th:field="*{user.cpf}" required
+                       minlength="14" maxlength="14"
+                       th:classappend="${#fields.hasErrors('user.cpf')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.cpf')}" th:errors="*{user.cpf}"></div>
             </div>
         </div>
     </div>
@@ -19,16 +24,23 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_password" th:text="#{user.form.password}"> </label>
-                <input type="password" class="form-control" id="user_form_password" th:field="*{password}" required
-                       minlength="5" maxlength="40">
+                <input type="password" class="form-control" id="user_form_password" th:field="*{user.password}" required
+                       minlength="5" maxlength="40"
+                       th:classappend="${#fields.hasErrors('user.password')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.password')}"
+                     th:errors="*{user.password}"></div>
             </div>
         </div>
 
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="user_form_password_confirm" th:text="#{user.form.password.confirm}"> </label>
-                <input type="password" class="form-control" id="user_form_password_confirm" name="password.confirm" required
-                       minlength="5" maxlength="40">
+                <input type="password" class="form-control" id="user_form_password_confirm"
+                       th:field="*{passwordConfirm}" required
+                       minlength="5" maxlength="40"
+                       th:classappend="${#fields.hasErrors('passwordConfirm')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('passwordConfirm')}"
+                     th:errors="*{passwordConfirm}"></div>
             </div>
         </div>
     </div>

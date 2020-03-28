@@ -1,20 +1,13 @@
 package br.edu.ifrs.canoas.webapp.config;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.Ordered;
-import org.springframework.expression.ParseException;
-import org.springframework.format.Formatter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
@@ -23,6 +16,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
+import java.util.Locale;
 
 @Configuration
 public class MVCConfig implements WebMvcConfigurer {
@@ -72,7 +67,7 @@ public class MVCConfig implements WebMvcConfigurer {
 
     @Bean
     public LocaleResolver localeResolver() {
-        LocaleContextHolder.setDefaultLocale(Locale.US);
+        LocaleContextHolder.setDefaultLocale(new Locale("pt", "BR"));
         CookieLocaleResolver slr = new CookieLocaleResolver();
         slr.setDefaultLocale(LocaleContextHolder.getLocale());
         return slr;

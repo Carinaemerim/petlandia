@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -24,12 +25,15 @@ public class Announce {
     private Long id;
 
     @NotBlank
+    @Size(min = 9, max = 120)
     private String title;
 
     @NotBlank
+    @Size(min = 2, max = 120)
     private String name;
 
     @NotNull
+    @Size(min = 1, max = 2)
     private int age;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -44,23 +48,30 @@ public class Announce {
     private AnimalSize animalSize;
 
     @Column(length = 10000)
+    @Size(min = 5, max = 10000)
     private String description;
 
     @NotNull
+    @Size(min = 4, max = 120)
     private String address;
 
     @NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
+    @Size(min = 9, max = 9)
     private String zipCode;
 
     @NotNull
+    @Size(min = 4, max = 120)
     private String neighborhood;
 
     @NotNull
+    @Size(min = 4, max = 120)
     private String city;
 
     @NotNull
+    @Size(min = 2, max = 2)
     private String state;
 
+    @Size(min = 1, max = 6)
     private int addressNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -70,6 +81,7 @@ public class Announce {
     private User user;
 
     @Lob
+    @NotNull
     private String mainPhoto;
 
     @Lob

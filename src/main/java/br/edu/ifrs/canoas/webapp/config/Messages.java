@@ -1,19 +1,13 @@
 package br.edu.ifrs.canoas.webapp.config;
 
-import java.util.Locale;
-
-import javax.annotation.PostConstruct;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
+import javax.annotation.PostConstruct;
 
-/**
- * Created by rodrigo on 3/16/17.
- */
+
 @Component
 public class Messages {
 
