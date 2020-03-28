@@ -3,8 +3,11 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_name" th:text="#{announce.form.name}"> </label>
-                <input type="text" class="form-control" id="announce_form_animal_name" th:field="*{name}" required
-                       minlength="2" maxlength="120">
+                <input type="text" class="form-control" id="announce_form_animal_name" th:field="*{announce.name}" required
+                       minlength="2" maxlength="120"
+                       th:classappend="${#fields.hasErrors('announce.name')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.name')}"
+                     th:errors="*{announce.name}"></div>
             </div>
         </div>
     </div>
@@ -12,8 +15,12 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_animal_age" th:text="#{announce.form.age}"> </label>
-                <input type="number" class="form-control" id="announce_form_animal_age" th:field="*{age}" required
-                       max="99" min="0" step="1">
+                <select class="custom-select" id="announce_form_animal_age" th:field="*{announce.animalAge}" required
+                        th:classappend="${#fields.hasErrors('announce.animalAge')} ? is-invalid">
+                    <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="${i.name}"> </option>
+                </select>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalAge')}"
+                     th:errors="*{announce.animalAge}"></div>
             </div>
         </div>
         <div class="col">
@@ -21,9 +28,12 @@
                 <label th:text="#{announce.form.animalGender}"> </label>
                 <br>
                 <div class="form-check form-check-inline" th:each="i : ${animalGender}">
-                    <input class="form-check-input" type="radio" th:field="*{animalGender}" th:value="${i.id}">
-                    <label class="form-check-label" th:for="${#ids.prev('animalGender')}" th:text="${i.name}"> </label>
+                    <input class="form-check-input" type="radio" th:field="*{announce.animalGender}" th:value="${i.id}"
+                           th:classappend="${#fields.hasErrors('announce.animalGender')} ? is-invalid">
+                    <label class="form-check-label" th:for="${#ids.prev('announce.animalGender')}" th:text="${i.name}"> </label>
                 </div>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalGender')}"
+                     th:errors="*{announce.animalGender}"></div>
 
             </div>
         </div>
@@ -33,9 +43,12 @@
         <div class="col col-md-4">
             <div class="form-group">
                 <label for="announce_form_animal_size" th:text="#{announce.form.size}"> </label>
-                <select class="custom-select" id="announce_form_animal_size" th:field="*{animalSize}" required>
+                <select class="custom-select" id="announce_form_animal_size" th:field="*{announce.animalSize}" required
+                        th:classappend="${#fields.hasErrors('announce.animalSize')} ? is-invalid">
                     <option th:each="i : ${animalSize}" th:value="${i.id}" th:text="${i.name}"> </option>
                 </select>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalSize')}"
+                     th:errors="*{announce.animalSize}"></div>
             </div>
         </div>
     </div>
@@ -47,10 +60,13 @@
                 <br>
 
                 <div class="form-check form-check-inline" th:each="i : ${animalCastrated}">
-                    <input class="form-check-input" type="radio" th:field="*{animalCastrated}" th:value="${i.id}">
-                    <label class="form-check-label" th:for="${#ids.prev('animalCastrated')}" th:text="${i.name}"> </label>
+                    <input class="form-check-input" type="radio" th:field="*{announce.animalCastrated}" th:value="${i.id}"
+                           th:classappend="${#fields.hasErrors('announce.animalCastrated')} ? is-invalid">
+                    <label class="form-check-label" th:for="${#ids.prev('announce.animalCastrated')}" th:text="${i.name}"> </label>
                 </div>
 
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalCastrated')}"
+                     th:errors="*{announce.animalCastrated}"></div>
             </div>
         </div>
 
@@ -59,10 +75,12 @@
                 <label th:text="#{announce.form.type}"> </label>
                 <br>
                 <div class="form-check form-check-inline" th:each="i : ${animalType}">
-                    <input class="form-check-input" type="radio" th:field="*{animalType}" th:value="${i.id}">
-                    <label class="form-check-label" th:for="${#ids.prev('animalType')}" th:text="${i.name}"> </label>
+                    <input class="form-check-input" type="radio" th:field="*{announce.animalType}" th:value="${i.id}"
+                           th:classappend="${#fields.hasErrors('announce.animalType')} ? is-invalid">
+                    <label class="form-check-label" th:for="${#ids.prev('announce.animalType')}" th:text="${i.name}"> </label>
                 </div>
-
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalCastrated')}"
+                     th:errors="*{announce.animalType}"></div>
             </div>
         </div>
     </div>
@@ -71,8 +89,11 @@
         <div class="col col-md-5">
             <div class="form-group">
                 <label for="announce_form_zipCode" th:text="#{announce.form.zipCode}"> </label>
-                <input type="text" class="form-control mask-zipcode" id="announce_form_zipCode" th:field="*{zipCode}" required
-                       minlength="9" maxlength="9">
+                <input type="text" class="form-control mask-zipcode" id="announce_form_zipCode" th:field="*{announce.zipCode}" required
+                       minlength="9" maxlength="9"
+                       th:classappend="${#fields.hasErrors('announce.zipCode')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.zipCode')}"
+                     th:errors="*{announce.zipCode}"></div>
             </div>
         </div>
     </div>
@@ -80,16 +101,22 @@
         <div class="col col-md-3">
             <div class="form-group">
                 <label for="announce_form_state" th:text="#{announce.form.state}"> </label>
-                <input type="text" class="form-control" id="announce_form_state" th:field="*{state}" required
-                       minlength="2" maxlength="2">
+                <input type="text" class="form-control" id="announce_form_state" th:field="*{announce.state}" required
+                       minlength="2" maxlength="2"
+                       th:classappend="${#fields.hasErrors('announce.state')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.state')}"
+                     th:errors="*{announce.state}"></div>
             </div>
         </div>
 
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_city" th:text="#{announce.form.city}"> </label>
-                <input type="text" class="form-control" id="announce_form_city" th:field="*{city}" required
-                       minlength="3" maxlength="120">
+                <input type="text" class="form-control" id="announce_form_city" th:field="*{announce.city}" required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('announce.city')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.city')}"
+                     th:errors="*{announce.city}"></div>
             </div>
         </div>
     </div>
@@ -98,8 +125,11 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="announce_form_neighborhood" th:text="#{announce.form.neighborhood}"> </label>
-                <input type="text" class="form-control" id="announce_form_neighborhood" th:field="*{neighborhood}" required
-                       minlength="3" maxlength="120">
+                <input type="text" class="form-control" id="announce_form_neighborhood" th:field="*{announce.neighborhood}" required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('announce.neighborhood')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.neighborhood')}"
+                     th:errors="*{announce.neighborhood}"></div>
             </div>
         </div>
     </div>
@@ -108,16 +138,22 @@
         <div class="col col-md-9">
             <div class="form-group">
                 <label for="announce_form_address" th:text="#{announce.form.address}"> </label>
-                <input type="text" class="form-control" id="announce_form_address" th:field="*{address}" required
-                       minlength="3" maxlength="120">
+                <input type="text" class="form-control" id="announce_form_address" th:field="*{announce.address}" required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('announce.address')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.address')}"
+                     th:errors="*{announce.address}"></div>
             </div>
         </div>
 
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}"> </label>
-                <input type="text" class="form-control" id="announce_form_address_number" th:field="*{addressNumber}"
-                       minlength="1" maxlength="6">
+                <input type="text" class="form-control" id="announce_form_address_number" th:field="*{announce.addressNumber}"
+                       max="99999"
+                       th:classappend="${#fields.hasErrors('announce.addressNumber')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.addressNumber')}"
+                     th:errors="*{announce.addressNumber}"></div>
             </div>
         </div>
     </div>
@@ -126,8 +162,12 @@
         <div class="col">
             <div class="form-group">
                 <label for="announce_form_description" th:text="#{announce.form.description}"> </label>
-                <textarea class="form-control" id="announce_form_description" th:field="*{description}" rows="5" required
-                          maxlength="10000" minlength="10"></textarea>
+                <textarea class="form-control" id="announce_form_description" th:field="*{announce.description}" rows="5" required
+                          maxlength="10000" minlength="10"
+                          th:classappend="${#fields.hasErrors('announce.description')} ? is-invalid">
+                </textarea>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.description')}"
+                     th:errors="*{announce.description}"></div>
             </div>
         </div>
     </div>

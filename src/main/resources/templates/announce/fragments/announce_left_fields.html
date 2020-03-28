@@ -4,7 +4,11 @@
             <img class="img-fluid" src="/img/placeholder.svg">
             <div class="form-group">
                 <label for="announce_form_main_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_main_photo" name="main_photo" required accept="image/*">
+                <input type="file" class="custom-file" id="announce_form_main_photo"
+                       th:field="*{mainPhoto}" required accept="image/*"
+                       th:classappend="${#fields.hasErrors('mainPhoto')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('mainPhoto')}"
+                     th:errors="*{mainPhoto}"></div>
             </div>
         </div>
     </div>
@@ -14,7 +18,11 @@
             <img class="img-fluid" src="/img/placeholder.svg">
             <div class="form-group">
                 <label for="announce_form_second_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_second_photo" name="second_photo" required accept="image/*">
+                <input type="file" class="custom-file" id="announce_form_second_photo"
+                       th:field="*{secondPhoto}" accept="image/*"
+                       th:classappend="${#fields.hasErrors('secondPhoto')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('secondPhoto')}"
+                     th:errors="*{secondPhoto}"></div>
             </div>
         </div>
 
@@ -22,7 +30,12 @@
             <img class="img-fluid" src="/img/placeholder.svg">
             <div class="form-group">
                 <label for="announce_form_third_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_third_photo" name="third_photo" required accept="image/*">
+                <input type="file" class="custom-file" id="announce_form_third_photo"
+                       th:field="*{thirdPhoto}" accept="image/*"
+                       th:classappend="${#fields.hasErrors('thirdPhoto')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('thirdPhoto')}"
+                     th:errors="*{thirdPhoto}"></div>
+
             </div>
         </div>
     </div>

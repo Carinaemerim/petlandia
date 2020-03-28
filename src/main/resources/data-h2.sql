@@ -47,6 +47,12 @@ insert into animal_castrated (id, name) values
 (102, 'Não'),
 (103, 'Não sei');
 
+-- ANIMAL_AGE
+insert into animal_age (id, name) values
+(101, 'Filhote'),
+(102, 'Adulto'),
+(103, 'Idoso');
+
 -- CITY
 -- insert into city (id, description) values
 --(101, 'Canoas'),

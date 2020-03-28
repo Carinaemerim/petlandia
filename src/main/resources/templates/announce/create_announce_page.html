@@ -10,15 +10,17 @@
 </th:block>
 
 <div layout:fragment="content-body">
-
-    <form action="#" method="post" th:action="@{/announce/create}" th:object="${announce}" accept-charset="UTF-8" enctype="multipart/form-data">
-        <div th:replace="/announce/fragments/announce_form_buttons" :: announce_form_buttons></div>
+    <div class="card card-body">
+    <form action="#" method="post" th:action="@{/announce/create}" th:object="${form}" accept-charset="UTF-8" enctype="multipart/form-data">
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="announce_form_title" th:text="#{announce.form.title}"> </label>
-                    <input type="text" class="form-control" id="announce_form_title" th:field="*{title}" required
-                           minlength="9" maxlength="120">
+                    <input type="text" class="form-control" id="announce_form_title" th:field="*{announce.title}" required
+                           minlength="9" maxlength="120"
+                           th:classappend="${#fields.hasErrors('announce.title')} ? is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.title')}"
+                         th:errors="*{announce.title}"></div>
                 </div>
             </div>
         </div>
@@ -34,5 +36,6 @@
 
         <div th:replace="/announce/fragments/announce_form_buttons" :: announce_form_buttons></div>
     </form>
+    </div>
 
 </div>

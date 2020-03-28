@@ -9,10 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -32,14 +29,16 @@ public class Announce {
     @Size(min = 2, max = 120)
     private String name;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    @Size(min = 1, max = 2)
-    private int age;
+    private AnimalAge animalAge;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
     private AnimalGender animalGender;
 
     @ManyToOne(fetch= FetchType.EAGER)
+    @NotNull
     private AnimalType animalType;
 
     private Date date;
@@ -71,7 +70,7 @@ public class Announce {
     @Size(min = 2, max = 2)
     private String state;
 
-    @Size(min = 1, max = 6)
+    @Max(999999)
     private int addressNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -81,7 +80,6 @@ public class Announce {
     private User user;
 
     @Lob
-    @NotNull
     private String mainPhoto;
 
     @Lob
