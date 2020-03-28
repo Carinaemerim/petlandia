@@ -110,16 +110,16 @@ public class AnnounceController {
         return "/announce/create_announce_page";
     }
 
-    @GetMapping("/details")
-    public ModelAndView dashboard(@RequestParam(value = "id") final Long id) {
+    @GetMapping("/{id}")
+    public String announceDetails(@PathVariable("id") final String id, Model model) {
 
-        ModelAndView mav = new ModelAndView("/announce/announceDetails");
+        Announce announce = announceService.findById(Long.decode(id));
+        if (announce == null){
+            return "/notFound";
+        }
 
-        Announce announce = announceService.findById(id);
-
-        mav.addObject("announce", announce);
-
-        return mav;
+        model.addAttribute("announce", announce);
+        return "/announce/announceDetails";
     }
 
     @GetMapping("/filter")

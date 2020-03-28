@@ -1,88 +1,134 @@
 <html layout:decorate="~{/layouts/main}">
 
 <head>
-    <title th:text="#{item.header}"/>
+    <title th:text="${announce.title}"/>
 </head>
+
 <div layout:fragment="content-body">
-
-        <div class="container">
-            <div class="row justify-content-end">
-                <th:block th:if="${announce.canAlter()}">
-                    <div class="col justify-content-end btn-group">
-                        <a href="#" class="btn btn-primary btn-round"><i class="far fa-edit" th:text="#{button.edit}
-                        "></i> </a>
-                        <a href="#" class="btn btn-primary btn-round"><i class="fa fa-trash" th:text="#{button.remove}
-                        "></i> </a>
-                    </div>
-                </th:block>
-            </div>
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-5 mb-5 mb-lg-0 ">
-                    <h1 class="text-white font-weight-light" th:text="${announce.name}">Nome do doggo</h1>
-                    <span th:text="#{announce.type}"></span>
-                    <p th:text="${announce.type.name}"> Tipo no animal </p>
-                    <span th:text="#{announce.size}"></span>
-                    <p th:text="${announce.size}">Porte do animal</p>
-                    <span th:text="#{announce.date}"></span>
-                    <p th:text="${#dates.format(announce.date, 'dd/MMM/yyyy HH:mm:ss')}"> Data Anúncio </p>
-                    <p class="text-white mt-4 text-center" th:text="${announce.description}">
-                        Inserir aqui a descrição completa do animal, texto livre.
-                    Será possível explicar onde encontrá-lo ou disponibilizar telefones, e-mails e blablabla.
-                    Poderá inserir o que achar relevante para auxiliar no processo de adoção.</p>
-
-                    <span class="center-container" th:text="#{announce.city}"> </span>
-                    <p class="text-center" th:text="${announce.city.description}"> Cidade </p>
-                    <span class="text-center" th:text="#{announce.user}"> </span>
-                    <p class="text-center" th:text="${announce.user.name}"> Autor </p>
-
+    <div class="card card-body">
+            <div class="row">
+                <div class="col">
+                    <h1 th:text="${announce.title}"></h1>
                 </div>
-                <div class="col-lg-6">
-                    <div id="carouselExampleControls" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-90 p-4 img-fluid floating" src="/photos/dogs.jpg"
-                                     alt="First slide" th:src="${announce.photo.getPictureBase64()}">
+            </div>
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <img class="img-fluid" src="/img/placeholder.svg">
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <img class="img-fluid" src="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="announce_form_animal_name" th:text="#{announce.form.name}"> </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="announce_form_animal_age" th:text="#{announce.form.age}"> </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{announce.form.animalGender}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label for="announce_form_animal_size" th:text="#{announce.form.size}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{announce.form.castrated}"> </label>
+                           </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{announce.form.type}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-5">
+                            <div class="form-group">
+                                <label for="announce_form_zipCode" th:text="#{announce.form.zipCode}"> </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <div class="form-group">
+                                <label for="announce_form_state" th:text="#{announce.form.state}"> </label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="announce_form_city" th:text="#{announce.form.city}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label for="announce_form_neighborhood" th:text="#{announce.form.neighborhood}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-9">
+                            <div class="form-group">
+                                <label for="announce_form_address" th:text="#{announce.form.address}"> </label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}"> </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="announce_form_description" th:text="#{announce.form.description}"> </label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <div class="container">
-            <div class="card">
-                <div class="card-title">
-                    <h3 class="text-white font-weight-light" th:text="#{comment}"> </h3>
-                </div>
-                <p class="description">
-                    <label><i th:text="#{comment.info}"></i> <i> Rosa às 18:23 ------ </i></iRosa> </label> Amei.
-                </p>
-            </div>
-            <div class="card">
-                <p class="description">
-                    <label><i th:text="#{comment.info}"> </i> <i> Bidu às 17:12 ------ </i> </label> Pode disponibilizar seu e-mail, por favor?
-                </p>
-            </div>
-        </div>
-
-
-        <form class="form col-md-12" sec:authorize="isAuthenticated()">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i></i>
-                    </div>
-                </div>
-                <textarea type="text" class="form-control" placeholder="Comentário"></textarea>
-            </div>
-
-            <div class="text-center mb-5">
-                <button class="btn btn-primary btn-round" type="button">
-                    <i class="tim-icons icon-heart-2" th:text="#{button.comment}"></i>
-                </button>
-            </div>
-        </form>
-        </div>
+    </div>
 
 </div>
