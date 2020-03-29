@@ -8,18 +8,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white" th:text="#{menu.see}" id="menusee">
+            <a th:href="@{/announces}" class="nav-link text-white" th:text="#{menu.see}" id="menusee">
                 Ver anúncios
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white" th:text="#{menu.create}" id="menucreate">
+            <a th:href="@{/announce/create}" class="nav-link text-white" th:text="#{menu.create}" id="menucreate">
                 Criar anúncio
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white" th:text="#{menu.account}" id="menuaccount">
-                Criar anúncio
+            <a th:href="@{/user/create}" class="nav-link text-white" th:text="#{menu.account}" id="menuaccount">
+                Criar cadastro
             </a>
         </li>
         <li class="nav-item">
