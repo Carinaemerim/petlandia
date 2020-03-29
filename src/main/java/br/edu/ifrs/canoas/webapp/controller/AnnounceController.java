@@ -77,9 +77,6 @@ public class AnnounceController {
         boolean hasSecondPhoto = form.getSecondPhoto() != null && !form.getSecondPhoto().isEmpty();
         boolean hasThirdPhoto = form.getThirdPhoto() != null && !form.getThirdPhoto().isEmpty();
 
-        System.out.println(hasMainPhoto);
-        System.out.println(bindingResult.getAllErrors());
-
         if (!hasMainPhoto && !bindingResult.hasErrors()) {
             String message = messages.get("form.validation.pwd_is_not_equal");
             FieldError error = new FieldError(bindingResult.getObjectName(), "mainPhoto", message);
@@ -106,8 +103,8 @@ public class AnnounceController {
 
 
         form.getAnnounce().setDate(new Date());
-        announceService.save(form.getAnnounce());
-        return "/announce/create_announce_page";
+        Announce announce = announceService.save(form.getAnnounce());
+        return "redirect:/announce/" + announce.getId();
     }
 
     @GetMapping("/{id}")

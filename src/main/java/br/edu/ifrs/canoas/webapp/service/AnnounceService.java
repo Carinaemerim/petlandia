@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+import java.util.List;
+
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
 @AllArgsConstructor
@@ -53,8 +55,12 @@ public class AnnounceService {
         return announceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
     }
 
-    public void save(Announce announce) {
+    public Announce save(Announce announce) {
+        return announceRepository.save(announce);
+    }
 
-        announceRepository.save(announce);
+
+    public List<Announce> listAnnounce() {
+        return announceRepository.findAllByOrderByDateDesc();
     }
 }

@@ -2,10 +2,7 @@ package br.edu.ifrs.canoas.webapp.domain;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Role {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String role;
 }

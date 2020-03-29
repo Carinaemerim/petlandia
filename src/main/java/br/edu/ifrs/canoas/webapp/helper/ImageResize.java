@@ -53,16 +53,6 @@ public class ImageResize {
         return new Dimension(new_width, new_height);
     }
 
-    public static BufferedImage resize(BufferedImage originalImage, Dimension target) {
-
-        BufferedImage resizedImage = new BufferedImage(target.width,
-                target.height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(originalImage, 0, 0, target.width, target.height, null);
-        g.dispose();
-        return resizedImage;
-    }
-
     public static String encode(BufferedImage image, String type) throws IOException {
 
         String imageString;
@@ -96,15 +86,20 @@ public class ImageResize {
         return image;
     }
 
+    public static BufferedImage crop(BufferedImage originalImage, Dimension desirable) {
+        int x = (originalImage.getWidth() - desirable.width) / 2;
+        int y = (originalImage.getHeight() - desirable.height) / 2;
+        return originalImage.getSubimage(x, y, desirable.width, desirable.height);
+    }
+
 
     public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable, String imageType) throws IOException {
 
-        BufferedImage buffer = ImageResize.getBuffer(file);
+        BufferedImage buffer = getBuffer(file);
         Dimension current = new Dimension(buffer.getWidth(), buffer.getHeight());
-        Dimension target = ImageResize.getScaledDimension(current, desirable);
-        buffer = ImageResize.resize(buffer,target);
-
-        return ImageResize.encode(buffer, imageType);
+        Dimension target = getScaledDimension(current, desirable);
+        buffer = crop(buffer, target);
+        return encode(buffer, imageType);
     }
 
     public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable) throws IOException {

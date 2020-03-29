@@ -9,6 +9,7 @@
 .content-wrapper
 {
     background-color: gainsboro !important;
+    padding-top: 15px !important;
 }
 
 
@@ -34,4 +35,8 @@
     background-color: var(--mypurple) !important;
     color: var(--mywhite) !important;
     border-color: var(--mypurple) !important;
+}
+
+.callout-pink {
+    border-left-color: var(--mypink);
 }
