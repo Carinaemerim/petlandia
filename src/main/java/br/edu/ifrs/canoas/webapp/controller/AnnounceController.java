@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
+import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -51,6 +52,9 @@ public class AnnounceController {
         announce.setThirdPhoto("");
 
         AnnounceCreateFrom form = new AnnounceCreateFrom();
+        form.setMainPhotoCropper(new Cropper());
+        form.setSecondPhotoCropper(new Cropper());
+        form.setThirdPhotoCropper(new Cropper());
         form.setAnnounce(announce);
 
         model.addAttribute("form", form);

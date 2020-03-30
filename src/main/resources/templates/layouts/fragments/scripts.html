@@ -26,6 +26,7 @@
 
     <link href="/webjars/ttskch__select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" rel="stylesheet" type="text/css"/>
 
+    <link th:href="@{/css/cropper.min.css}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 
     <th:block layout:fragment="css-view"/>
@@ -41,34 +42,12 @@
     <script src="/webjars/select2/js/i18n/pt-BR.js"></script>
     <script src="/webjars/popper.js/umd/popper.min.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
+    <script th:src="@{/js/cropper.min.js}"></script>
+    <script th:src="@{/js/jquery-cropper.min.js}"></script>
+    <script th:src="@{/js/create_announce_page.js}"></script>
+    <script src="/js/main.js"></script>
 
-
-    <script>
-
-        $(document).ready(function() {
-            $(".image-placeholder").each(function _each() {
-                const element = $(this);
-                const img = $('img', element);
-                const field = $('input', element);
-
-                field.change(function _change() {
-                    const [input] = field;
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            img.attr('src', e.target.result);
-                        }
-
-                        reader.readAsDataURL(input.files[0]);
-                    }
-                });
-            });
-            $('.mask-zipcode').mask('00000-000');
-            $('.mask-cpf').mask('000.000.000-00', {reverse: true});
-            $('.mask-celphone').mask('(00) 0000-00009');
-        });
-    </script>
 
     <th:block layout:fragment="js-view"/>
 </div>
+

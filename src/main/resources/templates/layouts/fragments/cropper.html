@@ -1,0 +1,14 @@
+<div th:fragment="cropper(photo)" class="cropper-init">
+
+    <img src="/img/placeholder.svg" class="img-fluid crop-image">
+
+    <input type="hidden" th:field="*{__${photo} + '.x'__}" class="input-x">
+    <input type="hidden" th:field="*{__${photo} + '.y'__}" class="input-y">
+    <input type="hidden" th:field="*{__${photo} + '.width'__}" class="input-width">
+    <input type="hidden" th:field="*{__${photo} + '.height'__}" class="input-height">
+    <input type="hidden" th:field="*{__${photo} + '.rotate'__}" class="input-rotate">
+    <input type="hidden" th:field="*{__${photo} + '.scaleX'__}" class="input-scaleX">
+    <input type="hidden" th:field="*{__${photo} + '.scaleY'__}" class="input-scaleY">
+
+</div>
+

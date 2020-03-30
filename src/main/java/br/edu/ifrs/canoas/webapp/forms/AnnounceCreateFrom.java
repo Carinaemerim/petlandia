@@ -14,8 +14,11 @@ public class AnnounceCreateFrom {
 
     @NotBlank
     private MultipartFile mainPhoto;
+    private Cropper mainPhotoCropper;
 
     private MultipartFile secondPhoto;
+    private Cropper secondPhotoCropper;
 
     private MultipartFile thirdPhoto;
+    private Cropper thirdPhotoCropper;
 }

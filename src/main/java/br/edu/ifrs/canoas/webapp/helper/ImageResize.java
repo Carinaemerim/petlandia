@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.helper;
 
+import org.imgscalr.Scalr;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -7,10 +8,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 
 public class ImageResize {
+
+    public final Dimension desirable = new Dimension(512, 288);
 
     public static BufferedImage getBuffer(MultipartFile file) {
 
@@ -23,34 +27,6 @@ public class ImageResize {
         } catch (IOException e) {
             return null;
         }
-    }
-
-    public static Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
-
-        int original_width = imgSize.width;
-        int original_height = imgSize.height;
-        int bound_width = boundary.width;
-        int bound_height = boundary.height;
-        int new_width = original_width;
-        int new_height = original_height;
-
-        // first check if we need to scale width
-        if (original_width > bound_width) {
-            //scale width to fit
-            new_width = bound_width;
-            //scale height to maintain aspect ratio
-            new_height = (new_width * original_height) / original_width;
-        }
-
-        // then check if we need to scale even with the new height
-        if (new_height > bound_height) {
-            //scale height to fit instead
-            new_height = bound_height;
-            //scale width to maintain aspect ratio
-            new_width = (new_height * original_width) / original_height;
-        }
-
-        return new Dimension(new_width, new_height);
     }
 
     public static String encode(BufferedImage image, String type) throws IOException {
@@ -86,23 +62,30 @@ public class ImageResize {
         return image;
     }
 
-    public static BufferedImage crop(BufferedImage originalImage, Dimension desirable) {
-        int x = (originalImage.getWidth() - desirable.width) / 2;
-        int y = (originalImage.getHeight() - desirable.height) / 2;
-        return originalImage.getSubimage(x, y, desirable.width, desirable.height);
-    }
-
 
     public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable, String imageType) throws IOException {
-
         BufferedImage buffer = getBuffer(file);
-        Dimension current = new Dimension(buffer.getWidth(), buffer.getHeight());
-        Dimension target = getScaledDimension(current, desirable);
-        buffer = crop(buffer, target);
+        buffer = Scalr.resize(buffer, desirable.width, desirable.height);
+        buffer = Scalr.crop(buffer, 0, 0, desirable.width, desirable.height);
         return encode(buffer, imageType);
     }
 
     public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable) throws IOException {
         return getBase64FromUploadImage(file, desirable, "jpg");
+    }
+
+
+
+    public static void main(String[] args) throws IOException {
+
+        Dimension desirable = new Dimension(512, 288);
+        File input = new File("/home/carina/Documentos/imagens_petlandia/3645-cachorro-que-nao-cresce-descubra-alguma-article_media_mobile-2.jpg");
+        File output = new File("/home/carina/Documentos/imagens_petlandia/unnamed-crop.jpg");
+        BufferedImage buffer = ImageIO.read(input);
+
+        buffer = Scalr.resize(buffer, desirable.width, desirable.height);
+        buffer = Scalr.crop(buffer, desirable.width, desirable.height);
+        System.out.println(buffer.getWidth() + "x" + buffer.getHeight());
+        ImageIO.write(buffer, "jpg", output);
     }
 }

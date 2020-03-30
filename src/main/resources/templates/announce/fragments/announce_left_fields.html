@@ -9,6 +9,8 @@
                        th:classappend="${#fields.hasErrors('mainPhoto')} ? is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('mainPhoto')}"
                      th:errors="*{mainPhoto}"></div>
+
+                <div th:replace="/layouts/fragments/cropper :: cropper('mainPhotoCropper')"></div>
             </div>
         </div>
     </div>
