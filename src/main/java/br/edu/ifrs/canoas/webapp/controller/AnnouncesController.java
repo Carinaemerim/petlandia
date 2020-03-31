@@ -1,7 +1,6 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/announces")
@@ -26,18 +24,13 @@ public class AnnouncesController {
 
     @GetMapping
     public String getList(Model model) {
+
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
-
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
-
         model.addAttribute("animalSize", animalSizeService.listAnimalSize());
-
         model.addAttribute("animalType", animalTypeService.listAnimalType());
-
         model.addAttribute("animalAge", animalAgeService.listAnimalAge());
-
         model.addAttribute("announces", announceService.listAnnounce());
-
 
         return "/announce/list";
     }

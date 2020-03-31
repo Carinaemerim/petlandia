@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.edu.ifrs.canoas.webapp.domain.User;
@@ -23,4 +24,16 @@ public class UserService {
 		Optional<User> optUser = userRepository.findById(user.getId());
 		return optUser.isPresent()?optUser.get():null;
 	}
+
+
+	public List<User> listUser() {
+//	    if (searchTerm == null || searchTerm.trim().length() == 0){
+//	        return userRepository.findAll();
+//        }
+//		return userRepository.findAllByUsernameContains(searchTerm);
+
+		return userRepository.findAll();
+	}
+
+
 }

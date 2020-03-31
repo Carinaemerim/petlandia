@@ -59,7 +59,6 @@ public class AnnounceService {
         return announceRepository.save(announce);
     }
 
-
     public List<Announce> listAnnounce() {
         return announceRepository.findAllByOrderByDateDesc();
     }

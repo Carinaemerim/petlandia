@@ -1,0 +1,56 @@
+<html layout:decorate="~{/layouts/main}">
+
+<div layout:fragment="content-body">
+    <div class="row">
+        <div class="col col-md-3">
+            <div class="card">
+                <form method="get" action="#" accept-charset="UTF-8">
+                    <div class="card-header">
+                        Filtros
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Default checkbox
+                                </label>
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Default checkbox
+                                </label>
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Default checkbox
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-secondary btn-sm btn-block" type="submit">Filtrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col col-md-9">
+            <div class="callout callout-pink" th:each="user :  ${users}">
+                <div class="row">
+                    <div class="col col-md-5">
+                        <h5 th:text="${user.name}">title</h5>
+
+                    </div>
+                    <div class="col">
+                        <div th:text="|#{user.form.username}:  ${user.username}|"></div>
+                        <div th:text="|#{user.form.email}:  ${user.email}|"></div>
+                        <button class="btn btn-secondary btn-sm float-right" type="submit"
+                                th:text="#{user.account_details}"> </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
