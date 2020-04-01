@@ -46,6 +46,9 @@ public class Announce {
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalSize animalSize;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AnimalColor animalColor;
+
     @Column(length = 10000)
     @Size(min = 5, max = 10000)
     private String description;

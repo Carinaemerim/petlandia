@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -57,5 +54,17 @@ public class UserController {
         userService.save(form.getUser());
 
         return "/user/create_user_page";
+    }
+
+    @GetMapping("/{id}")
+    public String userDetails(@PathVariable("id") final String id, Model model) {
+
+        User user = userService.findById(Long.decode(id));
+        if (user == null){
+            return "/notFound";
+        }
+
+        model.addAttribute("user", user);
+        return "/user/userDetails";
     }
 }

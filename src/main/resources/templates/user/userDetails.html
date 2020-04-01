@@ -1,0 +1,137 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+    <title th:text="${user.name}"/>
+</head>
+
+<div layout:fragment="content-body">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+
+                <div class="card-header" th:text="#{user.form.access.data}">
+
+                </div>
+
+                <div class="row">
+                    <div class="card-body">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{user.form.username}"> </label>
+                                <br>
+                                <span th:text="${user.name}"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label th:text="#{user.form.cpf}"> </label>
+                            <br>
+                            <span th:text="${user.cpf}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-header" th:text="#{user.form.address.data}">
+
+                </div>
+                <div class="card-body">
+                        <div class="row">
+                        <div class="col col-md-5">
+                            <div class="form-group">
+                                <label th:text="#{user.form.zipCode}"> </label>
+                                <br>
+                                <span th:text="${user.zipCode}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <div class="form-group">
+                                <label th:text="#{user.form.state}"> </label>
+                                <br>
+                                <span th:text="${user.state}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{user.form.city}"> </label>
+                                <br>
+                                <span th:text="${user.city}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{user.form.neighborhood}"> </label>
+                                <br>
+                                <span th:text="${user.neighborhood}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-9">
+                            <div class="form-group">
+                                <label th:text="#{user.form.address}"> </label>
+                                <br>
+                                <span th:text="${user.address}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{user.form.addressNumber}"> </label>
+                                <br>
+                                <span th:text="${user.addressNumber}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col col-md-5">
+                            <div class="form-group">
+                                <label th:text="#{user.form.name}"> </label>
+                                <br>
+                                <span th:text="${user.name}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{user.form.email}"> </label>
+                                <br>
+                                <span th:text="${user.email}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{user.form.residentialPhone}"> </label>
+                                <br>
+                                <span th:text="${user.residentialPhone}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label th:text="#{user.form.celPhone}"> </label>
+                                <br>
+                                <span th:text="${user.celPhone}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -53,6 +53,16 @@ insert into animal_age (id, name) values
 (102, 'Adulto'),
 (103, 'Idoso');
 
+--ANIMAL_COLOR
+insert into animal_color(id, name) values
+(101, 'Branco'),
+(102, 'Preto'),
+(103, 'Marrom'),
+(104, 'Caramelo'),
+(105, 'Cinza'),
+(106, 'Creme');
+
+
 --ANNOUNCE
 insert into announce(id, address, address_number, city, date, description, main_photo, name, neighborhood, second_photo,
 state, third_photo, title, zip_code, animal_age_id, animal_castrated_id, animal_gender_id, animal_size_id, animal_type_id, user_id)

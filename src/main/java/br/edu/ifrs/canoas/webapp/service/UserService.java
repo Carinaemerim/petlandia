@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -33,6 +35,10 @@ public class UserService {
 //		return userRepository.findAllByUsernameContains(searchTerm);
 
 		return userRepository.findAll();
+	}
+
+	public User findById(Long id){
+		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 	}
 
 

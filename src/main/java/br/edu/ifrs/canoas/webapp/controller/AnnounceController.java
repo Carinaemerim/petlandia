@@ -12,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.*;
@@ -34,6 +32,7 @@ public class AnnounceController {
     private final AnimalSizeService animalSizeService;
     private final AnimalTypeService animalTypeService;
     private final AnimalAgeService animalAgeService;
+    private final AnimalColorService animalColorService;
 
     @GetMapping("/create")
     public String getCreate(Model model) {
@@ -41,12 +40,14 @@ public class AnnounceController {
         List<AnimalCastrated> animalCastrateds = animalCastratedService.listAnimalCastrated();
         List<AnimalGender> animalGenders = animalGenderService.listAnimalGender();
         List<AnimalAge> animalAges = animalAgeService.listAnimalAge();
+        List<AnimalColor> animalColors = animalColorService.listAnimalColor();
 
         Announce announce = new Announce();
         announce.setAnimalType(animalTypes.get(0));
         announce.setAnimalCastrated(animalCastrateds.get(0));
         announce.setAnimalGender(animalGenders.get(0));
         announce.setAnimalAge(animalAges.get(0));
+        announce.setAnimalColor(animalColors.get(0));
         announce.setMainPhoto("");
         announce.setSecondPhoto("");
         announce.setThirdPhoto("");
@@ -63,6 +64,7 @@ public class AnnounceController {
         model.addAttribute("animalSize", animalSizeService.listAnimalSize());
         model.addAttribute("animalType", animalTypes);
         model.addAttribute("animalAges", animalAges);
+        model.addAttribute("animalColors", animalColors);
         return "/announce/create_announce_page";
     }
 
@@ -75,6 +77,7 @@ public class AnnounceController {
         model.addAttribute("animalSize", animalSizeService.listAnimalSize());
         model.addAttribute("animalType", animalTypeService.listAnimalType());
         model.addAttribute("animalAge", animalAgeService.listAnimalAge());
+        model.addAttribute("animalColors", animalColorService.listAnimalColor());
 
         Dimension desirable = new Dimension(500, 500);
         boolean hasMainPhoto = form.getMainPhoto() != null && !form.getMainPhoto().isEmpty();
