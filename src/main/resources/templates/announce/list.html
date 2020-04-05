@@ -4,30 +4,26 @@
     <div class="row">
         <div class="col col-md-3">
             <div class="card">
-                <form method="get" action="#" accept-charset="UTF-8">
+                <form method="get" action="#" th:action="@{/announces}" accept-charset="UTF-8">
+                    <input type="hidden" name="page" value="1">
                     <div class="card-header">
                         Filtros
                     </div>
                     <div class="card-body">
-
-                        <div class="form-group">
-                            <label>Titulo</label>
+                        <div class="form-group" th:each="filter : ${filters}">
+                            <label th:text="${filter.label}">filter.label</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Default checkbox
-                                </label>
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Default checkbox
-                                </label>
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Default checkbox
-                                </label>
+                                <div th:each="option : ${filter.options}">
+                                    <input class="form-check-input" type="checkbox"
+                                           th:id="${filter.id + '-' + option.id}"
+                                           th:name="${filter.id}" th:value="${option.id}"
+                                           th:checked="${#lists.contains(__'form.' + ${filter.id}__, option.id)} ? checked">
+                                    <label class="form-check-label"
+                                           th:for="${filter.id + '-' + option.id}"
+                                           th:text="${option.name}">option.name</label>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-secondary btn-sm btn-block" type="submit">Filtrar</button>

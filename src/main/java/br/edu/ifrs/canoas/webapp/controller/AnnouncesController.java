@@ -1,12 +1,16 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
+import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
 
 
 @Controller
@@ -16,23 +20,21 @@ public class AnnouncesController {
 
     private final Messages messages;
     private final AnnounceService announceService;
-    private final AnimalCastratedService animalCastratedService;
-    private final AnimalGenderService animalGenderService;
-    private final AnimalSizeService animalSizeService;
-    private final AnimalTypeService animalTypeService;
-    private final AnimalAgeService animalAgeService;
+    private final AnnounceListService announceListService;
 
     @GetMapping
-    public String getList(Model model) {
+    public String getList(@ModelAttribute AnnounceFilterForm form, Model model) {
+        if (form == null) {
+            form = new AnnounceFilterForm();
+        }
 
-        model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
-        model.addAttribute("animalGender", animalGenderService.listAnimalGender());
-        model.addAttribute("animalSize", animalSizeService.listAnimalSize());
-        model.addAttribute("animalType", animalTypeService.listAnimalType());
-        model.addAttribute("animalAge", animalAgeService.listAnimalAge());
+        model.addAttribute("filters", announceListService.getFilters());
+        model.addAttribute("form", form);
         model.addAttribute("announces", announceService.listAnnounce());
 
         return "/announce/list";
     }
+
+
 
 }
