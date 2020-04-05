@@ -34,6 +34,8 @@ public class AnnounceController {
     private final AnimalAgeService animalAgeService;
     private final AnimalColorService animalColorService;
 
+    private final Dimension imageTarget = new Dimension(1920, 1080);
+
     @GetMapping("/create")
     public String getCreate(Model model) {
         List<AnimalType> animalTypes = animalTypeService.listAnimalType();
@@ -79,30 +81,7 @@ public class AnnounceController {
         model.addAttribute("animalAge", animalAgeService.listAnimalAge());
         model.addAttribute("animalColors", animalColorService.listAnimalColor());
 
-        Dimension desirable = new Dimension(500, 500);
-        boolean hasMainPhoto = form.getMainPhoto() != null && !form.getMainPhoto().isEmpty();
-        boolean hasSecondPhoto = form.getSecondPhoto() != null && !form.getSecondPhoto().isEmpty();
-        boolean hasThirdPhoto = form.getThirdPhoto() != null && !form.getThirdPhoto().isEmpty();
-
-        if (!hasMainPhoto && !bindingResult.hasErrors()) {
-            String message = messages.get("form.validation.pwd_is_not_equal");
-            FieldError error = new FieldError(bindingResult.getObjectName(), "mainPhoto", message);
-            bindingResult.addError(error);
-        } else {
-            String image = ImageResize.getBase64FromUploadImage(form.getMainPhoto(), desirable);
-            System.out.println(image);
-            form.getAnnounce().setMainPhoto(image);
-        }
-
-        if (hasSecondPhoto && !bindingResult.hasErrors()) {
-            String image = ImageResize.getBase64FromUploadImage(form.getSecondPhoto(), desirable);
-            form.getAnnounce().setSecondPhoto(image);
-        }
-
-        if (hasThirdPhoto && !bindingResult.hasErrors()) {
-            String image = ImageResize.getBase64FromUploadImage(form.getThirdPhoto(), desirable);
-            form.getAnnounce().setThirdPhoto(image);
-        }
+        doUpload(form, bindingResult);
 
         if (bindingResult.hasErrors()){
             return "/announce/create_announce_page";
@@ -142,6 +121,37 @@ public class AnnounceController {
         mav.addObject("currentPage", page);
 
         return mav;
+    }
+
+
+    private void doUpload(AnnounceCreateFrom form, BindingResult bindingResult) throws IOException {
+        Cropper mainPhoto = form.getMainPhotoCropper();
+        boolean hasMainPhoto = mainPhoto != null && !mainPhoto.getImage().isEmpty();
+
+        Cropper secondPhoto = form.getSecondPhotoCropper();
+        boolean hasSecondPhoto = secondPhoto != null && !secondPhoto.getImage().isEmpty();
+
+        Cropper thirdPhoto = form.getThirdPhotoCropper();
+        boolean hasThirdPhoto = thirdPhoto != null && !thirdPhoto.getImage().isEmpty();
+
+        if (!hasMainPhoto && !bindingResult.hasErrors()) {
+            String message = messages.get("form.validation.pwd_is_not_equal");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "mainPhoto", message);
+            bindingResult.addError(error);
+        } else {
+            String image = ImageResize.getBase64FromUploadImage(mainPhoto, this.imageTarget);
+            form.getAnnounce().setMainPhoto(image);
+        }
+
+        if (hasSecondPhoto && !bindingResult.hasErrors()) {
+            String image = ImageResize.getBase64FromUploadImage(secondPhoto, this.imageTarget);
+            form.getAnnounce().setSecondPhoto(image);
+        }
+
+        if (hasThirdPhoto && !bindingResult.hasErrors()) {
+            String image = ImageResize.getBase64FromUploadImage(thirdPhoto, this.imageTarget);
+            form.getAnnounce().setThirdPhoto(image);
+        }
     }
 
 }

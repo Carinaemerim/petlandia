@@ -1,14 +1,50 @@
-<div th:fragment="cropper(photo)" class="cropper-init">
+<div th:fragment="cropper(photo)" class="cropper-init" th:id="${'cropper-' + photo}">
 
-    <img src="/img/placeholder.svg" class="img-fluid crop-image">
+    <div class="form-group">
+        <label th:text="#{cropper.label.__${photo}__}">label</label>
 
-    <input type="hidden" th:field="*{__${photo} + '.x'__}" class="input-x">
-    <input type="hidden" th:field="*{__${photo} + '.y'__}" class="input-y">
-    <input type="hidden" th:field="*{__${photo} + '.width'__}" class="input-width">
-    <input type="hidden" th:field="*{__${photo} + '.height'__}" class="input-height">
-    <input type="hidden" th:field="*{__${photo} + '.rotate'__}" class="input-rotate">
-    <input type="hidden" th:field="*{__${photo} + '.scaleX'__}" class="input-scaleX">
-    <input type="hidden" th:field="*{__${photo} + '.scaleY'__}" class="input-scaleY">
+        <div class="img-preview">
+            <img src="/img/placeholder.svg" class="img-fluid">
+        </div>
+
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('__${photo}__')}"
+             th:errors="*{mainPhoto}"></div>
+
+        <input type="hidden" th:field="*{__${photo} + '.x'__}" class="input-x">
+        <input type="hidden" th:field="*{__${photo} + '.y'__}" class="input-y">
+        <input type="hidden" th:field="*{__${photo} + '.width'__}" class="input-width">
+        <input type="hidden" th:field="*{__${photo} + '.height'__}" class="input-height">
+        <input type="hidden" th:field="*{__${photo} + '.rotate'__}" class="input-rotate">
+        <input type="hidden" th:field="*{__${photo} + '.scaleX'__}" class="input-scaleX">
+        <input type="hidden" th:field="*{__${photo} + '.scaleY'__}" class="input-scaleY">
+    </div>
+
+    <button type="button" class="btn btn-block btn-outline-secondary btn-select"
+            th:text="#{cropper.btn.select}">open modal</button>
+
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="#{cropper.title}">modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img src="/img/placeholder.svg" class="crop-image img-fluid">
+                    </div>
+
+                    <input type="file" class="custom-file crop-input"
+                           th:field="*{__${photo} + '.image'__}" accept="image/*"
+                           th:classappend="${#fields.hasErrors('__${photo}__')} ? is-invalid">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-submit"
+                            th:text="#{cropper.btn.submit}">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

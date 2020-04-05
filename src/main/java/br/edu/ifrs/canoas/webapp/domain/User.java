@@ -78,5 +78,24 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="user_id")
 	private Set<Announce> announces;
+/*
+	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull
+	private AnimalAge animalAge;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull
+	private AnimalGender animalGender;
+
+	@ManyToOne(fetch= FetchType.EAGER)
+	@NotNull
+	private AnimalType animalType;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private AnimalSize animalSize;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private AnimalColor animalColor;
+	*/
 
 }

@@ -1,44 +1,17 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="announce_left_fields">
-    <div class="row image-placeholder">
+    <div class="row">
         <div class="col">
-            <img class="img-fluid" src="/img/placeholder.svg">
-            <div class="form-group">
-                <label for="announce_form_main_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_main_photo"
-                       th:field="*{mainPhoto}" required accept="image/*"
-                       th:classappend="${#fields.hasErrors('mainPhoto')} ? is-invalid">
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('mainPhoto')}"
-                     th:errors="*{mainPhoto}"></div>
-
-                <div th:replace="/layouts/fragments/cropper :: cropper('mainPhotoCropper')"></div>
-            </div>
+            <div th:replace="/layouts/fragments/cropper :: cropper('mainPhotoCropper')"></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col image-placeholder">
-            <img class="img-fluid" src="/img/placeholder.svg">
-            <div class="form-group">
-                <label for="announce_form_second_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_second_photo"
-                       th:field="*{secondPhoto}" accept="image/*"
-                       th:classappend="${#fields.hasErrors('secondPhoto')} ? is-invalid">
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('secondPhoto')}"
-                     th:errors="*{secondPhoto}"></div>
-            </div>
+        <div class="col col-md-6">
+            <div th:replace="/layouts/fragments/cropper :: cropper('secondPhotoCropper')"></div>
         </div>
 
-        <div class="col image-placeholder">
-            <img class="img-fluid" src="/img/placeholder.svg">
-            <div class="form-group">
-                <label for="announce_form_third_photo" th:text="#{announce.form.title}"> </label>
-                <input type="file" class="custom-file" id="announce_form_third_photo"
-                       th:field="*{thirdPhoto}" accept="image/*"
-                       th:classappend="${#fields.hasErrors('thirdPhoto')} ? is-invalid">
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('thirdPhoto')}"
-                     th:errors="*{thirdPhoto}"></div>
-
-            </div>
+        <div class="col col-md-6">
+            <div th:replace="/layouts/fragments/cropper :: cropper('thirdPhotoCropper')"></div>
         </div>
     </div>
 </div>

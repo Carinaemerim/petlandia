@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.helper;
 
+import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import org.imgscalr.Scalr;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,14 +9,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 
 public class ImageResize {
-
-    public final Dimension desirable = new Dimension(512, 288);
-
     public static BufferedImage getBuffer(MultipartFile file) {
 
         if (file.isEmpty()) {
@@ -63,29 +60,39 @@ public class ImageResize {
     }
 
 
-    public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable, String imageType) throws IOException {
-        BufferedImage buffer = getBuffer(file);
-        buffer = Scalr.resize(buffer, desirable.width, desirable.height);
-        buffer = Scalr.crop(buffer, 0, 0, desirable.width, desirable.height);
+    public static BufferedImage rotate(BufferedImage buffer, int angle) {
+        Scalr.Rotation rotation = null;
+
+        if (angle == 90) {
+            rotation = Scalr.Rotation.CW_90;
+        }
+
+        if (angle == 180) {
+            rotation = Scalr.Rotation.CW_180;
+        }
+
+        if (angle == 270) {
+            rotation = Scalr.Rotation.CW_270;
+        }
+
+        if (rotation == null) {
+            return buffer;
+        }
+
+        return Scalr.rotate(buffer, rotation);
+    }
+
+
+    public static String getBase64FromUploadImage(Cropper cropper, Dimension target, String imageType) throws IOException {
+        BufferedImage buffer = getBuffer(cropper.getImage());
+
+        buffer = rotate(buffer, (int) cropper.getRotate());
+        buffer = Scalr.crop(buffer, (int) cropper.getX(), (int) cropper.getY(), (int) cropper.getWidth(), (int) cropper.getHeight());
+        buffer = Scalr.resize(buffer, (int) target.getWidth(), (int) target.getHeight());
         return encode(buffer, imageType);
     }
 
-    public static String getBase64FromUploadImage(MultipartFile file, Dimension desirable) throws IOException {
-        return getBase64FromUploadImage(file, desirable, "jpg");
-    }
-
-
-
-    public static void main(String[] args) throws IOException {
-
-        Dimension desirable = new Dimension(512, 288);
-        File input = new File("/home/carina/Documentos/imagens_petlandia/3645-cachorro-que-nao-cresce-descubra-alguma-article_media_mobile-2.jpg");
-        File output = new File("/home/carina/Documentos/imagens_petlandia/unnamed-crop.jpg");
-        BufferedImage buffer = ImageIO.read(input);
-
-        buffer = Scalr.resize(buffer, desirable.width, desirable.height);
-        buffer = Scalr.crop(buffer, desirable.width, desirable.height);
-        System.out.println(buffer.getWidth() + "x" + buffer.getHeight());
-        ImageIO.write(buffer, "jpg", output);
+    public static String getBase64FromUploadImage(Cropper cropper, Dimension target) throws IOException {
+        return getBase64FromUploadImage(cropper, target, "jpg");
     }
 }

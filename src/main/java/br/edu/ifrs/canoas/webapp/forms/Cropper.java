@@ -1,9 +1,11 @@
 package br.edu.ifrs.canoas.webapp.forms;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class Cropper {
+    private MultipartFile image;
     private float x = 0f;
     private float y = 0f;
     private float width = 0f;
