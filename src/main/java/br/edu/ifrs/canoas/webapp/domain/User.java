@@ -37,7 +37,7 @@ public class User {
 
 	@NotBlank
 	@CPF
-	@Size(min = 14, max = 14)
+	//@Size(min = 14, max = 14)
 	private String cpf;
 
 	@Email
@@ -69,16 +69,16 @@ public class User {
 	private int addressNumber;
 
 	@NotNull
-	@Size(min = 10, max = 11)
+	//@Size(min = 10, max = 11)
 	private String residentialPhone;
 
-	@Size(min = 10, max = 11)
+	//@Size(min = 10, max = 11)
 	private String celPhone;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="user_id")
 	private Set<Announce> announces;
-/*
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull
 	private AnimalAge animalAge;
@@ -96,6 +96,9 @@ public class User {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private AnimalColor animalColor;
-	*/
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private AnimalCastrated animalCastrated;
+
 
 }

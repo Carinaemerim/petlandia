@@ -38,6 +38,12 @@
 						<div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
 					</div>
 
+					<div class="card-header" th:text="#{user.form.animal.data}"> </div>
+
+					<div class="card-body">
+						<div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
+					</div>
+
 					<div class="row justify-content-between">
 						<div class="col">
 							<a class="btn btn-danger" th:text="#{user.form.cancel}">

@@ -25,8 +25,9 @@ public class AnnounceListService {
 
     public List<FilterForm> getFilters() {
         List<FilterForm> filters = new ArrayList<>();
+        FilterForm filter = null;
 
-        FilterForm filter = new FilterForm<AnimalAge>();
+        filter = new FilterForm<AnimalAge>();
         filter.setId("animalAge");
         filter.setLabel(messages.get("form.filter." + filter.getId()));
         filter.setOptions(animalAgeRepository.findAllByOrderByIdAsc());

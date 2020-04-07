@@ -11,19 +11,10 @@ insert into file(id, content) values
 insert into file(id, content) values
 (100, FILE_READ('./src/main/resources/static/photos/dogs.jpg'));
 
---AUTHENTICATION
-INSERT into user(id, username, password, active,  name, email, address, zip_code, neighborhood, city, state , address_number, residential_phone, cel_phone) VALUES
-(100, 'user', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380',
-'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '');
-
 --ROLES
 insert into role(id, role) values
 (1, 'ROLE_USER'),
 (2, 'ROLE_ADMIN');
-
--- USER_ROLES
-insert into user_roles (user_id, roles_id) values
-(100, 1);
 
 -- ANIMAL_TYPE
 insert into animal_type (id, name) values
@@ -62,6 +53,16 @@ insert into animal_color(id, name) values
 (105, 'Cinza'),
 (106, 'Creme');
 
+--AUTHENTICATION
+INSERT into user(id, username, password, active,  name, email, address, zip_code, neighborhood, city, state,
+address_number, residential_phone, cel_phone, animal_age_id, animal_gender_id, animal_type_id, animal_castrated_id,
+animal_color_id,animal_size_id) VALUES
+(100, 'user', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380',
+'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101);
+
+-- USER_ROLES
+insert into user_roles (user_id, roles_id) values
+(100, 1);
 
 --ANNOUNCE
 insert into announce(id, address, address_number, city, date, description, main_photo, name, neighborhood, second_photo,

@@ -21,7 +21,7 @@
                            th:classappend="${#fields.hasErrors('announce.animalType')} ? is-invalid">
                     <label class="form-check-label" th:for="${#ids.prev('announce.animalType')}" th:text="${i.name}"> </label>
                 </div>
-                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalCastrated')}"
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.animalType')}"
                      th:errors="*{announce.animalType}"></div>
             </div>
         </div>

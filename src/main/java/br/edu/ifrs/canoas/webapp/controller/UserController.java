@@ -1,9 +1,9 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
-import br.edu.ifrs.canoas.webapp.service.UserService;
+import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -20,6 +21,12 @@ public class UserController {
 
     private final UserService userService;
     private final Messages messages;
+    private final AnimalCastratedService animalCastratedService;
+    private final AnimalGenderService animalGenderService;
+    private final AnimalSizeService animalSizeService;
+    private final AnimalTypeService animalTypeService;
+    private final AnimalAgeService animalAgeService;
+    private final AnimalColorService animalColorService;
 
 //	@GetMapping("/profile")
 //    public ModelAndView viewUserAccount(@AuthenticationPrincipal UserImpl activeUser){
@@ -30,17 +37,54 @@ public class UserController {
 
     @GetMapping("/create")
     public String getCreateUser(Model model) {
+
+        List<AnimalType> animalTypes = animalTypeService.listAnimalType();
+        List<AnimalCastrated> animalCastrateds = animalCastratedService.listAnimalCastrated();
+        List<AnimalGender> animalGenders = animalGenderService.listAnimalGender();
+        List<AnimalAge> animalAges = animalAgeService.listAnimalAge();
+        List<AnimalColor> animalColors = animalColorService.listAnimalColor();
+        List<AnimalSize> animalSizes = animalSizeService.listAnimalSize();
+
         UserCreateForm form = new UserCreateForm();
         form.setUser(new User());
         form.getUser().setPassword("");
         form.setPasswordConfirm("");
+        form.getUser().setAnimalType(animalTypes.get(0));
+        form.getUser().setAnimalCastrated(animalCastrateds.get(0));
+        form.getUser().setAnimalGender(animalGenders.get(0));
+        form.getUser().setAnimalAge(animalAges.get(0));
+        form.getUser().setAnimalColor(animalColors.get(0));
+        form.getUser().setAnimalSize(animalSizes.get(0));
+
         model.addAttribute("form", new UserCreateForm());
+        model.addAttribute("animalCastrated", animalCastrateds);
+        model.addAttribute("animalGender", animalGenders);
+        model.addAttribute("animalSize", animalSizes);
+        model.addAttribute("animalType", animalTypes);
+        model.addAttribute("animalAges", animalAges);
+        model.addAttribute("animalColors", animalColors);
+
         return "/user/create_user_page";
     }
 
     @PostMapping("/create")
     public String postCreateUser(@ModelAttribute("form") @Valid UserCreateForm form,
                                  BindingResult bindingResult, Model model) {
+
+        List<AnimalType> animalTypes = animalTypeService.listAnimalType();
+        List<AnimalCastrated> animalCastrateds = animalCastratedService.listAnimalCastrated();
+        List<AnimalGender> animalGenders = animalGenderService.listAnimalGender();
+        List<AnimalAge> animalAges = animalAgeService.listAnimalAge();
+        List<AnimalColor> animalColors = animalColorService.listAnimalColor();
+        List<AnimalSize> animalSizes = animalSizeService.listAnimalSize();
+
+        model.addAttribute("animalCastrated", animalCastrateds);
+        model.addAttribute("animalGender", animalGenders);
+        model.addAttribute("animalSize", animalSizes);
+        model.addAttribute("animalType", animalTypes);
+        model.addAttribute("animalAges", animalAges);
+        model.addAttribute("animalColors", animalColors);
+
         if (!form.getPasswordConfirm().equals(form.getUser().getPassword())) {
             String message = messages.get("form.validation.pwd_is_not_equal");
             FieldError error = new FieldError(bindingResult.getObjectName(), "passwordConfirm", message);
@@ -50,6 +94,8 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "/user/create_user_page";
         }
+
+
 
         userService.save(form.getUser());
 

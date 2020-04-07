@@ -32,7 +32,6 @@ public class AnnounceService {
 
         Example<Announce> example = buildQuery(cityId, animalTypeId);
 
-        //TODO RNG03
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH, Sort.by("date").descending());
         return announceRepository.findAll(example, page);
 
