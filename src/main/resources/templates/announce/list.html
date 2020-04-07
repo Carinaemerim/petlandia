@@ -37,13 +37,18 @@
                     <div class="col col-md-3">
                         <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
                     </div>
-                    <div class="col">
+
+                    <div class="col col-md-5">
                         <h5 th:text="${announce.title}">title</h5>
                         <div th:text="|#{announce.form.name}:  ${announce.name}|"></div>
                         <div th:text="|#{announce.form.age}: ${announce.animalAge.name}|"></div>
-                        <div th:text="|#{announce.form.city}: ${announce.city}|"></div>
-                        <button class="btn btn-secondary btn-sm float-right" type="submit">Ver anúncio completo</button>
                     </div>
+                    <div class="col">
+                        <div th:text="|#{announce.form.animalGender}: ${announce.animalGender.name}|"></div>
+                        <div th:text="|#{announce.form.city}: ${announce.city}|"></div>
+                        <button class="btn btn-secondary btn-sm float-right " type="submit">Ver anúncio completo</button>
+                    </div>
+
 
                 </div>
             </div>

@@ -37,7 +37,7 @@ public class User {
 
 	@NotBlank
 	@CPF
-	//@Size(min = 14, max = 14)
+	@Size(min = 14, max = 14)
 	private String cpf;
 
 	@Email
@@ -69,10 +69,10 @@ public class User {
 	private int addressNumber;
 
 	@NotNull
-	//@Size(min = 10, max = 11)
+	@Size(min = 14, max = 15)
 	private String residentialPhone;
 
-	//@Size(min = 10, max = 11)
+	@Pattern(regexp="^$|^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
 	private String celPhone;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

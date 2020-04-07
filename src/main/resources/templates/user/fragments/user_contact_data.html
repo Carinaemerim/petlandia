@@ -29,7 +29,7 @@
                 <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}"> </label>
                 <input type="text" class="form-control mask-celphone" id="user_form_residentialPhone"
                        th:field="*{user.residentialPhone}" required
-                       minlength="10" maxlength="11"
+                       minlength="14" maxlength="15"
                        th:classappend="${#fields.hasErrors('user.residentialPhone')} ? is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.residentialPhone')}"
                      th:errors="*{user.residentialPhone}"></div>
@@ -41,7 +41,7 @@
                 <label for="user.form.celPhone" th:text="#{user.form.celPhone}"> </label>
                 <input type="text" class="form-control mask-celphone" id="user.form.celPhone"
                        th:field="*{user.celPhone}"
-                       minlength="10" maxlength="11"
+                       minlength="14" maxlength="15"
                        th:classappend="${#fields.hasErrors('user.celPhone')} ? is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.celPhone')}"
                      th:errors="*{user.celPhone}"></div>
