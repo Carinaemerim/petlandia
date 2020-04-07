@@ -38,18 +38,32 @@
                         <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
                     </div>
 
-                    <div class="col col-md-5">
-                        <h5 th:text="${announce.title}">title</h5>
-                        <div th:text="|#{announce.form.name}:  ${announce.name}|"></div>
-                        <div th:text="|#{announce.form.age}: ${announce.animalAge.name}|"></div>
-                    </div>
-                    <div class="col">
-                        <div th:text="|#{announce.form.animalGender}: ${announce.animalGender.name}|"></div>
-                        <div th:text="|#{announce.form.city}: ${announce.city}|"></div>
-                        <button class="btn btn-secondary btn-sm float-right " type="submit">Ver anúncio completo</button>
-                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 th:text="${announce.title}">title</h5>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div th:text="|#{announce.form.name}:  ${announce.name}|"></div>
+                                <div th:text="|#{announce.form.age}: ${announce.animalAge.name}|"></div>
+                            </div>
 
+                            <div class="col-md-6">
+                                <div th:text="|#{announce.form.animalGender}: ${announce.animalGender.name}|"></div>
+                                <div th:text="|#{announce.form.city}: ${announce.city}|"></div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="col-md-12">
+                                <button class="btn btn-secondary btn-sm float-right " type="submit" th:text="#{user.list.details}">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
