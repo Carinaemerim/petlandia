@@ -18,7 +18,7 @@ public class HomeController {
 
 	private final AnimalTypeService animalTypeService;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ModelAndView greetings() {
 
 

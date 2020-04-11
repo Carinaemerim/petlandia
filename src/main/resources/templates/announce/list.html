@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col col-md-9">
-            <div class="callout callout-pink" th:each="announce :  ${announces}">
+            <div class="callout callout-pink" th:each="announce :  ${announces.data}">
                 <div class="row">
                     <div class="col col-md-3">
                         <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">

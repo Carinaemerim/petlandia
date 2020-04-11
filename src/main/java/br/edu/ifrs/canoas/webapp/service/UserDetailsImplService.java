@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import lombok.AllArgsConstructor;
 
-/**
- * Created by rodrigo on 2/21/17.
- */
 @Service
 @AllArgsConstructor
 public class UserDetailsImplService implements UserDetailsService {

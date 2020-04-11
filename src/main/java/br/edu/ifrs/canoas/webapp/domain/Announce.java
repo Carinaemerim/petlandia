@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
+import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -41,6 +42,10 @@ public class Announce {
     @NotNull
     private AnimalType animalType;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AnnounceStatus status;
+
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -79,6 +84,7 @@ public class Announce {
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalCastrated animalCastrated;
 
+    @NotNull
     @ManyToOne(fetch= FetchType.EAGER)
     private User user;
 

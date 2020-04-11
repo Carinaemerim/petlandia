@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
+import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
@@ -8,6 +9,9 @@ import br.edu.ifrs.canoas.webapp.helper.ImageResize;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.*;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -71,8 +76,9 @@ public class AnnounceController {
     }
 
     @PostMapping("/create")
-    public String postCreate(@ModelAttribute("form") AnnounceCreateFrom form,
-                                    BindingResult bindingResult, Model model) throws IOException {
+    public String postCreate(@AuthenticationPrincipal UserImpl activeUser,
+                             @ModelAttribute("form") AnnounceCreateFrom form,
+                             BindingResult bindingResult, Model model) throws IOException {
 
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
@@ -83,11 +89,11 @@ public class AnnounceController {
 
         doUpload(form, bindingResult);
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "/announce/create_announce_page";
         }
 
-
+        form.getAnnounce().setUser(activeUser.getUser());
         form.getAnnounce().setDate(new Date());
         Announce announce = announceService.save(form.getAnnounce());
         return "redirect:/announce/" + announce.getId();
@@ -104,7 +110,7 @@ public class AnnounceController {
         boolean hasThirdPhoto = thirdPhoto != null && !thirdPhoto.getImage().isEmpty();
 
         if (!hasMainPhoto && !bindingResult.hasErrors()) {
-            String message = messages.get("form.validation.pwd_is_not_equal");
+            String message = messages.get("form.validation.pwd_is_not_equal"); // TODO: trocar
             FieldError error = new FieldError(bindingResult.getObjectName(), "mainPhoto", message);
             bindingResult.addError(error);
         } else {
@@ -127,7 +133,7 @@ public class AnnounceController {
     public String announceDetails(@PathVariable("id") final String id, Model model) {
 
         Announce announce = announceService.findById(Long.decode(id));
-        if (announce == null){
+        if (announce == null) {
             return "/notFound";
         }
 
@@ -138,12 +144,12 @@ public class AnnounceController {
     @GetMapping("/filter")
     public ModelAndView filterAnnounces(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
                                         @RequestParam(value = "cityId", required = false) Long cityId,
-                                        @RequestParam(value = "animalTypeId", required = false) Long animalTypeId){
+                                        @RequestParam(value = "animalTypeId", required = false) Long animalTypeId) {
 
         ModelAndView mav = new ModelAndView("/announce/fragments/announce-list");
 
-        if(page < 0){
-            page=1;
+        if (page < 0) {
+            page = 1;
         }
 
         Page<Announce> announces = announceService.findAll(page, cityId, animalTypeId);

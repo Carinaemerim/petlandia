@@ -1,14 +1,19 @@
 package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.Announce;
+import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.repository.AnimalTypeRepository;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.*;
+import javax.persistence.criteria.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
@@ -17,10 +22,13 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 @Service
 public class AnnounceService {
 
-    private static final int PAGE_LENGTH = 3;
+    private static final int PAGE_LENGTH = 12;
 
     private final AnnounceRepository announceRepository;
     private final AnimalTypeRepository animalTypeRepository;
+
+    @PersistenceUnit
+    private final EntityManagerFactory entityManagerFactory;
 
     public Page<Announce> findAll(int pageNumber, Long cityId, Long animalTypeId){
 
@@ -60,5 +68,70 @@ public class AnnounceService {
 
     public List<Announce> listAnnounce() {
         return announceRepository.findAllByOrderByDateDesc();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public PaginatedEntity<Announce> findAllByFilter(AnnounceFilterForm filters) {
+        EntityManager entityManager = null;
+
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Announce> announceCriteriaQuery = criteriaBuilder.createQuery(Announce.class);
+            Root<Announce> root = announceCriteriaQuery.from(Announce.class);
+            List<Predicate> wheres = new LinkedList<>();
+
+            if (filters.getAnimalCastrated() != null && !filters.getAnimalCastrated().isEmpty()) {
+                Expression<Long> e = root.get("animalCastrated");
+                wheres.add(e.in(filters.getAnimalCastrated()));
+            }
+
+            if (filters.getAnimalColor() != null && !filters.getAnimalColor().isEmpty()) {
+                Expression<Long> e = root.get("animalColor");
+                wheres.add(e.in(filters.getAnimalColor()));
+            }
+
+            if (filters.getAnimalGender() != null && !filters.getAnimalGender().isEmpty()) {
+                Expression<Long> e = root.get("animalGender");
+                wheres.add(e.in(filters.getAnimalGender()));
+            }
+
+            if (filters.getAnimalSize() != null && !filters.getAnimalSize().isEmpty()) {
+                Expression<Long> e = root.get("animalSize");
+                wheres.add(e.in(filters.getAnimalSize()));
+            }
+
+            if (filters.getAnimalType() != null && !filters.getAnimalType().isEmpty()) {
+                Expression<Long> e = root.get("animalType");
+                wheres.add(e.in(filters.getAnimalType()));
+            }
+
+            if (filters.getAnimalAge() != null && !filters.getAnimalAge().isEmpty()) {
+                Expression<Long> e = root.get("animalAge");
+                wheres.add(e.in(filters.getAnimalAge()));
+            }
+
+            wheres.add(criteriaBuilder.equal(root.get("status"), AnnounceStatus.ACTIVE));
+            announceCriteriaQuery.where(wheres.toArray(new Predicate[]{}));
+            announceCriteriaQuery.orderBy(criteriaBuilder.desc(root.get("date")));
+
+            TypedQuery query = entityManager.createQuery(announceCriteriaQuery)
+                    .setFirstResult(filters.getPage() * PAGE_LENGTH)
+                    .setMaxResults(PAGE_LENGTH);
+
+            List<Announce> list = query.getResultList();
+
+            return PaginatedEntity.<Announce>builder()
+                    .currentPage(filters.getPage())
+                    .data(list)
+                    .totalResults(query.getMaxResults())
+                    .pageLength(PAGE_LENGTH)
+                    .build();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 }
