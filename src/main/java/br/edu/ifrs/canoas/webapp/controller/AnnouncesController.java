@@ -11,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-
 
 @Controller
 @RequestMapping("/announces")
@@ -39,6 +37,15 @@ public class AnnouncesController {
         return "/announce/list";
     }
 
+    @GetMapping("/{id}")
+    public String announceDetails(@PathVariable("id") final String id, Model model) {
 
+        Announce announce = announceService.findById(Long.decode(id));
+        if (announce == null) {
+            return "/notFound";
+        }
 
+        model.addAttribute("announce", announce);
+        return "/announce/announceDetails";
+    }
 }

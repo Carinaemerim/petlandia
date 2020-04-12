@@ -6,6 +6,11 @@
     --mypurple:     #7300e6;
 }
 
+
+.pull-right {
+    float: right;
+}
+
 .content-wrapper
 {
     background-color: gainsboro !important;
@@ -13,8 +18,8 @@
 }
 
 
-.btn-secondary, .navbar-expand
-{
+.btn-secondary, .navbar-expand {
+    text-decoration: none !important;
     background-color: var(--mypink);
     color: var(--mywhite) !important;
     border-color: var(--mypink);
@@ -32,9 +37,9 @@
 .btn-secondary:active,
 .btn-secondary:link
 {
-    background-color: var(--mypurple) !important;
-    color: var(--mywhite) !important;
-    border-color: var(--mypurple) !important;
+    background-color: var(--mysoftpink) !important;
+    color: white !important;
+    border-color: var(--mysoftpink) !important;
 }
 
 .callout-pink {
@@ -54,11 +59,18 @@
 }
 
 
+/* page-link */
+.page-link {
+    color: black;
+}
+
+
 /* btn-outline-secondary */
 
 
 /* btn-outline-secondary */
 .btn-outline-secondary {
+    text-decoration: none;
     color: var(--mypink);
     border-color: var(--mypink);
 }

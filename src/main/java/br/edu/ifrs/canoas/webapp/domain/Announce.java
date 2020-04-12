@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -110,22 +112,55 @@ public class Announce {
                 '}';
     }
 
-    public boolean canAlter() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null || !authentication.isAuthenticated() ||
-                authentication instanceof AnonymousAuthenticationToken) {
+    public boolean canModify() {
+        if (this.status == AnnounceStatus.INACTIVE) {
             return false;
         }
 
-        for (GrantedAuthority auth : authentication.getAuthorities()) {
-            if ("ROLE_ADMIN".equals(auth.getAuthority()))
-                return true;
+        if (Auth.isAuthenticated() == false) {
+            return false;
+        };
+
+        boolean isOwner = this.isOwner();
+        boolean isModerator = this.isModerator();
+
+        return isOwner || isModerator;
+    }
+
+
+    public boolean isModerator() {
+        return Auth.hasRole(new Role[]{ Role.MODERATOR, Role.ADMIN });
+    }
+
+    public boolean isOwner() {
+        User user = Auth.getUser();
+        if (user == null) {
+            return false;
         }
 
-        UserImpl userImpl = (UserImpl) authentication.getPrincipal();
-        User user = userImpl.getUser();
-        return this.user.getId().equals(user.getId());
+        return user.getId().equals(this.user.getId());
+    }
 
+    public boolean canApprove() {
+        if (!this.isModerator()) {
+            return false;
+        }
+
+        return this.status == AnnounceStatus.CREATED;
+    }
+
+    public boolean canEdit() {
+        if (!this.isOwner()) {
+            return false;
+        }
+
+        return this.status == AnnounceStatus.CREATED || this.status == AnnounceStatus.ACTIVE;
+    }
+
+    public boolean canRemove() {
+        boolean hasPermission = this.isOwner() || this.isModerator();
+        boolean hasStatus = this.status == AnnounceStatus.CREATED || this.status == AnnounceStatus.ACTIVE;
+        return hasPermission && hasStatus;
     }
 }

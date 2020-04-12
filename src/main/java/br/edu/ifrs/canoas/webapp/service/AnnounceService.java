@@ -80,40 +80,40 @@ public class AnnounceService {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Announce> announceCriteriaQuery = criteriaBuilder.createQuery(Announce.class);
             Root<Announce> root = announceCriteriaQuery.from(Announce.class);
-            List<Predicate> wheres = new LinkedList<>();
+            List<Predicate> predicates = new LinkedList<>();
 
             if (filters.getAnimalCastrated() != null && !filters.getAnimalCastrated().isEmpty()) {
                 Expression<Long> e = root.get("animalCastrated");
-                wheres.add(e.in(filters.getAnimalCastrated()));
+                predicates.add(e.in(filters.getAnimalCastrated()));
             }
 
             if (filters.getAnimalColor() != null && !filters.getAnimalColor().isEmpty()) {
                 Expression<Long> e = root.get("animalColor");
-                wheres.add(e.in(filters.getAnimalColor()));
+                predicates.add(e.in(filters.getAnimalColor()));
             }
 
             if (filters.getAnimalGender() != null && !filters.getAnimalGender().isEmpty()) {
                 Expression<Long> e = root.get("animalGender");
-                wheres.add(e.in(filters.getAnimalGender()));
+                predicates.add(e.in(filters.getAnimalGender()));
             }
 
             if (filters.getAnimalSize() != null && !filters.getAnimalSize().isEmpty()) {
                 Expression<Long> e = root.get("animalSize");
-                wheres.add(e.in(filters.getAnimalSize()));
+                predicates.add(e.in(filters.getAnimalSize()));
             }
 
             if (filters.getAnimalType() != null && !filters.getAnimalType().isEmpty()) {
                 Expression<Long> e = root.get("animalType");
-                wheres.add(e.in(filters.getAnimalType()));
+                predicates.add(e.in(filters.getAnimalType()));
             }
 
             if (filters.getAnimalAge() != null && !filters.getAnimalAge().isEmpty()) {
                 Expression<Long> e = root.get("animalAge");
-                wheres.add(e.in(filters.getAnimalAge()));
+                predicates.add(e.in(filters.getAnimalAge()));
             }
 
-            wheres.add(criteriaBuilder.equal(root.get("status"), AnnounceStatus.ACTIVE));
-            announceCriteriaQuery.where(wheres.toArray(new Predicate[]{}));
+            predicates.add(criteriaBuilder.equal(root.get("status"), AnnounceStatus.ACTIVE));
+            announceCriteriaQuery.where(predicates.toArray(new Predicate[]{}));
             announceCriteriaQuery.orderBy(criteriaBuilder.desc(root.get("date")));
 
             TypedQuery query = entityManager.createQuery(announceCriteriaQuery)
@@ -123,7 +123,7 @@ public class AnnounceService {
             List<Announce> list = query.getResultList();
 
             return PaginatedEntity.<Announce>builder()
-                    .currentPage(filters.getPage())
+                    .currentPage(filters.getPage() - 1)
                     .data(list)
                     .totalResults(query.getMaxResults())
                     .pageLength(PAGE_LENGTH)

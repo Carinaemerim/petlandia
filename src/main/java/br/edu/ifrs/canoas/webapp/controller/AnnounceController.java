@@ -8,20 +8,15 @@ import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.*;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +79,7 @@ public class AnnounceController {
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
         model.addAttribute("animalSize", animalSizeService.listAnimalSize());
         model.addAttribute("animalType", animalTypeService.listAnimalType());
-        model.addAttribute("animalAge", animalAgeService.listAnimalAge());
+        model.addAttribute("animalAges", animalAgeService.listAnimalAge());
         model.addAttribute("animalColors", animalColorService.listAnimalColor());
 
         doUpload(form, bindingResult);
@@ -96,8 +91,84 @@ public class AnnounceController {
         form.getAnnounce().setUser(activeUser.getUser());
         form.getAnnounce().setDate(new Date());
         Announce announce = announceService.save(form.getAnnounce());
-        return "redirect:/announce/" + announce.getId();
+        return "redirect:/announces/" + announce.getId();
     }
+
+    /* Edit */
+
+    @GetMapping("/{id}/edit")
+    public String editGet(@PathVariable("id") final String id, Model model) {
+
+        Announce announce = announceService.findById(Long.decode(id));
+        if (announce == null || !announce.canEdit()) {
+            return "/notFound";
+        }
+
+        AnnounceCreateFrom form = new AnnounceCreateFrom();
+        form.setAnnounce(announce);
+        form.setMainPhotoCropper(new Cropper());
+        form.setSecondPhotoCropper(new Cropper());
+        form.setThirdPhotoCropper(new Cropper());
+
+        model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
+        model.addAttribute("animalGender", animalGenderService.listAnimalGender());
+        model.addAttribute("animalSize", animalSizeService.listAnimalSize());
+        model.addAttribute("animalType", animalTypeService.listAnimalType());
+        model.addAttribute("animalAges", animalAgeService.listAnimalAge());
+        model.addAttribute("animalColors", animalColorService.listAnimalColor());
+        model.addAttribute("form", form);
+
+        return "/announce/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editPost(@PathVariable("id") final String id,
+                          @ModelAttribute("form") AnnounceCreateFrom form,
+                          BindingResult bindingResult, Model model) {
+
+        Announce announce = announceService.findById(Long.decode(id));
+        if (announce == null || !announce.canEdit()) {
+            return "/notFound";
+        }
+
+        // TODO Salvar
+
+        model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
+        model.addAttribute("animalGender", animalGenderService.listAnimalGender());
+        model.addAttribute("animalSize", animalSizeService.listAnimalSize());
+        model.addAttribute("animalType", animalTypeService.listAnimalType());
+        model.addAttribute("animalAges", animalAgeService.listAnimalAge());
+        model.addAttribute("animalColors", animalColorService.listAnimalColor());
+        model.addAttribute("form", form);
+
+        return "/announce/edit";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void doUpload(AnnounceCreateFrom form, BindingResult bindingResult) throws IOException {
         Cropper mainPhoto = form.getMainPhotoCropper();
@@ -128,36 +199,4 @@ public class AnnounceController {
             form.getAnnounce().setThirdPhoto(image);
         }
     }
-
-    @GetMapping("/{id}")
-    public String announceDetails(@PathVariable("id") final String id, Model model) {
-
-        Announce announce = announceService.findById(Long.decode(id));
-        if (announce == null) {
-            return "/notFound";
-        }
-
-        model.addAttribute("announce", announce);
-        return "/announce/announceDetails";
-    }
-
-    @GetMapping("/filter")
-    public ModelAndView filterAnnounces(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-                                        @RequestParam(value = "cityId", required = false) Long cityId,
-                                        @RequestParam(value = "animalTypeId", required = false) Long animalTypeId) {
-
-        ModelAndView mav = new ModelAndView("/announce/fragments/announce-list");
-
-        if (page < 0) {
-            page = 1;
-        }
-
-        Page<Announce> announces = announceService.findAll(page, cityId, animalTypeId);
-        mav.addObject("announces", announces);
-        mav.addObject("currentPage", page);
-
-        return mav;
-    }
-
-
 }

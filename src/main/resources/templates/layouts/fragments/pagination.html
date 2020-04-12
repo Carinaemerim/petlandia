@@ -1,0 +1,23 @@
+<div th:fragment="pagination(results)" th:if="${results.totalPages gt 0}">
+    <ul class="pagination" id="pagination-list">
+        <li class="page-item" th:classappend="${results.currentPage <= 1} ? disabled">
+            <a class="page-link" href="#"
+               th:attr="data-page=${results.currentPage - 1}">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <li class="page-item" th:classappend="${i eq results.currentPage} ? active"
+            th:each="i : ${#numbers.sequence((results.currentPage - 5) > 1 ? results.currentPage - 5 : 1,
+            results.totalPages > (10 + results.currentPage) ? results.currentPage + 10 : results.totalPages, 1)}">
+            <span class="page-link" th:attr="data-page=${i}" th:text="${i}"></span>
+        </li>
+
+        <li class="page-item" th:classappend="${results.currentPage >= results.totalPages} ? disabled">
+            <a class="page-link" href="#"
+               th:attr="data-page=${results.currentPage + 1}">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>

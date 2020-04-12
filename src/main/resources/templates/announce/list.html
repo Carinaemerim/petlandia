@@ -47,7 +47,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div th:text="|#{announce.form.name}:  ${announce.name}|"></div>
+                                <div th:text="|#{announce.form.name}: ${announce.name}|"></div>
                                 <div th:text="|#{announce.form.age}: ${announce.animalAge.name}|"></div>
                             </div>
 
@@ -57,14 +57,18 @@
                             </div>
                         </div>
 
-                        <div class="col">
-                            <div class="col-md-12">
-                                <button class="btn btn-secondary btn-sm float-right " type="submit" th:text="#{user.list.details}">
-                                </button>
+                        <div class="row justify-content-end">
+                            <div class="col-auto">
+                                <a class="btn btn-secondary btn-xs btn-block"
+                                   th:text="#{user.list.details}" th:href="@{/announces/{id}(id = ${announce.id})}"
+                                >LINK</a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="pull-right">
+                <div th:replace="/layouts/fragments/pagination :: pagination(${announces})"></div>
             </div>
         </div>
     </div>
