@@ -12,20 +12,29 @@
                     <div class="btn-group btn-group-sm" th:if="${announce.canEdit()}">
                         <a class="btn btn-info"
                            th:href="@{/announce/{id}/edit(id = ${announce.id})}">
-                            <i class="fa fa-pen"></i> Editar</a>
+                            <i class="fa fa-pen"></i>
+                        <span class="ml-1" th:text="#{announce.mod.edit}"></span>
+                        </a>
                     </div>
                 </div>
                 <div class="col-auto">
                     <div class="btn-group btn-group-sm" th:if="${announce.canRemove()}">
                         <a class="btn btn-danger" th:href="@{/announce/{id}/remove(id = ${announce.id})}">
-                            <i class="fa fa-trash"></i> Excluir</a>
+                            <i class="fa fa-trash"></i>
+                        <span class="ml-1" th:text="#{announce.mod.delete}"></span>
+                        </a>
                     </div>
 
                     <div class="btn-group btn-group-sm" th:if="${announce.canApprove()}">
                         <a class="btn btn-danger" th:href="@{/announce/{id}/deny(id = ${announce.id})}">
-                            <i class="fa fa-hand-point-down"></i> Reprovar</a>
+                            <i class="fa fa-hand-point-down"></i>
+                        <span class="ml-1" th:text="#{announce.mod.approve}"></span>
+                        </a>
+
                         <a class="btn btn-success" th:href="@{/announce/{id}/accept(id = ${announce.id})}">
-                            <i class="fa fa-hand-point-up"></i> Aprovar</a>
+                            <i class="fa fa-hand-point-up"></i>
+                            <span class="ml-1" th:text="#{announce.mod.refuse}"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -78,14 +87,14 @@
                             <div class="form-group">
                                 <label th:text="#{announce.form.age}"> </label>
                                 <br>
-                                <span th:text="${announce.animalAge.name}"></span>
+                                <span th:text="#{${announce.animalAge.name.name}}"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label th:text="#{announce.form.animalGender}"> </label>
                                 <br>
-                                <span th:text="${announce.animalGender.name}"></span>
+                                <span th:text="#{${announce.animalGender.name.name}}"></span>
                             </div>
                         </div>
                     </div>
@@ -95,14 +104,14 @@
                             <div class="form-group">
                                 <label th:text="#{announce.form.size}"> </label>
                                 <br>
-                                <span th:text="${announce.animalSize.name}"></span>
+                                <span th:text="#{${announce.animalSize.name.name}}"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label th:text="#{announce.form.animalColor}"> </label>
                                 <br>
-                                <span th:text="${announce.animalColor}"></span>
+                                <span th:text="#{${announce.animalColor.name.name}}"></span>
                             </div>
                         </div>
                     </div>
@@ -112,7 +121,7 @@
                             <div class="form-group">
                                 <label th:text="#{announce.form.castrated}"> </label>
                                 <br>
-                                <span th:text="${announce.animalCastrated.name}"></span>
+                                <span th:text="#{${announce.animalCastrated.name.name}}"></span>
                             </div>
                         </div>
 
@@ -120,7 +129,7 @@
                             <div class="form-group">
                                 <label th:text="#{announce.form.type}"> </label>
                                 <br>
-                                <span th:text="${announce.animalType.name}"></span>
+                                <span th:text="#{${announce.animalType.name.name}}"></span>
                             </div>
                         </div>
                     </div>

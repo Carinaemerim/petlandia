@@ -120,7 +120,7 @@ public class AnnounceControllerTest extends BaseControllerTest{
 
     private AnimalType createAnimalType(){
         AnimalType animalType = new AnimalType();
-        animalType.setName("cachorro fêmea");
+        //animalType.setName("cachorro fêmea");
         return animalType;
     }
 

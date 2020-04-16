@@ -46,7 +46,7 @@ public class Announce {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private AnnounceStatus status;
+    private AnnounceStatus status = AnnounceStatus.CREATED;
 
     private Date date;
 

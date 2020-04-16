@@ -23,7 +23,7 @@ public class AnimalTypeRepositoryTest {
     public void testSaveAnimalType(){
         //given
         AnimalType animalType = new AnimalType();
-        animalType.setName("cachorro");
+        //animalType.setName("cachorro");
 
         //when
         animalType = animalTypeRepository.save(animalType);
@@ -39,7 +39,7 @@ public class AnimalTypeRepositoryTest {
     public void testDeleteAnimalType(){
         //given
         AnimalType animalType = new AnimalType();
-        animalType.setName("cachorro");
+        //animalType.setName("cachorro");
         animalType = animalTypeRepository.save(animalType);
 
         //when

@@ -7,11 +7,12 @@
                 <form method="get" action="#" th:action="@{/announces}" accept-charset="UTF-8">
                     <input type="hidden" name="page" value="1">
                     <div class="card-header">
-                        Filtros
+                        <i class="fas fa-filter"></i>
+                         <span class="ml-1" th:text="#{form.filter.filters}"> </span>
                     </div>
                     <div class="card-body">
                         <div class="form-group" th:each="filter : ${filters}">
-                            <label th:text="${filter.label}">filter.label</label>
+                            <label th:text="${filter.label}"> </label>
                             <div class="form-check">
                                 <div th:each="option : ${filter.options}">
                                     <input class="form-check-input" type="checkbox"
@@ -20,13 +21,15 @@
                                            th:checked="${#lists.contains(__'form.' + ${filter.id}__, option.id)} ? checked">
                                     <label class="form-check-label"
                                            th:for="${filter.id + '-' + option.id}"
-                                           th:text="${option.name}">option.name</label>
+                                           th:text="#{${option.name}}"> </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm btn-block" type="submit">Filtrar</button>
+                        <button class="btn btn-secondary btn-sm btn-block" type="submit"
+                                th:text="#{form.filter.button}">
+                            Filtrar</button>
                     </div>
                 </form>
             </div>
@@ -41,27 +44,27 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-12">
-                                <h5 th:text="${announce.title}">title</h5>
+                                <h5 th:text="${announce.title}"> </h5>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div th:text="|#{announce.form.name}: ${announce.name}|"></div>
-                                <div th:text="|#{announce.form.age}: ${announce.animalAge.name}|"></div>
+                                <div th:text="|#{announce.form.age}: #{${announce.animalAge.name.name}}|"></div>
                             </div>
 
                             <div class="col-md-6">
-                                <div th:text="|#{announce.form.animalGender}: ${announce.animalGender.name}|"></div>
+                                <div th:text="|#{announce.form.animalGender}: #{${announce.animalGender.name.name}}|"></div>
                                 <div th:text="|#{announce.form.city}: ${announce.city}|"></div>
                             </div>
                         </div>
 
                         <div class="row justify-content-end">
                             <div class="col-auto">
-                                <a class="btn btn-secondary btn-xs btn-block"
-                                   th:text="#{user.list.details}" th:href="@{/announces/{id}(id = ${announce.id})}"
-                                >LINK</a>
+                                <a class="btn btn-secondary btn-sm btn-block"
+                                   th:text="#{user.list.details}" th:href="@{/announces/{id}(id = ${announce.id})}">
+                                </a>
                             </div>
                         </div>
                     </div>

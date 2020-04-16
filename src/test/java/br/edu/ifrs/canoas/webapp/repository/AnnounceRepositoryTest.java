@@ -119,7 +119,7 @@ public class AnnounceRepositoryTest {
 
     private AnimalType createAnimalType(){
         AnimalType animalType= new AnimalType();
-        animalType.setName(ANIMAL_NAME);
+        //animalType.setName(ANIMAL_NAME);
         return animalType;
 
     }
