@@ -2,7 +2,8 @@ package br.edu.ifrs.canoas.webapp.enums;
 
 public enum AnnounceStatus {
     ACTIVE("announce.status.active"),
-    CREATED("announce.status.created"),
+    WAITING_REVIEW("announce.status.waiting_review"),
+    UNDER_REVIEW("announce.status.under_review"),
     INACTIVE("announce.status.inactive");
 
     private String name;

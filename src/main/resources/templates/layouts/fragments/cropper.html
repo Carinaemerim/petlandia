@@ -3,8 +3,8 @@
     <div class="form-group">
         <label th:text="#{cropper.label.__${photo}__}">label</label>
 
-        <div class="img-preview">
-            <img th:src="@{/img/placeholder.svg}" class="img-fluid">
+        <div class="img-preview cropper-preview-remove">
+            <img th:src="*{__${photo} + '.currentImage'__}" class="img-fluid">
         </div>
 
         <div class="invalid-feedback" th:if="${#fields.hasErrors('__${photo}__')}"
@@ -17,11 +17,18 @@
         <input type="hidden" th:field="*{__${photo} + '.rotate'__}" class="input-rotate">
         <input type="hidden" th:field="*{__${photo} + '.scaleX'__}" class="input-scaleX">
         <input type="hidden" th:field="*{__${photo} + '.scaleY'__}" class="input-scaleY">
+        <input type="hidden" th:field="*{__${photo} + '.remove'__}" class="input-remove">
     </div>
 
-    <button type="button" class="btn btn-block btn-outline-secondary btn-select"
-            th:text="#{cropper.btn.select}">open modal</button>
+    <div class="btn-group d-flex">
+        <button type="button" class="btn btn-block btn-outline-secondary btn-select w-100"
+                th:text="#{cropper.btn.select}">open modal</button>
 
+        <button type="button" class="btn btn-outline-danger btn-remove"
+                th:if="*{__${photo} + '.canRemove'__}">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
     <div class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -30,7 +37,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="img-container">
-                        <img src="/img/placeholder.svg" class="crop-image img-fluid">
+                        <img th:src="*{__${photo} + '.currentImage'__}" class="crop-image img-fluid">
                     </div>
 
                     <input type="file" class="custom-file crop-input"
@@ -39,8 +46,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-submit"
-                            th:text="#{cropper.btn.submit}">Save changes</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary btn-submit"
+                                th:text="#{cropper.btn.submit}">Select file</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -46,7 +46,7 @@ public class Announce {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private AnnounceStatus status = AnnounceStatus.CREATED;
+    private AnnounceStatus status = AnnounceStatus.WAITING_REVIEW;
 
     private Date date;
 
@@ -99,20 +99,6 @@ public class Announce {
     @Lob
     private String thirdPhoto;
 
-    @Override
-    public String toString() {
-        return "Announce{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + animalType +
-                ", date=" + date +
-                ", AnimalSize='" + animalSize + '\'' +
-                ", description='" + description + '\'' +
-                ", user=" + user +
-                '}';
-    }
-
-
     public boolean canModify() {
         if (this.status == AnnounceStatus.INACTIVE) {
             return false;
@@ -147,7 +133,7 @@ public class Announce {
             return false;
         }
 
-        return this.status == AnnounceStatus.CREATED;
+        return this.status == AnnounceStatus.WAITING_REVIEW;
     }
 
     public boolean canEdit() {
@@ -155,12 +141,12 @@ public class Announce {
             return false;
         }
 
-        return this.status == AnnounceStatus.CREATED || this.status == AnnounceStatus.ACTIVE;
+        return this.status == AnnounceStatus.ACTIVE;
     }
 
     public boolean canRemove() {
         boolean hasPermission = this.isOwner() || this.isModerator();
-        boolean hasStatus = this.status == AnnounceStatus.CREATED || this.status == AnnounceStatus.ACTIVE;
+        boolean hasStatus = this.status == AnnounceStatus.WAITING_REVIEW || this.status == AnnounceStatus.ACTIVE;
         return hasPermission && hasStatus;
     }
 }

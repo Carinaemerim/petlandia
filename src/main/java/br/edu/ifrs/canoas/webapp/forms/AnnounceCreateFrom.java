@@ -11,7 +11,6 @@ public class AnnounceCreateFrom {
     @NotNull
     private Announce announce;
 
-    @NotBlank
     private Cropper mainPhotoCropper;
     private Cropper secondPhotoCropper;
     private Cropper thirdPhotoCropper;

@@ -11,11 +11,13 @@ function InitCropper(id, options) {
     const $input_rotate = $(".input-rotate", container);
     const $input_scaleX = $(".input-scaleX", container);
     const $input_scaleY = $(".input-scaleY", container);
+    const $input_remove = $(".input-remove", container);
 
     const $modal = $('.modal', container);
     const $btn_submit = $('.btn-submit', container);
     const $btn_cancel = $('.btn-cancel', container);
     const $btn_select = $('.btn-select', container);
+    const $btn_remove = $('.btn-remove', container);
 
     let uploadedImageName = 'cropped.jpg';
     let uploadedImageType = 'image/jpeg';
@@ -83,7 +85,17 @@ function InitCropper(id, options) {
         $modal.hide();
     });
 
-
+    $btn_remove.click((e) => {
+        e.preventDefault();
+        const remove = $input_remove.val() === 'true';
+        if (!remove) {
+            container.addClass('cropper-remove');
+            $input_remove.val('true');
+        } else {
+            container.removeClass('cropper-remove');
+            $input_remove.val('false');
+        }
+    });
 
     return $image.data('cropper');
 }

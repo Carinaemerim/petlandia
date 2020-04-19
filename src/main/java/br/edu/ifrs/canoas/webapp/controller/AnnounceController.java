@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.*;
+import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Date;
@@ -55,7 +57,9 @@ public class AnnounceController {
         announce.setThirdPhoto("");
 
         AnnounceCreateFrom form = new AnnounceCreateFrom();
-        form.setMainPhotoCropper(new Cropper());
+        Cropper cropper = new Cropper();
+        cropper.setRequired(true);
+        form.setMainPhotoCropper(cropper);
         form.setSecondPhotoCropper(new Cropper());
         form.setThirdPhotoCropper(new Cropper());
         form.setAnnounce(announce);
@@ -82,13 +86,17 @@ public class AnnounceController {
         model.addAttribute("animalAges", animalAgeService.listAnimalAge());
         model.addAttribute("animalColors", animalColorService.listAnimalColor());
 
-        doUpload(form, bindingResult);
+        form.getAnnounce().setMainPhoto(doUpload(form.getMainPhotoCropper(), bindingResult, "mainPhoto"));
+        form.getAnnounce().setSecondPhoto(doUpload(form.getSecondPhotoCropper(), bindingResult, "secondPhoto"));
+        form.getAnnounce().setThirdPhoto(doUpload(form.getThirdPhotoCropper(), bindingResult, "thirdPhoto"));
+
 
         if (bindingResult.hasErrors()) {
             return "/announce/create_announce_page";
         }
 
         form.getAnnounce().setUser(activeUser.getUser());
+        form.getAnnounce().setStatus(AnnounceStatus.WAITING_REVIEW);
         form.getAnnounce().setDate(new Date());
         Announce announce = announceService.save(form.getAnnounce());
         return "redirect:/announces/" + announce.getId();
@@ -106,9 +114,19 @@ public class AnnounceController {
 
         AnnounceCreateFrom form = new AnnounceCreateFrom();
         form.setAnnounce(announce);
-        form.setMainPhotoCropper(new Cropper());
-        form.setSecondPhotoCropper(new Cropper());
-        form.setThirdPhotoCropper(new Cropper());
+
+        Cropper cropper = new Cropper();
+        cropper.setRequired(true);
+        cropper.setCurrentImage(announce.getMainPhoto());
+        form.setMainPhotoCropper(cropper);
+
+        cropper = new Cropper();
+        cropper.setCurrentImage(announce.getSecondPhoto());
+        form.setSecondPhotoCropper(cropper);
+
+        cropper = new Cropper();
+        cropper.setCurrentImage(announce.getThirdPhoto());
+        form.setThirdPhotoCropper(cropper);
 
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
@@ -123,15 +141,58 @@ public class AnnounceController {
 
     @PostMapping("/{id}/edit")
     public String editPost(@PathVariable("id") final String id,
-                          @ModelAttribute("form") AnnounceCreateFrom form,
-                          BindingResult bindingResult, Model model) {
+                          @ModelAttribute("form") @Valid AnnounceCreateFrom form,
+                          BindingResult bindingResult, Model model) throws IOException {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null || !announce.canEdit()) {
             return "/notFound";
         }
 
-        // TODO Salvar
+        form.getMainPhotoCropper().setRequired(true);
+        form.getMainPhotoCropper().setCurrentImage(announce.getMainPhoto());
+        form.getSecondPhotoCropper().setCurrentImage(announce.getSecondPhoto());
+        form.getThirdPhotoCropper().setCurrentImage(announce.getThirdPhoto());
+
+        String image = doUpload(form.getMainPhotoCropper(), bindingResult, "mainPhoto", announce.getMainPhoto());
+        if (image != null) {
+            form.getAnnounce().setMainPhoto(image);
+        }
+
+        image = doUpload(form.getSecondPhotoCropper(), bindingResult, "secondPhoto", announce.getSecondPhoto());
+        if (image != null) {
+            form.getAnnounce().setSecondPhoto(image);
+        }
+
+        image = doUpload(form.getThirdPhotoCropper(), bindingResult, "thirdPhoto", announce.getThirdPhoto());
+        if (image != null) {
+            form.getAnnounce().setThirdPhoto(image);
+        }
+
+        if (!bindingResult.hasErrors()) {
+            announce.setTitle(form.getAnnounce().getTitle());
+            announce.setName(form.getAnnounce().getName());
+            announce.setAnimalType(form.getAnnounce().getAnimalType());
+            announce.setAnimalGender(form.getAnnounce().getAnimalGender());
+            announce.setAnimalSize(form.getAnnounce().getAnimalSize());
+            announce.setAnimalColor(form.getAnnounce().getAnimalColor());
+            announce.setAnimalCastrated(form.getAnnounce().getAnimalCastrated());
+            announce.setAnimalAge(form.getAnnounce().getAnimalAge());
+            announce.setZipCode(form.getAnnounce().getZipCode());
+            announce.setState(form.getAnnounce().getState());
+            announce.setCity(form.getAnnounce().getCity());
+            announce.setNeighborhood(form.getAnnounce().getNeighborhood());
+            announce.setAddress(form.getAnnounce().getAddress());
+            announce.setAddressNumber(form.getAnnounce().getAddressNumber());
+            announce.setDescription(form.getAnnounce().getDescription());
+            announce.setMainPhoto(form.getAnnounce().getMainPhoto());
+            announce.setSecondPhoto(form.getAnnounce().getSecondPhoto());
+            announce.setThirdPhoto(form.getAnnounce().getThirdPhoto());
+
+            announce.setStatus(AnnounceStatus.WAITING_REVIEW);
+            announceService.save(announce);
+            return "redirect:/announces/" + announce.getId();
+        }
 
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
@@ -144,59 +205,30 @@ public class AnnounceController {
         return "/announce/edit";
     }
 
+    private String doUpload(Cropper cropper, BindingResult bindingResult, String field) throws IOException {
+        return this.doUpload(cropper, bindingResult, field, null);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void doUpload(AnnounceCreateFrom form, BindingResult bindingResult) throws IOException {
-        Cropper mainPhoto = form.getMainPhotoCropper();
-        boolean hasMainPhoto = mainPhoto != null && !mainPhoto.getImage().isEmpty();
-
-        Cropper secondPhoto = form.getSecondPhotoCropper();
-        boolean hasSecondPhoto = secondPhoto != null && !secondPhoto.getImage().isEmpty();
-
-        Cropper thirdPhoto = form.getThirdPhotoCropper();
-        boolean hasThirdPhoto = thirdPhoto != null && !thirdPhoto.getImage().isEmpty();
-
-        if (!hasMainPhoto && !bindingResult.hasErrors()) {
-            String message = messages.get("form.validation.pwd_is_not_equal"); // TODO: trocar
-            FieldError error = new FieldError(bindingResult.getObjectName(), "mainPhoto", message);
-            bindingResult.addError(error);
-        } else {
-            String image = ImageResize.getBase64FromUploadImage(mainPhoto, this.imageTarget);
-            form.getAnnounce().setMainPhoto(image);
+    private String doUpload(Cropper cropper, BindingResult bindingResult, String field, String currentImage) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return null;
         }
 
-        if (hasSecondPhoto && !bindingResult.hasErrors()) {
-            String image = ImageResize.getBase64FromUploadImage(secondPhoto, this.imageTarget);
-            form.getAnnounce().setSecondPhoto(image);
+        boolean hasImage = cropper.getImage() != null && !cropper.getImage().isEmpty();
+        if (hasImage) {
+            return ImageResize.getBase64FromUploadImage(cropper, this.imageTarget);
         }
 
-        if (hasThirdPhoto && !bindingResult.hasErrors()) {
-            String image = ImageResize.getBase64FromUploadImage(thirdPhoto, this.imageTarget);
-            form.getAnnounce().setThirdPhoto(image);
+        if (cropper.isRequired()) {
+            if (currentImage != null) {
+                return currentImage;
+            } else {
+                String message = messages.get("form.validation.pwd_is_not_equal"); // TODO: Trocar
+                FieldError error = new FieldError(bindingResult.getObjectName(), field, message);
+                bindingResult.addError(error);
+            }
         }
+
+        return cropper.isRemove() ? null : currentImage;
     }
 }
