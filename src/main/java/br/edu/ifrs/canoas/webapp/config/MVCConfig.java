@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.config;
 
+import br.edu.ifrs.canoas.webapp.components.MangerInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,7 @@ public class MVCConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(new MangerInterceptor()).addPathPatterns("/manager", "/manager/**");
     }
 
     @Override
