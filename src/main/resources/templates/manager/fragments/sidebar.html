@@ -3,12 +3,12 @@
         <div class="card-header" th:text="#{sidebar.user.perfil}"></div>
 
         <div class="card-body">
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{userProfile.href}"
                th:classappend="*{userProfile.active} ? 'active'">
              <i class="fa fa-user-edit mr-2"></i> <span th:text="#{ sidebar.user.myData}"></span></a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{userPassword.href}"
                th:classappend="*{userPassword.active} ? 'active'">
              <i class="fa fa-lock mr-2"></i> <span th:text="#{sidebar.user.alterPass}"></span></a>
@@ -17,22 +17,22 @@
         <div class="card-header" th:text="#{sidebar.user.myAnnounces}"> </div>
 
         <div class="card-body">
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{announceActive.href}"
                th:classappend="*{announceActive.active} ? 'active'">
              <i class="fa fa-check-circle mr-2"></i> <span th:text="#{sidebar.user.published}"></span></a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{announceWaitingReview.href}"
                th:classappend="*{announceWaitingReview.active} ? 'active'">
                 <i class="fa fa-exclamation-circle mr-2"></i>
                 <span th:text="#{sidebar.user.reported}"></span>
-                <!--<span class="badge badge-danger badge-pill"
+                <span class="badge badge-danger badge-pill pull-right"
                       th:if="*{announceWaitingReview.size > 0}"
-                      th:text="*{announceWaitingReview.size}">0</span> -->
+                      th:text="*{announceWaitingReview.size}">0</span>
             </a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{announceBlocked.href}"
                th:classappend="*{announceBlocked.active} ? 'active'">
                 <i class="fa fa-ban mr-2"></i>
@@ -42,47 +42,47 @@
         <div class="card-header" th:if="*{moderator}" th:text="#{sidebar.mod.complaints}"></div>
 
         <div class="card-body" th:if="*{moderator}">
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{denunciationAnnounces.href}"
                th:classappend="*{denunciationAnnounces.active} ? 'active'">
                 <i class="fa fa-bullhorn mr-2"></i>
                 <span th:text="#{sidebar.mod.announces}"> </span>
-                <!--<span class="badge badge-danger badge-pill"
+                <span class="badge badge-danger badge-pill pull-right"
                       th:if="*{denunciationAnnounces.size > 0}"
-                      th:text="*{denunciationAnnounces.size}">0</span> -->
+                      th:text="*{denunciationAnnounces.size}">0</span>
             </a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{denunciationComments.href}"
                th:classappend="*{denunciationComments.active} ? 'active'">
                <i class="fa fa-comments mr-2"></i>
              <span th:text="#{sidebar.mod.comments}"> </span>
-                <!--<span class="badge badge-danger badge-pill"
+                <span class="badge badge-danger badge-pill pull-right"
                       th:if="*{denunciationComments.size > 0}"
-                      th:text="*{denunciationComments.size}">0</span> -->
+                      th:text="*{denunciationComments.size}">0</span>
             </a>
         </div>
 
         <div class="card-header" th:if="*{admin}" th:text="#{sidebar.adm.management}"> </div>
 
         <div class="card-body" th:if="*{admin}">
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{adminUsers.href}"
                th:classappend="*{adminUsers.active} ? 'active'">
                 <i class="fa fa-users mr-2"></i>
-              <div th:text="#{sidebar.adm.users}"></div></a>
+              <span th:text="#{sidebar.adm.users}"></span></a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{adminModerators.href}"
                th:classappend="*{adminModerators.active} ? 'active'">
                 <i class="fa fa-user-lock mr-2"></i>
-              <div th:text="#{sidebar.adm.mod}"></div> </a>
+              <span th:text="#{sidebar.adm.mod}"></span> </a>
 
-            <a class="btn btn-light d-flex align-items-center"
+            <a class="btn btn-light btn-block text-left"
                th:href="*{adminAdmin.href}"
                th:classappend="*{adminAdmin.active} ? 'active'">
                 <i class="fa fa-user-shield mr-2"></i>
-              <div th:text="#{sidebar.adm.admins}"></div></a>
+              <span th:text="#{sidebar.adm.admins}"></span></a>
         </div>
 
     </div>
