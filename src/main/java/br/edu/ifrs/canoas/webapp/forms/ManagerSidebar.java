@@ -21,14 +21,14 @@ public class ManagerSidebar {
     private ManagerSidebarItem adminModerators = new ManagerSidebarItem("/manager/admin/moderators");
     private ManagerSidebarItem adminAdmin = new ManagerSidebarItem("/manager/admin/admin");
 
-    private boolean moderator = false;
-    private boolean admin = false;
+    private boolean moderator = true;
+    private boolean admin = true;
 
     public void set(HttpServletRequest request) {
         String uri = request.getRequestURI();
 
-        this.moderator = Auth.hasRole(new Role[]{Role.ADMIN, Role.MODERATOR});
-        this.admin = Auth.hasRole(new Role[]{Role.ADMIN});
+        //this.moderator = Auth.hasRole(new Role[]{Role.ADMIN, Role.MODERATOR});
+        //this.admin = Auth.hasRole(new Role[]{Role.ADMIN});
 
         userProfile.set(uri);
         userPassword.set(uri);
