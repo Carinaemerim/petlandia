@@ -1,6 +1,8 @@
 
 package br.edu.ifrs.canoas.webapp.domain;
 
+import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
+import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
@@ -8,7 +10,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
-
 
 @Entity
 @Data
@@ -19,86 +20,85 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
-	@Size(min = 2, max = 40)
+	@NotNull(groups = {UserCreateGroup.class})
+	@Size(min = 2, max = 40, groups = {UserCreateGroup.class})
 	private String username;
 
 	private boolean active;
 
-	@NotNull
-	@Size(min = 4, max = 250)
+	@NotNull(groups = {UserCreateGroup.class})
+	@Size(min = 4, max = 250, groups = {UserCreateGroup.class})
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
-	@Size(min = 3, max = 120)
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String name;
 
-	@NotBlank
-	@CPF
-	@Size(min = 14, max = 14)
+	@NotBlank(groups = {UserCreateGroup.class})
+	@CPF(groups = {UserCreateGroup.class})
+	@Size(min = 14, max = 14, groups = {UserCreateGroup.class})
 	private String cpf;
 
-	@Email
-	@NotBlank
-	@Size(min = 5, max = 120)
+	@Email(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 5, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String email;
 
-	@NotNull
-	@Size(min = 4, max = 120)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 4, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String address;
 
-	@NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
-	@Size(min = 9, max = 9)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Pattern(regexp="\\d{5}-\\d{3}$", groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 9, max = 9, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String zipCode;
 
-	@NotNull
-	@Size(min = 3, max = 120)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String neighborhood;
 
-	@NotNull
-	@Size(min = 3, max = 120)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String city;
 
-	@NotNull
-	@Size(min = 2, max = 2)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 2, max = 2, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String state;
 
 	@Max(99999)
 	private int addressNumber;
 
-	@NotNull
-	@Size(min = 14, max = 15)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String residentialPhone;
 
 	@Pattern(regexp="^$|^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
 	private String celPhone;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="user_id")
-	private Set<Announce> announces;
-
 	@ManyToOne(fetch = FetchType.EAGER)
-	@NotNull
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalAge animalAge;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@NotNull
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalGender animalGender;
 
 	@ManyToOne(fetch= FetchType.EAGER)
-	@NotNull
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalType animalType;
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalSize animalSize;
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalColor animalColor;
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalCastrated animalCastrated;
-
-
 }

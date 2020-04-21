@@ -1,5 +1,9 @@
 <html layout:decorate="~{/layouts/main}">
 
+<th:block layout:fragment="js-view">
+    <script src="/js/addressFinder.js"></script>
+</th:block>
+
 <div layout:fragment="content-body">
     <div class="row">
         <div class="col col-md-3 manager-menu">
@@ -21,7 +25,49 @@
                     </div>
                 </div>
 
+                <form method="post" th:action="@{/manager/user/profile/edit}" th:object="${form}" accept-charset="UTF-8">
 
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label th:text="#{user.form.username}"> </label>
+                                    <div class="form-control" readonly="readonly" th:text="*{user.username}"></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label th:text="#{user.form.cpf}"> </label>
+                                    <div class="form-control" readonly="readonly" th:text="*{user.cpf}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header" th:text="#{user.form.address.data}">
+
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_address_data" :: user_address_data></div>
+                    </div>
+
+                    <div class="card-header" th:text="#{user.form.contact.data}">
+
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
+                    </div>
+
+                    <div class="card-header" th:text="#{user.form.animal.data}"> </div>
+
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
+                    </div>
+
+                    <div class="card-footer text-right">
+                        <button class="btn btn-success" th:text="#{user.form.update}"></button>
+                    </div>
+                </form>
         </div>
     </div>
 </div>

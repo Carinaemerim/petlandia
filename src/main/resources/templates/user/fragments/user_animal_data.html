@@ -72,17 +72,15 @@
             </div>
         </div>
 
-        <div class="col">
-            <div class="col">
-                <div class="form-group">
-                    <label for="user_form_animal_age" th:text="#{announce.form.age}"> </label>
-                    <select class="custom-select" id="user_form_animal_age" th:field="*{user.animalAge}" required
-                            th:classappend="${#fields.hasErrors('user.animalAge')} ? is-invalid">
-                        <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="#{${i.name.name}}"> </option>
-                    </select>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalAge')}"
-                         th:errors="*{user.animalAge}"></div>
-                </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="user_form_animal_age" th:text="#{announce.form.age}"> </label>
+                <select class="custom-select" id="user_form_animal_age" th:field="*{user.animalAge}" required
+                        th:classappend="${#fields.hasErrors('user.animalAge')} ? is-invalid">
+                    <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="#{${i.name.name}}"> </option>
+                </select>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalAge')}"
+                     th:errors="*{user.animalAge}"></div>
             </div>
         </div>
     </div>

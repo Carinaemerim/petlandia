@@ -27,7 +27,7 @@
                         <div class="col col-md-7">
                             <div class="form-group">
                                 <label th:text="#{user.form.username}"> </label>
-                                <div class="form-control" th:text="${user.name}"></div>
+                                <div class="form-control" th:text="${user.username}"></div>
                             </div>
                         </div>
                         <div class="col col-md-5">
@@ -147,57 +147,48 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col col-md-10">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.age}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalAge.name.name}}"></div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.animalGender}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalGender.name.name}}"></div>
-                                    </div>
-                                </div>
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.age}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalAge.name.name}}"></div>
                             </div>
-
-                            <div class="row">
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.size}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalSize.name.name}}"></div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.color}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalColor.name.name}}"></div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.animalGender}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalGender.name.name}}"></div>
                             </div>
-
-                            <div class="row">
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.castrated}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalCastrated.name.name}}"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label th:text="#{user.form.type}"> </label>
-                                        <br>
-                                        <div class="form-control" th:text="#{${user.animalType.name.name}}"></div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.size}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalSize.name.name}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.color}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalColor.name.name}}"></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.castrated}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalCastrated.name.name}}"></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-4">
+                            <div class="form-group">
+                                <label th:text="#{user.form.type}"> </label>
+                                <br>
+                                <div class="form-control" th:text="#{${user.animalType.name.name}}"></div>
                             </div>
                         </div>
                     </div>
