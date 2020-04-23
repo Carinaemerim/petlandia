@@ -42,8 +42,10 @@ insert into animal_castrated (id, name) values
 -- ANIMAL_AGE
 insert into animal_age (id, name) values
 (101, 'PUPPY'),
-(102, 'ADULT'),
-(103, 'AGED');
+(102, 'TEENAGER'),
+(103, 'ADULT'),
+(104, 'AGED'),
+(105, 'GERIATRIC');
 
 --ANIMAL_COLOR
 insert into animal_color(id, name) values

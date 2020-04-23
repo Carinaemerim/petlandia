@@ -2,8 +2,10 @@ package br.edu.ifrs.canoas.webapp.enums;
 
 public enum AnimalAgeEnum {
     PUPPY("animal.age.puppy"),
+    TEENAGER("animal.age.teenager"),
     ADULT("animal.age.adult"),
-    AGED("animal.age.aged");
+    AGED("animal.age.aged"),
+    GERIATRIC("animal.age.geriatric");
 
     private String name;
 
