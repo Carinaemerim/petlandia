@@ -46,7 +46,7 @@ public class Announce {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private AnnounceStatus status = AnnounceStatus.WAITING_REVIEW;
+    private AnnounceStatus status = AnnounceStatus.ACTIVE;
 
     private Date date;
 

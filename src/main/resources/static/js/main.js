@@ -19,9 +19,16 @@ function InitCropper(id, options) {
     const $btn_select = $('.btn-select', container);
     const $btn_remove = $('.btn-remove', container);
 
+
+    const backup = $image.attr('src');
     let uploadedImageName = 'cropped.jpg';
     let uploadedImageType = 'image/jpeg';
     let uploadedImageURL;
+
+    const args = {
+        width: 512,
+        height: 288,
+    };
 
     const config = {
         preview: '#' + container.attr('id') + ' .img-preview',
@@ -42,32 +49,88 @@ function InitCropper(id, options) {
         autoCrop: true,
     };
 
-    Object.assign(config, options || {});
 
-    $file.change(function _change() {
-        const files = this.files;
+    Object.assign(args, options || {});
+    Object.assign(config, args);
+
+
+    function getFile(instance) {
+        const files = instance.files;
 
         if (files && files[0]) {
             const file = files[0];
 
             if (/^image\/\w+$/.test(file.type)) {
-                uploadedImageName = file.name;
-                uploadedImageType = file.type;
-
-                if (uploadedImageURL) {
-                    URL.revokeObjectURL(uploadedImageURL);
-                }
-
-                uploadedImageURL = URL.createObjectURL(file);
-
-                if ($image.data('cropper')) {
-                    $image.cropper('destroy');
-                }
-
-                $image.attr('src', uploadedImageURL)
-                    .cropper(config);
+                return file;
             }
         }
+    }
+
+    function destroy() {
+        if ($image.data('cropper')) {
+            $image.cropper('destroy');
+        }
+    }
+
+    function reset() {
+        destroy();
+        $image.attr('src', backup);
+    }
+
+    function getImageFromFile(file) {
+        return new Promise((resolve, reject) => {
+            const reader  = new FileReader();
+            reader.onload = function() {
+                const img = new Image;
+
+                img.onload = function() {
+                    resolve(img);
+                };
+
+                img.onerror = function(err) {
+                    reject(err);
+                }
+
+                img.src = reader.result;
+            };
+
+            reader.onerror = function(err) {
+                reject(err);
+            }
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    $file.change(async function _change() {
+        if ($file.val() === '') {
+            reset();
+            return;
+        }
+
+        const file = getFile(this);
+        const image = await getImageFromFile(file);
+
+        if (image.width < args.width || image.height < args.height) {
+            $file.val('');
+            reset();
+            alert(`Tamanho mínimo: ${args.width}x${args.height}`);
+            return;
+        }
+
+        uploadedImageName = file.name;
+        uploadedImageType = file.type;
+
+        if (uploadedImageURL) {
+            URL.revokeObjectURL(uploadedImageURL);
+        }
+
+        uploadedImageURL = URL.createObjectURL(file);
+
+        destroy();
+
+        $image.attr('src', uploadedImageURL)
+            .cropper(config);
     });
 
     $btn_select.click((e) => {

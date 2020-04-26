@@ -36,7 +36,7 @@ public class AnnounceController {
     private final AnimalAgeService animalAgeService;
     private final AnimalColorService animalColorService;
 
-    private final Dimension imageTarget = new Dimension(1280, 720);
+    private final Dimension imageTarget = new Dimension(512, 288);
 
     @GetMapping("/create")
     public String getCreate(Model model) {
@@ -96,7 +96,7 @@ public class AnnounceController {
         }
 
         form.getAnnounce().setUser(activeUser.getUser());
-        form.getAnnounce().setStatus(AnnounceStatus.WAITING_REVIEW);
+        form.getAnnounce().setStatus(AnnounceStatus.ACTIVE);
         form.getAnnounce().setDate(new Date());
         Announce announce = announceService.save(form.getAnnounce());
         return "redirect:/announces/" + announce.getId();
