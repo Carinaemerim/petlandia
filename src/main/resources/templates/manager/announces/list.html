@@ -6,9 +6,12 @@
             <div th:replace="/manager/fragments/sidebar :: managerSidebar(${sidebar})"></div>
         </div>
         <div class="col col-md-9 manager-content">
+            <div class="jumbotron" th:if="${announces.data.isEmpty()}">
+                <h3 class="display-8" th:text="#{manager.__${status.name}__}"></h3>
+                <p>Sem registros.</p>
+            </div>
 
-
-            <div class="card">
+            <div class="card" th:if="${!announces.data.isEmpty()}">
                 <div class="card-header">
                     <div class="row justify-content-between align-items-center">
                         <div class="col">
@@ -21,8 +24,7 @@
                 </div>
 
                 <div class="card-body">
-
-                    <div class="callout callout-pink" th:each="announce :  ${announces}">
+                    <div class="callout callout-pink" th:each="announce :  ${announces.data}">
                         <div class="row">
                             <div class="col col-md-3">
                                 <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
@@ -58,8 +60,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-
+                <div class="card-footer" th:if="${announces.totalPages > 0}">
+                    <div class="pull-right">
+                        <div th:replace="/layouts/fragments/pagination :: pagination(${announces})"></div>
+                    </div>
                 </div>
             </div>
 

@@ -86,10 +86,18 @@
 
 
 /* page-link */
-.page-link {
-    color: black;
+.page-item.active .page-link {
+    background-color: var(--mypink);
+    border-color: var(--mypink);
 }
 
+.page-link:hover {
+    color: var(--mypink);
+}
+
+.page-link {
+    color: var(--mypink);
+}
 
 /* btn-outline-secondary */
 
@@ -136,4 +144,12 @@
 .manager-content .jumbotron {
     background-color: white;
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+}
+
+.manager-content .pagination {
+    margin: 0;
+}
+
+.manager-content .callout:last-child {
+    margin-bottom: 0;
 }

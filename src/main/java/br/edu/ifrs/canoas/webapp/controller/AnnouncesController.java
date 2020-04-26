@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 public class AnnouncesController {
 
+    private static final int PAGE_LENGTH = 2;
+
     private final Messages messages;
     private final AnnounceService announceService;
     private final AnnounceListService announceListService;
@@ -29,7 +32,7 @@ public class AnnouncesController {
             form = new AnnounceFilterForm();
         }
 
-        PaginatedEntity<Announce> announces = announceService.findAllByFilter(form);
+        PaginatedEntity<Announce> announces = announceService.findAll(form, AnnounceStatus.ACTIVE, PAGE_LENGTH);
         model.addAttribute("filters", announceListService.getFilters());
         model.addAttribute("form", form);
         model.addAttribute("announces", announces);

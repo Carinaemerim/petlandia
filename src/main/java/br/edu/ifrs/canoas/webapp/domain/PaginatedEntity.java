@@ -10,14 +10,15 @@ import java.util.List;
 public class PaginatedEntity<T> {
     List<T> data;
     int currentPage;
-    int totalResults;
+    long totalResults;
     int pageLength;
+
 
     public double getTotalPages() {
         if (totalResults == 0) {
             return 0;
         }
 
-        return Math.ceil(totalResults / (double) pageLength);
+        return Math.ceil(totalResults / (double) pageLength) - 1;
     }
 }

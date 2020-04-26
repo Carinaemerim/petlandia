@@ -163,7 +163,24 @@ function InitCropper(id, options) {
     return $image.data('cropper');
 }
 
+
+function initPagination(container) {
+    const baseUrl = `${window.location.pathname}?`;
+    const search = new URLSearchParams(window.location.search);
+
+    $('.page-link', container).each(function _each() {
+        const link = $(this);
+
+        search.delete('page');
+        search.append('page', link.data('page'));
+        link.attr('href', `${baseUrl}${search}`);
+    });
+}
+
+
 $(document).ready(function() {
+    initPagination();
+
     $(".image-placeholder").each(function _each() {
         const element = $(this);
         const img = $('img', element);
@@ -187,7 +204,14 @@ $(document).ready(function() {
         InitCropper(this);
     });
 
+    $('#pagination-list').each(function _each() {
+        InitCropper(this);
+    });
+
     $('.mask-zipcode').mask('00000-000');
     $('.mask-cpf').mask('000.000.000-00', {reverse: true});
     $('.mask-celphone').mask('(00) 0000-00009');
+
+
+
 });

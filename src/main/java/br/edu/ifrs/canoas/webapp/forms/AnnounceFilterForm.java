@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class AnnounceFilterForm {
 
-    private int page = 1;
+    private int page = 0;
     private List<Long> animalAge = new ArrayList<>();
     private List<Long> animalGender = new ArrayList<>();
     private List<Long> animalType = new ArrayList<>();
@@ -17,7 +17,6 @@ public class AnnounceFilterForm {
     private List<Long> animalCastrated = new ArrayList<>();
 
     public int getPage() {
-        int page = this.page - 1;
         return page < 0 ? 0 : page;
     }
 
