@@ -2,6 +2,7 @@ package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.repository.AnimalTypeRepository;
@@ -22,7 +23,7 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 @Service
 public class AnnounceService {
 
-    private static final int PAGE_LENGTH = 12;
+    private static final int PAGE_LENGTH = 2;
 
     private final AnnounceRepository announceRepository;
     private final AnimalTypeRepository animalTypeRepository;
@@ -70,6 +71,22 @@ public class AnnounceService {
         return announceRepository.findAllByOrderByDateDesc();
     }
 
+
+
+    public Page<Announce> findAll(int pageNumber, User user, AnnounceStatus status){
+        pageNumber -= 1;
+
+        if(pageNumber < 0){
+            pageNumber = 0;
+        }
+
+        Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
+        return announceRepository.findAllByStatusAndUserOrderByDateDesc(status, user, page);
+    }
+
+    public Long countAll(User user, AnnounceStatus status){
+        return announceRepository.countAllByStatusAndUser(status, user);
+    }
 
     @SuppressWarnings("unchecked")
     public PaginatedEntity<Announce> findAllByFilter(AnnounceFilterForm filters) {

@@ -1,7 +1,9 @@
 package br.edu.ifrs.canoas.webapp.forms;
 
+import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
+import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +26,7 @@ public class ManagerSidebar {
     private boolean moderator = true;
     private boolean admin = true;
 
-    public void set(HttpServletRequest request) {
+    public void set(AnnounceService service, HttpServletRequest request) {
         String uri = request.getRequestURI();
 
         //this.moderator = Auth.hasRole(new Role[]{Role.ADMIN, Role.MODERATOR});
@@ -41,14 +43,12 @@ public class ManagerSidebar {
         adminModerators.set(uri);
         adminAdmin.set(uri);
 
-        // TODO: pegar do usuário
-        // Auth.getUser();
-        announceWaitingReview.setSize(4);
+        announceWaitingReview.setSize(service.countAll(Auth.getUser(), AnnounceStatus.WAITING_REVIEW));
 
         if (this.moderator) {
             // TODO: Pegar da base de dados
-            denunciationAnnounces.setSize(2);
-            denunciationComments.setSize(3);
+            denunciationAnnounces.setSize(2l);
+            denunciationComments.setSize(3l);
         }
     }
 
