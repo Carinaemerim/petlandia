@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -45,7 +46,7 @@ public class AnnouncesController {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null) {
-            return "/notFound";
+            throw new AnnounceNotFoundException();
         }
 
         model.addAttribute("announce", announce);

@@ -116,7 +116,7 @@ public class Announce {
 
 
     public boolean isModerator() {
-        return Auth.hasRole(new Role[]{ Role.MODERATOR, Role.ADMIN });
+        return Auth.hasRole(new Role[]{ Role.ROLE_MODERATOR, Role.ROLE_ADMIN });
     }
 
     public boolean isOwner() {

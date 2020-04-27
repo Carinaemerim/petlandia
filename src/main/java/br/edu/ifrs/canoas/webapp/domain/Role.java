@@ -17,5 +17,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String role;
+
+	@Enumerated(EnumType.STRING)
+	private br.edu.ifrs.canoas.webapp.enums.Role role;
 }

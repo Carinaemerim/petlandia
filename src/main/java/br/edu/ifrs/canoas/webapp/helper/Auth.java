@@ -28,10 +28,12 @@ public class Auth {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         for (GrantedAuthority auth : authentication.getAuthorities()) {
-            boolean result = Arrays.stream(roles).anyMatch(role -> role.equals(auth.getAuthority()));
+            for (Role role : roles) {
+                boolean result = role.name().equals(auth.getAuthority());
 
-            if (result) {
-                return true;
+                if (result) {
+                    return true;
+                }
             }
         }
 

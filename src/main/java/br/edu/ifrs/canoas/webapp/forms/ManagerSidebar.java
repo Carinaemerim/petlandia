@@ -21,14 +21,14 @@ public class ManagerSidebar {
     private ManagerSidebarItem denunciationComments = new ManagerSidebarItem("/manager/denunciation/comments");
     private ManagerSidebarItem adminUsers = new ManagerSidebarItem("/manager/admin/users");
 
-    private boolean moderator = true;
-    private boolean admin = true;
+    private boolean moderator = false;
+    private boolean admin = false;
 
     public void set(AnnounceService service, HttpServletRequest request) {
         String uri = request.getRequestURI();
 
-        //this.moderator = Auth.hasRole(new Role[]{Role.ADMIN, Role.MODERATOR});
-        //this.admin = Auth.hasRole(new Role[]{Role.ADMIN});
+        this.moderator = Auth.hasRole(new Role[]{Role.ROLE_ADMIN, Role.ROLE_MODERATOR});
+        this.admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
 
         userProfile.set(uri);
         userPassword.set(uri);

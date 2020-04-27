@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
@@ -109,7 +110,7 @@ public class AnnounceController {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null || !announce.canEdit()) {
-            return "/notFound";
+            throw new AnnounceNotFoundException();
         }
 
         AnnounceCreateFrom form = new AnnounceCreateFrom();
@@ -146,7 +147,7 @@ public class AnnounceController {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null || !announce.canEdit()) {
-            return "/notFound";
+            throw new AnnounceNotFoundException();
         }
 
         form.getMainPhotoCropper().setRequired(true);
