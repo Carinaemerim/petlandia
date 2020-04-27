@@ -27,7 +27,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/webjars/**", "/img/**", "/css/**", "/js/**", "/db/**");
+		web.ignoring().antMatchers("/webjars/**", "/img/**", "/css/**", "/js/**", "/favicon.ico", "/db/**");
 	}
 
 	@Override
@@ -35,7 +35,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/announces/**", "/logout").permitAll()
 				.antMatchers("/login", "/user/create").anonymous()
-				.antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated()
+				.antMatchers("/manager/admin/**").hasRole("ADMIN").anyRequest().authenticated()
             .and()
         .formLogin()
             .loginPage("/login").permitAll()
