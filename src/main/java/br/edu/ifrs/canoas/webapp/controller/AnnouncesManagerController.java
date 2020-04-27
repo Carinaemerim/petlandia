@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/manager/announces")
 @AllArgsConstructor
@@ -25,28 +23,28 @@ public class AnnouncesManagerController {
     private final AnnounceService announceService;
 
     @GetMapping("/active")
-    public String getActive(@AuthenticationPrincipal UserImpl activeUser, @RequestParam("page") Optional<Number> page, Model model) {
+    public String getActive(@AuthenticationPrincipal UserImpl activeUser, @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         return getUserAnnouncesByStatus(activeUser, page, AnnounceStatus.ACTIVE, model);
     }
 
     @GetMapping("/waiting-review")
-    public String getWaitingReview(@AuthenticationPrincipal UserImpl activeUser, @RequestParam("page") Optional<Number> page, Model model) {
+    public String getWaitingReview(@AuthenticationPrincipal UserImpl activeUser, @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         return getUserAnnouncesByStatus(activeUser, page, AnnounceStatus.WAITING_REVIEW, model);
     }
 
     @GetMapping("/blocked")
-    public String getBlocked(@AuthenticationPrincipal UserImpl activeUser, @RequestParam("page") Optional<Number> page, Model model) {
+    public String getBlocked(@AuthenticationPrincipal UserImpl activeUser, @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
         return getUserAnnouncesByStatus(activeUser, page, AnnounceStatus.INACTIVE, model);
     }
 
-    private String getUserAnnouncesByStatus(UserImpl activeUser, Optional<Number> page, AnnounceStatus status, Model model) {
+    private String getUserAnnouncesByStatus(UserImpl activeUser, int page, AnnounceStatus status, Model model) {
         User user = userService.findById(activeUser.getUser().getId());
         if (user == null){
             return "/notFound";
         }
 
         model.addAttribute("status", status);
-        model.addAttribute("announces", announceService.findAll(page.orElse(0).intValue(), user, status));
+        model.addAttribute("announces", announceService.findAll(page, user, status));
         return "/manager/announces/list";
     }
 }

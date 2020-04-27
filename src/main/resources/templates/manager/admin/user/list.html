@@ -1,0 +1,15 @@
+<html layout:decorate="~{/layouts/main}">
+
+<div layout:fragment="content-body">
+    <div class="row">
+        <div class="col col-md-3 manager-menu">
+            <div th:replace="/manager/fragments/sidebar :: managerSidebar(${sidebar})"></div>
+        </div>
+        <div class="col col-md-9 manager-content">
+            <div class="jumbotron">
+                <h1 class="display-4">Bem Vindo</h1>
+                <p class="lead">Aqui você vai gerênciar seus dados e anúncios.</p>
+            </div>
+        </div>
+    </div>
+</div>

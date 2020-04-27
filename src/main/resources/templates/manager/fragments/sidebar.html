@@ -71,18 +71,6 @@
                th:classappend="*{adminUsers.active} ? 'active'">
                 <i class="fa fa-users mr-2"></i>
               <span th:text="#{sidebar.adm.users}"></span></a>
-
-            <a class="btn btn-light btn-block text-left"
-               th:href="*{adminModerators.href}"
-               th:classappend="*{adminModerators.active} ? 'active'">
-                <i class="fa fa-user-lock mr-2"></i>
-              <span th:text="#{sidebar.adm.mod}"></span> </a>
-
-            <a class="btn btn-light btn-block text-left"
-               th:href="*{adminAdmin.href}"
-               th:classappend="*{adminAdmin.active} ? 'active'">
-                <i class="fa fa-user-shield mr-2"></i>
-              <span th:text="#{sidebar.adm.admins}"></span></a>
         </div>
 
     </div>

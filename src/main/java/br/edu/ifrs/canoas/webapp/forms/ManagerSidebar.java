@@ -20,8 +20,6 @@ public class ManagerSidebar {
     private ManagerSidebarItem denunciationAnnounces = new ManagerSidebarItem("/manager/denunciation/announces");
     private ManagerSidebarItem denunciationComments = new ManagerSidebarItem("/manager/denunciation/comments");
     private ManagerSidebarItem adminUsers = new ManagerSidebarItem("/manager/admin/users");
-    private ManagerSidebarItem adminModerators = new ManagerSidebarItem("/manager/admin/moderators");
-    private ManagerSidebarItem adminAdmin = new ManagerSidebarItem("/manager/admin/admin");
 
     private boolean moderator = true;
     private boolean admin = true;
@@ -40,8 +38,6 @@ public class ManagerSidebar {
         denunciationAnnounces.set(uri);
         denunciationComments.set(uri);
         adminUsers.set(uri);
-        adminModerators.set(uri);
-        adminAdmin.set(uri);
 
         announceWaitingReview.setSize(service.countAll(Auth.getUser(), AnnounceStatus.WAITING_REVIEW));
 
