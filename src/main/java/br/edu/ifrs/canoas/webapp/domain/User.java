@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
+import br.edu.ifrs.canoas.webapp.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
@@ -30,8 +31,8 @@ public class User {
 	@Size(min = 4, max = 250, groups = {UserCreateGroup.class})
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Role> roles;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class})
 	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})

@@ -47,9 +47,7 @@
                                 <td th:text="${user.id}"></td>
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.username}"></td>
-                                <td>
-                                    <span th:each="role :  ${user.roles}" th:text="#{${role.role.name}}"></span>
-                                </td>
+                                <td th:text="#{${user.role.name}}"></td>
                                 <td class="text-center">
                                     <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}" class="btn btn-light btn-xs">
                                         <i class="fa fa-eye"></i>

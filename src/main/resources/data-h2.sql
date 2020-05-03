@@ -11,12 +11,6 @@ insert into file(id, content) values
 insert into file(id, content) values
 (100, FILE_READ('./src/main/resources/static/photos/dogs.jpg'));
 
---ROLES
-insert into role(id, role) values
-(1, 'ROLE_USER'),
-(2, 'ROLE_ADMIN'),
-(3, 'ROLE_MODERATOR');
-
 -- ANIMAL_TYPE
 insert into animal_type (id, name) values
 (101, 'DOG'),
@@ -57,18 +51,12 @@ insert into animal_color(id, name) values
 (106, 'CREAM');
 
 --AUTHENTICATION
-INSERT into user(id, username, password, active,  name, email, address, zip_code, neighborhood, city, state,
+INSERT into user(id, username, password, active, role, name, email, address, zip_code, neighborhood, city, state,
 address_number, residential_phone, cel_phone, animal_age_id, animal_gender_id, animal_type_id, animal_castrated_id,
 animal_color_id,animal_size_id) VALUES
-(100, 'user', @PASSWORD, 'true' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101),
-(101, 'admin', @PASSWORD, 'true' ,'Admin Yoda','admin@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101),
-(102, 'mod', @PASSWORD, 'true' ,'Mod Yoda','mod@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101);
-
--- USER_ROLES
-insert into user_roles (user_id, roles_id) values
-(100, 1),
-(101, 2),
-(102, 3);
+(100, 'user', @PASSWORD, 'true', 'ROLE_USER' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101),
+(101, 'admin', @PASSWORD, 'true', 'ROLE_ADMIN' ,'Admin Yoda','admin@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101),
+(102, 'mod', @PASSWORD, 'true', 'ROLE_MODERATOR' ,'Mod Yoda','mod@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101);
 
 --ANNOUNCE
 insert into announce(id, address, address_number, city, date, description, main_photo, name, neighborhood, second_photo,

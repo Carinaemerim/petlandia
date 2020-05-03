@@ -1,9 +1,13 @@
 package br.edu.ifrs.canoas.webapp.service;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
+import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,8 +29,14 @@ public class UserDetailsImplService implements UserDetailsService {
 				.map(user -> new UserImpl(
 				        user.getUsername(),
                         user.getPassword(),
-						user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList()),
-                        user)
+						roleToCollection(user),
+						user)
                 ).orElseThrow(() -> new UsernameNotFoundException("couldn't find " + username + "!"));
+	}
+
+	private Collection<? extends GrantedAuthority> roleToCollection(User user) {
+		ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
+		list.add(new SimpleGrantedAuthority(user.getRole().name()));
+		return list.stream().collect(Collectors.toList());
 	}
 }

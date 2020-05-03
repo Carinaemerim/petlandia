@@ -3,9 +3,6 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
-import br.edu.ifrs.canoas.webapp.helper.Auth;
-import br.edu.ifrs.canoas.webapp.repository.RoleRepository;
-import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/manager/admin/users")
@@ -21,7 +17,6 @@ import java.util.Set;
 public class UserAdminManagerController {
 
     private final UserService userService;
-    private final RoleRepository roleRepository;
 
     @GetMapping("")
     public String getActive(@RequestParam(value = "page", defaultValue = "0") int page,
@@ -38,8 +33,7 @@ public class UserAdminManagerController {
         User user = getUser(id);
 
         model.addAttribute("user", user);
-        model.addAttribute("userRole", Auth.getUserRole(user));
-        model.addAttribute("roles", roleRepository.findAll());
+        model.addAttribute("roles", Role.values());
 
         return "/manager/admin/user/view";
     }
@@ -55,10 +49,8 @@ public class UserAdminManagerController {
     @PostMapping("/{id}/block-user")
     public String blockUser(@PathVariable("id") final Long id) {
         User user = getUser(id);
-        br.edu.ifrs.canoas.webapp.domain.Role role = roleRepository.findByRoleEquals(Role.ROLE_USER.name());
         user.setActive(false);
-        user.getRoles().clear();
-        user.getRoles().add(role);
+        user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "redirects:/manager/admin/users/" + user.getId();
     }
