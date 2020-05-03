@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:insert="/layouts/fragments/scripts :: head" />
 <body class="layout-top-nav layout-navbar-fixed">
+
 <!-- Site wrapper -->
 <div class="wrapper">
-
 	<nav th:insert="/layouts/fragments/static-top :: navbar" />
 
 	<!-- Content Wrapper. Contains page content -->
@@ -29,6 +29,9 @@
 	</div>
 	<footer th:insert="/layouts/fragments/footer ::footer"></footer>
 </div>
+
+<th:block layout:fragment="modal-view" />
+
 <div th:insert="/layouts/fragments/scripts :: javascripts" />
 </body>
 

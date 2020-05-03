@@ -9,8 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class Auth {
+public final class Auth {
     public static boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() ||
@@ -50,4 +51,37 @@ public class Auth {
         User user = userImpl.getUser();
         return user;
     }
+
+    public static Role getUserRole(User user) {
+        for (br.edu.ifrs.canoas.webapp.domain.Role role : user.getRoles()) {
+            if (role.getRole().equals(Role.ROLE_ADMIN)) {
+                return Role.ROLE_ADMIN;
+            }
+        }
+
+        for (br.edu.ifrs.canoas.webapp.domain.Role role : user.getRoles()) {
+            if (role.getRole().equals(Role.ROLE_MODERATOR)) {
+                return Role.ROLE_MODERATOR;
+            }
+        }
+
+        for (br.edu.ifrs.canoas.webapp.domain.Role role : user.getRoles()) {
+            if (role.getRole().equals(Role.ROLE_USER)) {
+                return Role.ROLE_USER;
+            }
+        }
+
+        return null;
+    }
+
+    public static Role getUserRole(User user, Role target) {
+        for (br.edu.ifrs.canoas.webapp.domain.Role role : user.getRoles()) {
+            if (role.getRole().name().equals(target.name())) {
+                return target;
+            }
+        }
+
+        return null;
+    }
+
 }

@@ -10,13 +10,15 @@
                 <div class="card-header">
                     <div class="row justify-content-between align-items-center">
                         <div class="col">
-                            <div>Usuários</div>
+                            <div th:text="#{sidebar.adm.users}">Usuários</div>
                         </div>
                         <div class="col-auto">
                             <form th:action="@{/manager/admin/users}" method="get" accept-charset="UTF-8">
                                 <input type="hidden" name="page" value="0">
                                 <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control" placeholder="Procurar" name="term" th:value="${term}">
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{manager.admin.user.list.search}"
+                                           name="term" th:value="${term}">
                                     <div class="input-group-append">
                                         <button class="btn btn-dark" type="submit">
                                             <i class="fa fa-search"></i>
@@ -32,29 +34,31 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Usuário</th>
-                                <th>Nível</th>
-                                <th>Ação</th>
+                                <th th:text="#{manager.admin.user.list.table.id}">ID</th>
+                                <th th:text="#{manager.admin.user.list.table.name}">Nome</th>
+                                <th th:text="#{manager.admin.user.list.table.username}">Usuário</th>
+                                <th th:text="#{manager.admin.user.list.table.role}">Nível</th>
+                                <th class="text-center" width="130"
+                                    th:text="#{manager.admin.user.list.table.action}">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="user :  ${users.data}">
+                            <tr th:each="user : ${users.data}">
                                 <td th:text="${user.id}"></td>
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.username}"></td>
                                 <td>
                                     <span th:each="role :  ${user.roles}" th:text="#{${role.role.name}}"></span>
                                 </td>
-                                <td class="text-right">
-                                    <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}" class="btn btn-outline-dark btn-xs">
+                                <td class="text-center">
+                                    <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}" class="btn btn-light btn-xs">
                                         <i class="fa fa-eye"></i>
+                                        <span th:text="#{manager.admin.user.list.action.view}"></span>
                                     </a>
                                 </td>
                             </tr>
                             <tr th:if="${users.data.isEmpty()}">
-                                <td class="text-center" colspan="5">
+                                <td class="text-center" colspan="5" th:text="#{manager.admin.user.list.table.empty}">
                                     Sem registros
                                 </td>
                             </tr>

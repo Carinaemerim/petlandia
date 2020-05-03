@@ -177,7 +177,6 @@ function initPagination(container) {
     });
 }
 
-
 $(document).ready(function() {
     initPagination();
 
