@@ -5,6 +5,7 @@ import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,14 @@ public class UserAdminManagerController {
     public String changeRole(@PathVariable("id") final Long id, @Valid @ModelAttribute("role") Role role) {
         User user = getUser(id);
 
+        if (role == null) {
+            throw new RuntimeException("role is not valid");
+        }
 
-        return "redirects:/manager/admin/users/" + user.getId();
+        user.setRole(role);
+        userService.save(user);
+
+        return "redirect:/manager/admin/users/" + user.getId();
     }
 
     @PostMapping("/{id}/block-user")
@@ -52,7 +59,7 @@ public class UserAdminManagerController {
         user.setActive(false);
         user.setRole(Role.ROLE_USER);
         userService.save(user);
-        return "redirects:/manager/admin/users/" + user.getId();
+        return "redirect:/manager/admin/users/" + user.getId();
     }
 
     private User getUser(Long id) {
