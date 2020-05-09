@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
+import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -91,7 +92,7 @@ public class UserController {
             return "/user/create_user_page";
         }
 
-
+        form.getUser().setRole(Role.ROLE_USER);
 
         userService.save(form.getUser());
 
