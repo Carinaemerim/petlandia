@@ -7,7 +7,7 @@
                 <div class="form-check form-check-inline" th:each="i : ${animalType}">
                     <input class="form-check-input" type="radio" th:field="*{user.animalType}" th:value="${i.id}"
                            th:classappend="${#fields.hasErrors('user.animalType')} ? is-invalid">
-                    <label class="form-check-label" th:for="${#ids.prev('user.animalType')}" th:text="#{${i.name.name}}"> </label>
+                    <label class="form-check-label" th:for="${#ids.prev('user.animalType')}" th:text="#{${i.label}}"> </label>
                 </div>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalType')}"
                      th:errors="*{user.animalType}"></div>
@@ -20,7 +20,7 @@
                 <div class="form-check form-check-inline" th:each="i : ${animalGender}">
                     <input class="form-check-input" type="radio" th:field="*{user.animalGender}" th:value="${i.id}"
                            th:classappend="${#fields.hasErrors('user.animalGender')} ? is-invalid">
-                    <label class="form-check-label" th:for="${#ids.prev('user.animalGender')}" th:text="#{${i.name.name}}"> </label>
+                    <label class="form-check-label" th:for="${#ids.prev('user.animalGender')}" th:text="#{${i.label}}"> </label>
                 </div>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalGender')}"
                      th:errors="*{user.animalGender}"></div>
@@ -35,7 +35,7 @@
                 <label for="user_form_animal_size" th:text="#{announce.form.size}"> </label>
                 <select class="custom-select" id="user_form_animal_size" th:field="*{user.animalSize}" required
                         th:classappend="${#fields.hasErrors('user.animalSize')} ? is-invalid">
-                    <option th:each="i : ${animalSize}" th:value="${i.id}" th:text="#{${i.name.name}}"> </option>
+                    <option th:each="i : ${animalSize}" th:value="${i.id}" th:text="#{${i.label}}"> </option>
                 </select>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalSize')}"
                      th:errors="*{user.animalSize}"></div>
@@ -47,7 +47,7 @@
                 <label for="user_form_animal_color" th:text="#{announce.form.animalColor}"> </label>
                 <select class="custom-select" id="user_form_animal_color" th:field="*{user.animalColor}" required
                         th:classappend="${#fields.hasErrors('user.animalColor')} ? is-invalid">
-                    <option th:each="i : ${animalColors}" th:value="${i.id}" th:text="#{${i.name.name}}"> </option>
+                    <option th:each="i : ${animalColors}" th:value="${i.id}" th:text="#{${i.label}}"> </option>
                 </select>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalColor')}"
                      th:errors="*{user.animalColor}"></div>
@@ -64,7 +64,7 @@
                 <div class="form-check form-check-inline" th:each="i : ${animalCastrated}">
                     <input class="form-check-input" type="radio" th:field="*{user.animalCastrated}" th:value="${i.id}"
                            th:classappend="${#fields.hasErrors('user.animalCastrated')} ? is-invalid">
-                    <label class="form-check-label" th:for="${#ids.prev('user.animalCastrated')}" th:text="#{${i.name.name}}"> </label>
+                    <label class="form-check-label" th:for="${#ids.prev('user.animalCastrated')}" th:text="#{${i.label}}"> </label>
                 </div>
 
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalCastrated')}"
@@ -77,7 +77,7 @@
                 <label for="user_form_animal_age" th:text="#{announce.form.age}"> </label>
                 <select class="custom-select" id="user_form_animal_age" th:field="*{user.animalAge}" required
                         th:classappend="${#fields.hasErrors('user.animalAge')} ? is-invalid">
-                    <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="#{${i.name.name}}"> </option>
+                    <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="#{${i.label}}"> </option>
                 </select>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.animalAge')}"
                      th:errors="*{user.animalAge}"></div>

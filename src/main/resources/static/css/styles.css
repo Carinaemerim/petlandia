@@ -161,3 +161,12 @@
 .manager-content .callout:last-child {
     margin-bottom: 0;
 }
+
+/* */
+.carousel .img-fluid {
+    border-radius: 5px;
+}
+
+pre.form-control {
+    font-family: "Source Sans Pro", Arial,sans-serif;
+}
