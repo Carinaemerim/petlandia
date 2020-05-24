@@ -170,3 +170,23 @@
 pre.form-control {
     font-family: "Source Sans Pro", Arial,sans-serif;
 }
+
+.direct-chat-actions {
+    padding-left: 15px;
+}
+
+.direct-chat-actions a {
+    font-size: 10px;
+    color: grey;
+    display: inline-block;
+}
+
+.modal-inline {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+}

@@ -4,7 +4,9 @@ import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
+import br.edu.ifrs.canoas.webapp.exception.CommentNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
@@ -29,6 +31,7 @@ public class AnnounceController {
 
     private final Messages messages;
     private final AnnounceService announceService;
+    private final CommentService commentService;
     private final AnimalCastratedService animalCastratedService;
     private final AnimalGenderService animalGenderService;
     private final AnimalSizeService animalSizeService;
@@ -202,6 +205,81 @@ public class AnnounceController {
         model.addAttribute("form", form);
 
         return "/announce/edit";
+    }
+
+    /* Comments */
+
+    @PostMapping("/{id}/comment")
+    public String saveComment(@AuthenticationPrincipal UserImpl activeUser,
+                              @PathVariable("id") final Long id,
+                              @ModelAttribute("message") String message,
+                              BindingResult bindingResult) {
+        Announce announce = this.getActiveAnnounce(id);
+
+        if (!bindingResult.hasErrors()) {
+            Comment comment = new Comment();
+            comment.setAnnounce(announce);
+            comment.setStatus(CommentStatus.ACTIVE);
+            comment.setUser(activeUser.getUser());
+            comment.setMessage(message);
+
+            commentService.save(comment);
+        }
+
+        return "redirect:/announces/" + announce.getId();
+    }
+
+    @PostMapping("/{id}/comment/{commentId}/report")
+    public String PostCommentToReport(@PathVariable("id") final Long id,
+                                       @PathVariable("commentId") final Long commentId,
+                                       @ModelAttribute("form") @Valid AnnounceCreateFrom form,
+                                       BindingResult bindingResult, Model model) {
+        Announce announce = this.getActiveAnnounce(id);
+        Comment comment = this.getComment(commentId, announce);
+
+        return "redirect:/announces/" + announce.getId();
+    }
+
+    @PostMapping("/{id}/comment/{commentId}/remove")
+    public String PostCommentToRemove(@PathVariable("id") final Long id,
+                                        @PathVariable("commentId") final Long commentId,
+                                        @ModelAttribute("form") @Valid AnnounceCreateFrom form,
+                                        BindingResult bindingResult, Model model) {
+
+        Announce announce = this.getActiveAnnounce(id);
+        Comment comment = this.getComment(commentId, announce);
+
+        commentService.remove(comment);
+
+        return "redirect:/announces/" + announce.getId();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    private Announce getActiveAnnounce(Long id) {
+        Announce announce = announceService.findById(id);
+        if (announce == null || !announce.getStatus().equals(AnnounceStatus.ACTIVE)) {
+            throw new AnnounceNotFoundException();
+        }
+
+        return announce;
+    }
+
+    private Comment getComment(Long id, Announce announce) {
+        Comment comment = commentService.findByIdAndAnnounce(id, announce);
+        if (comment == null) {
+            throw new CommentNotFoundException();
+        }
+
+        return comment;
     }
 
     private String doUpload(Cropper cropper, BindingResult bindingResult, String field) throws IOException {

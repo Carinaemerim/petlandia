@@ -1,5 +1,10 @@
 <html layout:decorate="~{/layouts/main}">
 
+<th:block layout:fragment="js-view">
+    <script th:src="@{/js/view_announce.js}"></script>
+</th:block>
+
+
 <head>
     <title th:text="${announce.title}"/>
 </head>
@@ -183,12 +188,17 @@
 
                 <div class="card-body">
                     <div class="direct-chat-msg"
+                         th:each="comment : ${comments.data}"
                          th:classappend="${comment.user.id == announce.user.id} ? 'right'"
-                         th:each="comment : ${comments.data}">
+                         th:attr="data-announce-id=${announce.id}, data-comment-id=${comment.id}">
                         <div class="direct-chat-infos clearfix">
                             <span class="direct-chat-name float-left">
                                 <span th:text="${comment.user.name}"></span> -
                                 <small th:text="${comment.user.username}"></small>
+                            </span>
+                            <span class="direct-chat-actions float-left">
+                                <a th:if="${currentUserId != comment.user.id}" th:text="#{announce.comment.action.report}" class="btn-comment-report"></a>
+                                <a th:if="${currentUserId == comment.user.id}" th:text="#{announce.comment.action.remove}" class="btn-comment-remove"></a>
                             </span>
                             <span class="direct-chat-timestamp float-right"
                                   th:text="${#temporals.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
@@ -196,14 +206,21 @@
                         <img class="direct-chat-img" th:src="${comment.user.avatar}">
                         <div class="direct-chat-text" th:text="${comment.message}"></div>
                     </div>
+
+                    <div class="clearfix" th:if="${comments.totalPages > 0}">
+                        <div class="pull-right">
+                            <div th:replace="/layouts/fragments/pagination :: pagination(${comments})"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-footer">
-                    <form action="#" method="post">
+                    <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post" accept-charset="UTF-8">
                         <div class="input-group">
-                            <input type="text" name="message" placeholder="Digite o comentário" class="form-control" autocomplete="off">
+                            <input type="text" name="message" th:placeholder="#{announce.comment.form.input.placeholder}"
+                                   class="form-control" autocomplete="off" minlength="5" maxlength="230">
                             <span class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Enviar</button>
+                                <button type="submit" class="btn btn-secondary" th:text="#{announce.comment.form.send}"></button>
                             </span>
                         </div>
                     </form>
@@ -213,3 +230,71 @@
 
     </div>
 </div>
+
+<th:block layout:fragment="modal-view">
+    <div class="modal fade" tabindex="-1" id="modal-announce-report">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8" th:action="@{/announce/{id}/report(id = ${announce.id})}">
+                    <div class="modal-header">
+                        <h5 class="modal-title">T</h5>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"
+                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal-comment-report">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8" action="#" data-action="/announce/:announce/comment/:comment/report">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Reportar Comentário</h5>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger"
+                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal-comment-remove">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8" action="#" data-action="/announce/:announce/comment/:comment/remove">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remover comentário</h5>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"
+                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>

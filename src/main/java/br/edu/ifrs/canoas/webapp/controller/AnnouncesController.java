@@ -3,9 +3,12 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -50,8 +53,12 @@ public class AnnouncesController {
             throw new AnnounceNotFoundException();
         }
 
-        model.addAttribute("comments", commentService.findAll(page, PAGE_COMMENT_LENGTH, announce));
+        User currentUser = Auth.getUser();
+        Long currentUserId = currentUser != null ? currentUser.getId() : 0l;
+
+        model.addAttribute("comments", commentService.findAll(page, PAGE_COMMENT_LENGTH, announce, CommentStatus.ACTIVE));
         model.addAttribute("announce", announce);
+        model.addAttribute("currentUserId", currentUserId);
         return "/announce/announceDetails";
     }
 }
