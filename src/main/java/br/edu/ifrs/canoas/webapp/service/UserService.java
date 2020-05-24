@@ -22,6 +22,9 @@ public class UserService {
 	private final UserRepository userRepository;
 
 	public void save(User user) {
+		if (user.getEmail() != null) {
+			user.setAvatar(user.getAvatarHash());
+		}
 
 		userRepository.save(user);
 	}

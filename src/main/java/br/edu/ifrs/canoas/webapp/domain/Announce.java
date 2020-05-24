@@ -6,14 +6,11 @@ import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -47,8 +44,6 @@ public class Announce {
     @NotNull
     @Enumerated(EnumType.STRING)
     private AnnounceStatus status = AnnounceStatus.ACTIVE;
-
-    private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalSize animalSize;
@@ -98,6 +93,12 @@ public class Announce {
 
     @Lob
     private String thirdPhoto;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public boolean canModify() {
         if (this.status == AnnounceStatus.INACTIVE) {

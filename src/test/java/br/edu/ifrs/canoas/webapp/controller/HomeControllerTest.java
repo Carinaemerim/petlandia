@@ -2,7 +2,6 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 
 import br.edu.ifrs.canoas.webapp.domain.AnimalType;
-import br.edu.ifrs.canoas.webapp.domain.City;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
 import org.junit.jupiter.api.Test;
@@ -46,12 +45,6 @@ public class HomeControllerTest extends BaseControllerTest{
     }
 
 
-
-    private City createCity(){
-        City city = new City();
-        city.setDescription("canoas");
-        return city;
-    }
 
     private AnimalType createAnimalType(){
         AnimalType animalType = new AnimalType();

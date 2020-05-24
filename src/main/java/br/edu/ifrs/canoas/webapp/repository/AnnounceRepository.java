@@ -13,7 +13,7 @@ import java.util.List;
 public interface AnnounceRepository extends PagingAndSortingRepository<Announce, Long> {
 
     Page<Announce> findAll(Example<Announce> example, Pageable page);
-    List<Announce> findAllByOrderByDateDescIdDesc();
-    Page<Announce> findAllByStatusAndUserOrderByDateDescIdDesc(AnnounceStatus status, User user, Pageable page);
+    List<Announce> findAllByOrderByCreatedAtDescIdDesc();
+    Page<Announce> findAllByStatusAndUserOrderByCreatedAtDescIdDesc(AnnounceStatus status, User user, Pageable page);
     Long countAllByStatusAndUser(AnnounceStatus status, User user);
 }

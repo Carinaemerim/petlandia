@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -98,7 +97,6 @@ public class AnnounceController {
 
         form.getAnnounce().setUser(activeUser.getUser());
         form.getAnnounce().setStatus(AnnounceStatus.ACTIVE);
-        form.getAnnounce().setDate(new Date());
         Announce announce = announceService.save(form.getAnnounce());
         return "redirect:/announces/" + announce.getId();
     }

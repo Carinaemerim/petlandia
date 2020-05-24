@@ -2,8 +2,6 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
-import br.edu.ifrs.canoas.webapp.domain.City;
-import br.edu.ifrs.canoas.webapp.domain.File;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
 import org.junit.jupiter.api.Test;
@@ -35,14 +33,11 @@ public class AnnounceControllerTest extends BaseControllerTest{
     AnnounceService announceService;
     @MockBean
     UserDetailsImplService userDetailsImplService;
-    @MockBean
-    File photo;
-
     @Test
     public void testReturnDetails() throws Exception{
 
         given(announceService.findById(any(Long.class))).willReturn(createAnnounce());
-        given(photo.getPictureBase64()).willReturn("photo");
+
         this.mvc.perform(get("/announce/details")
                 .with(user(userDetails))
                 .accept(MediaType.TEXT_HTML)
@@ -65,7 +60,6 @@ public class AnnounceControllerTest extends BaseControllerTest{
         given(announceService.findAll(any(int.class), any(Long.class), any(Long.class)))
         .willReturn(createPage());
 
-        given(photo.getPictureBase64()).willReturn("photo");
         this.mvc.perform(get("/announce/filter")
                 .with(user(userDetails))
                 .accept(MediaType.TEXT_HTML)
@@ -87,7 +81,6 @@ public class AnnounceControllerTest extends BaseControllerTest{
         given(announceService.findAll(any(int.class), any(Long.class), any(Long.class)))
                 .willReturn(createPage());
 
-        given(photo.getPictureBase64()).willReturn("photo");
         this.mvc.perform(get("/announce/filter")
                 .with(user(userDetails))
                 .accept(MediaType.TEXT_HTML)
@@ -110,12 +103,6 @@ public class AnnounceControllerTest extends BaseControllerTest{
         announce.setAnimalType(createAnimalType());
         announce.setUser(super.user);
         return announce;
-    }
-
-    private City createCity(){
-        City city = new City();
-        city.setDescription("canoas");
-        return city;
     }
 
     private AnimalType createAnimalType(){

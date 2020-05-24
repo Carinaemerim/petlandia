@@ -171,54 +171,42 @@
         </div>
 
 
-        <div class="col-md-8">
-
-            <div class="card">
+        <div class="col-md-12">
+            <div class="card" id="comment">
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h1>Comentários</h1>
+                            <h4>Comentários</h4>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <div class="direct-chat-messages">
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                            </div>
-                            <img class="direct-chat-img" th:src="@{img/avatar-placeholder.svg}">
-                            <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
-                            </div>
+                    <div class="direct-chat-msg"
+                         th:classappend="${comment.user.id == announce.user.id} ? 'right'"
+                         th:each="comment : ${comments.data}">
+                        <div class="direct-chat-infos clearfix">
+                            <span class="direct-chat-name float-left">
+                                <span th:text="${comment.user.name}"></span> -
+                                <small th:text="${comment.user.username}"></small>
+                            </span>
+                            <span class="direct-chat-timestamp float-right"
+                                  th:text="${#temporals.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
                         </div>
-
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                            </div>
-                            <img class="direct-chat-img" th:src="@{img/avatar-placeholder.svg}">
-                            <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
-                            </div>
-                        </div>
-
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                            </div>
-                            <img class="direct-chat-img" th:src="@{img/avatar-placeholder.svg}">
-                            <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
-                            </div>
-                        </div>
-
-
+                        <img class="direct-chat-img" th:src="${comment.user.avatar}">
+                        <div class="direct-chat-text" th:text="${comment.message}"></div>
                     </div>
+                </div>
+
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" placeholder="Digite o comentário" class="form-control" autocomplete="off">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">Enviar</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

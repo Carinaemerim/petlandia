@@ -64,12 +64,12 @@ public class AnnounceService {
     }
 
     public List<Announce> listAnnounce() {
-        return announceRepository.findAllByOrderByDateDescIdDesc();
+        return announceRepository.findAllByOrderByCreatedAtDescIdDesc();
     }
 
     public PaginatedEntity<Announce> findAll(int pageNumber, User user, AnnounceStatus status){
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
-        Page<Announce> announcePage = announceRepository.findAllByStatusAndUserOrderByDateDescIdDesc(status, user, page);
+        Page<Announce> announcePage = announceRepository.findAllByStatusAndUserOrderByCreatedAtDescIdDesc(status, user, page);
 
         return PaginatedEntity.<Announce>builder()
                 .currentPage(pageNumber)

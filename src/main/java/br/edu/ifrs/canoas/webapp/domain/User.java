@@ -10,6 +10,9 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.DatatypeConverter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 
 @Entity
@@ -102,4 +105,21 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	private AnimalCastrated animalCastrated;
+
+	private String avatar;
+
+	public String getAvatarHash() {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(this.email.toLowerCase().trim().getBytes());
+			byte[] digest = md.digest();
+			return DatatypeConverter.printHexBinary(digest).toLowerCase();
+		} catch (java.security.NoSuchAlgorithmException ex) {
+			return "default";
+		}
+	}
+
+	public String getAvatar() {
+		return "https://www.gravatar.com/avatar/" + this.avatar + "?d=mp&s=200";
+	}
 }

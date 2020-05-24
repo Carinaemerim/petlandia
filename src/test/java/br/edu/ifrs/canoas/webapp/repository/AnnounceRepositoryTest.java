@@ -2,7 +2,6 @@ package br.edu.ifrs.canoas.webapp.repository;
 
 import br.edu.ifrs.canoas.webapp.domain.AnimalType;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
-import br.edu.ifrs.canoas.webapp.domain.City;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,6 @@ public class AnnounceRepositoryTest {
     private AnnounceRepository announceRepository;
     @Autowired
     private AnimalTypeRepository animalTypeRepository;
-    @Autowired
-    private CityRepository cityRepository;
 
     private static final String CITY_NAME = "my_city";
     private static final String ANIMAL_NAME = "my_animal";
@@ -64,7 +61,6 @@ public class AnnounceRepositoryTest {
     public void testFilterByCity(){
         //given
         Announce announce = new Announce();
-        City city = cityRepository.save(createCity());
         announce.setDescription("Um dog que come muita comida");
         announce.setName("anuncio");
         //announce.setCity(city);
@@ -111,11 +107,6 @@ public class AnnounceRepositoryTest {
 
     }
 
-    private City createCity(){
-        City city = new City();
-        city.setDescription(CITY_NAME);
-        return city;
-    }
 
     private AnimalType createAnimalType(){
         AnimalType animalType= new AnimalType();

@@ -32,12 +32,6 @@ public class UserController {
     private final AnimalAgeService animalAgeService;
     private final AnimalColorService animalColorService;
 
-//	@GetMapping("/profile")
-//    public ModelAndView viewUserAccount(@AuthenticationPrincipal UserImpl activeUser){
-//        ModelAndView mav = new ModelAndView("create_user_page");
-//        mav.addObject("user", userService.getOne(activeUser.getUser()));
-//        return mav;
-//    }
 
     @GetMapping("/create")
     public String getCreateUser(Model model) {
@@ -96,7 +90,7 @@ public class UserController {
 
         userService.save(form.getUser());
 
-        return "/user/create_user_page";
+        return "redirect:/login";
     }
 
     @GetMapping("/{id}")

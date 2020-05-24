@@ -35,7 +35,7 @@ public class AnnounceDao {
             setAnnounceFilters(filters, status, root, criteriaBuilder, predicates);
 
             announceCriteriaQuery.where(predicates.toArray(new Predicate[]{}));
-            announceCriteriaQuery.orderBy(criteriaBuilder.desc(root.get("date")),
+            announceCriteriaQuery.orderBy(criteriaBuilder.desc(root.get("createdAt")),
                     criteriaBuilder.desc(root.get("id")));
 
             TypedQuery query = entityManager.createQuery(announceCriteriaQuery)

@@ -11,20 +11,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/announces")
 @AllArgsConstructor
 public class AnnouncesController {
 
-    private static final int PAGE_LENGTH = 2;
+    private static final int PAGE_LENGTH = 10;
+    private static final int PAGE_COMMENT_LENGTH = 10;
 
     private final Messages messages;
     private final AnnounceService announceService;
+    private final CommentService commentService;
     private final AnnounceListService announceListService;
 
     @GetMapping
@@ -42,13 +41,16 @@ public class AnnouncesController {
     }
 
     @GetMapping("/{id}")
-    public String announceDetails(@PathVariable("id") final String id, Model model) {
+    public String announceDetails(@PathVariable("id") final String id,
+                                  @RequestParam(value = "page", defaultValue = "0") int page,
+                                  Model model) {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null) {
             throw new AnnounceNotFoundException();
         }
 
+        model.addAttribute("comments", commentService.findAll(page, PAGE_COMMENT_LENGTH, announce));
         model.addAttribute("announce", announce);
         return "/announce/announceDetails";
     }
