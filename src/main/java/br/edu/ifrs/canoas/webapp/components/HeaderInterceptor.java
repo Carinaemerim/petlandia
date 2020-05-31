@@ -17,6 +17,10 @@ public class HeaderInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView model) throws Exception {
+        if (model == null) {
+            return;
+        }
+
         HeaderBar headerBar = new HeaderBar();
         headerBar.set(request);
         model.addObject("headerBar", headerBar);

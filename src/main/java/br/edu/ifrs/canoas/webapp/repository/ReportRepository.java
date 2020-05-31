@@ -14,4 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface ReportRepository extends PagingAndSortingRepository<Report, Long> {
     Page<Report> findAllByStatusAndCommentIsNullOrderByCreatedAtDesc(Pageable page, ReportStatus status);
     Page<Report> findAllByStatusAndCommentIsNotNullOrderByCreatedAtDesc(Pageable page, ReportStatus status);
+    Report findByIdAndStatusEquals(Long id, ReportStatus status);
 }

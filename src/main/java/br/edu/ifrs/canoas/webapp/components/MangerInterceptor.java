@@ -21,10 +21,12 @@ public class MangerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView model) throws Exception {
+        if (model == null) {
+            return;
+        }
+
         ManagerSidebar sidebar = new ManagerSidebar();
-
         sidebar.set(announceService, commentService, request);
-
         model.addObject("sidebar", sidebar);
     }
 }
