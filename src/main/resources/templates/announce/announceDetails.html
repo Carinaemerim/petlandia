@@ -29,18 +29,6 @@
                         <span class="ml-1" th:text="#{announce.mod.delete}"></span>
                         </a>
                     </div>
-
-                    <div class="btn-group btn-group-sm" th:if="${announce.canApprove()}">
-                        <a class="btn btn-danger" th:href="@{/announce/{id}/deny(id = ${announce.id})}">
-                            <i class="fa fa-hand-point-down"></i>
-                        <span class="ml-1" th:text="#{announce.mod.approve}"></span>
-                        </a>
-
-                        <a class="btn btn-success" th:href="@{/announce/{id}/accept(id = ${announce.id})}">
-                            <i class="fa fa-hand-point-up"></i>
-                            <span class="ml-1" th:text="#{announce.mod.refuse}"></span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
