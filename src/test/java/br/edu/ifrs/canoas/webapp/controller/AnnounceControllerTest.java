@@ -54,48 +54,6 @@ public class AnnounceControllerTest extends BaseControllerTest{
 
     }
 
-    @Test
-    public void testReturnFilter() throws Exception{
-
-        given(announceService.findAll(any(int.class), any(Long.class), any(Long.class)))
-        .willReturn(createPage());
-
-        this.mvc.perform(get("/announce/filter")
-                .with(user(userDetails))
-                .accept(MediaType.TEXT_HTML)
-                .param("page", "1")
-                .param("cityId", "10")
-                .param("animalTypeId", "100")
-        )
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(view().name("/announce/fragments/announce-list"))
-                .andExpect(model().attribute("currentPage", is(1)))
-        ;
-
-    }
-
-    @Test
-    public void testReturnFilterInvalidPage() throws Exception{
-
-        given(announceService.findAll(any(int.class), any(Long.class), any(Long.class)))
-                .willReturn(createPage());
-
-        this.mvc.perform(get("/announce/filter")
-                .with(user(userDetails))
-                .accept(MediaType.TEXT_HTML)
-                .param("page", "-1")
-                .param("cityId", "10")
-                .param("animalTypeId", "100")
-        )
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("text/html;charset=UTF-8"))
-                .andExpect(view().name("/announce/fragments/announce-list"))
-                .andExpect(model().attribute("currentPage", is(1)))
-        ;
-
-    }
-
     private Announce createAnnounce(){
         Announce announce = new Announce();
         announce.setId(10L);

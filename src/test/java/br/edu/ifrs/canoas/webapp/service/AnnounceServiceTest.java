@@ -34,46 +34,6 @@ public class AnnounceServiceTest {
     private static final String CITY_NAME = "my_city";
 
     @Test
-    public void testPaginationNegative() {
-        //given
-        Announce announce = new Announce();
-        announce.setDescription("Um dog que come muita comida");
-        announce.setName("anuncio");
-        //announce.setCity(city);
-        announceRepository.save(announce);
-
-        //when
-        Page<Announce> announces = announceService.findAll(-1, 100L, 200L);
-
-        //then
-        assertThat(announces.getPageable().getPageNumber()).isEqualTo(0);
-
-    }
-
-    @Test
-    public void testFindAllCitiesNull() {
-        //given
-
-        //when
-        Page<Announce> announces = announceService.findAll(0, null, 200L);
-
-        //then
-        assertThat(announces).isNotNull();
-
-    }
-
-    @Test
-    public void testFindAllAnimalTypesNull() {
-
-        //when
-        Page<Announce> announces = announceService.findAll(0, 100L, null);
-
-        //then
-        assertThat(announces).isNotNull();
-
-    }
-
-    @Test
     public void testGetCityTypesNotNull() {
 
         //when

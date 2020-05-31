@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.config;
 
+import br.edu.ifrs.canoas.webapp.components.HeaderInterceptor;
 import br.edu.ifrs.canoas.webapp.components.MangerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -27,6 +28,9 @@ public class MVCConfig implements WebMvcConfigurer {
     @Autowired
     private MangerInterceptor mangerInterceptor;
 
+    @Autowired
+    private HeaderInterceptor headerInterceptor;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("/auth/login");
@@ -36,6 +40,7 @@ public class MVCConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(headerInterceptor).addPathPatterns("/**");
         registry.addInterceptor(mangerInterceptor).addPathPatterns("/manager", "/manager/**");
     }
 

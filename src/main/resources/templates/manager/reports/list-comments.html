@@ -1,0 +1,43 @@
+<html layout:decorate="~{/layouts/main}">
+
+<div layout:fragment="content-body">
+    <div class="row">
+        <div class="col col-md-3 manager-menu">
+            <div th:replace="/manager/fragments/sidebar :: managerSidebar(${sidebar})"></div>
+        </div>
+        <div class="col col-md-9 manager-content">
+            <div class="jumbotron" th:if="${reports.data.isEmpty()}">
+                <h3 class="display-8">Report Comments</h3>
+                <p>Sem registros.</p>
+            </div>
+
+            <div class="card" th:if="${!reports.data.isEmpty()}">
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col">
+                            <div>Report Comments</div>
+                        </div>
+                        <div class="col-auto">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="callout callout-pink" th:each="report :  ${reports.data}">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" th:if="${reports.totalPages > 0}">
+                    <div class="pull-right">
+                        <div th:replace="/layouts/fragments/pagination :: pagination(${reports})"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -54,6 +54,12 @@
                         <div class="col">
                             <h3 th:text="${announce.title}"></h3>
                         </div>
+                        <div class="col col-auto">
+                            <a class="btn btn-light btn-sm" th:title="#{announce.report}"
+                               data-toggle="modal" data-target="#modal-announce-report">
+                                <i class="fa fa-flag"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -237,17 +243,21 @@
             <div class="modal-content">
                 <form method="post" accept-charset="UTF-8" th:action="@{/announce/{id}/report(id = ${announce.id})}">
                     <div class="modal-header">
-                        <h5 class="modal-title">T</h5>
+                        <h5 class="modal-title" th:text="#{announce.report}"></h5>
                     </div>
                     <div class="modal-body">
-
+                        <div class="form-group">
+                            <label for="announce_form_report" th:text="#{announce.form.report.label}"> </label>
+                            <textarea class="form-control" id="announce_form_report" name="message" rows="5"
+                                      required maxlength="160" minlength="10"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary"
-                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+                                th:text="#{announce.form.action.confirm}"></button>
 
                         <button type="button" class="btn btn-light" data-dismiss="modal"
-                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                                th:text="#{announce.form.action.cancel}"></button>
                     </div>
                 </form>
             </div>
@@ -259,17 +269,21 @@
             <div class="modal-content">
                 <form method="post" accept-charset="UTF-8" action="#" data-action="/announce/:announce/comment/:comment/report">
                     <div class="modal-header">
-                        <h5 class="modal-title">Reportar Comentário</h5>
+                        <h5 class="modal-title" th:text="#{announce.form.comment.report.title}"></h5>
                     </div>
                     <div class="modal-body">
-
+                        <div class="form-group">
+                            <label for="announce_form_comment_report" th:text="#{announce.form.comment.report.label}"> </label>
+                            <textarea class="form-control" id="announce_form_comment_report" name="message" rows="5"
+                                      required maxlength="160" minlength="10"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger"
-                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+                                th:text="#{announce.form.action.confirm}"></button>
 
                         <button type="button" class="btn btn-light" data-dismiss="modal"
-                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                                th:text="#{announce.form.action.cancel}"></button>
                     </div>
                 </form>
             </div>
@@ -283,15 +297,12 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Remover comentário</h5>
                     </div>
-                    <div class="modal-body">
-
-                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary"
-                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+                                th:text="#{announce.form.action.confirm}"></button>
 
                         <button type="button" class="btn btn-light" data-dismiss="modal"
-                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                                th:text="#{announce.form.action.cancel}"></button>
                     </div>
                 </form>
             </div>

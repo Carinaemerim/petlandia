@@ -38,7 +38,17 @@ public class CommentService {
 	}
 
 	public void remove(Comment comment) {
-		commentRepository.delete(comment);
+		comment.setStatus(CommentStatus.DELETED);
+		commentRepository.save(comment);
+	}
+
+	public void setStatus(Comment comment, CommentStatus status) {
+		comment.setStatus(status);
+		commentRepository.save(comment);
+	}
+
+	public Long countAll(CommentStatus status){
+		return commentRepository.countAllByStatus(status);
 	}
 
 }

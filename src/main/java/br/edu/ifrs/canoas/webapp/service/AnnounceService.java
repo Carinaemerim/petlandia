@@ -3,9 +3,12 @@ package br.edu.ifrs.canoas.webapp.service;
 import br.edu.ifrs.canoas.webapp.dao.AnnounceDao;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.domain.Report;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.repository.AnimalTypeRepository;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
@@ -25,36 +28,7 @@ public class AnnounceService {
 
     private final AnnounceRepository announceRepository;
     private final AnnounceDao announceDao;
-    private final AnimalTypeRepository animalTypeRepository;
 
-    public Page<Announce> findAll(int pageNumber, Long cityId, Long animalTypeId){
-
-        pageNumber -= 1;
-
-        if(pageNumber < 0){
-            pageNumber = 0;
-        }
-
-        Example<Announce> example = buildQuery(cityId, animalTypeId);
-
-        Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH, Sort.by("date").descending());
-        return announceRepository.findAll(example, page);
-
-    }
-
-    private Example<Announce> buildQuery(Long cityId, Long animalTypeId){
-        Announce announce = new Announce();
-
-        if(animalTypeId != null){
-            announce.setAnimalType(animalTypeRepository.findById(animalTypeId).orElse(null));
-        }
-
-        ExampleMatcher example = ExampleMatcher.matchingAll().withIgnoreNullValues()
-                .withMatcher("city", exact())
-                .withMatcher("type", exact());
-
-        return Example.of(announce, example);
-    }
     public Announce findById(Long id){
         return announceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
     }
@@ -79,8 +53,29 @@ public class AnnounceService {
                 .build();
     }
 
+    public PaginatedEntity<Announce> findAll(int pageNumber, AnnounceStatus status){
+        Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
+        Page<Announce> announcePage = announceRepository.findAllByStatusOrderByCreatedAtDescIdDesc(status, page);
+
+        return PaginatedEntity.<Announce>builder()
+                .currentPage(pageNumber)
+                .data(announcePage.getContent())
+                .totalResults(announcePage.getTotalElements())
+                .pageLength(PAGE_LENGTH)
+                .build();
+    }
+
     public Long countAll(User user, AnnounceStatus status){
         return announceRepository.countAllByStatusAndUser(status, user);
+    }
+
+    public Long countAll(AnnounceStatus status){
+        return announceRepository.countAllByStatus(status);
+    }
+
+    public void setStatus(Announce announce, AnnounceStatus status) {
+        announce.setStatus(status);
+        announceRepository.save(announce);
     }
 
     public PaginatedEntity<Announce> findAll(AnnounceFilterForm filters, AnnounceStatus status, int pageLength) {

@@ -1,32 +1,47 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand" th:fragment="navbar">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" th:object="${headerBar}">
         <li class="nav-item">
-            <a href="#" class="fa fa-paw nav-link text-white" th:text="#{login.title1}" id="menudashboard">
+            <a class="fa fa-paw nav-link text-white" th:text="#{menu.home}"
+               th:href="@{/}"
+               th:classappend="*{home.active} ? 'active'">
                 Ir para dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a th:href="@{/announces}" class="nav-link text-white" th:text="#{menu.see}" id="menusee">
+            <a class="nav-link text-white" th:text="#{menu.announces}"
+               th:href="@{*{announces.href}}"
+               th:classappend="*{announces.active} ? 'active'">
                 Ver anúncios
             </a>
         </li>
         <li class="nav-item">
-            <a th:href="@{/announce/create}" class="nav-link text-white" th:text="#{menu.create}" id="menucreate">
+            <a class="nav-link text-white" th:text="#{menu.createAnnounce}"
+               th:href="@{*{createAnnounce.href}}"
+               th:classappend="*{createAnnounce.active} ? 'active'">
                 Criar anúncio
             </a>
         </li>
-        <li class="nav-item">
-            <a th:href="@{/user/create}" class="nav-link text-white" th:text="#{menu.account}" id="menuaccount">
-                Criar cadastro
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white" th:text="#{menu.speak}" id="menuspeak">
-                Fale conosco
-            </a>
-        </li>
+        <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link text-white" th:text="#{menu.manager}"
+                   th:href="@{*{manager.href}}"
+                   th:classappend="*{manager.active} ? 'active'">
+                    Criar cadastro
+                </a>
+            </li>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <li class="nav-item">
+                <a class="nav-link text-white" th:text="#{menu.createUser}"
+                   th:href="@{*{createUser.href}}"
+                   th:classappend="*{createUser.active} ? 'active'">
+                    Criar cadastro
+                </a>
+            </li>
+        </th:block>
+
     </ul>
 
     <!-- Right navbar links -->
