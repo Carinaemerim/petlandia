@@ -5,7 +5,7 @@
         <div class="col col-md-3">
             <div class="card">
                 <form method="get" action="#" th:action="@{/announces}" accept-charset="UTF-8">
-                    <input type="hidden" name="page" value="1">
+                    <input type="hidden" name="page" value="0">
                     <div class="card-header">
                         <i class="fas fa-filter"></i>
                          <span class="ml-1" th:text="#{form.filter.filters}"> </span>
@@ -34,44 +34,22 @@
             </div>
         </div>
         <div class="col col-md-9">
-            <div class="callout callout-pink" th:each="announce :  ${announces.data}">
-                <div class="row">
-                    <div class="col col-md-3">
-                        <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
-                    </div>
-
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h5 th:text="${announce.title}"> </h5>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div th:text="|#{announce.form.name}: ${announce.name}|"></div>
-                                <div th:text="|#{announce.form.age}: #{${announce.animalAge.label}}|"></div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div th:text="|#{announce.form.type}: #{${announce.animalType.label}}|"></div>
-                                <div th:text="|#{announce.form.animalGender}: #{${announce.animalGender.label}}|"></div>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-end">
-                            <div class="col-auto">
-                                <a class="btn btn-secondary btn-sm btn-block"
-                                   th:text="#{user.list.details}" th:href="@{/announces/{id}(id = ${announce.id})}">
-                                </a>
-                            </div>
-                        </div>
+            <div class="card">
+                <div class="card-header">
+                    Anúncios
+                </div>
+                <div class="card-body">
+                    <th:block th:each="announce :  ${announces.data}">
+                        <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
+                    </th:block>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <div th:replace="/layouts/fragments/pagination :: pagination(${announces})"></div>
                     </div>
                 </div>
             </div>
-            <div class="pull-right">
-                <div th:replace="/layouts/fragments/pagination :: pagination(${announces})"></div>
-            </div>
+
         </div>
     </div>
 </div>

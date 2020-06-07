@@ -65,6 +65,10 @@ public class AnnounceService {
                 .build();
     }
 
+    public List<Announce> findFirstFive(AnnounceStatus status){
+        return announceRepository.findFirst5ByStatusEqualsOrderByCreatedAtDescIdDesc(status);
+    }
+
     public Long countAll(User user, AnnounceStatus status){
         return announceRepository.countAllByStatusAndUser(status, user);
     }

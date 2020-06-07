@@ -1,0 +1,17 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="callout(announce)">
+    <a th:href="@{/announces/{id}(id = ${announce.id})}" class="callout callout-pink callout-announce d-block">
+        <span class="row">
+            <span class="col col-md-5">
+                <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
+            </span>
+
+            <span class="col-md-7">
+                <h5 th:text="${announce.title}"> </h5>
+                <span th:text="|#{announce.form.name}: ${announce.name}|" class="d-block"></span>
+                <span th:text="|#{announce.form.age}: #{${announce.animalAge.label}}|" class="d-block"></span>
+                <span th:text="|#{announce.form.type}: #{${announce.animalType.label}}|" class="d-block"></span>
+                <span th:text="|#{announce.form.animalGender}: #{${announce.animalGender.label}}|" class="d-block"></span>
+            </span>
+        </span>
+    </a>
+</div>

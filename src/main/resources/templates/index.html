@@ -4,122 +4,105 @@
     <title th:text="#{item.header}"/>
 </head>
 
-<div layout:fragment="css-view" th:remove="tag">
-    <link rel="stylesheet" href="/webjars/select2/4.0.5/css/select2.min.css"/>
-
-    <style>
-        .select2-results__option { color: black !important; }
-    </style>
-</div>
-
-<!--TODO RNG006
-    TODO RNG007 -->
 <div layout:fragment="js-view">
-    <script src="/webjars/select2/4.0.5/js/select2.min.js"></script>
-    <script>
 
-        function reloadAnnounces(page){
-
-            //https://www.google.com/search?client=ubuntu&channel=fs&q=get+text+of+selected+option+jquery&ie=utf-8&oe=utf-8
-            page = parseInt(page) || 1;
-            let query = $.param({"page": page,
-                "animalTypeId": $("#filtroTipo").val(), "cityId": $("#filtroCidade").val()});
-
-            $("#badge-label").show();
-            $("#city").text($("#filtroCidade option:selected").text());
-            $("#animal-type").text($("#filtroTipo option:selected").text());
-
-            if(!$("#filtroCidade option:selected").text() && !$("#filtroTipo option:selected").text()){
-                $("#badge-label").hide();
-            }
-
-            $("#announce-list-container").load("/announce/filter?"+query, function(){
-                $(".page-link").click(function(){
-
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
-                    reloadAnnounces($(this).text());
-                });
-            });
-
-        }
-
-        $("document").ready(function(){
-
-            reloadAnnounces();
-
-            $("select").change(function(){
-                reloadAnnounces()
-            });
-
-
-            $("#filtroCidade, #filtroTipo").select2({
-                "language": {
-                    "noResults": function(){
-                        //TODO MSG04
-                        return "Não foram localizados registros. ";
-                    }
-                },
-                "placeholder":"--Selecione--",
-                "allowClear":true,
-                "width":"30%",
-                'escapeMarkup': function (markup) {
-                    return markup;
-                },
-            });
-        });
-    </script>
 </div>
-
 
 <div layout:fragment="content-body">
-
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12">
+    <div class="row">
+        <div class="col col-md-3">
             <div class="card">
-                <div class="card-body">
-                    <div class="card-title">
-                      <h3 class="title" th:text="#{text.about}"></h3>
+                <form method="get" action="#" th:action="@{/announces}" accept-charset="UTF-8">
+                    <input type="hidden" name="page" value="0">
+                    <div class="card-header">
+                        <i class="fas fa-filter"></i>
+                        <span class="ml-1" th:text="#{form.filter.filters}"> </span>
                     </div>
-                    <h4 class="description" th:text="#{text.us}">
-                    </h4>
+                    <div class="card-body">
+                        <div class="form-group" th:each="filter : ${filters}">
+                            <label th:text="${filter.label}"> </label>
+                            <div class="form-check">
+                                <div th:each="option : ${filter.options}">
+                                    <input class="form-check-input" type="checkbox"
+                                           th:id="${filter.id + '-' + option.id}"
+                                           th:name="${filter.id}" th:value="${option.id}"
+                                           th:checked="${#lists.contains(__'form.' + ${filter.id}__, option.id)} ? checked">
+                                    <label class="form-check-label"
+                                           th:for="${filter.id + '-' + option.id}"
+                                           th:text="#{${option.label}}"> </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-secondary btn-sm btn-block" type="submit"
+                                th:text="#{form.filter.button}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col col-md-9">
+            <div class="card">
+                <div class="card-header">Sobre nós</div>
+                <div class="card-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac eleifend ante. Duis sit amet condimentum nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In gravida dolor elementum, sodales leo in, rhoncus orci. Integer porta iaculis luctus. Nam velit libero, feugiat ut ante et, sagittis laoreet nisi. Fusce ut aliquet eros. Phasellus finibus odio in mi pretium tristique. Suspendisse eget scelerisque tortor.
+                    </p>
+                    <p>
+                        Vivamus malesuada bibendum pellentesque. Nullam in mauris a libero mattis condimentum. Duis id ornare arcu, quis gravida nunc. Ut vitae euismod nisl. Cras feugiat aliquet tellus nec tempor. Mauris ac suscipit ipsum, non sagittis velit. Vestibulum sit amet sapien non magna dictum vulputate. Proin pellentesque tellus sit amet sapien dignissim sodales. Proin dignissim convallis lorem, id elementum dolor maximus in.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card recommendation-list">
+                <div class="card-header">
+                    Recomendados
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron" sec:authorize="isAnonymous()">
+                        <p>
+                            <a th:href="@{/user/create}">Registre-se</a>
+                            <span>ou</span>
+                            <a th:href="@{/login}">loge-se</a>
+                            <span>no sistema para ver suas recomendações.</span>
+                        </p>
+                    </div>
+
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel"
+                         sec:authorize="isAuthenticated()">
+                        <div class="carousel-inner">
+                            <div class="carousel-item"
+                                 th:each="announce, status : ${announces}"
+                                 th:classappend="${status.first} ? 'active'">
+
+                                <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-secondary pull-right">
+                        Ver mais
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Últimos 5 anúncios
+                </div>
+                <div class="card-body">
+                    <th:block th:each="announce :  ${announces}">
+                        <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
+                    </th:block>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/announces}" class="btn btn-secondary pull-right">
+                        Ver mais
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <section>
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-12 align">
-                    <label for="filtroCidade" th:text="#{filter.type.city}" class="ml-5"> </label>
-                    <select id="filtroCidade">
-                        <option value=""></option>
-                        <th:block th:each="city : ${cities}">
-                            <option value="2" th:value="${city.id}" th:text="${city.description}"> Canoas </option>
-                        </th:block>
-                    </select>
-
-                    <label for="filtroTipo" th:text="#{filter.type.animal}" class="ml-5"> </label>
-                    <select id="filtroTipo">
-                        <option value=""></option>
-                        <th:block th:each="animalType : ${animalTypes}">
-                            <option value="1" th:value="${animalType.id}" th:text="${animalType.name}"> Cão </option>
-                        </th:block>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="row text-center" style="padding-top: 10px">
-        <div class="col-md-12">
-            <label th:text="#{filter.who}" id="badge-label"></label>
-            <a href="#" class="badge badge-primary" id="city"> Canoas </a>
-            <a href="#" class="badge badge-primary" id="animal-type">Cachorro Fêmea </a>
-        </div>
-    </div>
-
-    <div id="announce-list-container">
-
     </div>
 </div>

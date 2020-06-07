@@ -14,6 +14,7 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
 
     Page<Announce> findAll(Example<Announce> example, Pageable page);
     List<Announce> findAllByOrderByCreatedAtDescIdDesc();
+    List<Announce> findFirst5ByStatusEqualsOrderByCreatedAtDescIdDesc(AnnounceStatus status);
     Page<Announce> findAllByStatusAndUserOrderByCreatedAtDescIdDesc(AnnounceStatus status, User user, Pageable page);
     Page<Announce> findAllByStatusOrderByCreatedAtDescIdDesc(AnnounceStatus status, Pageable page);
     Long countAllByStatusAndUser(AnnounceStatus status, User user);

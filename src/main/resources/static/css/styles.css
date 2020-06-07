@@ -190,12 +190,41 @@ pre.form-control {
     color: black;
 }
 
-.modal-inline {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    z-index: 1;
-    display: block;
+/* recommendation-list */
+.recommendation-list {
+    margin-bottom: 15px;
 }
+
+.recommendation-list .callout {
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.recommendation-list .jumbotron {
+    margin-bottom: 15px;
+    border-radius: 0;
+}
+
+.recommendation-list .jumbotron p {
+    margin: 0;
+}
+
+.recommendation-list .card-body {
+    padding: 0;
+}
+
+
+.callout-announce {
+
+}
+
+.callout-announce:hover {
+    cursor: pointer;
+    background-color: rgba(255,255,255,.8);
+}
+
+.callout-announce span {
+    color: #212529;
+}
+
