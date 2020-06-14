@@ -2,43 +2,43 @@
 SET @PASSWORD = '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW';
 
 -- ANIMAL_TYPE
-insert into animal_type (id, name, label) values
-(101, 'DOG', 'animal.type.dog'),
-(102, 'CAT', 'animal.type.cat');
+insert into animal_type (id, name, label, weight) values
+(101, 'DOG', 'animal.type.dog', 0),
+(102, 'CAT', 'animal.type.cat', 0);
 
 -- ANIMAL_GENDER
-insert into animal_gender (id, name, label) values
-(101, 'MALE', 'animal.gender.male'),
-(102, 'FEMALE', 'animal.gender.female');
+insert into animal_gender (id, name, label, weight) values
+(101, 'MALE', 'animal.gender.male', 0),
+(102, 'FEMALE', 'animal.gender.female', 0);
 
 -- ANIMAL_SIZE
-insert into animal_size (id, name, label) values
-(101, 'SMALL', 'animal.size.small'),
-(102, 'MEDIUM', 'animal.size.medium'),
-(103, 'LARGE', 'animal.size.large');
+insert into animal_size (id, name, label, weight) values
+(101, 'SMALL', 'animal.size.small', 0),
+(102, 'MEDIUM', 'animal.size.medium', 0),
+(103, 'LARGE', 'animal.size.large', 0);
 
 -- ANIMAL_CASTRATED
-insert into animal_castrated (id, name, label) values
-(101, 'YES', 'animal.castrated.yes'),
-(102, 'NO', 'animal.castrated.no'),
-(103, 'UNKNOWN', 'animal.castrated.unknown');
+insert into animal_castrated (id, name, label, weight) values
+(101, 'YES', 'animal.castrated.yes', 0),
+(102, 'NO', 'animal.castrated.no', 0),
+(103, 'UNKNOWN', 'animal.castrated.unknown', 0);
 
 -- ANIMAL_AGE
-insert into animal_age (id, name, label) values
-(101, 'PUPPY', 'animal.age.puppy'),
-(102, 'TEENAGER', 'animal.age.teenager'),
-(103, 'ADULT', 'animal.age.adult'),
-(104, 'AGED', 'animal.age.aged'),
-(105, 'GERIATRIC', 'animal.age.geriatric');
+insert into animal_age (id, name, label, weight) values
+(101, 'PUPPY', 'animal.age.puppy', 0),
+(102, 'TEENAGER', 'animal.age.teenager', 0),
+(103, 'ADULT', 'animal.age.adult', 0),
+(104, 'AGED', 'animal.age.aged', 0),
+(105, 'GERIATRIC', 'animal.age.geriatric', 0);
 
 --ANIMAL_COLOR
-insert into animal_color(id, name, label) values
-(101, 'WHITE', 'animal.color.white'),
-(102, 'BLACK', 'animal.color.black'),
-(103, 'BROWN', 'animal.color.brown'),
-(104, 'CARAMEL', 'animal.color.caramel'),
-(105, 'GREY', 'animal.color.grey'),
-(106, 'CREAM', 'animal.color.cream');
+insert into animal_color(id, name, label, weight) values
+(101, 'WHITE', 'animal.color.white', 0),
+(102, 'BLACK', 'animal.color.black', 0),
+(103, 'BROWN', 'animal.color.brown', 0),
+(104, 'CARAMEL', 'animal.color.caramel', 0),
+(105, 'GREY', 'animal.color.grey', 0),
+(106, 'CREAM', 'animal.color.cream', 0);
 
 --AUTHENTICATION
 INSERT into user(id, username, password, active, role, name, email, address, zip_code, neighborhood, city, state,
