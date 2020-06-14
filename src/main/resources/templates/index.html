@@ -73,7 +73,7 @@
                          sec:authorize="isAuthenticated()">
                         <div class="carousel-inner">
                             <div class="carousel-item"
-                                 th:each="announce, status : ${announces}"
+                                 th:each="announce, status : ${suggestions}"
                                  th:classappend="${status.first} ? 'active'">
 
                                 <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-secondary pull-right">
+                    <a th:href="@{/suggestions}" class="btn btn-secondary pull-right">
                         Ver mais
                     </a>
                 </div>

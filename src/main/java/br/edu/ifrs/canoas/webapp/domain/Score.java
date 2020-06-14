@@ -25,5 +25,5 @@ public abstract class Score {
     private String label;
 
     @NotNull
-    private Float weight;
+    private double weight;
 }

@@ -1,0 +1,19 @@
+<html layout:decorate="~{/layouts/main}">
+
+<div layout:fragment="content-body">
+    <div class="card">
+        <div class="card-header">
+            Suggestions
+        </div>
+        <div class="card-body">
+            <th:block th:each="announce :  ${suggestions.data}">
+                <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
+            </th:block>
+        </div>
+        <div class="card-footer">
+            <div class="pull-right">
+                <div th:replace="/layouts/fragments/pagination :: pagination(${suggestions})"></div>
+            </div>
+        </div>
+    </div>
+</div>

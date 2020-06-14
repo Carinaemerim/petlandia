@@ -6,7 +6,7 @@ import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.service.AnnounceListService;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
-import br.edu.ifrs.canoas.webapp.service.RecommendationService;
+import br.edu.ifrs.canoas.webapp.service.SuggestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,20 +22,20 @@ public class HomeController {
 
 	private final AnnounceListService announceListService;
 	private final AnnounceService announceService;
-	private final RecommendationService recommendationService;
+	private final SuggestionService suggestionService;
 
 	@GetMapping("")
 	public String home(@AuthenticationPrincipal UserImpl activeUser, Model model) {
-		List<Announce> recommendations = new ArrayList<>();
+		List<Announce> suggestions = new ArrayList<>();
 
 		if (activeUser != null) {
-			recommendations = recommendationService.findFirstFive(activeUser.getUser());
+			suggestions = suggestionService.findFirstFive(activeUser.getUser());
 		}
 
 		model.addAttribute("filters", announceListService.getFilters());
 		model.addAttribute("form", new AnnounceFilterForm());
 		model.addAttribute("announces", announceService.findFirstFive(AnnounceStatus.ACTIVE));
-		model.addAttribute("recommendations", recommendations);
+		model.addAttribute("suggestions", suggestions);
 		return "/index";
 	}
 }

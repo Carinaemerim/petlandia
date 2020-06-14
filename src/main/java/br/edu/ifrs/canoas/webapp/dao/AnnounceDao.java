@@ -105,4 +105,6 @@ public class AnnounceDao {
 
         predicates.add(criteriaBuilder.equal(root.get("status"), status));
     }
+
+
 }
