@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="announce_form_animal_name" th:text="#{announce.form.name}"> </label>
+                <label for="announce_form_animal_name" th:text="#{announce.form.name}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_animal_name" th:field="*{announce.name}" required
                        minlength="2" maxlength="120"
                        th:classappend="${#fields.hasErrors('announce.name')} ? is-invalid">
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label th:text="#{announce.form.type}"> </label>
+                <label th:text="#{announce.form.type}+'*'"> </label>
                 <br>
                 <div class="form-check form-check-inline" th:each="i : ${animalType}">
                     <input class="form-check-input" type="radio" th:field="*{announce.animalType}" th:value="${i.id}"
@@ -28,7 +28,7 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <label th:text="#{announce.form.animalGender}"> </label>
+                <label th:text="#{announce.form.animalGender}+'*'"> </label>
                 <br>
                 <div class="form-check form-check-inline" th:each="i : ${animalGender}">
                     <input class="form-check-input" type="radio" th:field="*{announce.animalGender}" th:value="${i.id}"
@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label for="announce_form_animal_size" th:text="#{announce.form.size}"> </label>
+                <label for="announce_form_animal_size" th:text="#{announce.form.size}+'*'"> </label>
                 <select class="custom-select" id="announce_form_animal_size" th:field="*{announce.animalSize}" required
                         th:classappend="${#fields.hasErrors('announce.animalSize')} ? is-invalid">
                     <option th:each="i : ${animalSize}" th:value="${i.id}" th:text="#{${i.label}}"> </option>
@@ -58,7 +58,7 @@
 
         <div class="col ">
             <div class="form-group">
-                <label for="announce_form_animal_color" th:text="#{announce.form.animalColor}"> </label>
+                <label for="announce_form_animal_color" th:text="#{announce.form.animalColor}+'*'"> </label>
                 <select class="custom-select" id="announce_form_animal_color" th:field="*{announce.animalColor}" required
                         th:classappend="${#fields.hasErrors('announce.animalColor')} ? is-invalid">
                     <option th:each="i : ${animalColors}"
@@ -73,7 +73,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label th:text="#{announce.form.castrated}"> </label>
+                <label th:text="#{announce.form.castrated}+'*'"> </label>
                 <br>
 
                 <div class="form-check form-check-inline" th:each="i : ${animalCastrated}">
@@ -91,7 +91,7 @@
         <div class="col">
             <div class="col">
                 <div class="form-group">
-                    <label for="announce_form_animal_age" th:text="#{announce.form.age}"> </label>
+                    <label for="announce_form_animal_age" th:text="#{announce.form.age}+'*'"> </label>
                     <select class="custom-select" id="announce_form_animal_age" th:field="*{announce.animalAge}" required
                             th:classappend="${#fields.hasErrors('announce.animalAge')} ? is-invalid">
                         <option th:each="i : ${animalAges}" th:value="${i.id}" th:text="#{${i.label}}"> </option>
@@ -118,7 +118,7 @@
     <div class="row">
         <div class="col col-md-3">
             <div class="form-group">
-                <label for="announce_form_state" th:text="#{announce.form.state}"> </label>
+                <label for="announce_form_state" th:text="#{announce.form.state}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_state" th:field="*{announce.state}" required
                        minlength="2" maxlength="2"
                        th:classappend="${#fields.hasErrors('announce.state')} ? is-invalid">
@@ -129,7 +129,7 @@
 
         <div class="col">
             <div class="form-group">
-                <label for="announce_form_city" th:text="#{announce.form.city}"> </label>
+                <label for="announce_form_city" th:text="#{announce.form.city}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_city" th:field="*{announce.city}" required
                        minlength="3" maxlength="120"
                        th:classappend="${#fields.hasErrors('announce.city')} ? is-invalid">
@@ -179,7 +179,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group">
-                <label for="announce_form_description" th:text="#{announce.form.description}"> </label>
+                <label for="announce_form_description" th:text="#{announce.form.description}+'*'"> </label>
                 <textarea class="form-control" id="announce_form_description" th:field="*{announce.description}" rows="5" required
                           maxlength="10000" minlength="10"
                           th:classappend="${#fields.hasErrors('announce.description')} ? is-invalid">

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col col-md-3">
             <div class="form-group">
-                <label for="user_form_state" th:text="#{user.form.state}"> </label>
+                <label for="user_form_state" th:text="#{user.form.state}+'*'"> </label>
                 <input type="text" class="form-control" id="user_form_state" th:field="*{user.state}" required
                        minlength="2" maxlength="2"
                        th:classappend="${#fields.hasErrors('user.state')} ? is-invalid">
@@ -26,7 +26,7 @@
 
         <div class="col">
             <div class="form-group">
-                <label for="user_form_city" th:text="#{user.form.city}"> </label>
+                <label for="user_form_city" th:text="#{user.form.city}+'*'"> </label>
                 <input type="text" class="form-control" id="user_form_city" th:field="*{user.city}" required
                        minlength="3" maxlength="120"
                        th:classappend="${#fields.hasErrors('user.city')} ? is-invalid">
