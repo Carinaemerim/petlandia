@@ -1,8 +1,8 @@
 <html layout:decorate="~{/layouts/main}">
 
-<head>
+<th:block layout:fragment="meta-view">
 	<title th:text="#{item.header}"/>
-</head>
+</th:block>
 
 <th:block layout:fragment="js-view">
 	<script src="/js/addressFinder.js"></script>

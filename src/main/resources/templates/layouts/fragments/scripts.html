@@ -1,16 +1,17 @@
 <head th:fragment="head">
-    <title th:text="#{head.title}"></title>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy" th:if="${@environment.getActiveProfiles()[0] != 'development'}"
-    />
+    <th:block layout:fragment="meta-view">
+        <title th:text="#{head.title}"></title>
+    </th:block>
+
+    <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"
+          th:if="${@environment.getActiveProfiles()[0] != 'development'}" />
 
     <!-- Bootstrap 4.x -->
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"

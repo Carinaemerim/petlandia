@@ -1,8 +1,8 @@
 <html layout:decorate="~{/layouts/main}">
 
-<head>
-    <title th:text="${user.name}"/>
-</head>
+<th:block layout:fragment="meta-view">
+    <title th:text="#{item.header}"/>
+</th:block>
 
 <div layout:fragment="content-body">
     <div class="row justify-content-center">

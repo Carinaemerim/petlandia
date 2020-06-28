@@ -1,8 +1,8 @@
 <html layout:decorate="~{/layouts/main}" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
-    <title th:text="#{item.header}"/>
-</head>
+<th:block layout:fragment="meta-view">
+    <title th:text="@{announce.title}"/>
+</th:block>
 
 <div layout:fragment="js-view">
 

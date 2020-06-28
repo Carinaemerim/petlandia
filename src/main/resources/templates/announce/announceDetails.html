@@ -4,10 +4,9 @@
     <script th:src="@{/js/view_announce.js}"></script>
 </th:block>
 
-
-<head>
-    <title th:text="${announce.title}"/>
-</head>
+<th:block layout:fragment="meta-view">
+    <title th:text="#{item.header}"/>
+</th:block>
 
 <div layout:fragment="content-body">
     <div th:if="${announce.canModify()}" class="card bg-gradient-light">

@@ -1,5 +1,9 @@
 <html layout:decorate="~{/layouts/main}">
 
+<th:block layout:fragment="meta-view">
+    <title th:text="#{item.header}"/>
+</th:block>
+
 <div layout:fragment="content-body">
     <div class="row">
         <div class="col col-md-3 manager-menu">
