@@ -47,6 +47,7 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
             "JOIN animal_size asi ON asi.id = a.animal_size_id " +
             "WHERE a.animal_type_id = :#{#user.animalType.id} " +
             "AND a.status = :#{#status.name()} " +
+            "AND a.user_id != :#{#user.id} " +
             "ORDER BY score ASC",
             nativeQuery = true,
             countQuery = "" +
@@ -58,6 +59,7 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
                     "JOIN animal_gender age ON age.id = a.animal_gender_id " +
                     "JOIN animal_size asi ON asi.id = a.animal_size_id " +
                     "WHERE a.animal_type_id = :#{#user.animalType.id} " +
-                    "AND a.status = :#{#status.name()}")
+                    "AND a.status = :#{#status.name()} " +
+                    "AND a.user_id != :#{#user.id} ")
     Page<AnnounceSuggested> findAllSuggestedByUser(@Param("user") User user, @Param("status") AnnounceStatus status, Pageable pageable);
 }

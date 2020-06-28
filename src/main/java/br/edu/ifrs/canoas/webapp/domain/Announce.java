@@ -22,7 +22,7 @@ public class Announce {
     private Long id;
 
     @NotBlank
-    @Size(min = 3x, max = 120)
+    @Size(min = 3, max = 120)
     private String title;
 
     @NotBlank
