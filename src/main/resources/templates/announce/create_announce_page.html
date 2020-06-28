@@ -34,7 +34,11 @@
             </div>
         </div>
 
-        <div th:replace="/announce/fragments/announce_form_buttons" :: announce_form_buttons></div>
+        <div class="col text-right">
+            <button class="btn btn-success" th:text="#{announce.form.save}">
+                Criar anúncio
+            </button>
+        </div>
     </form>
     </div>
 
