@@ -1,4 +1,4 @@
-<html layout:decorate="~{/layouts/main}">
+<html layout:decorate="~{/layouts/main}" xmlns:th="http://www.w3.org/1999/html">
 
 <div layout:fragment="content-body">
     <div class="row">
@@ -24,41 +24,9 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="callout callout-pink" th:each="announce :  ${announces.data}">
-                        <div class="row">
-                            <div class="col col-md-3">
-                                <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
-                            </div>
-
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5 th:text="${announce.title}"> </h5>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div th:text="|#{announce.form.name}: ${announce.name}|"></div>
-                                        <div th:text="|#{announce.form.age}: #{${announce.animalAge.name.name}}|"></div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div th:text="|#{announce.form.type}: #{${announce.animalType.name.name}}|"></div>
-                                        <div th:text="|#{announce.form.animalGender}: #{${announce.animalGender.name.name}}|"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-end">
-                                    <div class="col-auto">
-                                        <a class="btn btn-secondary btn-sm btn-block"
-                                           th:text="#{user.list.details}" th:href="@{/announces/{id}(id = ${announce.id})}">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <th:block th:each="announce :  ${announces.data}">
+                        <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
+                    </th:block>
                 </div>
                 <div class="card-footer" th:if="${announces.totalPages > 0}">
                     <div class="pull-right">

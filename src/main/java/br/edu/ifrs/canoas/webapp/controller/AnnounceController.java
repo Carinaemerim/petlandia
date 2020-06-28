@@ -193,7 +193,6 @@ public class AnnounceController {
             announce.setSecondPhoto(form.getAnnounce().getSecondPhoto());
             announce.setThirdPhoto(form.getAnnounce().getThirdPhoto());
 
-            announce.setStatus(AnnounceStatus.WAITING_REVIEW);
             announceService.save(announce);
             return "redirect:/announces/" + announce.getId();
         }

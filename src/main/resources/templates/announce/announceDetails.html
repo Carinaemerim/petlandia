@@ -161,7 +161,10 @@
                             <div class="form-group">
                                 <label th:text="#{announce.form.description}"> </label>
                                 <br>
-                                <pre class="form-control" th:text="${announce.description}"></pre>
+                                <div class="form-control"
+                                     style="height: auto;"
+                                     th:utext="${#strings.replace( #strings.escapeXml( announce.description ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"
+                                     ></div>
                             </div>
                         </div>
                     </div>

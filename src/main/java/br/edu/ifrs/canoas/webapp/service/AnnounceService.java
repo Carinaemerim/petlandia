@@ -24,7 +24,7 @@ import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatc
 @Service
 public class AnnounceService {
 
-    private static final int PAGE_LENGTH = 2;
+    private static final int PAGE_LENGTH = 8;
 
     private final AnnounceRepository announceRepository;
     private final AnnounceDao announceDao;
@@ -44,7 +44,6 @@ public class AnnounceService {
     public PaginatedEntity<Announce> findAll(int pageNumber, User user, AnnounceStatus status){
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
         Page<Announce> announcePage = announceRepository.findAllByStatusAndUserOrderByCreatedAtDescIdDesc(status, user, page);
-
         return PaginatedEntity.<Announce>builder()
                 .currentPage(pageNumber)
                 .data(announcePage.getContent())

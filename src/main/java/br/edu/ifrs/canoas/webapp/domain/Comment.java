@@ -39,6 +39,6 @@ public class Comment {
     private Announce announce;
 
     @NotNull
-    @Size(min = 4, max = 250)
+    @Size(min = 5, max = 250)
     private String message;
 }

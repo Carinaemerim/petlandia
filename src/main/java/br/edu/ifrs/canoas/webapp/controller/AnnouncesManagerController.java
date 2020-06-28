@@ -4,6 +4,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,7 @@ public class AnnouncesManagerController {
     private String getUserAnnouncesByStatus(UserImpl activeUser, int page, AnnounceStatus status, Model model) {
         User user = userService.findById(activeUser.getUser().getId());
         if (user == null){
-            return "/notFound";
+            throw new UserNotFoundException();
         }
 
         model.addAttribute("status", status);
