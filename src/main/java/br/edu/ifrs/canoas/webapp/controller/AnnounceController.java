@@ -231,16 +231,17 @@ public class AnnounceController {
     public String saveComment(@AuthenticationPrincipal UserImpl activeUser,
                               @PathVariable("id") final Long id,
                               @ModelAttribute("message") String message,
-                              BindingResult bindingResult) {
+                              RedirectAttributes redirectAttributes) {
         Announce announce = this.getActiveAnnounce(id);
 
-        if (!bindingResult.hasErrors()) {
+        if (message.length() < 5 || message.length() > 230) {
+            redirectAttributes.addFlashAttribute("error", "announce.comment.size");
+        } else {
             Comment comment = new Comment();
             comment.setAnnounce(announce);
             comment.setStatus(CommentStatus.ACTIVE);
             comment.setUser(activeUser.getUser());
-            comment.setMessage(message);
-
+            comment.setMessage(message.trim());
             commentService.save(comment);
         }
 

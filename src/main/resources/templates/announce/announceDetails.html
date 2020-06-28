@@ -5,7 +5,7 @@
 </th:block>
 
 <th:block layout:fragment="meta-view">
-    <title th:text="#{item.header}"/>
+    <title th:text="|${announce.title} - #{head.title}|"/>
 </th:block>
 
 <div layout:fragment="content-body">
@@ -214,7 +214,7 @@
                     <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post" accept-charset="UTF-8">
                         <div class="input-group">
                             <input type="text" name="message" th:placeholder="#{announce.comment.form.input.placeholder}"
-                                   class="form-control" autocomplete="off" minlength="5" maxlength="230">
+                                   class="form-control" autocomplete="off" minlength="5" maxlength="230" pattern=".{5,230}">
                             <span class="input-group-append">
                                 <button type="submit" class="btn btn-secondary" th:text="#{announce.comment.form.send}"></button>
                             </span>
