@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.awt.*;
@@ -82,7 +83,9 @@ public class AnnounceController {
     @PostMapping("/create")
     public String postCreate(@AuthenticationPrincipal UserImpl activeUser,
                              @ModelAttribute("form") AnnounceCreateFrom form,
-                             BindingResult bindingResult, Model model) throws IOException {
+                             BindingResult bindingResult,
+                             Model model,
+                             RedirectAttributes redirectAttributes) throws IOException {
 
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
@@ -103,6 +106,8 @@ public class AnnounceController {
         form.getAnnounce().setUser(activeUser.getUser());
         form.getAnnounce().setStatus(AnnounceStatus.ACTIVE);
         Announce announce = announceService.save(form.getAnnounce());
+
+        redirectAttributes.addFlashAttribute("success", "announce.form.success");
         return "redirect:/announces/" + announce.getId();
     }
 
@@ -145,8 +150,10 @@ public class AnnounceController {
 
     @PostMapping("/{id}/edit")
     public String editPost(@PathVariable("id") final String id,
-                          @ModelAttribute("form") @Valid AnnounceCreateFrom form,
-                          BindingResult bindingResult, Model model) throws IOException {
+                           @ModelAttribute("form") @Valid AnnounceCreateFrom form,
+                           BindingResult bindingResult,
+                           Model model,
+                           RedirectAttributes redirectAttributes) throws IOException {
 
         Announce announce = announceService.findById(Long.decode(id));
         if (announce == null || !announce.canEdit()) {
@@ -194,6 +201,7 @@ public class AnnounceController {
             announce.setThirdPhoto(form.getAnnounce().getThirdPhoto());
 
             announceService.save(announce);
+            redirectAttributes.addFlashAttribute("success", "announce.form.updated");
             return "redirect:/announces/" + announce.getId();
         }
 

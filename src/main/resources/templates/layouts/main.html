@@ -13,17 +13,14 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div layout:fragment="content-header"></div>
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-12">
-						<div layout:fragment="content-body"></div>
-					</div>
-				</div>
+				<div layout:fragment="content-header"></div>
+
+				<div class="alert alert-success" role="alert" th:text="#{${success}}" th:if="${success}"></div>
+				<div class="alert alert-danger" role="alert" th:text="#{${error}}" th:if="${error}"></div>
+
+				<div layout:fragment="content-body"></div>
+
 			</div>
 		</section>
 	</div>
