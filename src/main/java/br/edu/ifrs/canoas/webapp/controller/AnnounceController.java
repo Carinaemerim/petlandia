@@ -243,6 +243,7 @@ public class AnnounceController {
             comment.setUser(activeUser.getUser());
             comment.setMessage(message.trim());
             commentService.save(comment);
+            redirectAttributes.addFlashAttribute("success", "announce.comment.created");
         }
 
         return "redirect:/announces/" + announce.getId();
@@ -252,26 +253,25 @@ public class AnnounceController {
     public String PostCommentToReport(@AuthenticationPrincipal UserImpl activeUser,
                                       @PathVariable("id") final Long id,
                                       @PathVariable("commentId") final Long commentId,
-                                      @ModelAttribute("message") String message) {
+                                      @ModelAttribute("message") String message,
+                                      RedirectAttributes redirectAttributes) {
         Announce announce = this.getActiveAnnounce(id);
         Comment comment = this.getComment(commentId, announce);
 
         reportService.save(comment, activeUser.getUser(), message);
         commentService.setStatus(comment, CommentStatus.WAITING_REVIEW);
-
+        redirectAttributes.addFlashAttribute("success", "announce.comment.reported");
         return "redirect:/announces/" + announce.getId();
     }
 
     @PostMapping("/{id}/comment/{commentId}/remove")
     public String PostCommentToRemove(@PathVariable("id") final Long id,
                                       @PathVariable("commentId") final Long commentId,
-                                      @ModelAttribute("form") @Valid AnnounceCreateFrom form) {
-
+                                      RedirectAttributes redirectAttributes) {
         Announce announce = this.getActiveAnnounce(id);
         Comment comment = this.getComment(commentId, announce);
-
         commentService.remove(comment);
-
+        redirectAttributes.addFlashAttribute("success", "announce.comment.deleted");
         return "redirect:/announces/" + announce.getId();
     }
 
