@@ -1,7 +1,7 @@
 <html layout:decorate="~{/layouts/main}" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <th:block layout:fragment="meta-view">
-    <title th:text="@{announce.title}"/>
+    <title th:text="|#{announce.home.title} - #{head.title}|"/>
 </th:block>
 
 <div layout:fragment="js-view">
@@ -64,7 +64,7 @@
                         <p>
                             <a th:href="@{/user/create}">Registre-se</a>
                             <span>ou</span>
-                            <a th:href="@{/login}">loge-se</a>
+                            <a th:href="@{/login}">Faça login</a>
                             <span>no sistema para ver suas recomendações.</span>
                         </p>
                     </div>
