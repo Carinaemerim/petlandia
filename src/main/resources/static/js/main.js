@@ -212,5 +212,8 @@ $(document).ready(function() {
     $('.mask-celphone').mask('(00) 0000-00009');
 
 
+    setTimeout(() => {
+        $('.alert.alert-success').fadeOut();
+    }, 5000)
 
 });
