@@ -105,9 +105,9 @@ public class Announce {
             return false;
         }
 
-        if (Auth.isAuthenticated() == false) {
+        if (!Auth.isAuthenticated()) {
             return false;
-        };
+        }
 
         boolean isOwner = this.isOwner();
         boolean isModerator = this.isModerator();

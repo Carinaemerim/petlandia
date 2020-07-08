@@ -69,7 +69,7 @@
                         </p>
                     </div>
 
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel"
+                    <div id="carousel-recommended" class="carousel slide" data-ride="carousel"
                          sec:authorize="isAuthenticated()">
                         <div class="carousel-inner">
                             <div class="carousel-item"
@@ -79,6 +79,14 @@
                                 <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
                             </div>
                         </div>
+                        <a class="carousel-control-prev" href="#carousel-recommended" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-recommended" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
                 <div class="card-footer">
