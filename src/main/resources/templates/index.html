@@ -47,10 +47,18 @@
                 <div class="card-header">Sobre nós</div>
                 <div class="card-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac eleifend ante. Duis sit amet condimentum nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In gravida dolor elementum, sodales leo in, rhoncus orci. Integer porta iaculis luctus. Nam velit libero, feugiat ut ante et, sagittis laoreet nisi. Fusce ut aliquet eros. Phasellus finibus odio in mi pretium tristique. Suspendisse eget scelerisque tortor.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac eleifend ante. Duis sit amet
+                        condimentum nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                        inceptos himenaeos. In gravida dolor elementum, sodales leo in, rhoncus orci. Integer porta
+                        iaculis luctus. Nam velit libero, feugiat ut ante et, sagittis laoreet nisi. Fusce ut aliquet
+                        eros. Phasellus finibus odio in mi pretium tristique. Suspendisse eget scelerisque tortor.
                     </p>
                     <p>
-                        Vivamus malesuada bibendum pellentesque. Nullam in mauris a libero mattis condimentum. Duis id ornare arcu, quis gravida nunc. Ut vitae euismod nisl. Cras feugiat aliquet tellus nec tempor. Mauris ac suscipit ipsum, non sagittis velit. Vestibulum sit amet sapien non magna dictum vulputate. Proin pellentesque tellus sit amet sapien dignissim sodales. Proin dignissim convallis lorem, id elementum dolor maximus in.
+                        Vivamus malesuada bibendum pellentesque. Nullam in mauris a libero mattis condimentum. Duis id
+                        ornare arcu, quis gravida nunc. Ut vitae euismod nisl. Cras feugiat aliquet tellus nec tempor.
+                        Mauris ac suscipit ipsum, non sagittis velit. Vestibulum sit amet sapien non magna dictum
+                        vulputate. Proin pellentesque tellus sit amet sapien dignissim sodales. Proin dignissim
+                        convallis lorem, id elementum dolor maximus in.
                     </p>
                 </div>
             </div>
@@ -69,8 +77,11 @@
                         </p>
                     </div>
 
+                    <h5 th:text="#{announce.list.empty}" th:if="${suggestions.isEmpty()}"
+                        sec:authorize="isAuthenticated()" class="pl-4 pt-4"></h5>
+
                     <div id="carousel-recommended" class="carousel slide" data-ride="carousel"
-                         sec:authorize="isAuthenticated()">
+                         sec:authorize="isAuthenticated()" th:unless="${suggestions.isEmpty()}">
                         <div class="carousel-inner">
                             <div class="carousel-item"
                                  th:each="announce, status : ${suggestions}"
@@ -90,7 +101,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a th:href="@{/suggestions}" class="btn btn-secondary pull-right">
+                    <a th:href="@{/suggestions}" class="btn btn-secondary pull-right"
+                       th:unless="${suggestions.isEmpty()}">
                         Ver mais
                     </a>
                 </div>
@@ -101,12 +113,14 @@
                     Últimos 5 anúncios
                 </div>
                 <div class="card-body">
+                    <h5 th:text="#{announce.list.empty}" th:if="${announces.isEmpty()}"></h5>
                     <th:block th:each="announce :  ${announces}">
                         <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
                     </th:block>
                 </div>
                 <div class="card-footer">
-                    <a th:href="@{/announces}" class="btn btn-secondary pull-right">
+                    <a th:href="@{/announces}" class="btn btn-secondary pull-right"
+                       th:unless="${announces.isEmpty()}">
                         Ver mais
                     </a>
                 </div>

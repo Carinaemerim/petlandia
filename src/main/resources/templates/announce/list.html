@@ -43,6 +43,7 @@
                     Anúncios
                 </div>
                 <div class="card-body">
+                    <h5 th:text="#{announce.list.empty}" th:if="${announces.data.isEmpty()}"></h5>
                     <th:block th:each="announce :  ${announces.data}">
                         <a th:replace="/announce/fragments/callout :: callout(${announce})"></a>
                     </th:block>
