@@ -18,13 +18,15 @@
                         </div>
                         <div class="col-auto">
                             <button id="btn-edit-role" class="btn btn-xs btn-outline-dark btn-modal"
-                                    data-toggle="modal" data-target="#modal-edit-role">
+                                    data-toggle="modal" data-target="#modal-edit-role"
+                                    th:attrappend="disabled=${isSelf} ? 'disabled'">
                                 <i class="fa fa-user-edit"></i>
                                 <span th:text="#{manager.admin.user.view.action.change-role}"></span>
                             </button>
 
                             <button id="btn-block-user" class="btn btn-xs btn-outline-dark btn-modal"
-                                    data-toggle="modal" data-target="#modal-block-user">
+                                    data-toggle="modal" data-target="#modal-block-user"
+                                    th:attrappend="disabled=${isSelf} ? 'disabled'">
                                 <i class="fa fa-user-times"></i>
                                 <span th:text="#{manager.admin.user.view.action.block-user}"></span>
                             </button>

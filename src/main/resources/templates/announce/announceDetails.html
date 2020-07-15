@@ -139,6 +139,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col col-md-4">
+                            <label th:text="#{announce.form.createdBy}">Criado Por</label>
+                            <div class="form-control">
+                                <a th:href="@{|/manager/admin/users/${announce.user.id}|}"
+                                th:text="${announce.user.username}" th:if="${isAdmin}"></a>
+
+                                <span th:text="${announce.user.username}" th:unless="${isAdmin}"></span>
+                            </div>
+                        </div>
+                        <div class="col col-md-4">
+                            <label th:text="#{user.form.residentialPhone}">Telefone Residencial</label>
+                            <div class="form-control" th:text="${announce.user.residentialPhone}"></div>
+
+                        </div>
+                        <div class="col col-md-4">
+                            <label th:text="#{user.form.email}">Email</label>
+                            <div class="form-control" th:text="${announce.user.email}"></div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col">
                             <div class="form-group">

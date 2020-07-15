@@ -1,11 +1,14 @@
 package br.edu.ifrs.canoas.webapp.controller;
 
+import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.implementation.bytecode.Throw;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +33,12 @@ public class UserAdminManagerController {
     }
 
     @GetMapping("/{id}")
-    public String view(@PathVariable("id") final Long id, Model model) {
+    public String view(@PathVariable("id") final Long id,
+                       Model model,
+                       @AuthenticationPrincipal UserImpl activeUser) {
         User user = getUser(id);
 
+        model.addAttribute("isSelf", activeUser.getUser().getId().equals(id));
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
 
@@ -40,7 +46,14 @@ public class UserAdminManagerController {
     }
 
     @PostMapping("/{id}/change-role")
-    public String changeRole(@PathVariable("id") final Long id, @Valid @ModelAttribute("role") Role role) {
+    public String changeRole(@PathVariable("id") final Long id,
+                             @Valid @ModelAttribute("role") Role role,
+                             @AuthenticationPrincipal UserImpl activeUser) {
+
+        if(activeUser.getUser().getId().equals(id)) {
+            throw new ForbiddenException("User cannot change his own privileges");
+        }
+
         User user = getUser(id);
 
         if (role == null) {
@@ -54,7 +67,13 @@ public class UserAdminManagerController {
     }
 
     @PostMapping("/{id}/block-user")
-    public String blockUser(@PathVariable("id") final Long id) {
+    public String blockUser(@PathVariable("id") final Long id,
+                            @AuthenticationPrincipal UserImpl activeUser) {
+
+        if(activeUser.getUser().getId().equals(id)) {
+            throw new ForbiddenException("User cannot change his own privileges");
+        }
+
         User user = getUser(id);
         user.setActive(false);
         user.setRole(Role.ROLE_USER);
