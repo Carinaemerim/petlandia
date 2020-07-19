@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col col-md-5">
             <div class="form-group">
-                <label for="user_form_zipCode" th:text="#{user.form.zipCode}"> </label>
+                <label for="user_form_zipCode" th:text="#{user.form.zipCode}+'*'"> </label>
                 <input type="text" class="form-control mask-zipcode" id="user_form_zipCode" th:field="*{user.zipCode}"
                        required
                        minlength="9" maxlength="9"
@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label for="user_form_neighborhood" th:text="#{user.form.neighborhood}"> </label>
+                <label for="user_form_neighborhood" th:text="#{user.form.neighborhood}+'*'"> </label>
                 <input type="text" class="form-control" id="user_form_neighborhood" th:field="*{user.neighborhood}"
                        required
                        minlength="3" maxlength="120"
@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col col-md-9">
             <div class="form-group">
-                <label for="user_form_address" th:text="#{user.form.address}"> </label>
+                <label for="user_form_address" th:text="#{user.form.address}+'*'"> </label>
                 <input type="text" class="form-control" id="user_form_address" th:field="*{user.address}" required
                        minlength="4" maxlength="120"
                        th:classappend="${#fields.hasErrors('user.address')} ? is-invalid">
@@ -63,7 +63,7 @@
 
         <div class="col">
             <div class="form-group">
-                <label for="user_form_address_number" th:text="#{user.form.addressNumber}"> </label>
+                <label for="user_form_address_number" th:text="#{user.form.addressNumber}+'*'"> </label>
                 <input type="text" class="form-control" id="user_form_address_number" th:field="*{user.addressNumber}"
                        minlength="1" maxlength="6"
                        th:classappend="${#fields.hasErrors('user.addressNumber')} ? is-invalid">

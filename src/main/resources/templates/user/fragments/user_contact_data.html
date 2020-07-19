@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}"> </label>
+                <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}+'*'"> </label>
                 <input type="text" class="form-control mask-celphone" id="user_form_residentialPhone"
                        th:field="*{user.residentialPhone}" required
                        minlength="14" maxlength="15"
