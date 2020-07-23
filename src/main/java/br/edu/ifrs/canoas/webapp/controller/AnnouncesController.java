@@ -11,6 +11,7 @@ import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
+import br.edu.ifrs.canoas.webapp.helper.URIHelper;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/announces")
@@ -50,9 +53,10 @@ public class AnnouncesController {
     public String announceDetails(@PathVariable("id") final String id,
                                   @AuthenticationPrincipal UserImpl activeUser,
                                   @RequestParam(value = "page", defaultValue = "0") int page,
+                                  HttpServletRequest httpServletRequest,
                                   Model model) {
 
-        Announce announce = announceService.findById(Long.decode(id));
+        Announce announce = announceService.findByIdAndStatusActive(Long.decode(id));
         if (announce == null) {
             throw new AnnounceNotFoundException();
         }
@@ -64,6 +68,7 @@ public class AnnouncesController {
         model.addAttribute("announce", announce);
         model.addAttribute("currentUserId", currentUserId);
         model.addAttribute("isAdmin", activeUser != null && activeUser.getUser().getRole() == Role.ROLE_ADMIN);
+        model.addAttribute("referrer", URIHelper.getReferrerURI(httpServletRequest, "/announces"));
         return "/announce/announceDetails";
     }
 }

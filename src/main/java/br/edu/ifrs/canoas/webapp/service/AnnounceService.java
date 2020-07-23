@@ -3,13 +3,11 @@ package br.edu.ifrs.canoas.webapp.service;
 import br.edu.ifrs.canoas.webapp.dao.AnnounceDao;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
-import br.edu.ifrs.canoas.webapp.domain.Report;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
-import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
+import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
-import br.edu.ifrs.canoas.webapp.helper.Auth;
-import br.edu.ifrs.canoas.webapp.repository.AnimalTypeRepository;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.*;
@@ -30,7 +28,12 @@ public class AnnounceService {
     private final AnnounceDao announceDao;
 
     public Announce findById(Long id){
-        return announceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+        return announceRepository.findById(id).orElseThrow(AnnounceNotFoundException::new);
+    }
+
+    public Announce findByIdAndStatusActive(Long id){
+        return announceRepository.findAllByIdAndStatusActive(id).
+                orElseThrow(AnnounceNotFoundException::new);
     }
 
     public Announce save(Announce announce) {
@@ -91,5 +94,16 @@ public class AnnounceService {
                 .totalResults(count)
                 .pageLength(pageLength)
                 .build();
+    }
+
+    public void removeAnnounce(Long id) {
+        Announce announce = this.findByIdAndStatusActive(id);
+
+        if(!announce.canRemove()) {
+            throw new ForbiddenException("Cannot remove announce");
+        }
+
+        announce.setStatus(AnnounceStatus.INACTIVE);
+        announceRepository.save(announce);
     }
 }

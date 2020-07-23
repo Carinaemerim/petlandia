@@ -7,6 +7,7 @@ import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.helper.URIHelper;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.CommentService;
 import br.edu.ifrs.canoas.webapp.service.ReportService;
@@ -16,6 +17,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/manager/reports")
@@ -27,8 +30,10 @@ public class ReportsManagerController {
     private final ReportService reportService;
 
     @GetMapping("/announces")
-    public String getAnnounces(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+    public String getAnnounces(@RequestParam(value = "page", defaultValue = "0") int page, Model model,
+                               HttpServletRequest httpServletRequest) {
         model.addAttribute("reports", reportService.findAllAnnounces(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW));
+        model.addAttribute("referrer", URIHelper.getReferrerURI(httpServletRequest, "/announces"));
         return "/manager/reports/list-announces";
     }
 

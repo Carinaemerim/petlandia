@@ -12,8 +12,15 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AnnounceRepository extends PagingAndSortingRepository<Announce, Long> {
+
+    default Optional<Announce> findAllByIdAndStatusActive(Long id) {
+        return this.findByIdAndStatus(id, AnnounceStatus.ACTIVE);
+    }
+
+    Optional<Announce> findByIdAndStatus(Long id, AnnounceStatus status);
 
     Page<Announce> findAll(Example<Announce> example, Pageable page);
 

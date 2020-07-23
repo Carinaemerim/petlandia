@@ -101,23 +101,23 @@ public class Announce {
     private LocalDateTime updatedAt;
 
     public boolean canModify() {
-        if (this.status == AnnounceStatus.INACTIVE) {
+
+        if(!Auth.isAuthenticated()) {
             return false;
         }
 
-        if (!Auth.isAuthenticated()) {
-            return false;
-        }
-
-        boolean isOwner = this.isOwner();
-        boolean isModerator = this.isModerator();
-
-        return isOwner || isModerator;
+        boolean hasPermission = this.isOwner() || this.isAdmin();
+        boolean isActive = this.status == AnnounceStatus.ACTIVE;
+        return hasPermission && isActive;
     }
 
 
     public boolean isModerator() {
         return Auth.hasRole(new Role[]{ Role.ROLE_MODERATOR, Role.ROLE_ADMIN });
+    }
+
+    public boolean isAdmin() {
+        return Auth.hasRole(new Role[]{ Role.ROLE_ADMIN });
     }
 
     public boolean isOwner() {
@@ -146,8 +146,6 @@ public class Announce {
     }
 
     public boolean canRemove() {
-        boolean hasPermission = this.isOwner() || this.isModerator();
-        boolean hasStatus = this.status == AnnounceStatus.WAITING_REVIEW || this.status == AnnounceStatus.ACTIVE;
-        return hasPermission && hasStatus;
+        return this.canModify();
     }
 }

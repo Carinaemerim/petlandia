@@ -11,6 +11,7 @@ import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.helper.ImageResize;
+import br.edu.ifrs.canoas.webapp.helper.URIHelper;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 @Controller
@@ -275,13 +277,21 @@ public class AnnounceController {
         return "redirect:/announces/" + announce.getId();
     }
 
-    private Announce getActiveAnnounce(Long id) {
-        Announce announce = announceService.findById(id);
-        if (announce == null || !announce.getStatus().equals(AnnounceStatus.ACTIVE)) {
-            throw new AnnounceNotFoundException();
-        }
+    @PostMapping("/{id}/remove")
+    public String removeAnnounce(
+            @PathVariable final Long id,
+            @RequestParam final URI origin,
+            RedirectAttributes redirectAttributes
+    ) {
 
-        return announce;
+        announceService.removeAnnounce(id);
+        redirectAttributes.addFlashAttribute("success", "announce.deleted");
+
+        return "redirect:" + URIHelper.buildPath(origin);
+    }
+
+    private Announce getActiveAnnounce(Long id) {
+        return announceService.findByIdAndStatusActive(id);
     }
 
     private Comment getComment(Long id, Announce announce) {

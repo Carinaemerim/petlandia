@@ -23,10 +23,14 @@
                 </div>
                 <div class="col-auto">
                     <div class="btn-group btn-group-sm" th:if="${announce.canRemove()}">
-                        <a class="btn btn-danger" th:href="@{/announce/{id}/remove(id = ${announce.id})}">
+                        <form class="d-none" method="post" th:action="@{/announce/{id}/remove(id = ${announce.id})}"
+                        id="delete-form">
+                            <input type="hidden" name="origin" th:value="${referrer}">
+                        </form>
+                        <button class="btn btn-danger" type="submit" form="delete-form">
                             <i class="fa fa-trash"></i>
                         <span class="ml-1" th:text="#{announce.mod.delete}"></span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
