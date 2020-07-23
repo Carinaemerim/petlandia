@@ -72,8 +72,8 @@ public class User {
 	@Size(min = 2, max = 2, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String state;
 
-	@Max(99999)
-	private int addressNumber;
+	@Size(max = 5)
+	private String addressNumber;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
 	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class})

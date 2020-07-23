@@ -9,6 +9,7 @@ import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -20,10 +21,15 @@ import javax.persistence.EntityNotFoundException;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public void save(User user) {
 		if (user.getEmail() != null) {
 			user.setAvatar(user.getAvatarHash());
+		}
+
+		if(user.getId() == null) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		}
 
 		userRepository.save(user);
@@ -31,7 +37,7 @@ public class UserService {
 
 	public User getOne(User user) {
 		Optional<User> optUser = userRepository.findById(user.getId());
-		return optUser.isPresent()?optUser.get():null;
+		return optUser.orElse(null);
 	}
 
 

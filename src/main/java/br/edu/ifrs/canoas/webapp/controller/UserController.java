@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -67,7 +68,7 @@ public class UserController {
 
     @PostMapping("/create")
     public String postCreateUser(@ModelAttribute("form") @Validated({UserCreateGroup.class}) UserCreateForm form,
-                                 BindingResult bindingResult, Model model) {
+                                 BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         model.addAttribute("animalCastrated", animalCastratedService.listAnimalCastrated());
         model.addAttribute("animalGender", animalGenderService.listAnimalGender());
@@ -89,6 +90,8 @@ public class UserController {
         form.getUser().setRole(Role.ROLE_USER);
 
         userService.save(form.getUser());
+        redirectAttributes.addFlashAttribute("successRegister",
+                messages.get("user.login.new"));
 
         return "redirect:/login";
     }
