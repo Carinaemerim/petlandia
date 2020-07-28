@@ -44,8 +44,11 @@
 
         <div class="col col-md-9">
             <div class="card">
-                <div class="card-header">Sobre nós</div>
-                <div class="card-body">
+
+                <div class="card-header" th:text="#{about.us}">Sobre nós</div>
+                <div class="card-body" >
+                    <img class="float-left mr-2" th:src="@{/img/placeholder.svg}"
+                         alt="Cachorros_gato" style="width:240px;height:220px;">
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac eleifend ante. Duis sit amet
                         condimentum nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -61,19 +64,20 @@
                         convallis lorem, id elementum dolor maximus in.
                     </p>
                 </div>
+
             </div>
 
             <div class="card recommendation-list">
-                <div class="card-header">
-                    Recomendados
+                <div class="card-header" th:text="#{announces.suggested}">
+                    Recomendado
                 </div>
                 <div class="card-body">
                     <div class="jumbotron" sec:authorize="isAnonymous()">
                         <p>
-                            <a th:href="@{/user/create}">Registre-se</a>
+                            <a class="text-gray" th:text="#{register.message}" th:href="@{/user/create}" >Registre-se</a>
                             <span>ou</span>
-                            <a th:href="@{/login}">Faça login</a>
-                            <span>no sistema para ver suas recomendações.</span>
+                            <a class="text-gray" th:text="#{login.home}" th:href="@{/login}">Faça login</a>
+                            <span th:text="#{system.suggested}">no sistema p ver suas recomendações.</span>
                         </p>
                     </div>
 
@@ -109,8 +113,8 @@
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    Últimos 5 anúncios
+                <div class="card-header" th:text="#{last.announces}">
+                    Últimos anúncios
                 </div>
                 <div class="card-body">
                     <h5 th:text="#{announce.list.empty}" th:if="${announces.isEmpty()}"></h5>
