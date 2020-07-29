@@ -100,8 +100,10 @@ public class Announce {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public boolean canModify() {
+    @Transient
+    private double score = 0;
 
+    public boolean canModify() {
         if(!Auth.isAuthenticated()) {
             return false;
         }

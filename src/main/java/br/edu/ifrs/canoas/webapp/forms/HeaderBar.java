@@ -14,6 +14,7 @@ public class HeaderBar {
     private BarItem createAnnounce = new BarItem("/announce/create");
     private BarItem createUser = new BarItem("/user/create");
     private BarItem manager = new BarItem("/manager");
+    private BarItem suggestions = new BarItem("/suggestions");
 
     private boolean logged = false;
 
@@ -27,6 +28,7 @@ public class HeaderBar {
         createAnnounce.set(uri);
         createUser.set(uri);
         manager.set(uri);
+        suggestions.set(uri);
     }
 
 

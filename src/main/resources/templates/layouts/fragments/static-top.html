@@ -16,6 +16,15 @@
                 Ver anúncios
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-white" th:text="#{header.suggested}"
+               th:href="@{*{suggestions.href}}"
+               th:classapend="*{suggestions.active} ? 'active'">
+                Sugeridos
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link text-white" th:text="#{menu.createAnnounce}"
                th:href="@{*{createAnnounce.href}}"

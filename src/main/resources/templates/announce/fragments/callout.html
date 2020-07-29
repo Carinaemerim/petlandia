@@ -5,8 +5,13 @@
                 <img class="img-fluid" th:src="${'data:image/png;base64,' + announce.mainPhoto}">
             </span>
 
-            <span class="col-md-7">
+            <span class="col-md-7 position-relative">
                 <h5 th:text="${announce.title}"> </h5>
+
+                <span class="position-absolute d-none" th:if="${announce.score > 0}">
+                    <span th:text="${announce.score}"></span>
+                </span>
+
                 <span th:text="|#{announce.form.name}: ${announce.name}|" class="d-block"></span>
                 <span th:text="|#{announce.form.age}: #{${announce.animalAge.label}}|" class="d-block"></span>
                 <span th:text="|#{announce.form.type}: #{${announce.animalType.label}}|" class="d-block"></span>

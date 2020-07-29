@@ -34,8 +34,11 @@ public class SuggestionService {
         for(AnnounceSuggested announceSuggested : announcesSuggested.getContent()) {
             System.out.print("Announce: " + announceSuggested.getId());
             System.out.println(" Score: " + announceSuggested.getScore());
-            announces.add(announceRepository.findById(announceSuggested.getId())
-                    .orElseThrow(AnnounceNotFoundException::new));
+
+            Announce announce = announceRepository.findById(announceSuggested.getId())
+                    .orElseThrow(AnnounceNotFoundException::new);
+            announce.setScore(announceSuggested.getScore());
+            announces.add(announce);
         }
 
         return PaginatedEntity.<Announce>builder()

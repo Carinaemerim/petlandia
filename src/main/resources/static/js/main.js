@@ -13,7 +13,10 @@ function InitCropper(id, options) {
     const $input_scaleY = $(".input-scaleY", container);
     const $input_remove = $(".input-remove", container);
 
-    const $modal = $('.modal', container);
+    const $modal = $('.modal', container).modal({
+        backdrop: true,
+        show: false,
+    });
     const $btn_submit = $('.btn-submit', container);
     const $btn_cancel = $('.btn-cancel', container);
     const $btn_select = $('.btn-select', container);
@@ -135,17 +138,17 @@ function InitCropper(id, options) {
 
     $btn_select.click((e) => {
       e.preventDefault();
-      $modal.show();
+      $modal.modal('show');
     });
 
     $btn_cancel.click((e) => {
         e.preventDefault();
-        $modal.hide();
+        $modal.modal('hide');
     });
 
     $btn_submit.click((e) => {
         e.preventDefault();
-        $modal.hide();
+        $modal.modal('hide');
     });
 
     $btn_remove.click((e) => {
