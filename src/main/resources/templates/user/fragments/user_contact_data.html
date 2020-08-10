@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="user.form.email" th:text="#{user.form.email}+'*'"> </label>
                 <input type="text" class="form-control" id="user.form.email" th:field="*{user.email}" required
-                       minlength="5" maxlength="120"
+                       minlength="6" maxlength="120"
                        th:classappend="${#fields.hasErrors('user.email')} ? is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('user.email')}"
                      th:errors="*{user.email}"></div>

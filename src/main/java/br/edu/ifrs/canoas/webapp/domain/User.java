@@ -31,7 +31,7 @@ public class User {
 	private boolean active;
 
 	@NotNull(groups = {UserCreateGroup.class})
-	@Size(min = 4, max = 250, groups = {UserCreateGroup.class})
+	@Size(min = 6, max = 20, groups = {UserCreateGroup.class})
 	private String password;
 
 	@Enumerated(EnumType.STRING)
@@ -48,11 +48,11 @@ public class User {
 
 	@Email(groups = {UserCreateGroup.class, UserEditGroup.class})
 	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class})
-	@Size(min = 5, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 6, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String email;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})
-	@Size(min = 4, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String address;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class})

@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="announce_form_title" th:text="#{announce.form.title}+'*'"> </label>
                     <input type="text" class="form-control" id="announce_form_title" th:field="*{announce.title}" required
-                           minlength="9" maxlength="120"
+                           minlength="4" maxlength="120"
                            th:classappend="${#fields.hasErrors('announce.title')} ? is-invalid">
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.title')}"
                          th:errors="*{announce.title}"></div>

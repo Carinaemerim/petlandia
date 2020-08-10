@@ -22,7 +22,7 @@ public class Announce {
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 120)
+    @Size(min = 4, max = 120)
     private String title;
 
     @NotBlank
@@ -52,11 +52,11 @@ public class Announce {
     private AnimalColor animalColor;
 
     @Column(length = 10000)
-    @Size(min = 5, max = 10000)
+    @Size(min = 10, max = 10000)
     private String description;
 
     @NotNull
-    @Size(min = 4, max = 120)
+    @Size(min = 3, max = 120)
     private String address;
 
     @NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
@@ -64,11 +64,11 @@ public class Announce {
     private String zipCode;
 
     @NotNull
-    @Size(min = 4, max = 120)
+    @Size(min = 3, max = 120)
     private String neighborhood;
 
     @NotNull
-    @Size(min = 4, max = 120)
+    @Size(min = 3, max = 120)
     private String city;
 
     @NotNull
