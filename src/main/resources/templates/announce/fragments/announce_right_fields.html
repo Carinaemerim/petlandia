@@ -142,7 +142,7 @@
     <div class="row">
         <div class="col col-md-6">
             <div class="form-group">
-                <label for="announce_form_neighborhood" th:text="#{announce.form.neighborhood}"> </label>
+                <label for="announce_form_neighborhood" th:text="#{announce.form.neighborhood}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_neighborhood" th:field="*{announce.neighborhood}" required
                        minlength="3" maxlength="120"
                        th:classappend="${#fields.hasErrors('announce.neighborhood')} ? is-invalid">
@@ -155,7 +155,7 @@
     <div class="row">
         <div class="col col-md-9">
             <div class="form-group">
-                <label for="announce_form_address" th:text="#{announce.form.address}"> </label>
+                <label for="announce_form_address" th:text="#{announce.form.address}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_address" th:field="*{announce.address}" required
                        minlength="3" maxlength="120"
                        th:classappend="${#fields.hasErrors('announce.address')} ? is-invalid">
@@ -166,7 +166,7 @@
 
         <div class="col">
             <div class="form-group">
-                <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}"> </label>
+                <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_address_number" th:field="*{announce.addressNumber}"
                        max="99999"
                        th:classappend="${#fields.hasErrors('announce.addressNumber')} ? is-invalid">
