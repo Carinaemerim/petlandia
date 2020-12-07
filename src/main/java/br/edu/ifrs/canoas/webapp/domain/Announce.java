@@ -21,63 +21,68 @@ public class Announce {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 4, max = 120)
+    @NotBlank(message = "{field.required}")
+    @Size(min = 4, max = 120, message = "{validation.announce.title.size}")
     private String title;
 
-    @NotBlank
-    @Size(min = 2, max = 120)
+    @NotBlank(message = "{field.required}")
+    @Size(min = 2, max = 120, message = "{validation.announce.name.size}")
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
+    @NotNull(message = "{field.required}")
     private AnimalAge animalAge;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
+    @NotNull(message = "{field.required}")
     private AnimalGender animalGender;
 
     @ManyToOne(fetch= FetchType.EAGER)
-    @NotNull
+    @NotNull(message = "{field.required}")
     private AnimalType animalType;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @Enumerated(EnumType.STRING)
     private AnnounceStatus status = AnnounceStatus.ACTIVE;
 
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalSize animalSize;
 
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalColor animalColor;
 
+    @NotNull(message = "{field.required}")
     @Column(length = 10000)
-    @Size(min = 10, max = 10000)
+    @Size(min = 10, max = 10000, message ="{validation.announce.description.size}")
     private String description;
 
-    @NotNull
-    @Size(min = 3, max = 120)
+    @NotNull(message = "{field.required}")
+    @Size(min = 3, max = 120, message = "{validation.announce.address.size}")
     private String address;
 
-    @NotNull @Pattern(regexp="\\d{5}-\\d{3}$")
-    @Size(min = 9, max = 9)
+    @NotNull (message = "{field.required}")
+    @Pattern(regexp="\\d{5}-\\d{3}$")
+    @Size(min = 9, max = 9, message = "{validation.announce.zipcode.size}")
     private String zipCode;
 
-    @NotNull
-    @Size(min = 3, max = 120)
+    @NotNull(message = "{field.required}")
+    @Size(min = 3, max = 120, message = "{validation.announce.neighborhood.size}")
     private String neighborhood;
 
-    @NotNull
-    @Size(min = 3, max = 120)
+    @NotNull(message = "{field.required}")
+    @Size(min = 3, max = 120, message = "{validation.announce.city.size}")
     private String city;
 
-    @NotNull
-    @Size(min = 2, max = 2)
+    @NotNull(message = "{field.required}")
+    @Size(min = 2, max = 2, message = "{validation.announce.state.size}")
     private String state;
 
     @Max(999999)
     private int addressNumber;
 
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalCastrated animalCastrated;
 
