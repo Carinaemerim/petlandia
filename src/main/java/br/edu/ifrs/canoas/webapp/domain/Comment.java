@@ -38,7 +38,7 @@ public class Comment {
     @ManyToOne(fetch= FetchType.EAGER)
     private Announce announce;
 
-    @NotNull
-    @Size(min = 5, max = 250)
+    @NotNull(message="{field.required}")
+    @Size(min = 5, max = 250, message="{validation.comment.message.size}")
     private String message;
 }

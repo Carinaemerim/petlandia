@@ -46,7 +46,7 @@ public class Report {
     @ManyToOne(fetch= FetchType.EAGER)
     private Comment comment;
 
-    @NotNull
-    @Size(min = 10, max = 250)
+    @NotNull (message="{field.required}")
+    @Size(min = 10, max = 250, message="{validation.report.message.size}")
     private String message;
 }
