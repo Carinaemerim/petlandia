@@ -4,6 +4,8 @@ package br.edu.ifrs.canoas.webapp.domain;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
@@ -16,8 +18,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 
 @Entity
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
 	@Id
@@ -72,15 +76,14 @@ public class User {
 	@Size(min = 2, max = 2, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.state.size}")
 	private String state;
 
-	@Size(max = 5)
+	@Size(max = 5, groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String addressNumber;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.celphone.size}")
 	private String residentialPhone;
 
-	@Pattern(regexp="^$|^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$")
-	@Size(min = 14, max = 15, message = "{validation.user.celphone.size}")
+	@Size(min = 14, max = 15, message = "{validation.user.celphone.size}", groups = {UserCreateGroup.class, UserEditGroup.class})
 	private String celPhone;
 
 	@ManyToOne(fetch = FetchType.EAGER)
