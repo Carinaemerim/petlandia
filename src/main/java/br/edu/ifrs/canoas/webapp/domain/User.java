@@ -46,11 +46,11 @@ public class User {
 	private String name;
 
 	@NotBlank(groups = {UserCreateGroup.class}, message = "{field.required}")
-	@CPF(groups = {UserCreateGroup.class})
+	@CPF(groups = {UserCreateGroup.class}, message="{validation.user.cpf.invalid}")
 	@Size(min = 14, max = 14, groups = {UserCreateGroup.class}, message="{validation.user.cpf.size}")
 	private String cpf;
 
-	@Email(groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Email(groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.email.invalid}")
 	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 6, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.email.size}")
 	private String email;
@@ -60,7 +60,7 @@ public class User {
 	private String address;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
-	@Pattern(regexp="\\d{5}-\\d{3}$", groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Pattern(regexp="\\d{5}-\\d{3}$", groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.zipcode.pattern}")
 	@Size(min = 9, max = 9, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.zipcode.size}")
 	private String zipCode;
 
@@ -76,11 +76,11 @@ public class User {
 	@Size(min = 2, max = 2, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.state.size}")
 	private String state;
 
-	@Size(max = 5, groups = {UserCreateGroup.class, UserEditGroup.class})
+	@Size(max = 5, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.addressNumber.size}")
 	private String addressNumber;
 
 	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
-	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.celphone.size}")
+	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.residential.size}")
 	private String residentialPhone;
 
 	@Size(min = 14, max = 15, message = "{validation.user.celphone.size}", groups = {UserCreateGroup.class, UserEditGroup.class})
