@@ -168,7 +168,7 @@
             <div class="form-group">
                 <label for="announce_form_address_number" th:text="#{announce.form.addressNumber}+'*'"> </label>
                 <input type="text" class="form-control" id="announce_form_address_number" th:field="*{announce.addressNumber}"
-                       max="99999"
+                       minlength="1" maxlength="5"
                        th:classappend="${#fields.hasErrors('announce.addressNumber')} ? is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('announce.addressNumber')}"
                      th:errors="*{announce.addressNumber}"></div>

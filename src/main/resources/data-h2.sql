@@ -41,13 +41,13 @@ insert into animal_color(id, name, label, weight) values
 (106, 'CREAM', 'animal.color.cream', 2);
 
 --AUTHENTICATION
-INSERT into user(id, username, password, active, role, name, email, address, zip_code, neighborhood, city, state,
+INSERT into user(id, cpf, username, password, active, role, name, email, address, zip_code, neighborhood, city, state,
 address_number, residential_phone, cel_phone, animal_age_id, animal_gender_id, animal_type_id, animal_castrated_id,
 animal_color_id,animal_size_id, avatar) VALUES
-(103, 'user', @PASSWORD, 'true', 'ROLE_USER' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
-(100, 'r2d2', @PASSWORD, 'true', 'ROLE_USER' ,'R2d2','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
-(101, 'admin', @PASSWORD, 'true', 'ROLE_ADMIN' ,'Admin Yoda','admin@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
-(102, 'mod', @PASSWORD, 'true', 'ROLE_MODERATOR' ,'Mod Yoda','mod@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default');
+(103, '65613188033', 'user', @PASSWORD, 'true', 'ROLE_USER' ,'Baby Yoda','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
+(100, '29583242063','r2d2', @PASSWORD, 'true', 'ROLE_USER' ,'R2d2','yoda@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
+(101, '14670871064','admin', @PASSWORD, 'true', 'ROLE_ADMIN' ,'Admin Yoda','admin@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default'),
+(102, '24340284033','mod', @PASSWORD, 'true', 'ROLE_MODERATOR' ,'Mod Yoda','mod@stars.wars', 'Garro', '92032380', 'Tattooine', 'StarWars', 'RS' ,544,'51982656565', '', 101, 102,101,101,101,101, 'default');
 
 --ANNOUNCE
 insert into announce(id, address, address_number, city, description, main_photo, name, neighborhood, second_photo,
@@ -271,7 +271,7 @@ TIMESTAMP '2020-08-03 14:56:34.923682',TIMESTAMP '2020-08-03 14:56:34.923682');
 
 -- Comments
 INSERT INTO comment (id, message, created_at, updated_at, status, announce_id, user_id) VALUES
-(101, 'Boa noite gostria de mais informações.', '2020-02-12 19:17:27', '2020-02-12 19:17:27', 'ACTIVE', 3, 101),
+(101, 'Boa noite gostaria de mais informações.', '2020-02-12 19:17:27', '2020-02-12 19:17:27', 'ACTIVE', 3, 101),
 (102, 'Boa tarde lorem', '2020-05-24 13:47:57', '2020-05-24 13:47:57', 'ACTIVE', 3, 100),
 (103, 'Boa tarde lorem, me reportem', '2020-05-24 13:47:57', '2020-05-24 13:47:57', 'WAITING_REVIEW', 3, 100);
 

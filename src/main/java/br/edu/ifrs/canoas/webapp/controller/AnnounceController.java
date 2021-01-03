@@ -321,7 +321,7 @@ public class AnnounceController {
             if (currentImage != null) {
                 return currentImage;
             } else {
-                String message = messages.get("form.validation.pwd_is_not_equal"); // TODO: Trocar
+                String message = messages.get("validation.announce.cropper.required");
                 FieldError error = new FieldError(bindingResult.getObjectName(), field, message);
                 bindingResult.addError(error);
             }

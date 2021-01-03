@@ -78,7 +78,7 @@ public class UserController {
         model.addAttribute("animalColors", animalColorService.listAnimalColor());
 
         if (!form.getPasswordConfirm().equals(form.getUser().getPassword())) {
-            String message = messages.get("form.validation.pwd_is_not_equal");
+            String message = messages.get("validation.user.password_mismatch");
             FieldError error = new FieldError(bindingResult.getObjectName(), "passwordConfirm", message);
             bindingResult.addError(error);
         }
