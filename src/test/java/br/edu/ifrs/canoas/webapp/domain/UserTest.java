@@ -4,7 +4,7 @@ import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.helper.UserHelper;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.DatatypeConverter;

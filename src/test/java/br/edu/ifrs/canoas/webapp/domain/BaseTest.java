@@ -2,11 +2,11 @@ package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.MockAuthContext;
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import org.junit.After;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class BaseTest<T> {
     @Autowired
@@ -35,7 +35,7 @@ public abstract class BaseTest<T> {
         assertThat(messages).contains(this.messages.get(message));
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         this.mockAuthContext.tearDown();
     }
