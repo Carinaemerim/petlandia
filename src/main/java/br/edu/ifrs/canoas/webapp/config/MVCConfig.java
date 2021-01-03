@@ -1,7 +1,7 @@
 package br.edu.ifrs.canoas.webapp.config;
 
 import br.edu.ifrs.canoas.webapp.components.HeaderInterceptor;
-import br.edu.ifrs.canoas.webapp.components.MangerInterceptor;
+import br.edu.ifrs.canoas.webapp.components.ManagerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ import java.util.Locale;
 public class MVCConfig implements WebMvcConfigurer {
 
     @Autowired
-    private MangerInterceptor mangerInterceptor;
+    private ManagerInterceptor managerInterceptor;
 
     @Autowired
     private HeaderInterceptor headerInterceptor;
@@ -41,7 +41,7 @@ public class MVCConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(headerInterceptor).addPathPatterns("/**");
-        registry.addInterceptor(mangerInterceptor).addPathPatterns("/manager", "/manager/**");
+        registry.addInterceptor(managerInterceptor).addPathPatterns("/manager", "/manager/**");
     }
 
     @Override

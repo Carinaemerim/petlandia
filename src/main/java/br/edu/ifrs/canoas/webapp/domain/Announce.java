@@ -1,9 +1,12 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
-import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
+import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
+import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +18,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Announce {
 
     @Id
@@ -53,34 +58,34 @@ public class Announce {
     @ManyToOne(fetch = FetchType.EAGER)
     private AnimalColor animalColor;
 
-    @NotNull(message = "{field.required}")
+    @NotBlank(message = "{field.required}")
     @Column(length = 10000)
     @Size(min = 10, max = 10000, message ="{validation.announce.description.size}")
     private String description;
 
-    @NotNull(message = "{field.required}")
+    @NotBlank(message = "{field.required}")
     @Size(min = 3, max = 120, message = "{validation.announce.address.size}")
     private String address;
 
-    @NotNull (message = "{field.required}")
-    @Pattern(regexp="\\d{5}-\\d{3}$")
+    @NotBlank (message = "{field.required}")
+    @Pattern(regexp="\\d{5}-\\d{3}$", message = "{validation.announce.zipcode.pattern}")
     @Size(min = 9, max = 9, message = "{validation.announce.zipcode.size}")
     private String zipCode;
 
-    @NotNull(message = "{field.required}")
+    @NotBlank(message = "{field.required}")
     @Size(min = 3, max = 120, message = "{validation.announce.neighborhood.size}")
     private String neighborhood;
 
-    @NotNull(message = "{field.required}")
+    @NotBlank(message = "{field.required}")
     @Size(min = 3, max = 120, message = "{validation.announce.city.size}")
     private String city;
 
-    @NotNull(message = "{field.required}")
+    @NotBlank(message = "{field.required}")
     @Size(min = 2, max = 2, message = "{validation.announce.state.size}")
     private String state;
 
-    @Max(999999)
-    private int addressNumber;
+    @Size(max = 5, message="{validation.announce.addressNumber.size}")
+    private String addressNumber;
 
     @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)

@@ -49,6 +49,18 @@ public class UserTest extends BaseTest<User> {
     }
 
     @Test
+    public void testBlankUserName() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setUsername("");
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
     public void testMinSizeUsername() {
         User user = UserHelper.createUser();
         Set<ConstraintViolation<User>> violations;
@@ -79,6 +91,18 @@ public class UserTest extends BaseTest<User> {
         Set<ConstraintViolation<User>> violations;
 
         user.setPassword(null);
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
+    public void testBlankPassword() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setPassword("");
 
         violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
 
@@ -290,6 +314,18 @@ public class UserTest extends BaseTest<User> {
     }
 
     @Test
+    public void testBlankAddress() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setAddress("");
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
     public void testMinSizeAddress() {
         User user = UserHelper.createUser();
         Set<ConstraintViolation<User>> violations;
@@ -319,6 +355,18 @@ public class UserTest extends BaseTest<User> {
         Set<ConstraintViolation<User>> violations;
 
         user.setZipCode(null);
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
+    public void testBlankZipCode() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setZipCode("");
 
         violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
 
@@ -374,6 +422,18 @@ public class UserTest extends BaseTest<User> {
     }
 
     @Test
+    public void testBlankNeighborhood() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setNeighborhood("");
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
     public void testMinSizeNeighborhood() {
         User user = UserHelper.createUser();
         Set<ConstraintViolation<User>> violations;
@@ -410,6 +470,18 @@ public class UserTest extends BaseTest<User> {
     }
 
     @Test
+    public void testBlankCity() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setCity("");
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
     public void testMinSizeCity() {
         User user = UserHelper.createUser();
         Set<ConstraintViolation<User>> violations;
@@ -439,6 +511,18 @@ public class UserTest extends BaseTest<User> {
         Set<ConstraintViolation<User>> violations;
 
         user.setState(null);
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
+    public void testBlankState() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setState("");
 
         violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
 
@@ -487,6 +571,18 @@ public class UserTest extends BaseTest<User> {
         Set<ConstraintViolation<User>> violations;
 
         user.setResidentialPhone(null);
+
+        violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
+
+        this.assertHasViolation("field.required", violations);
+    }
+
+    @Test
+    public void testBlankResidentialPhone() {
+        User user = UserHelper.createUser();
+        Set<ConstraintViolation<User>> violations;
+
+        user.setResidentialPhone("");
 
         violations = this.validator.validate(user, UserCreateGroup.class, UserEditGroup.class);
 

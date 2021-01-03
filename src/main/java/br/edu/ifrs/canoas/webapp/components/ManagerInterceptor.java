@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @AllArgsConstructor
-public class MangerInterceptor implements HandlerInterceptor {
+public class ManagerInterceptor implements HandlerInterceptor {
 
     private final AnnounceService announceService;
     private final CommentService commentService;

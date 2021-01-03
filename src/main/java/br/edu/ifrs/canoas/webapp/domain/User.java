@@ -14,8 +14,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Set;
 
 @Entity
 @Builder
@@ -28,13 +26,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(groups = {UserCreateGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class}, message = "{field.required}")
 	@Size(min = 2, max = 40, groups = {UserCreateGroup.class}, message = "{validation.user.username.size}")
 	private String username;
 
 	private boolean active;
 
-	@NotNull(groups = {UserCreateGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class}, message = "{field.required}")
 	@Size(min = 6, max = 20, groups = {UserCreateGroup.class}, message = "{validation.user.password.size}")
 	private String password;
 
@@ -55,31 +53,31 @@ public class User {
 	@Size(min = 6, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.email.size}")
 	private String email;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.address.size}")
 	private String address;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Pattern(regexp="\\d{5}-\\d{3}$", groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.zipcode.pattern}")
 	@Size(min = 9, max = 9, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.zipcode.size}")
 	private String zipCode;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.neighborhood.size}")
 	private String neighborhood;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 3, max = 120, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.city.size}")
 	private String city;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 2, max = 2, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.state.size}")
 	private String state;
 
 	@Size(max = 5, groups = {UserCreateGroup.class, UserEditGroup.class}, message="{validation.user.addressNumber.size}")
 	private String addressNumber;
 
-	@NotNull(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
+	@NotBlank(groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{field.required}")
 	@Size(min = 14, max = 15, groups = {UserCreateGroup.class, UserEditGroup.class}, message = "{validation.user.residential.size}")
 	private String residentialPhone;
 

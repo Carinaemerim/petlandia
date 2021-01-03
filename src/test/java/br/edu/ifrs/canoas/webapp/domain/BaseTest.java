@@ -1,11 +1,11 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
+import br.edu.ifrs.canoas.webapp.MockAuthContext;
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolation;
@@ -18,7 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class BaseTest<T> {
+public abstract class BaseTest<T> {
+    @Autowired
+    protected MockAuthContext mockAuthContext;
+
     @Autowired
     protected Validator validator;
 
@@ -30,5 +33,10 @@ public class BaseTest<T> {
                 .map(ConstraintViolation::getMessage).collect(Collectors.toList());
 
         assertThat(messages).contains(this.messages.get(message));
+    }
+
+    @After
+    public void tearDown() {
+        this.mockAuthContext.tearDown();
     }
 }
