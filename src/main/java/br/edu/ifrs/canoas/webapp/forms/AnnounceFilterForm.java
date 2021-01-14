@@ -17,7 +17,7 @@ public class AnnounceFilterForm {
     private List<Long> animalCastrated = new ArrayList<>();
 
     public int getPage() {
-        return page < 0 ? 0 : page;
+        return Math.max(page, 0);
     }
 
 }

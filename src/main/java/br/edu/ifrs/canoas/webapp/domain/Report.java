@@ -1,6 +1,8 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +25,7 @@ public class Report {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private ReportStatus status = ReportStatus.WAITING_REVIEW;
 
     @CreationTimestamp

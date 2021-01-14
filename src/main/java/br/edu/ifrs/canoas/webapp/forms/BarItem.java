@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BarItem {
     private String href;
-    private Long size = 0l;
+    private Long size = 0L;
     private boolean active = false;
 
     public BarItem(String href) {
