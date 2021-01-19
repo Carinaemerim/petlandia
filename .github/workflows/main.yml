@@ -41,6 +41,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run unit tests
-        run: |
-            mvn -Dtest='edu.ifrs.canoas.webapp.domain.**'
-                -Dtest='edu.ifrs.canoas.webapp.service.**' clean test
+        run: >4
+            mvn -Dtest='edu.ifrs.canoas.webapp.domain.**,
+                        edu.ifrs.canoas.webapp.service.**'
+            clean test
