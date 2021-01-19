@@ -43,5 +43,5 @@ jobs:
       - name: Run unit tests
         run: >
             mvn -Dtest='edu.ifrs.canoas.webapp.domain.**,
-                        edu.ifrs.canoas.webapp.service.**
+                        edu.ifrs.canoas.webapp.service.**'
             clean test
