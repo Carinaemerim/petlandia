@@ -40,10 +40,6 @@ public class AnnounceService {
         return announceRepository.save(announce);
     }
 
-    public List<Announce> listAnnounce() {
-        return announceRepository.findAllByOrderByCreatedAtDescIdDesc();
-    }
-
     public PaginatedEntity<Announce> findAll(int pageNumber, User user, AnnounceStatus status){
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
         Page<Announce> announcePage = announceRepository.findAllByStatusAndUserOrderByCreatedAtDescIdDesc(status, user, page);

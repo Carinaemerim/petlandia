@@ -1,71 +1,47 @@
 package br.edu.ifrs.canoas.webapp.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.transaction.Transactional;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import br.edu.ifrs.canoas.webapp.domain.User;
-
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional
-public class UserServiceTest {
+public class UserServiceTest extends BaseTest {
 
     @Autowired
     UserService service;
 
-    private final String PASSWORD = "password";
-
     @Test
-    public void testSaveExistingUserIgnoringPassword(){
-        // given
-        User user = new User();
-        user.setId(100L);
-        user.setPassword(PASSWORD);
-
-        // when
-        //User saved = service.save(user);
-
-        // then
-        //assertThat(saved.getId()).isNotNull();
-        //assertThat(saved.getPassword()).isNotEqualTo(PASSWORD);
+    public void testSaveNew() {
     }
 
     @Test
-    public void testSaveNotExistingUser(){
-        // given
-        User user = new User();
-        user.setId(2L);
-        user.setName("name");
-        user.setEmail("email@email.email");
-        user.setPassword(PASSWORD);
-
-        // when
-        //User saved = service.save(user);
-
-        // then
-        //assertThat(saved).isNull();
+    public void testSaveExisting() {
     }
 
-    @Disabled
-    public void testSaveWithNullValue(){
-        // given
-        User user = new User();
-        user.setId(100L);
-        user.setPassword(PASSWORD);
-
-        // when
-        //User saved = service.save(null);
-
-        // then
-        //assertThat(saved).isNull();
+    @Test
+    public void testSaveNullEmail() {
     }
 
+    @Test
+    public void testGetOne() {
+    }
+
+    @Test
+    public void testGetOneNotFound() {
+    }
+
+    @Test
+    public void testListUser() {
+    }
+
+    @Test
+    public void testFindById() {
+    }
+
+    @Test
+    public void testFindByIdNotFound() {
+    }
+
+    @Test
+    public void testFindAll() {
+    }
 }
