@@ -4,8 +4,8 @@ import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
-import org.junit.jupiter.api.AfterEach;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +26,11 @@ public class MockAuthContext {
 
     protected UserImpl userDetails;
     protected User user;
-    @MockBean
+
+    /**
+     * Utilizar @MockBean deste bean na classe que for utilizar MockAuthContext
+     */
+    @Autowired
     UserDetailsImplService implService;
 
     public void tearDown() {

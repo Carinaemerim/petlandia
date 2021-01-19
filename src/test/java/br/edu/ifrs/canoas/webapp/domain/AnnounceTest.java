@@ -3,8 +3,12 @@ package br.edu.ifrs.canoas.webapp.domain;
 import br.edu.ifrs.canoas.webapp.MockAuthContext;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.helper.AnnounceHelper;
+import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import javax.validation.ConstraintViolation;
 import java.util.Set;
@@ -12,6 +16,18 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnnounceTest extends BaseTest<Announce> {
+
+    @MockBean
+    UserDetailsImplService userDetailsImplService;
+
+    @Autowired
+    protected MockAuthContext mockAuthContext;
+
+    @AfterEach
+    public void tearDown() {
+        this.mockAuthContext.tearDown();
+    }
+
     @Test
     public void testValidAnnounce() {
         Announce announce = AnnounceHelper.createAnnounce();

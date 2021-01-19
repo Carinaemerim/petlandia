@@ -20,9 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class BaseTest<T> {
     @Autowired
-    protected MockAuthContext mockAuthContext;
-
-    @Autowired
     protected Validator validator;
 
     @Autowired
@@ -33,10 +30,5 @@ public abstract class BaseTest<T> {
                 .map(ConstraintViolation::getMessage).collect(Collectors.toList());
 
         assertThat(messages).contains(this.messages.get(message));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        this.mockAuthContext.tearDown();
     }
 }

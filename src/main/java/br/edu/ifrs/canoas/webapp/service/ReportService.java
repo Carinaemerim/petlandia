@@ -31,7 +31,8 @@ public class ReportService {
 		reportRepository.save(report);
 	}
 
-	public void save(Announce announce, User user, String message) {
+	//TODO renomear para create, pois este método não faz atualização
+	public Report save(Announce announce, User user, String message) {
 		if (announce == null) {
 			throw new AnnounceNotFoundException();
 		}
@@ -46,9 +47,12 @@ public class ReportService {
 		report.setMessage(message);
 		report.setStatus(ReportStatus.WAITING_REVIEW);
 		this.save(report);
+
+		return report;
 	}
 
-	public void save(Comment comment, User user, String message) {
+	//TODO renomear para create, pois este método não faz atualização
+	public Report save(Comment comment, User user, String message) {
 		if (comment == null) {
 			throw new CommentNotFoundException();
 		}
@@ -64,6 +68,8 @@ public class ReportService {
 		report.setComment(comment);
 		report.setStatus(ReportStatus.WAITING_REVIEW);
 		this.save(report);
+
+		return report;
 	}
 
 	public PaginatedEntity<Report> findAllComments(int pageNumber, int pageLenght, ReportStatus status) {
@@ -91,6 +97,7 @@ public class ReportService {
 	}
 
 
+	// TODO: Revisar o fluxo deste método
 	public String action(Long id, User user, ReportStatus status) {
 		Report report = this.reportRepository.findByIdAndStatusEquals(id, ReportStatus.WAITING_REVIEW);
 		if (report == null) {

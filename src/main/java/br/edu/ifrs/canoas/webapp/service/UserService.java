@@ -23,7 +23,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 
-	public void save(User user) {
+	public User save(User user) {
 		if (user.getEmail() != null) {
 			user.setAvatar(user.getAvatarHash());
 		}
@@ -32,22 +32,12 @@ public class UserService {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		}
 
-		userRepository.save(user);
+		return userRepository.save(user);
 	}
 
 	public User getOne(User user) {
 		Optional<User> optUser = userRepository.findById(user.getId());
 		return optUser.orElse(null);
-	}
-
-
-	public List<User> listUser() {
-//	    if (searchTerm == null || searchTerm.trim().length() == 0){
-//	        return userRepository.findAll();
-//        }
-//		return userRepository.findAllByUsernameContains(searchTerm);
-
-		return userRepository.findAll();
 	}
 
 	public User findById(Long id){
