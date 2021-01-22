@@ -36,6 +36,11 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
 
     Long countAllByStatus(AnnounceStatus status);
 
+    /*
+     * Devido a um bug no spring, este método retorna uma lista e,
+     * a query de count é feita em outro método. Caso seja corrigido, alterar o retorno
+     * para Page ao invés de List e remover o método de contagem abaixo
+     */
     @Query(value = "" +
             "SELECT " +
             "   a.id, " +
@@ -68,5 +73,19 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
                     "WHERE a.animal_type_id = :#{#user.animalType.id} " +
                     "AND a.status = :#{#status.name()} " +
                     "AND a.user_id != :#{#user.id} ")
-    Page<AnnounceSuggested> findAllSuggestedByUser(@Param("user") User user, @Param("status") AnnounceStatus status, Pageable pageable);
+    List<AnnounceSuggested> findAllSuggestedByUser(@Param("user") User user, @Param("status") AnnounceStatus status, Pageable pageable);
+
+    @Query(value = "" +
+            "SELECT COUNT(*) " +
+            "FROM announce a " +
+            "JOIN animal_age ag ON ag.id = a.animal_age_id " +
+            "JOIN animal_castrated ac ON ac.id = a.animal_castrated_id " +
+            "JOIN animal_color aco ON aco.id = a.animal_color_id " +
+            "JOIN animal_gender age ON age.id = a.animal_gender_id " +
+            "JOIN animal_size asi ON asi.id = a.animal_size_id " +
+            "WHERE a.animal_type_id = :#{#user.animalType.id} " +
+            "AND a.status = :#{#status.name()} " +
+            "AND a.user_id != :#{#user.id} ",
+    nativeQuery = true)
+    Long countSuggestedByUser(@Param("user") User user, @Param("status") AnnounceStatus status);
 }

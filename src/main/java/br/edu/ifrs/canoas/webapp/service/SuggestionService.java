@@ -28,10 +28,11 @@ public class SuggestionService {
     }
 
     public PaginatedEntity<Announce> findAllByUser(User user, AnnounceStatus status, Pageable pageable) {
-        Page<AnnounceSuggested> announcesSuggested = announceRepository.findAllSuggestedByUser(user, status, pageable);
+        List<AnnounceSuggested> announcesSuggested = announceRepository.findAllSuggestedByUser(user, status, pageable);
         List<Announce> announces = new ArrayList<>();
+        Long suggestionCount = announceRepository.countSuggestedByUser(user, status);
 
-        for(AnnounceSuggested announceSuggested : announcesSuggested.getContent()) {
+        for(AnnounceSuggested announceSuggested : announcesSuggested) {
             System.out.print("Announce: " + announceSuggested.getId());
             System.out.println(" Score: " + announceSuggested.getScore());
 
@@ -44,7 +45,7 @@ public class SuggestionService {
         return PaginatedEntity.<Announce>builder()
                 .currentPage(pageable.getPageNumber())
                 .data(announces)
-                .totalResults(announcesSuggested.getTotalElements())
+                .totalResults(suggestionCount)
                 .pageLength(pageable.getPageSize())
                 .build();
     }
