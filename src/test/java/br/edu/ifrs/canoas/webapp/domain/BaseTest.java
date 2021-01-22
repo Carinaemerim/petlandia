@@ -1,8 +1,6 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
-import br.edu.ifrs.canoas.webapp.MockAuthContext;
 import br.edu.ifrs.canoas.webapp.config.Messages;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

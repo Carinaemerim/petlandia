@@ -1,13 +1,13 @@
 package br.edu.ifrs.canoas.webapp.web.page;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import java.util.concurrent.TimeUnit;
-
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @PageUrl("http://localhost:{port}/")
 public class LoginPage extends FluentPage {

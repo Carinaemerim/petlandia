@@ -40,7 +40,7 @@ public class AnnouncesManagerController {
 
     private String getUserAnnouncesByStatus(UserImpl activeUser, int page, AnnounceStatus status, Model model) {
         User user = userService.findById(activeUser.getUser().getId());
-        if (user == null){
+        if (user == null) {
             throw new UserNotFoundException();
         }
 

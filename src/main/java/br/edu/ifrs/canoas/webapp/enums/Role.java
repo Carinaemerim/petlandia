@@ -5,7 +5,7 @@ public enum Role {
     ROLE_MODERATOR("user.role.moderator"),
     ROLE_ADMIN("user.role.admin");
 
-    private String name;
+    private final String name;
 
     Role(String name) {
         this.name = name;
@@ -16,7 +16,7 @@ public enum Role {
         return this.name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

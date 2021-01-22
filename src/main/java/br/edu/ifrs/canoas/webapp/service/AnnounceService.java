@@ -10,13 +10,12 @@ import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
 import java.util.List;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
 @AllArgsConstructor
 @Service
@@ -27,11 +26,11 @@ public class AnnounceService {
     private final AnnounceRepository announceRepository;
     private final AnnounceDao announceDao;
 
-    public Announce findById(Long id){
+    public Announce findById(Long id) {
         return announceRepository.findById(id).orElseThrow(AnnounceNotFoundException::new);
     }
 
-    public Announce findByIdAndStatusActive(Long id){
+    public Announce findByIdAndStatusActive(Long id) {
         return announceRepository.findAllByIdAndStatusActive(id).
                 orElseThrow(AnnounceNotFoundException::new);
     }
@@ -40,7 +39,7 @@ public class AnnounceService {
         return announceRepository.save(announce);
     }
 
-    public PaginatedEntity<Announce> findAll(int pageNumber, User user, AnnounceStatus status){
+    public PaginatedEntity<Announce> findAll(int pageNumber, User user, AnnounceStatus status) {
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
         Page<Announce> announcePage = announceRepository.findAllByStatusAndUserOrderByCreatedAtDescIdDesc(status, user, page);
         return PaginatedEntity.<Announce>builder()
@@ -51,7 +50,7 @@ public class AnnounceService {
                 .build();
     }
 
-    public PaginatedEntity<Announce> findAll(int pageNumber, AnnounceStatus status){
+    public PaginatedEntity<Announce> findAll(int pageNumber, AnnounceStatus status) {
         Pageable page = PageRequest.of(pageNumber, PAGE_LENGTH);
         Page<Announce> announcePage = announceRepository.findAllByStatusOrderByCreatedAtDescIdDesc(status, page);
 
@@ -63,15 +62,15 @@ public class AnnounceService {
                 .build();
     }
 
-    public List<Announce> findFirstFive(AnnounceStatus status){
+    public List<Announce> findFirstFive(AnnounceStatus status) {
         return announceRepository.findFirst5ByStatusEqualsOrderByCreatedAtDescIdDesc(status);
     }
 
-    public Long countAll(User user, AnnounceStatus status){
+    public Long countAll(User user, AnnounceStatus status) {
         return announceRepository.countAllByStatusAndUser(status, user);
     }
 
-    public Long countAll(AnnounceStatus status){
+    public Long countAll(AnnounceStatus status) {
         return announceRepository.countAllByStatus(status);
     }
 
@@ -95,7 +94,7 @@ public class AnnounceService {
     public void removeAnnounce(Long id) {
         Announce announce = this.findByIdAndStatusActive(id);
 
-        if(!announce.canRemove()) {
+        if (!announce.canRemove()) {
             throw new ForbiddenException("Cannot remove announce");
         }
 

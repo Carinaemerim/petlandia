@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:insert="/layouts/fragments/scripts :: head" />
+<head th:insert="/layouts/fragments/scripts :: head"/>
 <body class="layout-top-nav layout-navbar-fixed">
 
 <!-- Site wrapper -->
 <div class="wrapper">
-	<nav th:insert="/layouts/fragments/static-top :: navbar" />
+    <nav th:insert="/layouts/fragments/static-top :: navbar"/>
 
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-		<!-- Main content -->
-		<section class="content">
-			<div class="container">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container">
 
-				<div layout:fragment="content-header"></div>
+                <div layout:fragment="content-header"></div>
 
-				<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
-					<span th:text="#{${success}}"></span>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error}">
-					<span th:text="#{${error}}"></span>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
+                    <span th:text="#{${success}}"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error}">
+                    <span th:text="#{${error}}"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-				<div layout:fragment="content-body"></div>
+                <div layout:fragment="content-body"></div>
 
-			</div>
-		</section>
-	</div>
-	<footer th:insert="/layouts/fragments/footer ::footer"></footer>
+            </div>
+        </section>
+    </div>
+    <footer th:insert="/layouts/fragments/footer ::footer"></footer>
 </div>
 
-<th:block layout:fragment="modal-view" />
+<th:block layout:fragment="modal-view"/>
 
-<div th:insert="/layouts/fragments/scripts :: javascripts" />
+<div th:insert="/layouts/fragments/scripts :: javascripts"/>
 </body>
 
 

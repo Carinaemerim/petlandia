@@ -9,17 +9,17 @@ import java.util.ArrayList;
 public class PaginatedEntityHelper {
     /**
      * Cria paginated entity para um objeto dinamico.
-     *
+     * <p>
      * //TODO: Caso necessário fazer seedMethod retornar um array de entity
      * //TODO: ao invés de chamar ele pageLength vezes. Útil caso se deseje dados
      * //TODO: mais randomicos no set
      *
-     * @param entity O objeto class da entidade que se deseja criar a lista
-     * @param seedMethod O método que retorna a entidade. Chamado pageLength vezes
+     * @param entity         O objeto class da entidade que se deseja criar a lista
+     * @param seedMethod     O método que retorna a entidade. Chamado pageLength vezes
      * @param seedParameters Parametros para seedMethod
-     * @param size O tamanho da lista
-     * @param pageLength O comprimento de página da lista
-     * @param <T> O Tipo da entidade que se deseja criar a lista
+     * @param size           O tamanho da lista
+     * @param pageLength     O comprimento de página da lista
+     * @param <T>            O Tipo da entidade que se deseja criar a lista
      * @return
      * @throws InvocationTargetException
      * @throws IllegalAccessException
@@ -33,7 +33,7 @@ public class PaginatedEntityHelper {
     ) throws InvocationTargetException, IllegalAccessException {
         ArrayList<T> dataList = new ArrayList<>();
 
-        if (! seedMethod.getReturnType().equals(entity)) {
+        if (!seedMethod.getReturnType().equals(entity)) {
             String message = String.format(
                     "Trying to create list of %s, but seedMethod function returns %s",
                     entity.toString(),

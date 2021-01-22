@@ -1,9 +1,9 @@
-:root{
+:root {
 
-    --mypink:       #e83e8c;
-    --mywhite:      #f8f9fa;
-    --mysoftpink:   #ff80bf;
-    --mypurple:     #7300e6;
+    --mypink: #e83e8c;
+    --mywhite: #f8f9fa;
+    --mysoftpink: #ff80bf;
+    --mypurple: #7300e6;
 }
 
 
@@ -45,8 +45,7 @@
     border-color: var(--mypink);
 }
 
-.btn-secondary:hover
-{
+.btn-secondary:hover {
     background-color: var(--mysoftpink);
     color: var(--mywhite);
     border-color: var(--mysoftpink);
@@ -54,8 +53,7 @@
 
 .btn-secondary:focus,
 .btn-secondary:active,
-.btn-secondary:link
-{
+.btn-secondary:link {
     background-color: var(--mysoftpink) !important;
     color: white !important;
     border-color: var(--mysoftpink) !important;
@@ -154,7 +152,7 @@
 }
 
 .manager-menu .card-body:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
 .manager-menu .btn .badge {
@@ -163,7 +161,7 @@
 
 .manager-content .jumbotron {
     background-color: white;
-    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
 }
 
 .manager-content .pagination {
@@ -180,7 +178,7 @@
 }
 
 pre.form-control {
-    font-family: "Source Sans Pro", Arial,sans-serif;
+    font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
 .direct-chat-actions {
@@ -229,7 +227,7 @@ pre.form-control {
 
 .callout-announce:hover {
     cursor: pointer;
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255, 255, 255, .8);
 }
 
 .callout-announce span {

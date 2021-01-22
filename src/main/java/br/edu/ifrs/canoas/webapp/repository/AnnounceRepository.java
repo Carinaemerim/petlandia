@@ -86,6 +86,6 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
             "WHERE a.animal_type_id = :#{#user.animalType.id} " +
             "AND a.status = :#{#status.name()} " +
             "AND a.user_id != :#{#user.id} ",
-    nativeQuery = true)
+            nativeQuery = true)
     Long countSuggestedByUser(@Param("user") User user, @Param("status") AnnounceStatus status);
 }

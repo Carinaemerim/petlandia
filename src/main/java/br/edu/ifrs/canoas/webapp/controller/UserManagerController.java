@@ -2,7 +2,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
-import br.edu.ifrs.canoas.webapp.domain.*;
+import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
 import br.edu.ifrs.canoas.webapp.service.*;
@@ -34,7 +34,7 @@ public class UserManagerController {
     @GetMapping("/profile")
     public String getProfile(@AuthenticationPrincipal UserImpl activeUser, Model model) {
         User user = userService.findById(activeUser.getUser().getId());
-        if (user == null){
+        if (user == null) {
             return "/notFound";
         }
 
@@ -45,7 +45,7 @@ public class UserManagerController {
     @GetMapping("/profile/edit")
     public String getProfileEdit(@AuthenticationPrincipal UserImpl activeUser, Model model) {
         User user = userService.findById(activeUser.getUser().getId());
-        if (user == null){
+        if (user == null) {
             return "/notFound";
         }
 
@@ -64,7 +64,7 @@ public class UserManagerController {
                                   Model model) {
 
         User user = userService.findById(activeUser.getUser().getId());
-        if (user == null){
+        if (user == null) {
             return "/notFound";
         }
 

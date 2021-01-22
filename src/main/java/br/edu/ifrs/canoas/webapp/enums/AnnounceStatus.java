@@ -6,7 +6,7 @@ public enum AnnounceStatus {
     UNDER_REVIEW("announce.status.under_review"),
     INACTIVE("announce.status.inactive");
 
-    private String name;
+    private final String name;
 
     AnnounceStatus(String name) {
         this.name = name;
@@ -17,7 +17,7 @@ public enum AnnounceStatus {
         return this.name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

@@ -13,7 +13,7 @@ public class AnimalGenderService {
 
     private final AnimalGenderRepository animalGenderdRepository;
 
-    public List<AnimalGender> listAnimalGender(){
+    public List<AnimalGender> listAnimalGender() {
         return animalGenderdRepository.findAllByOrderByNameAsc();
     }
 

@@ -4,7 +4,6 @@ import br.edu.ifrs.canoas.webapp.forms.ManagerSidebar;
 import br.edu.ifrs.canoas.webapp.service.AnnounceService;
 import br.edu.ifrs.canoas.webapp.service.CommentService;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

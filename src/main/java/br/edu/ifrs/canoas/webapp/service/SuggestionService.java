@@ -8,7 +8,6 @@ import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class SuggestionService {
         List<Announce> announces = new ArrayList<>();
         Long suggestionCount = announceRepository.countSuggestedByUser(user, status);
 
-        for(AnnounceSuggested announceSuggested : announcesSuggested) {
+        for (AnnounceSuggested announceSuggested : announcesSuggested) {
             System.out.print("Announce: " + announceSuggested.getId());
             System.out.println(" Score: " + announceSuggested.getScore());
 

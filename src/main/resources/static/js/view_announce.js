@@ -1,5 +1,3 @@
-
-
 function initComments() {
     const container = $('#comment');
     const comments = $('.direct-chat-msg', container);
@@ -48,6 +46,6 @@ function initComments() {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     initComments();
 });

@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 @Getter
 @NoArgsConstructor
 public class HeaderBar {
-    private BarItem home = new BarItem(null);
-    private BarItem announces = new BarItem("/announces");
-    private BarItem createAnnounce = new BarItem("/announce/create");
-    private BarItem createUser = new BarItem("/user/create");
-    private BarItem manager = new BarItem("/manager");
-    private BarItem suggestions = new BarItem("/suggestions");
+    private final BarItem home = new BarItem(null);
+    private final BarItem announces = new BarItem("/announces");
+    private final BarItem createAnnounce = new BarItem("/announce/create");
+    private final BarItem createUser = new BarItem("/user/create");
+    private final BarItem manager = new BarItem("/manager");
+    private final BarItem suggestions = new BarItem("/suggestions");
 
     private boolean logged = false;
 

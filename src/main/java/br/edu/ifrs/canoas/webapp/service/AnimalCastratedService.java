@@ -13,7 +13,7 @@ public class AnimalCastratedService {
 
     private final AnimalCastratedRepository animalCastratedRepository;
 
-    public List<AnimalCastrated> listAnimalCastrated(){
+    public List<AnimalCastrated> listAnimalCastrated() {
         return animalCastratedRepository.findAllByOrderByNameAsc();
     }
 

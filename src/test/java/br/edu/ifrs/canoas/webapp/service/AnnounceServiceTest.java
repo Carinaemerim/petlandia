@@ -255,8 +255,8 @@ public class AnnounceServiceTest extends BaseTest {
         this.mockAuthContext.mockAuthAnonymous();
 
         assertThatExceptionOfType(ForbiddenException.class)
-        .isThrownBy(() -> {
-            announceService.removeAnnounce(101L);
-        });
+                .isThrownBy(() -> {
+                    announceService.removeAnnounce(101L);
+                });
     }
 }

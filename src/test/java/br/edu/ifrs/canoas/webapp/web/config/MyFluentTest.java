@@ -1,8 +1,7 @@
 package br.edu.ifrs.canoas.webapp.web.config;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.fluentlenium.core.annotation.Page;
@@ -13,13 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Wait
-@FluentConfiguration(webDriver="chrome")
+@FluentConfiguration(webDriver = "chrome")
 public abstract class MyFluentTest extends FluentTest {
 
     @LocalServerPort

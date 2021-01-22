@@ -3,7 +3,6 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
-import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
 import br.edu.ifrs.canoas.webapp.service.*;
@@ -16,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -100,7 +98,7 @@ public class UserController {
     public String userDetails(@PathVariable("id") final String id, Model model) {
 
         User user = userService.findById(Long.decode(id));
-        if (user == null){
+        if (user == null) {
             return "/notFound";
         }
 

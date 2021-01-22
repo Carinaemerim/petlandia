@@ -1,11 +1,10 @@
 package br.edu.ifrs.canoas.webapp.web.test;
 
+import br.edu.ifrs.canoas.webapp.web.config.MyFluentTest;
+import br.edu.ifrs.canoas.webapp.web.page.ProfilePage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import br.edu.ifrs.canoas.webapp.web.config.MyFluentTest;
-import br.edu.ifrs.canoas.webapp.web.page.ProfilePage;
 
 
 public class ProfileTest extends MyFluentTest {
@@ -14,15 +13,15 @@ public class ProfileTest extends MyFluentTest {
     ProfilePage profilePage;
 
     @BeforeEach
-    public void loginUser(){
+    public void loginUser() {
         super.loginUser();
     }
 
     @Test
     public void checkIsAt() {
         //Given
-    	profilePage.go(port);
-    	profilePage.isAt();
+        profilePage.go(port);
+        profilePage.isAt();
 
 
         //When

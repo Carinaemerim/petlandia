@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -36,14 +35,14 @@ public class Comment {
     private LocalDateTime updatedAt;
 
     @NotNull
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @NotNull
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Announce announce;
 
-    @NotNull(message="{field.required}")
-    @Size(min = 5, max = 250, message="{validation.comment.message.size}")
+    @NotNull(message = "{field.required}")
+    @Size(min = 5, max = 250, message = "{validation.comment.message.size}")
     private String message;
 }

@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 @Getter
 @NoArgsConstructor
 public class ManagerSidebar {
-    private BarItem userProfile = new BarItem("/manager/user/profile");
-    private BarItem userPassword = new BarItem("/manager/user/password");
-    private BarItem announceActive = new BarItem("/manager/announces/active");
-    private BarItem announceWaitingReview = new BarItem("/manager/announces/waiting-review");
-    private BarItem announceBlocked = new BarItem("/manager/announces/blocked");
-    private BarItem reportAnnounces = new BarItem("/manager/reports/announces");
-    private BarItem reportComments = new BarItem("/manager/reports/comments");
-    private BarItem adminUsers = new BarItem("/manager/admin/users");
+    private final BarItem userProfile = new BarItem("/manager/user/profile");
+    private final BarItem userPassword = new BarItem("/manager/user/password");
+    private final BarItem announceActive = new BarItem("/manager/announces/active");
+    private final BarItem announceWaitingReview = new BarItem("/manager/announces/waiting-review");
+    private final BarItem announceBlocked = new BarItem("/manager/announces/blocked");
+    private final BarItem reportAnnounces = new BarItem("/manager/reports/announces");
+    private final BarItem reportComments = new BarItem("/manager/reports/comments");
+    private final BarItem adminUsers = new BarItem("/manager/admin/users");
 
     private boolean moderator = false;
     private boolean admin = false;

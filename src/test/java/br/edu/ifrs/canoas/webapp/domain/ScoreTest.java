@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * AnimalAge é um label de score. Ao testar AnimalAge testamos score
  */
-public class ScoreTest extends BaseTest<AnimalAge>{
+public class ScoreTest extends BaseTest<AnimalAge> {
     @Test
     public void testValidScore() {
         AnimalAge score = ScoreHelper.createScore("age", 5, AnimalAge.class);

@@ -1,65 +1,65 @@
 <html layout:decorate="~{/layouts/main}">
 
 <th:block layout:fragment="meta-view">
-	<title th:text="|#{user.create.title} - #{head.title}|"/>
+    <title th:text="|#{user.create.title} - #{head.title}|"/>
 </th:block>
 
 <th:block layout:fragment="js-view">
-	<script src="/js/addressFinder.js"></script>
-	<script src="/js/create_user_page.js"></script>
+    <script src="/js/addressFinder.js"></script>
+    <script src="/js/create_user_page.js"></script>
 </th:block>
 
 
 <div layout:fragment="content-body">
 
-	<div class="row justify-content-center">
-		<div class="col-md-8 ">
-			<form action="#" method="post" th:action="@{/user/create}" th:object="${form}" accept-charset="UTF-8">
-				<div class="card">
+    <div class="row justify-content-center">
+        <div class="col-md-8 ">
+            <form action="#" method="post" th:action="@{/user/create}" th:object="${form}" accept-charset="UTF-8">
+                <div class="card">
 
-					<div class="card-header" th:text="#{user.form.access.data}">
+                    <div class="card-header" th:text="#{user.form.access.data}">
 
-					</div>
-					<div class="card-body">
-						<div th:replace="/user/fragments/user_login_data" :: user_login_data></div>
-					</div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_login_data" :: user_login_data></div>
+                    </div>
 
-					<div class="card-header" th:text="#{user.form.address.data}">
+                    <div class="card-header" th:text="#{user.form.address.data}">
 
-					</div>
-					<div class="card-body">
-						<div th:replace="/user/fragments/user_address_data" :: user_address_data></div>
-					</div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_address_data" :: user_address_data></div>
+                    </div>
 
-					<div class="card-header" th:text="#{user.form.contact.data}">
+                    <div class="card-header" th:text="#{user.form.contact.data}">
 
-					</div>
-					<div class="card-body">
-						<div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
-					</div>
+                    </div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
+                    </div>
 
-					<div class="card-header" th:text="#{user.form.animal.data}"> </div>
+                    <div class="card-header" th:text="#{user.form.animal.data}"></div>
 
-					<div class="card-body">
-						<div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
-					</div>
+                    <div class="card-body">
+                        <div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
+                    </div>
 
-					<div class="row justify-content-between">
-						<div class="col">
-							<a class="btn btn-danger" th:text="#{user.form.cancel}">
-							</a>
-						</div>
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <a class="btn btn-danger" th:text="#{user.form.cancel}">
+                            </a>
+                        </div>
 
-						<div class="col text-right">
-							<button class="btn btn-success" th:text="#{user.form.save}">
-							</button>
-						</div>
-					</div>
+                        <div class="col text-right">
+                            <button class="btn btn-success" th:text="#{user.form.save}">
+                            </button>
+                        </div>
+                    </div>
 
-				</div>
+                </div>
 
-			</form>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
 
 </div>

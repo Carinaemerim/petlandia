@@ -6,7 +6,7 @@ public enum CommentStatus {
     UNDER_REVIEW("comment.status.under_review"),
     DELETED("comment.status.deleted");
 
-    private String name;
+    private final String name;
 
     CommentStatus(String name) {
         this.name = name;
@@ -17,7 +17,7 @@ public enum CommentStatus {
         return this.name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

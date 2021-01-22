@@ -241,14 +241,15 @@
     <div class="modal fade" tabindex="-1" id="modal-edit-role">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" accept-charset="UTF-8" th:action="@{/manager/admin/users/{id}/change-role(id = ${user.id})}">
+                <form method="post" accept-charset="UTF-8"
+                      th:action="@{/manager/admin/users/{id}/change-role(id = ${user.id})}">
                     <div class="modal-header">
                         <h5 class="modal-title" th:text="#{manager.admin.user.view.action.change-role}"></h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="modal-edit-role-roles"
-                                th:text="#{manager.admin.user.view.roles}"></label>
+                                   th:text="#{manager.admin.user.view.roles}"></label>
                             <select class="custom-select" id="modal-edit-role-roles" name="role" required>
                                 <option th:each="i : ${roles}"
                                         th:value="${i.name()}" th:text="#{${i.name}}"
@@ -272,7 +273,8 @@
     <div class="modal fade" tabindex="-1" id="modal-block-user">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" accept-charset="UTF-8" th:action="@{/manager/admin/users/{id}/block-user(id = ${user.id})}">
+                <form method="post" accept-charset="UTF-8"
+                      th:action="@{/manager/admin/users/{id}/block-user(id = ${user.id})}">
                     <div class="modal-header">
                         <h5 class="modal-title" th:text="#{manager.admin.user.view.action.block-user}"></h5>
                     </div>

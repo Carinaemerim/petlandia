@@ -1,6 +1,6 @@
 package br.edu.ifrs.canoas.webapp.helper;
 
-import br.edu.ifrs.canoas.webapp.domain.*;
+import br.edu.ifrs.canoas.webapp.domain.Score;
 
 import java.lang.reflect.InvocationTargetException;
 

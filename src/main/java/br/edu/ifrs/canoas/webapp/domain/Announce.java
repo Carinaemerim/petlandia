@@ -1,7 +1,5 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
-import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
-import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.helper.Auth;
@@ -11,8 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -42,7 +44,7 @@ public class Announce {
     @NotNull(message = "{field.required}")
     private AnimalGender animalGender;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull(message = "{field.required}")
     private AnimalType animalType;
 
@@ -60,15 +62,15 @@ public class Announce {
 
     @NotBlank(message = "{field.required}")
     @Column(length = 10000)
-    @Size(min = 10, max = 10000, message ="{validation.announce.description.size}")
+    @Size(min = 10, max = 10000, message = "{validation.announce.description.size}")
     private String description;
 
     @NotBlank(message = "{field.required}")
     @Size(min = 3, max = 120, message = "{validation.announce.address.size}")
     private String address;
 
-    @NotBlank (message = "{field.required}")
-    @Pattern(regexp="\\d{5}-\\d{3}$", message = "{validation.announce.zipcode.pattern}")
+    @NotBlank(message = "{field.required}")
+    @Pattern(regexp = "\\d{5}-\\d{3}$", message = "{validation.announce.zipcode.pattern}")
     @Size(min = 9, max = 9, message = "{validation.announce.zipcode.size}")
     private String zipCode;
 
@@ -84,7 +86,7 @@ public class Announce {
     @Size(min = 2, max = 2, message = "{validation.announce.state.size}")
     private String state;
 
-    @Size(max = 5, message="{validation.announce.addressNumber.size}")
+    @Size(max = 5, message = "{validation.announce.addressNumber.size}")
     private String addressNumber;
 
     @NotNull(message = "{field.required}")
@@ -92,7 +94,7 @@ public class Announce {
     private AnimalCastrated animalCastrated;
 
     @NotNull
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Lob
@@ -114,7 +116,7 @@ public class Announce {
     private double score = 0;
 
     public boolean canModify() {
-        if(!Auth.isAuthenticated()) {
+        if (!Auth.isAuthenticated()) {
             return false;
         }
 
@@ -125,11 +127,11 @@ public class Announce {
 
 
     public boolean isModerator() {
-        return Auth.hasRole(new Role[]{ Role.ROLE_MODERATOR, Role.ROLE_ADMIN });
+        return Auth.hasRole(new Role[]{Role.ROLE_MODERATOR, Role.ROLE_ADMIN});
     }
 
     public boolean isAdmin() {
-        return Auth.hasRole(new Role[]{ Role.ROLE_ADMIN });
+        return Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
     }
 
     public boolean isOwner() {

@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CommentTest extends BaseTest<Comment>{
+public class CommentTest extends BaseTest<Comment> {
     @Test
     public void testValidComment() {
         Comment comment = CommentHelper.createComment();

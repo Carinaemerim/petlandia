@@ -37,21 +37,21 @@ public class Report {
     @Column
     private LocalDateTime ratedAt;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User ratedBy;
 
     @NotNull
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User reportBy;
 
     @NotNull
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Announce announce;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Comment comment;
 
-    @NotNull (message="{field.required}")
-    @Size(min = 10, max = 250, message="{validation.report.message.size}")
+    @NotNull(message = "{field.required}")
+    @Size(min = 10, max = 250, message = "{validation.report.message.size}")
     private String message;
 }

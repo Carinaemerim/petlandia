@@ -11,20 +11,20 @@ import javax.annotation.PostConstruct;
 @Component
 public class Messages {
 
-	private MessageSourceAccessor accessor;
-	private final MessageSource messageSource;
+    private MessageSourceAccessor accessor;
+    private final MessageSource messageSource;
 
-	public Messages(MessageSource messageSource) {
-		this.messageSource = messageSource;
-	}
+    public Messages(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
-	@PostConstruct
-	private void init() {
-		accessor = new MessageSourceAccessor(messageSource, LocaleContextHolder.getLocale());
-	}
+    @PostConstruct
+    private void init() {
+        accessor = new MessageSourceAccessor(messageSource, LocaleContextHolder.getLocale());
+    }
 
-	public String get(String code) {
-		return accessor.getMessage(code, LocaleContextHolder.getLocale());
-	}
+    public String get(String code) {
+        return accessor.getMessage(code, LocaleContextHolder.getLocale());
+    }
 
 }

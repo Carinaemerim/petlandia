@@ -1,12 +1,11 @@
 package br.edu.ifrs.canoas.webapp.web.test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import br.edu.ifrs.canoas.webapp.web.config.MyFluentTest;
+import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
 
-import br.edu.ifrs.canoas.webapp.web.config.MyFluentTest;
-import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LoginTest extends MyFluentTest {

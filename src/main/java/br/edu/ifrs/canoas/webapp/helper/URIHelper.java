@@ -10,7 +10,7 @@ public final class URIHelper {
     public static String buildPath(URI uri) {
         String query = uri.getRawQuery();
 
-        if(query == null) {
+        if (query == null) {
             return uri.getPath();
         }
 
@@ -19,7 +19,8 @@ public final class URIHelper {
 
     /**
      * Get referrer path from header
-     * @param request The request object
+     *
+     * @param request    The request object
      * @param defaultUri The path in case the referrer header is not available.
      *                   This should always be passed
      * @return The path to a route on our application

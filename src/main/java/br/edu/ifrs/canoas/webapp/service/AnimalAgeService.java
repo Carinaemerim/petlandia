@@ -13,7 +13,7 @@ public class AnimalAgeService {
 
     private final AnimalAgeRepository animalAgeRepository;
 
-    public List<AnimalAge> listAnimalAge(){
+    public List<AnimalAge> listAnimalAge() {
         return animalAgeRepository.findAllByOrderByIdAsc();
     }
 

@@ -17,19 +17,19 @@
                         <a class="btn btn-info"
                            th:href="@{/announce/{id}/edit(id = ${announce.id})}">
                             <i class="fa fa-pen"></i>
-                        <span class="ml-1" th:text="#{announce.mod.edit}"></span>
+                            <span class="ml-1" th:text="#{announce.mod.edit}"></span>
                         </a>
                     </div>
                 </div>
                 <div class="col-auto">
                     <div class="btn-group btn-group-sm" th:if="${announce.canRemove()}">
                         <form class="d-none" method="post" th:action="@{/announce/{id}/remove(id = ${announce.id})}"
-                        id="delete-form">
+                              id="delete-form">
                             <input type="hidden" name="origin" th:value="${referrer}">
                         </form>
                         <button class="btn btn-danger" type="submit" form="delete-form">
                             <i class="fa fa-trash"></i>
-                        <span class="ml-1" th:text="#{announce.mod.delete}"></span>
+                            <span class="ml-1" th:text="#{announce.mod.delete}"></span>
                         </button>
                     </div>
                 </div>
@@ -72,11 +72,13 @@
                                              th:src="${'data:image/png;base64,' + announce.thirdPhoto}">
                                     </div>
                                 </div>
-                                <a class="carousel-control-prev" href="#carousel-photos" role="button" data-slide="prev">
+                                <a class="carousel-control-prev" href="#carousel-photos" role="button"
+                                   data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carousel-photos" role="button" data-slide="next">
+                                <a class="carousel-control-next" href="#carousel-photos" role="button"
+                                   data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -149,7 +151,7 @@
                             <label th:text="#{announce.form.createdBy}">Criado Por</label>
                             <div class="form-control">
                                 <a th:href="@{|/manager/admin/users/${announce.user.id}|}"
-                                th:text="${announce.user.username}" th:if="${isAdmin}"></a>
+                                   th:text="${announce.user.username}" th:if="${isAdmin}"></a>
 
                                 <span th:text="${announce.user.username}" th:unless="${isAdmin}"></span>
                             </div>
@@ -190,7 +192,7 @@
                                      th:with="lineSeparator=${T(java.lang.System).getProperty('line.separator')}"
                                      style="height: auto;"
                                      th:utext="${#strings.replace( #strings.escapeXml( announce.description ), lineSeparator,'&lt;br /&gt;')}"
-                                     ></div>
+                                ></div>
                             </div>
                         </div>
                     </div>
@@ -220,8 +222,10 @@
                                 <small th:text="${comment.user.username}"></small>
                             </span>
                             <span class="direct-chat-actions float-left">
-                                <a th:if="${currentUserId != comment.user.id}" th:text="#{announce.comment.action.report}" class="btn-comment-report"></a>
-                                <a th:if="${currentUserId == comment.user.id}" th:text="#{announce.comment.action.remove}" class="btn-comment-remove"></a>
+                                <a th:if="${currentUserId != comment.user.id}"
+                                   th:text="#{announce.comment.action.report}" class="btn-comment-report"></a>
+                                <a th:if="${currentUserId == comment.user.id}"
+                                   th:text="#{announce.comment.action.remove}" class="btn-comment-remove"></a>
                             </span>
                             <span class="direct-chat-timestamp float-right"
                                   th:text="${#temporals.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
@@ -238,12 +242,16 @@
                 </div>
 
                 <div class="card-footer">
-                    <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post" accept-charset="UTF-8">
+                    <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post"
+                          accept-charset="UTF-8">
                         <div class="input-group">
-                            <input type="text" name="message" th:placeholder="#{announce.comment.form.input.placeholder}"
-                                   class="form-control" autocomplete="off" minlength="5" maxlength="230" pattern=".{5,230}">
+                            <input type="text" name="message"
+                                   th:placeholder="#{announce.comment.form.input.placeholder}"
+                                   class="form-control" autocomplete="off" minlength="5" maxlength="230"
+                                   pattern=".{5,230}">
                             <span class="input-group-append">
-                                <button type="submit" class="btn btn-secondary" th:text="#{announce.comment.form.send}"></button>
+                                <button type="submit" class="btn btn-secondary"
+                                        th:text="#{announce.comment.form.send}"></button>
                             </span>
                         </div>
                     </form>
@@ -284,13 +292,15 @@
     <div class="modal fade" tabindex="-1" id="modal-comment-report">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" accept-charset="UTF-8" action="#" data-action="/announce/:announce/comment/:comment/report">
+                <form method="post" accept-charset="UTF-8" action="#"
+                      data-action="/announce/:announce/comment/:comment/report">
                     <div class="modal-header">
                         <h5 class="modal-title" th:text="#{announce.form.comment.report.title}"></h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="announce_form_comment_report" th:text="#{announce.form.comment.report.label}"> </label>
+                            <label for="announce_form_comment_report"
+                                   th:text="#{announce.form.comment.report.label}"> </label>
                             <textarea class="form-control" id="announce_form_comment_report" name="message" rows="5"
                                       required maxlength="160" minlength="10"></textarea>
                         </div>
@@ -310,7 +320,8 @@
     <div class="modal fade" tabindex="-1" id="modal-comment-remove">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" accept-charset="UTF-8" action="#" data-action="/announce/:announce/comment/:comment/remove">
+                <form method="post" accept-charset="UTF-8" action="#"
+                      data-action="/announce/:announce/comment/:comment/remove">
                     <div class="modal-header">
                         <h5 class="modal-title">Remover comentário</h5>
                     </div>

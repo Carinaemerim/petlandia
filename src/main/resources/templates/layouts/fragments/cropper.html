@@ -22,7 +22,8 @@
 
     <div class="btn-group d-flex">
         <button type="button" class="btn btn-block btn-outline-secondary btn-select w-100"
-                th:text="#{cropper.btn.select}">open modal</button>
+                th:text="#{cropper.btn.select}">open modal
+        </button>
 
         <button type="button" class="btn btn-outline-danger btn-remove"
                 th:if="*{__${photo} + '.canRemove'__}">
@@ -48,7 +49,8 @@
                 <div class="modal-footer">
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary btn-submit"
-                                th:text="#{cropper.btn.submit}">Select file</button>
+                                th:text="#{cropper.btn.submit}">Select file
+                        </button>
                     </div>
                 </div>
             </div>

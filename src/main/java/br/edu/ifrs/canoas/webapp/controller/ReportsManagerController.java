@@ -2,16 +2,9 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
-import br.edu.ifrs.canoas.webapp.domain.Report;
-import br.edu.ifrs.canoas.webapp.domain.User;
-import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
-import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
 import br.edu.ifrs.canoas.webapp.helper.URIHelper;
-import br.edu.ifrs.canoas.webapp.service.AnnounceService;
-import br.edu.ifrs.canoas.webapp.service.CommentService;
 import br.edu.ifrs.canoas.webapp.service.ReportService;
-import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

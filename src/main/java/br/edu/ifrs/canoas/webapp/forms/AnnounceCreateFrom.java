@@ -3,7 +3,6 @@ package br.edu.ifrs.canoas.webapp.forms;
 import br.edu.ifrs.canoas.webapp.domain.Announce;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data

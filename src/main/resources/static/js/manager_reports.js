@@ -1,5 +1,3 @@
-
-
 function initReportsModal() {
     const container = $('#report-container');
     const rows = $('.callout', container);
@@ -47,6 +45,6 @@ function initReportsModal() {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     initReportsModal();
 });

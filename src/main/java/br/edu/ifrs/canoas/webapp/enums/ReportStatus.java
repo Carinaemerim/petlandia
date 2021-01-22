@@ -5,7 +5,7 @@ public enum ReportStatus {
     REJECTED("report.status.rejected"),
     ACCEPTED("report.status.accepted");
 
-    private String name;
+    private final String name;
 
     ReportStatus(String name) {
         this.name = name;
@@ -16,7 +16,7 @@ public enum ReportStatus {
         return this.name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

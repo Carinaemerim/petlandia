@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends PagingAndSortingRepository<Comment, Long> {
     Page<Comment> findAllByAnnounceEqualsOrderByCreatedAtDesc(Pageable page, Announce announce);
+
     Page<Comment> findAllByAnnounceEqualsAndStatusEqualsOrderByCreatedAtDesc(Pageable page, Announce announce, CommentStatus status);
+
     Comment findByIdAndAnnounce(Long id, Announce announce);
+
     Long countAllByStatus(CommentStatus status);
 }

@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
-public class AnimalType extends Score {}
+public class AnimalType extends Score {
+}

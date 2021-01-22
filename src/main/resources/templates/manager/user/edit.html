@@ -29,7 +29,8 @@
                     </div>
                 </div>
 
-                <form method="post" th:action="@{/manager/user/profile/edit}" th:object="${form}" accept-charset="UTF-8">
+                <form method="post" th:action="@{/manager/user/profile/edit}" th:object="${form}"
+                      accept-charset="UTF-8">
 
                     <div class="card-body">
                         <div class="row">
@@ -62,7 +63,7 @@
                         <div th:replace="/user/fragments/user_contact_data" :: user_contact_data></div>
                     </div>
 
-                    <div class="card-header" th:text="#{user.form.animal.data}"> </div>
+                    <div class="card-header" th:text="#{user.form.animal.data}"></div>
 
                     <div class="card-body">
                         <div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
@@ -72,6 +73,6 @@
                         <button class="btn btn-success" th:text="#{user.form.update}"></button>
                     </div>
                 </form>
+            </div>
         </div>
     </div>
-</div>

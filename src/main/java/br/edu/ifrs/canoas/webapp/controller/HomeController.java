@@ -20,22 +20,22 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeController {
 
-	private final AnnounceListService announceListService;
-	private final AnnounceService announceService;
-	private final SuggestionService suggestionService;
+    private final AnnounceListService announceListService;
+    private final AnnounceService announceService;
+    private final SuggestionService suggestionService;
 
-	@GetMapping("")
-	public String home(@AuthenticationPrincipal UserImpl activeUser, Model model) {
-		List<Announce> suggestions = new ArrayList<>();
+    @GetMapping("")
+    public String home(@AuthenticationPrincipal UserImpl activeUser, Model model) {
+        List<Announce> suggestions = new ArrayList<>();
 
-		if (activeUser != null) {
-			suggestions = suggestionService.findFirstFive(activeUser.getUser());
-		}
+        if (activeUser != null) {
+            suggestions = suggestionService.findFirstFive(activeUser.getUser());
+        }
 
-		model.addAttribute("filters", announceListService.getFilters());
-		model.addAttribute("form", new AnnounceFilterForm());
-		model.addAttribute("announces", announceService.findFirstFive(AnnounceStatus.ACTIVE));
-		model.addAttribute("suggestions", suggestions);
-		return "/index";
-	}
+        model.addAttribute("filters", announceListService.getFilters());
+        model.addAttribute("form", new AnnounceFilterForm());
+        model.addAttribute("announces", announceService.findFirstFive(AnnounceStatus.ACTIVE));
+        model.addAttribute("suggestions", suggestions);
+        return "/index";
+    }
 }

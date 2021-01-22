@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CommentServiceTest extends BaseTest{
+public class CommentServiceTest extends BaseTest {
     @Autowired
     CommentService commentService;
 
@@ -76,7 +76,7 @@ public class CommentServiceTest extends BaseTest{
         assertThat(comments.getData()).hasSize(2);
 
         assertThat(comments.getData().stream()
-                    .allMatch((e) -> e.getStatus().equals(CommentStatus.ACTIVE)))
+                .allMatch((e) -> e.getStatus().equals(CommentStatus.ACTIVE)))
                 .isTrue();
 
         assertThat(comments.getData().get(0).getId()).isEqualTo(102);

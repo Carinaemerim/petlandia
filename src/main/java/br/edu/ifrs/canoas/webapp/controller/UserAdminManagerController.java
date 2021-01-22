@@ -7,7 +7,6 @@ import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +49,7 @@ public class UserAdminManagerController {
                              @Valid @ModelAttribute("role") Role role,
                              @AuthenticationPrincipal UserImpl activeUser) {
 
-        if(activeUser.getUser().getId().equals(id)) {
+        if (activeUser.getUser().getId().equals(id)) {
             throw new ForbiddenException("User cannot change his own privileges");
         }
 
@@ -70,7 +69,7 @@ public class UserAdminManagerController {
     public String blockUser(@PathVariable("id") final Long id,
                             @AuthenticationPrincipal UserImpl activeUser) {
 
-        if(activeUser.getUser().getId().equals(id)) {
+        if (activeUser.getUser().getId().equals(id)) {
             throw new ForbiddenException("User cannot change his own privileges");
         }
 
@@ -90,8 +89,6 @@ public class UserAdminManagerController {
 
         return user;
     }
-
-
 
 
 }

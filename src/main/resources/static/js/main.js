@@ -82,22 +82,22 @@ function InitCropper(id, options) {
 
     function getImageFromFile(file) {
         return new Promise((resolve, reject) => {
-            const reader  = new FileReader();
-            reader.onload = function() {
+            const reader = new FileReader();
+            reader.onload = function () {
                 const img = new Image;
 
-                img.onload = function() {
+                img.onload = function () {
                     resolve(img);
                 };
 
-                img.onerror = function(err) {
+                img.onerror = function (err) {
                     reject(err);
                 }
 
                 img.src = reader.result;
             };
 
-            reader.onerror = function(err) {
+            reader.onerror = function (err) {
                 reject(err);
             }
 
@@ -137,8 +137,8 @@ function InitCropper(id, options) {
     });
 
     $btn_select.click((e) => {
-      e.preventDefault();
-      $modal.modal('show');
+        e.preventDefault();
+        $modal.modal('show');
     });
 
     $btn_cancel.click((e) => {
@@ -180,7 +180,7 @@ function initPagination(container) {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     initPagination();
 
     $(".image-placeholder").each(function _each() {

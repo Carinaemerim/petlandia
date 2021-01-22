@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.FORBIDDEN)
 @AllArgsConstructor
-public class ForbiddenException extends RuntimeException{
+public class ForbiddenException extends RuntimeException {
     String message;
 }

@@ -6,21 +6,21 @@
             <a class="btn btn-light btn-block text-left"
                th:href="*{userProfile.href}"
                th:classappend="*{userProfile.active} ? 'active'">
-             <i class="fa fa-user-edit mr-2"></i> <span th:text="#{ sidebar.user.myData}"></span></a>
+                <i class="fa fa-user-edit mr-2"></i> <span th:text="#{ sidebar.user.myData}"></span></a>
 
             <a class="btn btn-light btn-block text-left"
                th:href="*{userPassword.href}"
                th:classappend="*{userPassword.active} ? 'active'">
-             <i class="fa fa-lock mr-2"></i> <span th:text="#{sidebar.user.alterPass}"></span></a>
+                <i class="fa fa-lock mr-2"></i> <span th:text="#{sidebar.user.alterPass}"></span></a>
         </div>
 
-        <div class="card-header" th:text="#{sidebar.user.myAnnounces}"> </div>
+        <div class="card-header" th:text="#{sidebar.user.myAnnounces}"></div>
 
         <div class="card-body">
             <a class="btn btn-light btn-block text-left"
                th:href="*{announceActive.href}"
                th:classappend="*{announceActive.active} ? 'active'">
-             <i class="fa fa-check-circle mr-2"></i> <span th:text="#{sidebar.user.published}"></span></a>
+                <i class="fa fa-check-circle mr-2"></i> <span th:text="#{sidebar.user.published}"></span></a>
 
             <a class="btn btn-light btn-block text-left"
                th:href="*{announceWaitingReview.href}"
@@ -55,22 +55,22 @@
             <a class="btn btn-light btn-block text-left"
                th:href="*{reportComments.href}"
                th:classappend="*{reportComments.active} ? 'active'">
-               <i class="fa fa-comments mr-2"></i>
-             <span th:text="#{sidebar.mod.comments}"> </span>
+                <i class="fa fa-comments mr-2"></i>
+                <span th:text="#{sidebar.mod.comments}"> </span>
                 <span class="badge badge-danger badge-pill pull-right"
                       th:if="*{reportComments.size > 0}"
                       th:text="*{reportComments.size}">0</span>
             </a>
         </div>
 
-        <div class="card-header" th:if="*{admin}" th:text="#{sidebar.adm.management}"> </div>
+        <div class="card-header" th:if="*{admin}" th:text="#{sidebar.adm.management}"></div>
 
         <div class="card-body" th:if="*{admin}">
             <a class="btn btn-light btn-block text-left"
                th:href="*{adminUsers.href}"
                th:classappend="*{adminUsers.active} ? 'active'">
                 <i class="fa fa-users mr-2"></i>
-              <span th:text="#{sidebar.adm.users}"></span></a>
+                <span th:text="#{sidebar.adm.users}"></span></a>
         </div>
 
     </div>

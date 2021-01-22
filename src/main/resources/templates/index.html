@@ -46,7 +46,7 @@
             <div class="card">
 
                 <div class="card-header" th:text="#{about.us}">Sobre nós</div>
-                <div class="card-body" >
+                <div class="card-body">
                     <img class="float-left mr-2" th:src="@{/img/homepetlandia.png}"
                          alt="Cachorros_gato" style="width:260px;height:170px;">
                     <p th:text="#{first.paragraph}">
@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <div class="jumbotron" sec:authorize="isAnonymous()">
                         <p>
-                            <a class="text-gray" th:text="#{register.message}" th:href="@{/user/create}" >Registre-se</a>
+                            <a class="text-gray" th:text="#{register.message}" th:href="@{/user/create}">Registre-se</a>
                             <span>ou</span>
                             <a class="text-gray" th:text="#{login.home}" th:href="@{/login}">Faça login</a>
                             <span th:text="#{system.suggested}">no sistema p ver suas recomendações.</span>

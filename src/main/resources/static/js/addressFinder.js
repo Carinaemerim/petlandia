@@ -4,7 +4,7 @@ var streetField;
 var zipField;
 var neighborhoodField;
 
-function init(neighborhoodFieldParam, stateFieldParam, cityFieldParam, streetFieldParam, zipFieldParam){
+function init(neighborhoodFieldParam, stateFieldParam, cityFieldParam, streetFieldParam, zipFieldParam) {
     streetField = streetFieldParam;
     cityField = cityFieldParam;
     stateField = stateFieldParam;
@@ -22,7 +22,7 @@ function init(neighborhoodFieldParam, stateFieldParam, cityFieldParam, streetFie
 }
 
 
-function handleAddress(){
+function handleAddress() {
 
     function clearAdressInfo() {
 
@@ -31,7 +31,8 @@ function handleAddress(){
         $(streetField).val("");
         $(neighborhoodField).val("");
     }
-    $(zipField).blur(function() {
+
+    $(zipField).blur(function () {
 
         console.log("Localizando endereço ... ");
         var cep = $(this).val().replace(/\D/g, '');
@@ -39,7 +40,7 @@ function handleAddress(){
         if (cep !== "") {
             var validacep = /^[0-9]{8}$/;
 
-            if(validacep.test(cep)) {
+            if (validacep.test(cep)) {
 
                 $(cityField).val("...");
                 $(stateField).val("...");
@@ -47,7 +48,7 @@ function handleAddress(){
                 $(neighborhoodField).val("...");
 
                 //Consulta o webservice viacep.com.br/
-                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                     if (!("erro" in dados)) {
 
@@ -57,8 +58,7 @@ function handleAddress(){
                         $(neighborhoodField).val(dados.bairro);
                         console.log("Success");
 
-                    }
-                    else {
+                    } else {
                         //CEP pesquisado não foi encontrado.
                         clearAdressInfo();
                         alert("CEP não encontrado, por favor informe os dados manualmente.");
