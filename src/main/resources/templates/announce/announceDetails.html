@@ -187,8 +187,9 @@
                                 <label th:text="#{announce.form.description}"> </label>
                                 <br>
                                 <div class="form-control"
+                                     th:with="lineSeparator=${T(java.lang.System).getProperty('line.separator')}"
                                      style="height: auto;"
-                                     th:utext="${#strings.replace( #strings.escapeXml( announce.description ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}"
+                                     th:utext="${#strings.replace( #strings.escapeXml( announce.description ), lineSeparator,'&lt;br /&gt;')}"
                                      ></div>
                             </div>
                         </div>
