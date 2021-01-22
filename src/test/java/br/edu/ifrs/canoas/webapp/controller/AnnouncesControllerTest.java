@@ -213,7 +213,7 @@ public class AnnouncesControllerTest extends BaseTest {
 
         when(announceService.findByIdAndStatusActive(
                 eq(announceId))
-        ).thenThrow(AnnounceNotFoundException.class);
+        ).thenReturn(null);
 
         this.mvc.perform(get("/announces/{id}", announceId)
                 .with(csrf())
