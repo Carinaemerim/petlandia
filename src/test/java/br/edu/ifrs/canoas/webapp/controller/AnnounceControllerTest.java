@@ -2,6 +2,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.helper.*;
 import br.edu.ifrs.canoas.webapp.service.*;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.awt.*;
+import java.net.URI;
 import java.util.*;
 import java.util.List;
 
@@ -248,13 +250,90 @@ public class AnnounceControllerTest extends BaseTest {
     }
 
     @Test
-    public void testPostCommentToReport() throws Exception { fail("not implemented"); }
+    public void testPostCommentToReport() throws Exception {
+        this.mockAuthContext.mockAuthUser();
+
+        String message = "report comment test on announce id 100";
+
+        Announce announce = AnnounceHelper.createAnnounce();
+        announce.setId(100L);
+
+        Comment comment = CommentHelper.createComment();
+        comment.setId(200L);
+        comment.setUser(this.mockAuthContext.getUser());
+        comment.setAnnounce(announce);
+
+        when(announceService.findByIdAndStatusActive(eq(announce.getId()))).thenReturn(announce);
+        when(commentService.findOrThrow(eq(comment.getId()), eq(announce))).thenReturn(comment);
+
+        this.mvc.perform(post("/announce/{id}/comment/{commentId}/report",
+                announce.getId(), comment.getId())
+                .with(csrf())
+                .flashAttr("message", message)
+                .accept(MediaType.TEXT_HTML)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attribute("success", "announce.comment.reported"))
+                .andExpect(view().name("redirect:/announces/" + announce.getId()));
+
+
+        verify(reportService, times(1)).save(eq(comment),
+                eq(this.mockAuthContext.getUser()), eq(message));
+        verify(commentService, times(1)).setStatus(eq(comment), eq(CommentStatus.WAITING_REVIEW));
+    }
 
     @Test
-    public void testPostCommentToRemove() throws Exception { fail("not implemented"); }
+    public void testPostCommentToRemove() throws Exception {
+        this.mockAuthContext.mockAuthUser();
+
+        Announce announce = AnnounceHelper.createAnnounce();
+        announce.setId(100L);
+
+        Comment comment = CommentHelper.createComment();
+        comment.setId(200L);
+        comment.setUser(this.mockAuthContext.getUser());
+        comment.setAnnounce(announce);
+
+        when(announceService.findByIdAndStatusActive(eq(announce.getId()))).thenReturn(announce);
+        when(commentService.findOrThrow(eq(comment.getId()), eq(announce))).thenReturn(comment);
+
+        this.mvc.perform(post("/announce/{id}/comment/{commentId}/remove",
+                announce.getId(), comment.getId())
+                .with(csrf())
+                .accept(MediaType.TEXT_HTML)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attribute("success", "announce.comment.deleted"))
+                .andExpect(view().name("redirect:/announces/" + announce.getId()));
+
+
+        verify(commentService, times(1)).remove(eq(comment));
+
+    }
 
     @Test
-    public void testRemoveAnnounce() throws Exception { fail("not implemented"); }
+    public void testRemoveAnnounce() throws Exception {
+        this.mockAuthContext.mockAuthUser();
+
+        Announce announce = AnnounceHelper.createAnnounce();
+        announce.setId(100L);
+        announce.setUser(this.mockAuthContext.getUser());
+
+        this.mvc.perform(post("/announce/{id}/remove", announce.getId())
+                .param("origin", "/announces/" + announce.getId())
+                .with(csrf())
+                .accept(MediaType.TEXT_HTML)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attribute("success", "announce.deleted"))
+                .andExpect(view().name("redirect:/announces/" + announce.getId()));
+
+
+        verify(announceService, times(1)).removeAnnounce(eq(announce.getId()));
+    }
 
     @SuppressWarnings("unchecked")
     private void mockScoreServices(Map<String, List<? extends Score>> scoresMap) {
