@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.webapp.helper;
 
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import org.imgscalr.Scalr;
+import org.springframework.http.InvalidMediaTypeException;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -26,13 +28,13 @@ public class ImageResize {
         }
     }
 
-    public static String encode(BufferedImage image, String type) throws IOException {
+    public static String encode(BufferedImage image) throws IOException {
 
         String imageString;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         try {
-            ImageIO.write(image, type, bos);
+            ImageIO.write(image, "jpeg", bos);
             byte[] imageBytes = bos.toByteArray();
             imageString = Base64.getEncoder().encodeToString(imageBytes);
         } finally {
@@ -83,16 +85,19 @@ public class ImageResize {
     }
 
 
-    public static String getBase64FromUploadImage(Cropper cropper, Dimension target, String imageType) throws IOException {
+    public static String getBase64FromUploadImage(Cropper cropper, Dimension target) throws IOException {
         BufferedImage buffer = getBuffer(cropper.getImage());
+
+        MediaType mediaType = MediaType.parseMediaType(cropper.getImage().getContentType());
+        if (MediaType.IMAGE_PNG.equals(mediaType)) {
+            BufferedImage newImage = new BufferedImage(buffer.getWidth(), buffer.getHeight(), buffer.TYPE_INT_RGB);
+            newImage.createGraphics().drawImage(buffer, 0, 0, Color.WHITE, null);
+            buffer = newImage;
+        }
 
         buffer = rotate(buffer, (int) cropper.getRotate());
         buffer = Scalr.crop(buffer, (int) cropper.getX(), (int) cropper.getY(), (int) cropper.getWidth(), (int) cropper.getHeight());
         buffer = Scalr.resize(buffer, (int) target.getWidth(), (int) target.getHeight());
-        return encode(buffer, imageType);
-    }
-
-    public static String getBase64FromUploadImage(Cropper cropper, Dimension target) throws IOException {
-        return getBase64FromUploadImage(cropper, target, "jpg");
+        return encode(buffer);
     }
 }

@@ -4,12 +4,15 @@ import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.Comment;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
+import br.edu.ifrs.canoas.webapp.exception.CommentNotFoundException;
 import br.edu.ifrs.canoas.webapp.repository.CommentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -49,6 +52,11 @@ public class CommentService {
 
     public Long countAll(CommentStatus status) {
         return commentRepository.countAllByStatus(status);
+    }
+
+    public Comment findOrThrow(Long id, Announce announce) {
+        Optional<Comment> comment = Optional.of(this.findByIdAndAnnounce(id, announce));
+        return comment.orElseThrow(CommentNotFoundException::new);
     }
 
 }
