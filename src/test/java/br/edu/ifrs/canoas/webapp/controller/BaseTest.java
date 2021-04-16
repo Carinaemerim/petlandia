@@ -32,6 +32,8 @@ public abstract class BaseTest {
     MockMvc mvc;
     @Autowired
     MockAuthContext mockAuthContext;
+    @Autowired
+    MockAuthContext mockAuthAnonymous;
     @MockBean
     UserDetailsImplService implService;
     @MockBean

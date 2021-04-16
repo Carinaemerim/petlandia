@@ -29,5 +29,4 @@ public class UserControllerTest extends BaseTest {
     public void testCreateUserGet() {
         fail("Not implemented");
     }
-
 }

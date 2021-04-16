@@ -1,6 +1,6 @@
 package br.edu.ifrs.canoas.webapp.web.config;
 
-import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
+import br.edu.ifrs.canoas.webapp.web.page.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.fluentlenium.configuration.FluentConfiguration;
@@ -30,13 +30,11 @@ public abstract class MyFluentTest extends FluentTest {
     }
 
     @Page
-    LoginPage loginPage;
+    HomePage homePage;
 
-    public void loginUser() {
-        loginPage.go(port);
-        loginPage.fillAndSubmitForm("user", "user")
-                .awaitUntilFormDisappear();
-        assertThat(window().title()).isEqualTo("IFRS");
+    public void NotloggedUser() {
+        homePage.go(port);
+        assertThat(window().title()).isEqualTo("Home - PetLandia");
     }
 
 }
