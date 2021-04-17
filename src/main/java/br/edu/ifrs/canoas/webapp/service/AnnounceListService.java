@@ -23,6 +23,7 @@ public class AnnounceListService {
     private final AnimalCastratedRepository animalCastratedRepository;
     private final AnimalSizeRepository animalSizeRepository;
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<FilterForm> getFilters() {
         List<FilterForm> filters = new ArrayList<>();
         FilterForm filter = null;

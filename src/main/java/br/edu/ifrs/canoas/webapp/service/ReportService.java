@@ -72,15 +72,15 @@ public class ReportService {
         return report;
     }
 
-    public PaginatedEntity<Report> findAllComments(int pageNumber, int pageLenght, ReportStatus status) {
-        Pageable page = PageRequest.of(pageNumber, pageLenght);
+    public PaginatedEntity<Report> findAllComments(int pageNumber, int pageLength, ReportStatus status) {
+        Pageable page = PageRequest.of(pageNumber, pageLength);
         Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNotNullOrderByCreatedAtDesc(page, status);
 
         return PaginatedEntity.<Report>builder()
                 .currentPage(pageNumber)
                 .data(reportPage.getContent())
                 .totalResults(reportPage.getTotalElements())
-                .pageLength(pageLenght)
+                .pageLength(pageLength)
                 .build();
     }
 
