@@ -4,8 +4,9 @@ import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 
 public class UserHelper {
-    public static User createUser() {
+    public static User createUser(Long id) {
         return User.builder()
+                .id(id)
                 .address("Rua tramandaí")
                 .state("RS")
                 .city("Canoas")
@@ -29,5 +30,9 @@ public class UserHelper {
                 .animalType(ScoreHelper.createScore("DOG", 2.0, AnimalType.class))
                 .animalGender(ScoreHelper.createScore("FEMALE", 2.0, AnimalGender.class))
                 .build();
+    }
+
+    public static User createUser() {
+        return createUser(null);
     }
 }

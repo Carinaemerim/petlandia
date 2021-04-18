@@ -35,7 +35,7 @@ public class UserAdminManagerController {
     public String view(@PathVariable("id") final Long id,
                        Model model,
                        @AuthenticationPrincipal UserImpl activeUser) {
-        User user = getUser(id);
+        User user = this.userService.findById(id);
 
         model.addAttribute("isSelf", activeUser.getUser().getId().equals(id));
         model.addAttribute("user", user);
@@ -53,7 +53,7 @@ public class UserAdminManagerController {
             throw new ForbiddenException("User cannot change his own privileges");
         }
 
-        User user = getUser(id);
+        User user = this.userService.findById(id);
 
         if (role == null) {
             throw new RuntimeException("role is not valid");
@@ -73,22 +73,11 @@ public class UserAdminManagerController {
             throw new ForbiddenException("User cannot change his own privileges");
         }
 
-        User user = getUser(id);
+        User user = this.userService.findById(id);
         user.setActive(false);
         user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "redirect:/manager/admin/users/" + user.getId();
     }
-
-    private User getUser(Long id) {
-        User user = userService.findById(id);
-
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
-
-        return user;
-    }
-
 
 }

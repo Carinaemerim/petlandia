@@ -1,8 +1,9 @@
 package br.edu.ifrs.canoas.webapp;
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
-import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.helper.ScoreHelper;
 import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
 import lombok.Getter;
 import org.mockito.Mockito;
@@ -93,6 +94,13 @@ public class MockAuthContext {
         user.setPassword(password);
         user.setUsername(username);
         user.setRole(role);
+
+        user.setAnimalType(ScoreHelper.createScore("DOG", 2.0, AnimalType.class));
+        user.setAnimalCastrated(ScoreHelper.createScore("YES", 2.0, AnimalCastrated.class));
+        user.setAnimalGender(ScoreHelper.createScore("FEMALE", 2.0, AnimalGender.class));
+        user.setAnimalAge(ScoreHelper.createScore("PUPPY", 2.0, AnimalAge.class));
+        user.setAnimalColor(ScoreHelper.createScore("WHITE", 2.0, AnimalColor.class));
+        user.setAnimalSize(ScoreHelper.createScore("MEDIUM", 2.0, AnimalSize.class));
 
         userDetails = new UserImpl(
                 username,
