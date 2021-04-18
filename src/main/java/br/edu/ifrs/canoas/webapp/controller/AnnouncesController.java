@@ -51,13 +51,13 @@ public class AnnouncesController {
     }
 
     @GetMapping("/{id}")
-    public String announceDetails(@PathVariable("id") final String id,
+    public String announceDetails(@PathVariable("id") final Long id,
                                   @AuthenticationPrincipal UserImpl activeUser,
                                   @RequestParam(value = "page", defaultValue = "0") int page,
                                   HttpServletRequest httpServletRequest,
                                   Model model) {
 
-        Announce announce = announceService.findByIdAndStatusActive(Long.decode(id));
+        Announce announce = announceService.findByIdAndStatusActive(id);
         if (announce == null) {
             throw new AnnounceNotFoundException();
         }

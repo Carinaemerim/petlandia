@@ -5,7 +5,6 @@ import br.edu.ifrs.canoas.webapp.domain.Comment;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
-import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.helper.AnnounceHelper;
 import br.edu.ifrs.canoas.webapp.helper.CommentHelper;
@@ -16,15 +15,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
-
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AnnouncesController.class)
