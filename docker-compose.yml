@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  database:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    networks:
+      - main
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petlandia
+      MYSQL_USER: petlandia
+      MYSQL_PASSWORD: petlandia
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    restart: unless-stopped
+#    ports:
+#      - '8081:80'
+#    environment:
+#      PMA_HOST: database
+#      MYSQL_ROOT_PASSWORD: root
+#    networks:
+#      - main
+volumes:
+  db_data:
+networks:
+  main:

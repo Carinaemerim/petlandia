@@ -1,7 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE
-    platform: h2
+    url: jdbc:mysql://${MYSQL_HOST:petlandia}:3306/${MYSQL_DATABASE:petlandia}
+    platform: mysql
+    username: ${MYSQL_USER:petlandia}
+    password: ${MYSQL_PASSWORD:petlandia}
 ---
 spring:
   profiles:
