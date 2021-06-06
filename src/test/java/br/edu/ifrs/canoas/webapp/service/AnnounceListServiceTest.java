@@ -32,24 +32,22 @@ public class AnnounceListServiceTest extends BaseTest {
     @Autowired
     AnimalColorRepository animalColorRepository;
 
-
-
     @Test
     public <T extends Score> void testGetFilters() {
         List<FilterForm> filters = announceListService.getFilters();
 
         this.testFilterType(
                 filters.get(0),
-                "animalAge",
-                messages.get("form.filter.animalAge"),
-                animalAgeRepository.findAllByOrderByIdAsc()
+                "animalType",
+                messages.get("form.filter.animalType"),
+                animalTypeRepository.findAllByOrderByNameAsc()
         );
 
         this.testFilterType(
                 filters.get(1),
-                "animalType",
-                messages.get("form.filter.animalType"),
-                animalTypeRepository.findAllByOrderByNameAsc()
+                "animalAge",
+                messages.get("form.filter.animalAge"),
+                animalAgeRepository.findAllByOrderByIdAsc()
         );
 
         this.testFilterType(

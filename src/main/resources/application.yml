@@ -4,7 +4,7 @@ spring:
     cache: false
   mvc:
     favicon:
-      enabled: true
+    enabled: true
     locale: pt_BR
   jpa:
     show-sql: true

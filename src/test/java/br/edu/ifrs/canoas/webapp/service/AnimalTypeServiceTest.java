@@ -1,6 +1,5 @@
 package br.edu.ifrs.canoas.webapp.service;
 
-import br.edu.ifrs.canoas.webapp.domain.AnimalAge;
 import br.edu.ifrs.canoas.webapp.domain.AnimalType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class AnimalTypeServiceTest extends BaseTest {
     public static final String TYPE = "DOG";
 
     @Test
-    public void testListAnimalAge() {
+    public void testListAnimalType() {
         List<AnimalType> animalTypes = animalTypeService.listAnimalType();
 
         assertThat(animalTypes).hasSize(2);

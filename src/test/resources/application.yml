@@ -1,10 +1,37 @@
 spring:
+  thymeleaf:
+    prefix: classpath:/templates
+    cache: false
+  mvc:
+    favicon:
+    enabled: true
+    locale: pt_BR
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:petlandia}:3306/${MYSQL_DATABASE:petlandia}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE:petlandia}
     platform: mysql
     username: ${MYSQL_USER:petlandia}
     password: ${MYSQL_PASSWORD:petlandia}
+    data: classpath:data-mysql.sql
+    initialization-mode: always
+
+  profiles:
+    - development
 ---
 spring:
   profiles:
     active: development
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 16MB
+---
+server:
+  error:
+    whitelabel:
+      enabled: false

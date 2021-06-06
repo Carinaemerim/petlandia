@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.helper.UserHelper;
 import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -86,7 +87,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testFindByIdNotFound() {
-        assertThatExceptionOfType(EntityNotFoundException.class)
+        assertThatExceptionOfType(UserNotFoundException.class)
                 .isThrownBy(() -> {
                     userService.findById(10000000L);
                 });

@@ -28,16 +28,16 @@ public class AnnounceListService {
         List<FilterForm> filters = new ArrayList<>();
         FilterForm filter = null;
 
-        filter = new FilterForm<AnimalAge>();
-        filter.setId("animalAge");
-        filter.setLabel(messages.get("form.filter." + filter.getId()));
-        filter.setOptions(animalAgeRepository.findAllByOrderByIdAsc());
-        filters.add(filter);
-
         filter = new FilterForm<AnimalType>();
         filter.setId("animalType");
         filter.setLabel(messages.get("form.filter." + filter.getId()));
         filter.setOptions(animalTypeRepository.findAllByOrderByNameAsc());
+        filters.add(filter);
+
+        filter = new FilterForm<AnimalAge>();
+        filter.setId("animalAge");
+        filter.setLabel(messages.get("form.filter." + filter.getId()));
+        filter.setOptions(animalAgeRepository.findAllByOrderByIdAsc());
         filters.add(filter);
 
         filter = new FilterForm<AnimalCastrated>();
