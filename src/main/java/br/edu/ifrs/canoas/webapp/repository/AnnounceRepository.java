@@ -40,6 +40,8 @@ public interface AnnounceRepository extends PagingAndSortingRepository<Announce,
      * Devido a um bug no spring, este método retorna uma lista e,
      * a query de count é feita em outro método. Caso seja corrigido, alterar o retorno
      * para Page ao invés de List e remover o método de contagem abaixo
+     *
+     * Apenas anúncios que não foram criados pelo usuário que esta logado
      */
     @Query(value = "" +
             "SELECT " +

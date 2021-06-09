@@ -15,8 +15,8 @@ values (101, 'MALE', 'animal.gender.male', 1),
 -- ANIMAL_SIZE
 insert into animal_size (id, name, label, weight)
 values (101, 'SMALL', 'animal.size.small', 1),
-       (102, 'MEDIUM', 'animal.size.medium', 2),
-       (103, 'LARGE', 'animal.size.large', 3);
+       (102, 'MEDIUM', 'animal.size.medium', 3),
+       (103, 'LARGE', 'animal.size.large', 5);
 
 -- ANIMAL_CASTRATED
 insert into animal_castrated (id, name, label, weight)
