@@ -57,11 +57,7 @@ public class AnnouncesController {
                                   HttpServletRequest httpServletRequest,
                                   Model model) {
 
-        Announce announce = announceService.findByIdAndStatusActive(id);
-        if (announce == null) {
-            throw new AnnounceNotFoundException();
-        }
-
+        Announce announce = announceService.findByIdAndCheck(id);
         User currentUser = Auth.getUser();
         Long currentUserId = currentUser != null ? currentUser.getId() : 0L;
 

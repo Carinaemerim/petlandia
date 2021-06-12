@@ -5,9 +5,11 @@ import br.edu.ifrs.canoas.webapp.domain.Announce;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
+import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,8 +33,19 @@ public class AnnounceService {
     }
 
     public Announce findByIdAndStatusActive(Long id) {
-        return announceRepository.findAllByIdAndStatusActive(id).
-                orElseThrow(AnnounceNotFoundException::new);
+        return announceRepository.findAllByIdAndStatusActive(id)
+                .orElseThrow(AnnounceNotFoundException::new);
+    }
+
+    public Announce findByIdAndCheck(Long id) {
+        boolean isModerator = Auth.hasRole(new Role[]{Role.ROLE_MODERATOR, Role.ROLE_ADMIN});
+        Announce announce = announceRepository.findById(id)
+                .orElseThrow(AnnounceNotFoundException::new);;
+
+        if (!isModerator && !announce.getStatus().equals(AnnounceStatus.ACTIVE)) {
+            throw new AnnounceNotFoundException();
+        }
+        return announce;
     }
 
     public Announce save(Announce announce) {

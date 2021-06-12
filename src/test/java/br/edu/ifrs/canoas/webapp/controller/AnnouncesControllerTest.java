@@ -5,6 +5,7 @@ import br.edu.ifrs.canoas.webapp.domain.Comment;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
+import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceFilterForm;
 import br.edu.ifrs.canoas.webapp.helper.AnnounceHelper;
 import br.edu.ifrs.canoas.webapp.helper.CommentHelper;
@@ -124,7 +125,7 @@ public class AnnouncesControllerTest extends BaseTest {
 
         Long announceId = 101L;
 
-        when(announceService.findByIdAndStatusActive(
+        when(announceService.findByIdAndCheck(
                 eq(announceId))
         ).thenReturn(announce);
 
@@ -171,7 +172,7 @@ public class AnnouncesControllerTest extends BaseTest {
 
         Long announceId = 101L;
 
-        when(announceService.findByIdAndStatusActive(
+        when(announceService.findByIdAndCheck(
                 eq(announceId))
         ).thenReturn(announce);
 
@@ -208,9 +209,9 @@ public class AnnouncesControllerTest extends BaseTest {
 
         Long announceId = 101L;
 
-        when(announceService.findByIdAndStatusActive(
+        when(announceService.findByIdAndCheck(
                 eq(announceId))
-        ).thenReturn(null);
+        ).thenThrow(AnnounceNotFoundException.class);
 
         this.mvc.perform(get("/announces/{id}", announceId)
                 .with(csrf())
