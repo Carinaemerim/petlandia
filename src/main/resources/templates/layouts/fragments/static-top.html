@@ -4,6 +4,7 @@
     <ul class="navbar-nav" th:object="${headerBar}">
         <li class="nav-item">
             <a class="fa fa-paw nav-link text-white" th:text="#{menu.home}"
+               id="btn-header-home"
                th:href="@{/}"
                th:classappend="*{home.active} ? 'active'">
                 Ir para dashboard
@@ -11,6 +12,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" th:text="#{menu.announces}"
+               id="btn-header-announces"
                th:href="@{*{announces.href}}"
                th:classappend="*{announces.active} ? 'active'">
                 Ver anúncios
@@ -19,6 +21,7 @@
 
         <li class="nav-item">
             <a class="nav-link text-white" th:text="#{header.suggested}"
+               id="btn-header-suggested"
                th:href="@{*{suggestions.href}}"
                th:classappend="*{suggestions.active} ? 'active'">
                 Sugeridos
@@ -27,6 +30,7 @@
 
         <li class="nav-item">
             <a class="nav-link text-white" th:text="#{menu.createAnnounce}"
+               id="btn-header-announce-create"
                th:href="@{*{createAnnounce.href}}"
                th:classappend="*{createAnnounce.active} ? 'active'">
                 Criar anúncio
@@ -35,6 +39,7 @@
         <th:block sec:authorize="isAuthenticated()">
             <li class="nav-item">
                 <a class="nav-link text-white" th:text="#{menu.manager}"
+                   id="btn-header-manager"
                    th:href="@{*{manager.href}}"
                    th:classappend="*{manager.active} ? 'active'">
                     Criar cadastro
@@ -44,6 +49,7 @@
         <th:block sec:authorize="isAnonymous()">
             <li class="nav-item">
                 <a class="nav-link text-white" th:text="#{menu.createUser}"
+                   id="btn-header-user-create"
                    th:href="@{*{createUser.href}}"
                    th:classappend="*{createUser.active} ? 'active'">
                     Criar cadastro
@@ -57,7 +63,7 @@
     <ul class="navbar-nav ml-auto">
         <li class="dropdown user user-menu nav-item">
             <div sec:authorize="isAnonymous()">
-                <a href="#" th:href="@{/login}" class="nav-link text-white" id="user-login">
+                <a href="#" th:href="@{/login}" class="nav-link text-white" id="btn-header-user-login">
                     <span th:text="#{login.enter}">Login</span>
                 </a>
             </div>
@@ -65,7 +71,7 @@
             <div sec:authorize="isAuthenticated()">
                 <a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown" id="user-info">
                     <i class="fas fa-user"></i>
-                    <span th:text="${#authentication.principal.user.name}"><span
+                    <span th:text="${#authentication.principal.user.name}" id="text-header-user-name"><span
                             class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -80,7 +86,8 @@
                     </li>
                     <li class="user-footer">
                         <div class="text-center">
-                            <a href="#" th:href="@{/logout}" id="logout-button"
+                            <a href="#" th:href="@{/logout}"
+                               id="btn-header-user-logoff"
                                class="btn btn-secondary btn-flat" th:text="#{login.logout}"></a>
                         </div>
                     </li>

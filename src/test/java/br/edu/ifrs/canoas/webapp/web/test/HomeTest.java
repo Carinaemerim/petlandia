@@ -1,44 +1,31 @@
 package br.edu.ifrs.canoas.webapp.web.test;
 
-import br.edu.ifrs.canoas.webapp.web.config.MyFluentTest;
+import br.edu.ifrs.canoas.webapp.web.config.BaseFluentTest;
 import br.edu.ifrs.canoas.webapp.web.page.HomePage;
+import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
+import br.edu.ifrs.canoas.webapp.web.page.user.UserCreatePage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-
-public class HomeTest extends MyFluentTest {
-
+public class HomeTest extends BaseFluentTest {
     @Page
     HomePage homePage;
-
-    @Test
-    public void checkAccessNotLogged() {
-        //Given
-        homePage.go(port);
-        //Then
-        assertThat(window().title()).isEqualTo("Home - PetLandia");
-    }
-
-    @Test
-    public void checkAccessLogged() {
-        //given
-        homePage.go(port);
-        //when
-
-        //Then
-    }
+    @Page
+    LoginPage loginPage;
+    @Page
+    UserCreatePage userCreatePage;
 
     @Test
     public void testLoginSuggestedAnnounces(){
-
+        homePage.go();
+        homePage.getButtonHomeUserLogin().click();
+        loginPage.isAt();
     }
 
     @Test
     public void testRegisterSuggestedAnnounces(){
-
+        homePage.go();
+        homePage.getButtonHomeUserCreate();
+        userCreatePage.isAt();
     }
-
-
 }

@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.webapp.web.page;
 
+import lombok.Getter;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -9,16 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@PageUrl("http://localhost:{port}/")
-public class HomePage extends FluentPage {
+@Getter
+@PageUrl("/")
+public class HomePage extends GenericPage {
+    @FindBy(id = "btn-home-user-create")
+    private FluentWebElement buttonHomeUserCreate;
 
-    @FindBy(id = "#user-login")
-    private FluentWebElement loginButton;
-    @FindBy(linkText = "Faça login")
-    private FluentWebElement loginInfo;
-
-    public void isAt() {
-        assertThat(window().title()).isEqualTo("Home - PetLandia");
-    }
-
+    @FindBy(id = "btn-home-user-login")
+    private FluentWebElement buttonHomeUserLogin;
 }

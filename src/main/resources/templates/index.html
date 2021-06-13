@@ -66,9 +66,9 @@
                 <div class="card-body">
                     <div class="jumbotron" sec:authorize="isAnonymous()">
                         <p>
-                            <a class="text-gray" th:text="#{register.message}" th:href="@{/user/create}">Registre-se</a>
+                            <a class="text-gray" th:text="#{register.message}" th:href="@{/user/create}" id="btn-home-user-create">Registre-se</a>
                             <span>ou</span>
-                            <a class="text-gray" th:text="#{login.home}" th:href="@{/login}">Faça login</a>
+                            <a class="text-gray" th:text="#{login.home}" th:href="@{/login}" id="btn-home-user-login">Faça login</a>
                             <span th:text="#{system.suggested}">no sistema p ver suas recomendações.</span>
                         </p>
                     </div>
