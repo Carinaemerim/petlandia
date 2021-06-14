@@ -23,13 +23,13 @@ jobs:
         mkdir release
         mv target/webapp-0.0.1-SNAPSHOT.jar release/app.jar
     - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          server: ${{ secrets.SSH_HOSTNAME }}
-          ssh_private_key: ${{ secrets.SSH_KEY }} 
-          local_path: './release/*'
-          remote_path: '/home/petlandia'
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: ${{ secrets.SSH_USERNAME }}
+        server: ${{ secrets.SSH_HOSTNAME }}
+        ssh_private_key: ${{ secrets.SSH_KEY }} 
+        local_path: './release/*'
+        remote_path: '/home/petlandia'
     - name: restart application
       uses: fifsky/ssh-action@master
       with:
