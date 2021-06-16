@@ -1,16 +1,16 @@
 package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.*;
-import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
-import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
-import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.*;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.CommentNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.ReportNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.repository.AnnounceRepository;
 import br.edu.ifrs.canoas.webapp.repository.CommentRepository;
 import br.edu.ifrs.canoas.webapp.repository.ReportRepository;
+import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,12 +26,12 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final AnnounceRepository announceRepository;
     private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     public void save(Report report) {
         reportRepository.save(report);
     }
 
-    //TODO renomear para create, pois este método não faz atualização
     public Report save(Announce announce, User user, String message) {
         if (announce == null) {
             throw new AnnounceNotFoundException();
@@ -44,6 +44,7 @@ public class ReportService {
         Report report = new Report();
         report.setAnnounce(announce);
         report.setReportBy(user);
+        report.setType(ReportType.ANNOUNCE);
         report.setMessage(message);
         report.setStatus(ReportStatus.WAITING_REVIEW);
         this.save(report);
@@ -51,7 +52,6 @@ public class ReportService {
         return report;
     }
 
-    //TODO renomear para create, pois este método não faz atualização
     public Report save(Comment comment, User user, String message) {
         if (comment == null) {
             throw new CommentNotFoundException();
@@ -64,6 +64,7 @@ public class ReportService {
         Report report = new Report();
         report.setAnnounce(comment.getAnnounce());
         report.setReportBy(user);
+        report.setType(ReportType.COMMENT);
         report.setMessage(message);
         report.setComment(comment);
         report.setStatus(ReportStatus.WAITING_REVIEW);
@@ -72,9 +73,29 @@ public class ReportService {
         return report;
     }
 
-    public PaginatedEntity<Report> findAllComments(int pageNumber, int pageLength, ReportStatus status) {
+    public Report save(User reported, User user, String message) {
+        if (reported == null) {
+            throw new UserNotFoundException();
+        }
+
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+
+        Report report = new Report();
+        report.setUser(reported);
+        report.setReportBy(user);
+        report.setType(ReportType.USER);
+        report.setMessage(message);
+        report.setStatus(ReportStatus.WAITING_REVIEW);
+        this.save(report);
+
+        return report;
+    }
+
+    public PaginatedEntity<Report> findAllByStatusAndType(int pageNumber, int pageLength, ReportStatus status, ReportType type) {
         Pageable page = PageRequest.of(pageNumber, pageLength);
-        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNotNullAndAnnounceIsNotNullAndUserIsNullOrderByCreatedAtDesc(page, status);
+        Page<Report> reportPage = reportRepository.findAllByStatusAndTypeOrderByCreatedAtDesc(page, status, type);
 
         return PaginatedEntity.<Report>builder()
                 .currentPage(pageNumber)
@@ -84,51 +105,31 @@ public class ReportService {
                 .build();
     }
 
-    public PaginatedEntity<Report> findAllAnnounces(int pageNumber, int pageLenght, ReportStatus status) {
-        Pageable page = PageRequest.of(pageNumber, pageLenght);
-        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNullAndAnnounceIsNotNullAndUserIsNullOrderByCreatedAtDesc(page, status);
-
-        return PaginatedEntity.<Report>builder()
-                .currentPage(pageNumber)
-                .data(reportPage.getContent())
-                .totalResults(reportPage.getTotalElements())
-                .pageLength(pageLenght)
-                .build();
-    }
-
-    public PaginatedEntity<Report> findAllUsers(int pageNumber, int pageLenght, ReportStatus status) {
-        Pageable page = PageRequest.of(pageNumber, pageLenght);
-        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNullAndAnnounceIsNullAndUserIsNotNullOrderByCreatedAtDesc(page, status);
-
-        return PaginatedEntity.<Report>builder()
-                .currentPage(pageNumber)
-                .data(reportPage.getContent())
-                .totalResults(reportPage.getTotalElements())
-                .pageLength(pageLenght)
-                .build();
-    }
-
-
-    // TODO: Revisar o fluxo deste método
     public String action(Long id, User user, ReportStatus status) {
         Report report = this.reportRepository.findByIdAndStatusEquals(id, ReportStatus.WAITING_REVIEW);
         if (report == null) {
             throw new ReportNotFoundException();
         }
 
-        String type = report.getComment() == null ? "announces" : "comments";
         report.setRatedAt(LocalDateTime.now());
         report.setRatedBy(user);
         report.setStatus(status);
 
-        if (report.getComment() != null) {
-            this.setActionComment(report.getComment(), status);
-        } else {
-            this.setActionAnnounce(report.getAnnounce(), status);
+        switch (report.getType()) {
+            case ANNOUNCE:
+                this.setActionAnnounce(report.getAnnounce(), status);
+                this.reportRepository.save(report);
+                return "announces";
+            case COMMENT:
+                this.setActionComment(report.getComment(), status);
+                this.reportRepository.save(report);
+                return "comments";
+            case USER:
+                this.setActionUser(report.getUser(), status);
+                this.reportRepository.save(report);
+                return "users";
+            default: throw new RuntimeException("report type invalid");
         }
-
-        this.reportRepository.save(report);
-        return type;
     }
 
     private void setActionComment(Comment comment, ReportStatus status) {
@@ -155,6 +156,21 @@ public class ReportService {
             if (status.equals(ReportStatus.REJECTED)) {
                 announce.setStatus(AnnounceStatus.ACTIVE);
                 this.announceRepository.save(announce);
+            }
+        }
+    }
+
+    private void setActionUser(User user, ReportStatus status) {
+        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
+        if (user.getStatus().equals(UserStatus.WAITING_REVIEW) && admin) {
+            if (status.equals(ReportStatus.ACCEPTED)) {
+                user.setStatus(UserStatus.ACTIVE);
+                this.userRepository.save(user);
+            }
+
+            if (status.equals(ReportStatus.REJECTED)) {
+                user.setStatus(UserStatus.ACTIVE);
+                this.userRepository.save(user);
             }
         }
     }

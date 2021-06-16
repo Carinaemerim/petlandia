@@ -1,6 +1,5 @@
 package br.edu.ifrs.canoas.webapp.service;
 
-import br.edu.ifrs.canoas.webapp.domain.AnimalAge;
 import br.edu.ifrs.canoas.webapp.domain.AnimalGender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

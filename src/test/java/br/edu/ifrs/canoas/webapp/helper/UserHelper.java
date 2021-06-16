@@ -2,6 +2,7 @@ package br.edu.ifrs.canoas.webapp.helper;
 
 import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 
 public class UserHelper {
     public static User createUser(Long id) {
@@ -21,7 +22,7 @@ public class UserHelper {
                 .name("Carina Emerim")
                 .username("carina.emerim")
                 .cpf("021.570.780-02")
-                .active(true)
+                .status(UserStatus.ACTIVE)
                 .role(Role.ROLE_ADMIN)
                 .animalAge(ScoreHelper.createScore("PUPPY", 2.0, AnimalAge.class))
                 .animalCastrated(ScoreHelper.createScore("YES", 2.0, AnimalCastrated.class))

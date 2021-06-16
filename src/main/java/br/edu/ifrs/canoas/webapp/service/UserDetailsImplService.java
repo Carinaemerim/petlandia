@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +25,7 @@ public class UserDetailsImplService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.userRepository.findByUsername(username)
+        return this.userRepository.findByUsernameAndStatus(username, UserStatus.ACTIVE)
                 .map(user -> new UserImpl(
                         user.getUsername(),
                         user.getPassword(),

@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.Report;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportType;
 import br.edu.ifrs.canoas.webapp.helper.PaginatedEntityHelper;
 import br.edu.ifrs.canoas.webapp.helper.ReportHelper;
 import br.edu.ifrs.canoas.webapp.service.ReportService;
@@ -37,10 +38,11 @@ public class ReportsManagerControllerTest extends BaseTest {
                 10
         );
 
-        when(this.reportService.findAllAnnounces(
+        when(this.reportService.findAllByStatusAndType(
                 0,
                 10,
-                ReportStatus.WAITING_REVIEW
+                ReportStatus.WAITING_REVIEW,
+                ReportType.ANNOUNCE
         )).thenReturn(reports);
 
         this.mvc.perform(get("/manager/reports/announces")
@@ -53,10 +55,11 @@ public class ReportsManagerControllerTest extends BaseTest {
                 .andExpect(view().name("/manager/reports/list-announces"))
                 .andExpect(model().attribute("referrer", is(matchesPattern("^.*/announces$"))));
 
-        verify(reportService).findAllAnnounces(
+        verify(reportService).findAllByStatusAndType(
                 0,
                 10,
-                ReportStatus.WAITING_REVIEW
+                ReportStatus.WAITING_REVIEW,
+                ReportType.ANNOUNCE
         );
     }
 
@@ -72,10 +75,11 @@ public class ReportsManagerControllerTest extends BaseTest {
                 10
         );
 
-        when(this.reportService.findAllComments(
+        when(this.reportService.findAllByStatusAndType(
                 0,
                 10,
-                ReportStatus.WAITING_REVIEW
+                ReportStatus.WAITING_REVIEW,
+                ReportType.COMMENT
         )).thenReturn(reports);
 
         this.mvc.perform(get("/manager/reports/comments")
@@ -87,10 +91,11 @@ public class ReportsManagerControllerTest extends BaseTest {
                 .andExpect(model().attribute("reports", is(reports)))
                 .andExpect(view().name("/manager/reports/list-comments"));
 
-        verify(reportService).findAllComments(
+        verify(reportService).findAllByStatusAndType(
                 0,
                 10,
-                ReportStatus.WAITING_REVIEW
+                ReportStatus.WAITING_REVIEW,
+                ReportType.COMMENT
         );
     }
 

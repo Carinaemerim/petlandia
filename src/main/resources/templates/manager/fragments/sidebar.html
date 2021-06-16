@@ -61,11 +61,22 @@
                       th:if="*{reportComments.size > 0}"
                       th:text="*{reportComments.size}">0</span>
             </a>
+
+
+            <a class="btn btn-light btn-block text-left"
+               th:href="*{reportUsers.href}"
+               th:classappend="*{reportUsers.active} ? 'active'">
+                <i class="fa fa-user mr-2"></i>
+                <span th:text="#{sidebar.mod.users}"> </span>
+                <span class="badge badge-danger badge-pill pull-right"
+                      th:if="*{reportUsers.size > 0}"
+                      th:text="*{reportUsers.size}">0</span>
+            </a>
         </div>
 
-        <div class="card-header" th:if="*{admin}" th:text="#{sidebar.adm.management}"></div>
+        <div class="card-header" th:if="*{moderator}" th:text="#{sidebar.adm.management}"></div>
 
-        <div class="card-body" th:if="*{admin}">
+        <div class="card-body" th:if="*{moderator}">
             <a class="btn btn-light btn-block text-left"
                th:href="*{adminUsers.href}"
                th:classappend="*{adminUsers.active} ? 'active'">

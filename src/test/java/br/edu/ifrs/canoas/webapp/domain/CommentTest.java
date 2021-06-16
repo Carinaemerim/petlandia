@@ -76,7 +76,7 @@ public class CommentTest extends BaseTest<Comment> {
 
         violations = this.validator.validate(comment);
 
-        this.assertHasViolation("field.required", violations);
+        this.assertHasViolation("validation.report.message.size", violations);
     }
 
     @Test

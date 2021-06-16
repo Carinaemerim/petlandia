@@ -42,17 +42,19 @@ values (101, 'WHITE', 'animal.color.white', 1),
        (106, 'CREAM', 'animal.color.cream', 2);
 
 -- AUTHENTICATION
-INSERT into user(id, cpf, username, password, active, role, name, email, address, zip_code, neighborhood, city, state,
+INSERT into user(id, cpf, username, password, status, role, name, email, address, zip_code, neighborhood, city, state,
                  address_number, residential_phone, cel_phone, animal_age_id, animal_gender_id, animal_type_id,
                  animal_castrated_id,
                  animal_color_id, animal_size_id, avatar)
-VALUES (103, '65613188033', 'user', @PASSWORD, 1, 'ROLE_USER', 'Baby Yoda', 'yoda@stars.wars', 'Garro', '92032380',
+VALUES (103, '65613188033', 'user', @PASSWORD, 'ACTIVE', 'ROLE_USER', 'Baby Yoda', 'yoda@stars.wars', 'Garro', '92032380',
         'Tattooine', 'StarWars', 'RS', 544, '51982656565', '', 101, 102, 101, 101, 101, 101, 'default'),
-       (100, '29583242063', 'r2d2', @PASSWORD, 1, 'ROLE_USER', 'R2d2', 'yoda@stars.wars', 'Garro', '92032380',
+       (100, '29583242063', 'r2d2', @PASSWORD, 'ACTIVE', 'ROLE_USER', 'R2d2', 'yoda@stars.wars', 'Garro', '92032380',
         'Tattooine', 'StarWars', 'RS', 544, '51982656565', '', 101, 102, 101, 101, 101, 101, 'default'),
-       (101, '14670871064', 'admin', @PASSWORD, 1, 'ROLE_ADMIN', 'Admin Yoda', 'admin@stars.wars', 'Garro',
+       (101, '14670871064', 'admin', @PASSWORD, 'ACTIVE', 'ROLE_ADMIN', 'Admin Yoda', 'admin@stars.wars', 'Garro',
         '92032380', 'Tattooine', 'StarWars', 'RS', 544, '51982656565', '', 101, 102, 101, 101, 101, 101, 'default'),
-       (102, '24340284033', 'mod', @PASSWORD, 1, 'ROLE_MODERATOR', 'Mod Yoda', 'mod@stars.wars', 'Garro',
+       (102, '24340284033', 'mod', @PASSWORD, 'ACTIVE', 'ROLE_MODERATOR', 'Mod Yoda', 'mod@stars.wars', 'Garro',
+        '92032380', 'Tattooine', 'StarWars', 'RS', 544, '51982656565', '', 101, 102, 101, 101, 101, 101, 'default'),
+       (104, '24340284023', 'spam', @PASSWORD, 'WAITING_REVIEW', 'ROLE_USER', 'User Spam', 'spam@stars.wars', 'Garro',
         '92032380', 'Tattooine', 'StarWars', 'RS', 544, '51982656565', '', 101, 102, 101, 101, 101, 101, 'default');
 
 -- ANNOUNCE
@@ -394,10 +396,12 @@ VALUES (101, 'Boa noite gostaria de mais informações.', '2020-02-12 19:17:27',
        (103, 'Boa tarde lorem, me reportem', '2020-05-24 13:47:57', '2020-05-24 13:47:57', 'WAITING_REVIEW', 103, 100);
 
 -- Reports
-INSERT INTO report (id, created_at, message, rated_at, status, updated_at, announce_id, comment_id, rated_by_id,
-                    report_by_id)
-VALUES (101, '2020-02-12 19:17:27', 'Teste de report de anúncio', null, 'WAITING_REVIEW', '2020-02-12 19:17:27', 104,
-        null, null, 100),
-       (102, '2020-02-13 19:17:27', 'Teste de report de comentário', null, 'WAITING_REVIEW', '2020-02-13 19:17:27', 103,
-        103, null, 100);
+INSERT INTO report (id, created_at, message, rated_at, status, type, updated_at, announce_id, comment_id, rated_by_id,
+                    report_by_id, user_id)
+VALUES (101, '2020-02-12 19:17:27', 'Teste de report de anúncio', null, 'WAITING_REVIEW', 'ANNOUNCE', '2020-02-12 19:17:27', 104,
+        null, null, 100, null),
+       (102, '2020-02-13 19:17:27', 'Teste de report de comentário', null, 'WAITING_REVIEW', 'COMMENT', '2020-02-13 19:17:27', 103,
+        103, null, 100, null),
+       (103, '2020-02-13 19:17:27', 'Teste de report de usuário', null, 'WAITING_REVIEW', 'USER', '2020-02-13 19:17:27', null,
+        null, null, 100, 104);
 

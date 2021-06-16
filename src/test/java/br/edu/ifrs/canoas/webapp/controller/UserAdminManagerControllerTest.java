@@ -3,9 +3,11 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
+import br.edu.ifrs.canoas.webapp.forms.UserSummary;
 import br.edu.ifrs.canoas.webapp.helper.PaginatedEntityHelper;
 import br.edu.ifrs.canoas.webapp.helper.UserHelper;
-import br.edu.ifrs.canoas.webapp.service.UserService;
+import br.edu.ifrs.canoas.webapp.service.ReportService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,8 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserAdminManagerController.class)
 public class UserAdminManagerControllerTest extends BaseTest {
+
     @MockBean
-    UserService userService;
+    ReportService reportService;
 
     @Test
     public void testGetActive() throws Exception {
@@ -56,8 +59,10 @@ public class UserAdminManagerControllerTest extends BaseTest {
         this.mockAuthContext.mockAuthAdmin();
         User user = this.mockAuthContext.getUser();
         Long id = user.getId();
+        UserSummary summary = new UserSummary(0L, 0L, 0L, 0L, 0L, 0L);
 
         when(this.userService.findById(id)).thenReturn(user);
+        when(this.userService.getSummary(user)).thenReturn(summary);
         this.mvc.perform(get("/manager/admin/users/{id}", id)
                 .with(csrf())
                 .accept(MediaType.TEXT_HTML)
@@ -66,7 +71,9 @@ public class UserAdminManagerControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("/manager/admin/user/view"))
                 .andExpect(model().attribute("isSelf", is(true)))
+                .andExpect(model().attribute("cantReport", is(true)))
                 .andExpect(model().attribute("user", is(user)))
+                .andExpect(model().attribute("summary", is(summary)))
                 .andExpect(model().attributeExists("roles"));
 
         verify(this.userService).findById(id);
@@ -125,7 +132,7 @@ public class UserAdminManagerControllerTest extends BaseTest {
         verify(this.userService).findById(id);
         verify(this.userService).save(user);
         assertThat(user.getRole()).isEqualTo(Role.ROLE_USER);
-        assertThat(user.isActive()).isEqualTo(false);
+        assertThat(user.getStatus()).isEqualTo(UserStatus.DELETED);
     }
 
     @Test

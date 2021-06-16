@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.webapp.domain;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserCreateGroup;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +30,10 @@ public class User {
     @Size(min = 2, max = 40, groups = {UserCreateGroup.class}, message = "{validation.user.username.size}")
     private String username;
 
-    private boolean active;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private UserStatus status = UserStatus.ACTIVE;
 
     @NotBlank(groups = {UserCreateGroup.class}, message = "{field.required}")
     @Size(min = 6, max = 20, groups = {UserCreateGroup.class}, message = "{validation.user.password.size}")

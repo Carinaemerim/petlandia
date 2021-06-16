@@ -1,6 +1,5 @@
 package br.edu.ifrs.canoas.webapp.web.test.user;
 
-import org.apache.commons.lang3.builder.ToStringExclude;
 import org.junit.jupiter.api.Test;
 
 public class UserManageTest {

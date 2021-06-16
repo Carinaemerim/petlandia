@@ -4,7 +4,10 @@ import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
-import br.edu.ifrs.canoas.webapp.helper.*;
+import br.edu.ifrs.canoas.webapp.helper.AnnounceFormHelper;
+import br.edu.ifrs.canoas.webapp.helper.AnnounceHelper;
+import br.edu.ifrs.canoas.webapp.helper.CommentHelper;
+import br.edu.ifrs.canoas.webapp.helper.ScoreHelper;
 import br.edu.ifrs.canoas.webapp.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,12 +15,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.awt.*;
-import java.net.URI;
-import java.util.*;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;

@@ -16,7 +16,17 @@
                         <div class="col">
                             <div th:text="${user.name}"></div>
                         </div>
-                        <div class="col-auto">
+
+                        <div class="col-auto" th:if="${moderator}">
+                            <button id="btn-report-user" class="btn btn-xs btn-outline-dark btn-modal"
+                                    data-toggle="modal" data-target="#modal-report-user"
+                                    th:attrappend="disabled=${cantReport} ? 'disabled'">
+                                <i class="fa fa-flag"></i>
+                                <span th:text="#{manager.admin.user.view.action.report-user}"></span>
+                            </button>
+                        </div>
+
+                        <div class="col-auto" th:if="${admin}">
                             <button id="btn-edit-role" class="btn btn-xs btn-outline-dark btn-modal"
                                     data-toggle="modal" data-target="#modal-edit-role"
                                     th:attrappend="disabled=${isSelf} ? 'disabled'">
@@ -68,7 +78,7 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         <label th:text="#{user.form.active}"> </label>
-                                        <div class="form-control" th:text="${user.active} ? #{yes} : #{no}"></div>
+                                        <div class="form-control" th:text="#{${user.status.name}}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -358,20 +368,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <form method="post" accept-charset="UTF-8"
-                      th:action="@{/manager/admin/users/{id}/report-user}">
+                      th:action="@{/manager/admin/users/{id}/report(id = ${user.id})}">
                     <div class="modal-header">
-                        <h5 class="modal-title" th:text="#{manager.admin.user.view.action.change-role}"></h5>
+                        <h5 class="modal-title" th:text="#{manager.admin.user.view.action.report-user}"></h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="modal-edit-role-roles"
-                                   th:text="#{manager.admin.user.view.roles}"></label>
-                            <select class="custom-select" id="modal-report-user-reason" name="role" required>
-                                <option th:each="i : ${roles}"
-                                        th:value="${i.name()}" th:text="#{${i.name}}"
-                                        th:selected="${user.role.equals(i)} ? selected"
-                                ></option>
-                            </select>
+                            <label for="user_form_report" th:text="#{user.form.report.label}"> </label>
+                            <textarea class="form-control" id="user_form_report" name="message" rows="5"
+                                      required maxlength="160" minlength="10"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

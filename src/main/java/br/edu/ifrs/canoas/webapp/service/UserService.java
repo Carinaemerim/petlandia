@@ -3,6 +3,8 @@ package br.edu.ifrs.canoas.webapp.service;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportType;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.UserSummary;
 import br.edu.ifrs.canoas.webapp.repository.UserRepository;
@@ -13,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -58,12 +59,21 @@ public class UserService {
 
     public UserSummary getSummary(User user) {
         return new UserSummary(
-                userRepository.countReportedAnnouncesByStatus(user, ReportStatus.ACCEPTED),
-                userRepository.countReportedAnnouncesByStatus(user, ReportStatus.REJECTED),
-                userRepository.countReportedCommentsByStatus(user, ReportStatus.ACCEPTED),
-                userRepository.countReportedCommentsByStatus(user, ReportStatus.REJECTED),
-                userRepository.countReportedUsersByStatus(user, ReportStatus.ACCEPTED),
-                userRepository.countReportedUsersByStatus(user, ReportStatus.REJECTED)
+                userRepository.countReportedByTypeAndStatus(user, ReportType.ANNOUNCE, ReportStatus.ACCEPTED),
+                userRepository.countReportedByTypeAndStatus(user, ReportType.ANNOUNCE, ReportStatus.REJECTED),
+                userRepository.countReportedByTypeAndStatus(user, ReportType.COMMENT, ReportStatus.ACCEPTED),
+                userRepository.countReportedByTypeAndStatus(user, ReportType.COMMENT, ReportStatus.REJECTED),
+                userRepository.countReportedByTypeAndStatus(user, ReportType.USER, ReportStatus.ACCEPTED),
+                userRepository.countReportedByTypeAndStatus(user, ReportType.USER, ReportStatus.REJECTED)
         );
+    }
+
+    public Long countAll(UserStatus status) {
+        return userRepository.countAllByStatus(status);
+    }
+
+    public User findByIdByStatus(Long id, UserStatus status) {
+        return userRepository.findByIdAndStatus(id, status)
+            .orElseThrow(UserNotFoundException::new);
     }
 }

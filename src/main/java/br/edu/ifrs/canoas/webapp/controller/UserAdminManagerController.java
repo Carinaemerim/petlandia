@@ -3,9 +3,11 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
-import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.UserSummary;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
+import br.edu.ifrs.canoas.webapp.service.ReportService;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,12 +23,12 @@ import javax.validation.Valid;
 public class UserAdminManagerController {
 
     private final UserService userService;
+    private final ReportService reportService;
 
     @GetMapping("")
-    public String getActive(@RequestParam(value = "page", defaultValue = "0") int page,
+    public String listUsers(@RequestParam(value = "page", defaultValue = "0") int page,
                             @RequestParam(value = "term", defaultValue = "") String term,
                             Model model) {
-
         model.addAttribute("term", term);
         model.addAttribute("users", userService.findAll(page, 30, term));
         return "/manager/admin/user/list";
@@ -36,10 +38,17 @@ public class UserAdminManagerController {
     public String view(@PathVariable("id") final Long id,
                        Model model,
                        @AuthenticationPrincipal UserImpl activeUser) {
+        boolean moderator = Auth.hasRole(new Role[]{Role.ROLE_MODERATOR});
+        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
         User user = this.userService.findById(id);
         UserSummary summary = this.userService.getSummary(user);
+        boolean isSelf = activeUser.getUser().getId().equals(id);
+        boolean cantReport = isSelf || !user.getStatus().equals(UserStatus.ACTIVE);
 
-        model.addAttribute("isSelf", activeUser.getUser().getId().equals(id));
+        model.addAttribute("isSelf", isSelf);
+        model.addAttribute("cantReport", cantReport);
+        model.addAttribute("admin", admin);
+        model.addAttribute("moderator", moderator);
         model.addAttribute("user", user);
         model.addAttribute("summary", summary);
         model.addAttribute("roles", Role.values());
@@ -47,10 +56,30 @@ public class UserAdminManagerController {
         return "/manager/admin/user/view";
     }
 
+    @PostMapping("/{id}/report")
+    public String PostToReport(@AuthenticationPrincipal UserImpl activeUser,
+                               @PathVariable("id") final Long id,
+                               @ModelAttribute("message") String message) {
+        boolean moderator = Auth.hasRole(new Role[]{Role.ROLE_MODERATOR});
+        if (!moderator) {
+            throw new ForbiddenException("not allowed");
+        }
+
+        User user = userService.findByIdByStatus(id, UserStatus.ACTIVE);
+        reportService.save(user, activeUser.getUser(), message);
+        user.setStatus(UserStatus.WAITING_REVIEW);
+        userService.save(user);
+        return "redirect:/manager/admin/users/" + user.getId();
+    }
+
     @PostMapping("/{id}/change-role")
     public String changeRole(@PathVariable("id") final Long id,
                              @Valid @ModelAttribute("role") Role role,
                              @AuthenticationPrincipal UserImpl activeUser) {
+        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
+        if (!admin) {
+            throw new ForbiddenException("not allowed");
+        }
 
         if (activeUser.getUser().getId().equals(id)) {
             throw new ForbiddenException("User cannot change his own privileges");
@@ -71,13 +100,17 @@ public class UserAdminManagerController {
     @PostMapping("/{id}/block-user")
     public String blockUser(@PathVariable("id") final Long id,
                             @AuthenticationPrincipal UserImpl activeUser) {
+        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
+        if (!admin) {
+            throw new ForbiddenException("not allowed");
+        }
 
         if (activeUser.getUser().getId().equals(id)) {
             throw new ForbiddenException("User cannot change his own privileges");
         }
 
         User user = this.userService.findById(id);
-        user.setActive(false);
+        user.setStatus(UserStatus.DELETED);
         user.setRole(Role.ROLE_USER);
         userService.save(user);
         return "redirect:/manager/admin/users/" + user.getId();

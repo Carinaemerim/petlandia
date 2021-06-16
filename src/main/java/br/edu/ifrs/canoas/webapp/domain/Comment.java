@@ -23,7 +23,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private CommentStatus status = CommentStatus.ACTIVE;
@@ -34,11 +34,11 @@ public class Comment {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private Announce announce;
 

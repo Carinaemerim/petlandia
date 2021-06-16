@@ -3,6 +3,9 @@ package br.edu.ifrs.canoas.webapp.controller;
 
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportType;
+import br.edu.ifrs.canoas.webapp.enums.Role;
+import br.edu.ifrs.canoas.webapp.helper.Auth;
 import br.edu.ifrs.canoas.webapp.helper.URIHelper;
 import br.edu.ifrs.canoas.webapp.service.ReportService;
 import lombok.AllArgsConstructor;
@@ -25,15 +28,23 @@ public class ReportsManagerController {
     @GetMapping("/announces")
     public String getAnnounces(@RequestParam(value = "page", defaultValue = "0") int page, Model model,
                                HttpServletRequest httpServletRequest) {
-        model.addAttribute("reports", reportService.findAllAnnounces(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW));
+        model.addAttribute("reports", reportService.findAllByStatusAndType(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW, ReportType.ANNOUNCE));
         model.addAttribute("referrer", URIHelper.getReferrerURI(httpServletRequest, "/announces"));
         return "/manager/reports/list-announces";
     }
 
     @GetMapping("/comments")
     public String getComments(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
-        model.addAttribute("reports", reportService.findAllComments(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW));
+        model.addAttribute("reports", reportService.findAllByStatusAndType(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW, ReportType.COMMENT));
         return "/manager/reports/list-comments";
+    }
+
+    @GetMapping("/users")
+    public String getUsers(@RequestParam(value = "page", defaultValue = "0") int page, Model model) {
+        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
+        model.addAttribute("reports", reportService.findAllByStatusAndType(page, PAGE_LENGTH, ReportStatus.WAITING_REVIEW, ReportType.USER));
+        model.addAttribute("admin", admin);
+        return "/manager/reports/list-users";
     }
 
     @PostMapping("/{id}/accept")

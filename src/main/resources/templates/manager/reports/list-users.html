@@ -1,0 +1,130 @@
+<html layout:decorate="~{/layouts/main}">
+
+<th:block layout:fragment="js-view">
+    <script th:src="@{/js/manager_reports.js}"></script>
+</th:block>
+
+<th:block layout:fragment="meta-view">
+    <title th:text="|#{user.report.title} - #{head.title}|"/>
+</th:block>
+
+<div layout:fragment="content-body">
+    <div class="row">
+        <div class="col col-md-3 manager-menu">
+            <div th:replace="/manager/fragments/sidebar :: managerSidebar(${sidebar})"></div>
+        </div>
+        <div class="col col-md-9 manager-content">
+            <div class="jumbotron" th:if="${reports.data.isEmpty()}">
+                <h3 class="display-8" th:text="#{manager.reports.users.title}"></h3>
+                <p>Sem registros.</p>
+            </div>
+
+            <div class="card" th:if="${!reports.data.isEmpty()}">
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col">
+                            <div th:text="#{manager.reports.users.title}"></div>
+                        </div>
+                        <div class="col-auto">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" id="report-container">
+                    <div class="callout callout-pink" th:each="report :  ${reports.data}"
+                         th:attr="data-report-id=${report.id}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label th:text="#{manager.reports.rows.user}"></label>
+                                    <div class="form-control">
+                                        <img th:src="${report.user.avatar}" width="16" class="img-circle">
+                                        <a th:text="${report.user.name}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label th:text="#{manager.reports.rows.reportedBy}"></label>
+                                    <div class="form-control">
+                                        <img th:src="${report.reportBy.avatar}" width="16" class="img-circle">
+                                        <a th:text="${report.reportBy.name}"></a>
+                                        <span th:text="#{manager.reports.rows.datePipe}"></span>
+                                        <span th:text="${#temporals.format(report.createdAt, 'dd/MM/yyyy HH:mm')}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label th:text="#{manager.reports.rows.message}"></label>
+                                    <div class="form-control" th:text="${report.message}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a th:href="@{/manager/admin/users/{id}(id = ${report.user.id})}"
+                                   th:text="#{manager.reports.rows.linkUser}"
+                                   class="btn btn-link"></a>
+                            </div>
+                            <div class="col-auto" th:if="${admin}">
+                                <button class="btn btn-danger btn-accept"
+                                        th:text="#{manager.reports.rows.accept}"></button>
+                                <button class="btn btn-warning btn-reject"
+                                        th:text="#{manager.reports.rows.reject}"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" th:if="${reports.totalPages > 0}">
+                    <div class="pull-right">
+                        <div th:replace="/layouts/fragments/pagination :: pagination(${reports})"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="modal-view">
+    <div class="modal fade" tabindex="-1" id="modal-report-accept">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8" action="#" data-action="/manager/reports/:report/accept">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="#{manager.reports.modal.accept.title}"></h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"
+                                th:text="#{manager.reports.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.reports.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal-report-reject">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8" action="#" data-action="/manager/reports/:report/reject">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="#{manager.reports.modal.reject.title}"></h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"
+                                th:text="#{manager.reports.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.reports.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>

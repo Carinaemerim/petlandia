@@ -9,8 +9,6 @@ import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityNotFoundException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -102,9 +100,9 @@ public class UserServiceTest extends BaseTest {
         assertThat(users.getCurrentPage()).isEqualTo(0);
         assertThat(users.getPageLength()).isEqualTo(8);
         assertThat(users.getTotalPages()).isEqualTo(0);
-        assertThat(users.getTotalResults()).isEqualTo(4);
+        assertThat(users.getTotalResults()).isEqualTo(5);
 
-        assertThat(users.getData()).hasSize(4);
+        assertThat(users.getData()).hasSize(5);
 
         assertThat(users.getData().get(0).getId()).isEqualTo(100);
     }

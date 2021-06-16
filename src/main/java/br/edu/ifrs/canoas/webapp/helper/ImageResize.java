@@ -2,7 +2,6 @@ package br.edu.ifrs.canoas.webapp.helper;
 
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
 import org.imgscalr.Scalr;
-import org.springframework.http.InvalidMediaTypeException;
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 

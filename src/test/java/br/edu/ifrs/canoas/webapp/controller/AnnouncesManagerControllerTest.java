@@ -6,10 +6,8 @@ import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.helper.AnnounceHelper;
 import br.edu.ifrs.canoas.webapp.helper.PaginatedEntityHelper;
-import br.edu.ifrs.canoas.webapp.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import static org.hamcrest.Matchers.is;
@@ -21,9 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(AnnouncesManagerController.class)
 public class AnnouncesManagerControllerTest extends BaseTest {
-    @MockBean
-    UserService userService;
-
     @Test
     public void testGetActiveGet() throws Exception {
         this.mockAuthContext.mockAuthAdmin();

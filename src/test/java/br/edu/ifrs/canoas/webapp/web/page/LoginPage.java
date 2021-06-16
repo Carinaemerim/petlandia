@@ -2,8 +2,6 @@ package br.edu.ifrs.canoas.webapp.web.page;
 
 import org.fluentlenium.core.annotation.PageUrl;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 @PageUrl("/login")
 public class LoginPage extends GenericPage {
 

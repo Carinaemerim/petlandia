@@ -18,12 +18,12 @@ public abstract class Score {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "{field.required}")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "{field.required}")
     private String label;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     private Double weight;
 }

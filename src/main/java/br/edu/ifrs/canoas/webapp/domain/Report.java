@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.webapp.domain;
 
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,10 +24,14 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private ReportStatus status = ReportStatus.WAITING_REVIEW;
+
+    @NotNull(message = "{field.required}")
+    @Enumerated(EnumType.STRING)
+    private ReportType type;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -40,11 +45,10 @@ public class Report {
     @ManyToOne(fetch = FetchType.EAGER)
     private User ratedBy;
 
-    @NotNull
+    @NotNull(message = "{field.required}")
     @ManyToOne(fetch = FetchType.EAGER)
     private User reportBy;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private Announce announce;
 

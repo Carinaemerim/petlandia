@@ -6,10 +6,8 @@ import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
-import br.edu.ifrs.canoas.webapp.exception.CommentNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.AnnounceCreateFrom;
 import br.edu.ifrs.canoas.webapp.forms.Cropper;
-import br.edu.ifrs.canoas.webapp.helper.ImageResize;
 import br.edu.ifrs.canoas.webapp.helper.URIHelper;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +15,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 

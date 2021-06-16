@@ -26,7 +26,7 @@ public abstract class BaseTest<T> {
     protected void assertHasViolation(String message, Set<ConstraintViolation<T>> violations) {
         List<String> messages = violations.stream()
                 .map(ConstraintViolation::getMessage).collect(Collectors.toList());
-
+        System.out.println(messages);
         assertThat(messages).contains(this.messages.get(message));
     }
 }

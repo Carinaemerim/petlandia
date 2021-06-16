@@ -57,18 +57,6 @@ public class ReportTest extends BaseTest<Report> {
     }
 
     @Test
-    public void testNullAnnounce() {
-        Report report = ReportHelper.createReport();
-        Set<ConstraintViolation<Report>> violations;
-
-        report.setAnnounce(null);
-
-        violations = this.validator.validate(report);
-
-        this.assertHasViolation("field.required", violations);
-    }
-
-    @Test
     public void testNullMessage() {
         Report report = ReportHelper.createReport();
         Set<ConstraintViolation<Report>> violations;
@@ -89,7 +77,7 @@ public class ReportTest extends BaseTest<Report> {
 
         violations = this.validator.validate(report);
 
-        this.assertHasViolation("field.required", violations);
+        this.assertHasViolation("validation.report.message.size", violations);
     }
 
     @Test

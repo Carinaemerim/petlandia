@@ -3,7 +3,10 @@ package br.edu.ifrs.canoas.webapp.helper;
 import br.edu.ifrs.canoas.webapp.domain.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ScoreHelper {
     public static Map<String, List<? extends Score>> createScoresMap() {

@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.webapp.domain.*;
 import br.edu.ifrs.canoas.webapp.enums.AnnounceStatus;
 import br.edu.ifrs.canoas.webapp.enums.CommentStatus;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
+import br.edu.ifrs.canoas.webapp.enums.ReportType;
 import br.edu.ifrs.canoas.webapp.exception.AnnounceNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.CommentNotFoundException;
 import br.edu.ifrs.canoas.webapp.exception.ReportNotFoundException;
@@ -119,7 +120,7 @@ public class ReportServiceTest extends BaseTest {
     public void testFindAllCommentReports() {
         PaginatedEntity<Report> reports;
 
-        reports = this.reportService.findAllComments(0, 8, ReportStatus.WAITING_REVIEW);
+        reports = this.reportService.findAllByStatusAndType(0, 8, ReportStatus.WAITING_REVIEW, ReportType.COMMENT);
 
         assertThat(reports.getPageLength()).isEqualTo(8);
         assertThat(reports.getCurrentPage()).isEqualTo(0);
@@ -138,7 +139,7 @@ public class ReportServiceTest extends BaseTest {
     public void testFindAllAnnounceReports() {
         PaginatedEntity<Report> reports;
 
-        reports = this.reportService.findAllAnnounces(0, 8, ReportStatus.WAITING_REVIEW);
+        reports = this.reportService.findAllByStatusAndType(0, 8, ReportStatus.WAITING_REVIEW, ReportType.ANNOUNCE);
 
         assertThat(reports.getPageLength()).isEqualTo(8);
         assertThat(reports.getCurrentPage()).isEqualTo(0);

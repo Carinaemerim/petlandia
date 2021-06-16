@@ -8,7 +8,6 @@ import br.edu.ifrs.canoas.webapp.service.UserDetailsImplService;
 import lombok.Getter;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
