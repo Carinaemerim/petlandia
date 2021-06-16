@@ -74,7 +74,7 @@ public class ReportService {
 
     public PaginatedEntity<Report> findAllComments(int pageNumber, int pageLength, ReportStatus status) {
         Pageable page = PageRequest.of(pageNumber, pageLength);
-        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNotNullOrderByCreatedAtDesc(page, status);
+        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNotNullAndAnnounceIsNotNullAndUserIsNullOrderByCreatedAtDesc(page, status);
 
         return PaginatedEntity.<Report>builder()
                 .currentPage(pageNumber)
@@ -86,7 +86,19 @@ public class ReportService {
 
     public PaginatedEntity<Report> findAllAnnounces(int pageNumber, int pageLenght, ReportStatus status) {
         Pageable page = PageRequest.of(pageNumber, pageLenght);
-        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNullOrderByCreatedAtDesc(page, status);
+        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNullAndAnnounceIsNotNullAndUserIsNullOrderByCreatedAtDesc(page, status);
+
+        return PaginatedEntity.<Report>builder()
+                .currentPage(pageNumber)
+                .data(reportPage.getContent())
+                .totalResults(reportPage.getTotalElements())
+                .pageLength(pageLenght)
+                .build();
+    }
+
+    public PaginatedEntity<Report> findAllUsers(int pageNumber, int pageLenght, ReportStatus status) {
+        Pageable page = PageRequest.of(pageNumber, pageLenght);
+        Page<Report> reportPage = reportRepository.findAllByStatusAndCommentIsNullAndAnnounceIsNullAndUserIsNotNullOrderByCreatedAtDesc(page, status);
 
         return PaginatedEntity.<Report>builder()
                 .currentPage(pageNumber)

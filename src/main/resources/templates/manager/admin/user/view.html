@@ -178,9 +178,7 @@
                     </div>
                 </div>
 
-                <div class="card-header" th:text="#{user.form.animal.data}">
-
-                </div>
+                <div class="card-header" th:text="#{user.form.animal.data}"></div>
 
                 <div class="card-body">
                     <div class="row">
@@ -230,8 +228,71 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+
+                <div class="card-header" th:text="#{manager.admin.user.view.reportedAnnounces}"></div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedAccepted}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedAnnouncesAccepted}"></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedRejected}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedAnnouncesRejected}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-header" th:text="#{manager.admin.user.view.reportedComments}"></div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedAccepted}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedCommentsAccepted}"></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedRejected}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedCommentsRejected}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-header" th:text="#{manager.admin.user.view.reportedUsers}"></div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedAccepted}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedUsersAccepted}"></div>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label th:text="#{manager.admin.user.view.reportedRejected}"></label>
+                                <br>
+                                <div class="form-control" th:text="${summary.reportedUsersRejected}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -280,6 +341,38 @@
                     </div>
                     <div class="modal-body">
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"
+                                th:text="#{manager.admin.user.view.action.confirm}"></button>
+
+                        <button type="button" class="btn btn-light" data-dismiss="modal"
+                                th:text="#{manager.admin.user.view.action.cancel}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal-report-user">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" accept-charset="UTF-8"
+                      th:action="@{/manager/admin/users/{id}/report-user}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="#{manager.admin.user.view.action.change-role}"></h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="modal-edit-role-roles"
+                                   th:text="#{manager.admin.user.view.roles}"></label>
+                            <select class="custom-select" id="modal-report-user-reason" name="role" required>
+                                <option th:each="i : ${roles}"
+                                        th:value="${i.name()}" th:text="#{${i.name}}"
+                                        th:selected="${user.role.equals(i)} ? selected"
+                                ></option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-secondary"

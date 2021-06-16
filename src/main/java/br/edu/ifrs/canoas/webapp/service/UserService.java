@@ -2,7 +2,9 @@ package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
+import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
+import br.edu.ifrs.canoas.webapp.forms.UserSummary;
 import br.edu.ifrs.canoas.webapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -54,4 +56,14 @@ public class UserService {
                 .build();
     }
 
+    public UserSummary getSummary(User user) {
+        return new UserSummary(
+                userRepository.countReportedAnnouncesByStatus(user, ReportStatus.ACCEPTED),
+                userRepository.countReportedAnnouncesByStatus(user, ReportStatus.REJECTED),
+                userRepository.countReportedCommentsByStatus(user, ReportStatus.ACCEPTED),
+                userRepository.countReportedCommentsByStatus(user, ReportStatus.REJECTED),
+                userRepository.countReportedUsersByStatus(user, ReportStatus.ACCEPTED),
+                userRepository.countReportedUsersByStatus(user, ReportStatus.REJECTED)
+        );
+    }
 }

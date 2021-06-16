@@ -5,6 +5,7 @@ import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.exception.ForbiddenException;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
+import br.edu.ifrs.canoas.webapp.forms.UserSummary;
 import br.edu.ifrs.canoas.webapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,9 +37,11 @@ public class UserAdminManagerController {
                        Model model,
                        @AuthenticationPrincipal UserImpl activeUser) {
         User user = this.userService.findById(id);
+        UserSummary summary = this.userService.getSummary(user);
 
         model.addAttribute("isSelf", activeUser.getUser().getId().equals(id));
         model.addAttribute("user", user);
+        model.addAttribute("summary", summary);
         model.addAttribute("roles", Role.values());
 
         return "/manager/admin/user/view";
