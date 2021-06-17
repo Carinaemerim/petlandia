@@ -40,12 +40,15 @@ public class AnnounceService {
     public Announce findByIdAndCheck(Long id) {
         boolean isModerator = Auth.hasRole(new Role[]{Role.ROLE_MODERATOR, Role.ROLE_ADMIN});
         Announce announce = announceRepository.findById(id)
-                .orElseThrow(AnnounceNotFoundException::new);;
+                .orElseThrow(AnnounceNotFoundException::new);
+        boolean isOwner = announce.isOwner();
+        boolean isActive = announce.getStatus().equals(AnnounceStatus.ACTIVE);
 
-        if (!isModerator && !announce.getStatus().equals(AnnounceStatus.ACTIVE)) {
-            throw new AnnounceNotFoundException();
+        if (isModerator || isOwner || isActive) {
+            return announce;
         }
-        return announce;
+
+        throw new AnnounceNotFoundException();
     }
 
     public Announce save(Announce announce) {

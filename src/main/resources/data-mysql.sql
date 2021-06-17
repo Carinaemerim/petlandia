@@ -403,5 +403,5 @@ VALUES (101, '2020-02-12 19:17:27', 'Teste de report de anúncio', null, 'WAITIN
        (102, '2020-02-13 19:17:27', 'Teste de report de comentário', null, 'WAITING_REVIEW', 'COMMENT', '2020-02-13 19:17:27', 103,
         103, null, 100, null),
        (103, '2020-02-13 19:17:27', 'Teste de report de usuário', null, 'WAITING_REVIEW', 'USER', '2020-02-13 19:17:27', null,
-        null, null, 100, 104);
+        null, null, 102, 104);
 
