@@ -3,7 +3,6 @@ package br.edu.ifrs.canoas.webapp.controller;
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.Role;
-import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import br.edu.ifrs.canoas.webapp.forms.UserSummary;
 import br.edu.ifrs.canoas.webapp.helper.PaginatedEntityHelper;
 import br.edu.ifrs.canoas.webapp.helper.UserHelper;

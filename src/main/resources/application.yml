@@ -24,8 +24,3 @@ server:
   error:
     whitelabel:
       enabled: false
-  tomcat:
-    remoteip:
-      protocol-header: x-forwarded-proto
-      remote-ip-header: x-forwarded-for
-  forward-headers-strategy: framework
