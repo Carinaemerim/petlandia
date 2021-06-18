@@ -5,3 +5,5 @@ spring:
       ddl-auto: create-drop
   thymeleaf:
     cache: false
+server:
+  port: 8080

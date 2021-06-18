@@ -25,7 +25,7 @@ public class HomeTest extends BaseFluentTest {
     @Test
     public void testRegisterSuggestedAnnounces(){
         homePage.go();
-        homePage.getButtonHomeUserCreate();
+        homePage.getButtonHomeUserCreate().click();
         userCreatePage.isAt();
     }
 }

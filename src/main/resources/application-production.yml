@@ -13,3 +13,5 @@ logging:
   file:
     name: errors.log
     path: logs
+server:
+  port: 80
