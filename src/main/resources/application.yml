@@ -28,3 +28,4 @@ server:
     remoteip:
       protocol-header: x-forwarded-proto
       remote-ip-header: x-forwarded-for
+  forward-headers-strategy: native
