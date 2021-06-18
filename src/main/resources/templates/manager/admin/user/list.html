@@ -42,6 +42,7 @@
                             <th th:text="#{manager.admin.user.list.table.name}">Nome</th>
                             <th th:text="#{manager.admin.user.list.table.username}">Usuário</th>
                             <th th:text="#{manager.admin.user.list.table.role}">Nível</th>
+                            <th th:text="#{manager.admin.user.list.table.status}">Status</th>
                             <th class="text-center" width="130"
                                 th:text="#{manager.admin.user.list.table.action}">Ação
                             </th>
@@ -53,6 +54,7 @@
                             <td th:text="${user.name}"></td>
                             <td th:text="${user.username}"></td>
                             <td th:text="#{${user.role.name}}"></td>
+                            <td th:text="#{${user.status.name}}"></td>
                             <td class="text-center">
                                 <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}" class="btn btn-light btn-xs">
                                     <i class="fa fa-eye"></i>

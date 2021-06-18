@@ -96,7 +96,6 @@ public class UserAdminManagerControllerTest extends BaseTest {
                 .andExpect(status().is3xxRedirection());
 
         verify(this.userService).findById(id);
-        verify(this.userService).save(user);
         assertThat(user.getRole()).isEqualTo(Role.ROLE_ADMIN);
 
     }
@@ -130,9 +129,7 @@ public class UserAdminManagerControllerTest extends BaseTest {
                 .andExpect(status().is3xxRedirection());
 
         verify(this.userService).findById(id);
-        verify(this.userService).save(user);
-        assertThat(user.getRole()).isEqualTo(Role.ROLE_USER);
-        assertThat(user.getStatus()).isEqualTo(UserStatus.DELETED);
+        verify(this.userService).delete(user);
     }
 
     @Test

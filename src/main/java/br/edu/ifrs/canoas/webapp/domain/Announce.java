@@ -162,4 +162,8 @@ public class Announce {
     public boolean canRemove() {
         return this.canModify();
     }
+
+    public boolean isActive() {
+        return this.status.equals(AnnounceStatus.ACTIVE);
+    }
 }

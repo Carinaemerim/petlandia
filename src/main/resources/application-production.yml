@@ -1,11 +1,15 @@
 spring:
   thymeleaf:
     prefix: classpath:/templates
+    cache: true
   mvc:
     favicon:
     enabled: true
     locale: pt_BR
   jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE:petlandia}
@@ -14,43 +18,27 @@ spring:
     password: ${MYSQL_PASSWORD:petlandia}
     data: classpath:data-mysql.sql
     initialization-mode: always
+
   profiles:
-    active: development
+    - production
+---
+spring:
+  profiles:
+    active: production
   servlet:
     multipart:
       enabled: true
       max-file-size: 5MB
       max-request-size: 16MB
+---
 server:
-  port: 8080
   error:
     whitelabel:
       enabled: false
-  tomcat:
-    remoteip:
-      protocol-header: x-forwarded-proto
-      remote-ip-header: x-forwarded-for
 ---
-spring:
-  profiles: development
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-  thymeleaf:
-    cache: false
----
-spring:
-  profiles: production
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: create-drop
-  thymeleaf:
-    cache: true
 logging:
   level:
     root: ERROR
     org.springframework.web: ERROR
     org.hibernate: ERROR
-    file: logs/errors.log
+    file: /logs/errors.log

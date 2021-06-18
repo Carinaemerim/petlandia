@@ -1,9 +1,11 @@
 package br.edu.ifrs.canoas.webapp.service;
 
 import br.edu.ifrs.canoas.webapp.domain.PaginatedEntity;
+import br.edu.ifrs.canoas.webapp.domain.Report;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.enums.ReportStatus;
 import br.edu.ifrs.canoas.webapp.enums.ReportType;
+import br.edu.ifrs.canoas.webapp.enums.Role;
 import br.edu.ifrs.canoas.webapp.enums.UserStatus;
 import br.edu.ifrs.canoas.webapp.exception.UserNotFoundException;
 import br.edu.ifrs.canoas.webapp.forms.UserSummary;
@@ -23,6 +25,20 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ReportService reportService;
+
+    public void delete(User user) {
+        user.setStatus(UserStatus.DELETED);
+        user.setRole(Role.ROLE_USER);
+
+        Report[] reports = reportService.findAllByStatusAndTypeAndUser(ReportStatus.WAITING_REVIEW, ReportType.USER, user);
+        for (Report report : reports) {
+            report.setStatus(ReportStatus.ACCEPTED);
+            reportService.save(report);
+        }
+
+        userRepository.save(user);
+    }
 
     public User save(User user) {
         if (user.getEmail() != null) {

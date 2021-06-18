@@ -93,6 +93,10 @@ public class ReportService {
         return report;
     }
 
+    public Report[] findAllByStatusAndTypeAndUser(ReportStatus status, ReportType type, User user) {
+        return reportRepository.findAllByStatusAndTypeAndUser(status, type, user);
+    }
+
     public PaginatedEntity<Report> findAllByStatusAndType(int pageNumber, int pageLength, ReportStatus status, ReportType type) {
         Pageable page = PageRequest.of(pageNumber, pageLength);
         Page<Report> reportPage = reportRepository.findAllByStatusAndTypeOrderByCreatedAtDesc(page, status, type);

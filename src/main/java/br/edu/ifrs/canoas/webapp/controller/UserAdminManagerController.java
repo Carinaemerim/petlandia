@@ -43,7 +43,9 @@ public class UserAdminManagerController {
         User user = this.userService.findById(id);
         UserSummary summary = this.userService.getSummary(user);
         boolean isSelf = activeUser.getUser().getId().equals(id);
-        boolean cantReport = isSelf || !user.getStatus().equals(UserStatus.ACTIVE);
+        boolean cantReport = isSelf ||
+                !user.getStatus().equals(UserStatus.ACTIVE) ||
+                !user.getRole().equals(Role.ROLE_USER);
 
         model.addAttribute("isSelf", isSelf);
         model.addAttribute("cantReport", cantReport);
@@ -66,6 +68,14 @@ public class UserAdminManagerController {
         }
 
         User user = userService.findByIdByStatus(id, UserStatus.ACTIVE);
+        if (!user.getRole().equals(Role.ROLE_USER)) {
+            throw new ForbiddenException("not allowed");
+        }
+
+        if (activeUser.getUser().equals(user)) {
+            throw new ForbiddenException("not allowed");
+        }
+
         reportService.save(user, activeUser.getUser(), message);
         user.setStatus(UserStatus.WAITING_REVIEW);
         userService.save(user);
@@ -100,7 +110,7 @@ public class UserAdminManagerController {
     @PostMapping("/{id}/block-user")
     public String blockUser(@PathVariable("id") final Long id,
                             @AuthenticationPrincipal UserImpl activeUser) {
-        boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
+        boolean admin = activeUser.getUser().getRole().equals(Role.ROLE_ADMIN);
         if (!admin) {
             throw new ForbiddenException("not allowed");
         }
@@ -110,9 +120,8 @@ public class UserAdminManagerController {
         }
 
         User user = this.userService.findById(id);
-        user.setStatus(UserStatus.DELETED);
-        user.setRole(Role.ROLE_USER);
-        userService.save(user);
+        this.userService.delete(user);
+
         return "redirect:/manager/admin/users/" + user.getId();
     }
 

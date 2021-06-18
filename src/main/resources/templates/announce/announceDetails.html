@@ -45,7 +45,7 @@
                         <div class="col">
                             <h3 th:text="${announce.title}"></h3>
                         </div>
-                        <div class="col col-auto">
+                        <div class="col col-auto" th:if="${announce.isActive()}">
                             <a class="btn btn-light btn-sm" th:title="#{announce.report}"
                                data-toggle="modal" data-target="#modal-announce-report">
                                 <i class="fa fa-flag"></i>
@@ -206,7 +206,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h4>Comentários</h4>
+                            <h4 th:text="#{announce.comments}">Comentários</h4>
                         </div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                                 <span th:text="${comment.user.name}"></span> -
                                 <small th:text="${comment.user.username}"></small>
                             </span>
-                            <span class="direct-chat-actions float-left">
+                            <span class="direct-chat-actions float-left" th:if="${announce.isActive()}">
                                 <a th:if="${currentUserId != comment.user.id}"
                                    th:text="#{announce.comment.action.report}" class="btn-comment-report"></a>
                                 <a th:if="${currentUserId == comment.user.id}"
@@ -241,7 +241,7 @@
                     </div>
                 </div>
 
-                <div class="card-footer">
+                <div class="card-footer" th:if="${announce.isActive()}">
                     <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post"
                           accept-charset="UTF-8">
                         <div class="input-group">
