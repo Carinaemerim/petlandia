@@ -13,7 +13,7 @@ spring:
     data: classpath:data-mysql.sql
     initialization-mode: always
   profiles:
-    active: development
+    active: production
   servlet:
     multipart:
       enabled: true

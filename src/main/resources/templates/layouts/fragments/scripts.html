@@ -10,9 +10,6 @@
         <title th:text="#{head.title}"></title>
     </th:block>
 
-    <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"
-          th:if="${@environment.getActiveProfiles()[0] != 'development'}"/>
-
     <!-- Bootstrap 4.x -->
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
     />

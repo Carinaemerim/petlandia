@@ -10,13 +10,13 @@ values (101, 'DOG', 'animal.type.dog', 0),
 -- ANIMAL_GENDER
 insert into animal_gender (id, name, label, weight)
 values (101, 'MALE', 'animal.gender.male', 1),
-       (102, 'FEMALE', 'animal.gender.female', 3);
+       (102, 'FEMALE', 'animal.gender.female', 5);
 
 -- ANIMAL_SIZE
 insert into animal_size (id, name, label, weight)
 values (101, 'SMALL', 'animal.size.small', 1),
-       (102, 'MEDIUM', 'animal.size.medium', 3),
-       (103, 'LARGE', 'animal.size.large', 5);
+       (102, 'MEDIUM', 'animal.size.medium', 4),
+       (103, 'LARGE', 'animal.size.large', 8);
 
 -- ANIMAL_CASTRATED
 insert into animal_castrated (id, name, label, weight)
@@ -28,17 +28,17 @@ values (101, 'YES', 'animal.castrated.yes', 1),
 insert into animal_age (id, name, label, weight)
 values (101, 'PUPPY', 'animal.age.puppy', 1),
        (102, 'TEENAGER', 'animal.age.teenager', 2),
-       (103, 'ADULT', 'animal.age.adult', 4),
-       (104, 'AGED', 'animal.age.aged', 6),
-       (105, 'GERIATRIC', 'animal.age.geriatric', 7);
+       (103, 'ADULT', 'animal.age.adult', 5),
+       (104, 'AGED', 'animal.age.aged', 7),
+       (105, 'GERIATRIC', 'animal.age.geriatric', 8);
 
 -- ANIMAL_COLOR
 insert into animal_color(id, name, label, weight)
 values (101, 'WHITE', 'animal.color.white', 1),
-       (102, 'BLACK', 'animal.color.black', 8),
-       (103, 'BROWN', 'animal.color.brown', 6),
+       (102, 'BLACK', 'animal.color.black', 7),
+       (103, 'BROWN', 'animal.color.brown', 5),
        (104, 'CARAMEL', 'animal.color.caramel', 3),
-       (105, 'GREY', 'animal.color.grey', 7),
+       (105, 'GREY', 'animal.color.grey', 6),
        (106, 'CREAM', 'animal.color.cream', 2);
 
 -- AUTHENTICATION
