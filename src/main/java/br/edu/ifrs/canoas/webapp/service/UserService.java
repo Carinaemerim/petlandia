@@ -58,18 +58,18 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
-    public PaginatedEntity<User> findAll(int pageNumber, int pageLenght, String term) {
-        Pageable page = PageRequest.of(pageNumber, pageLenght);
+    public PaginatedEntity<User> findAll(int pageNumber, int pageLength, String term) {
+        Pageable page = PageRequest.of(pageNumber, pageLength);
         Page<User> userPage = userRepository.findAllByNameContainsIgnoreCaseOrCpfContainingOrUsernameIgnoreCaseContainingOrEmailContainingIgnoreCaseOrderByNameDescIdDesc(page, term, term, term, term);
 
         return PaginatedEntity.<User>builder()
                 .currentPage(pageNumber)
                 .data(userPage.getContent())
                 .totalResults(userPage.getTotalElements())
-                .pageLength(pageLenght)
+                .pageLength(pageLength)
                 .build();
     }
 

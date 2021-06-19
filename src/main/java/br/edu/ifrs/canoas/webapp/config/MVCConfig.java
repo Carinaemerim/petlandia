@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.webapp.config;
 
 import br.edu.ifrs.canoas.webapp.components.HeaderInterceptor;
 import br.edu.ifrs.canoas.webapp.components.ManagerInterceptor;
+import br.edu.ifrs.canoas.webapp.config.auth.VerifyAccessInterceptor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
@@ -29,9 +31,10 @@ public class MVCConfig implements WebMvcConfigurer {
 
     @Autowired
     private ManagerInterceptor managerInterceptor;
-
     @Autowired
     private HeaderInterceptor headerInterceptor;
+    @Autowired
+    private VerifyAccessInterceptor verifyAccessInterceptor;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -52,6 +55,12 @@ public class MVCConfig implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(headerInterceptor).addPathPatterns("/**");
         registry.addInterceptor(managerInterceptor).addPathPatterns("/manager", "/manager/**");
+        registry.addInterceptor(verifyAccessInterceptor)
+                .excludePathPatterns("/webjars/**",
+                        "/css/**",
+                        "/js/**").addPathPatterns("/**");
+
+
     }
 
     @Override

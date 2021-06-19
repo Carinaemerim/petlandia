@@ -37,6 +37,6 @@ public class UserDetailsImplService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> roleToCollection(User user) {
         ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority(user.getRole().name()));
-        return list.stream().collect(Collectors.toList());
+        return new ArrayList<>(list);
     }
 }
