@@ -58,7 +58,9 @@ public class VerifyAccessInterceptor implements HandlerInterceptor {
             FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
 
             FlashMap flashMap = new FlashMap();
-            flashMap.putAll(lastAttributes);
+            if (lastAttributes != null) {
+                flashMap.putAll(lastAttributes);
+            }
 
             if (flashMapManager != null) {
                 flashMapManager.saveOutputFlashMap(flashMap, request, response);
