@@ -113,6 +113,10 @@ public class User {
 
     private String avatar;
 
+    public void setCelPhone(String celPhone) {
+        this.celPhone = (celPhone != null && celPhone.length() > 1) ? celPhone : null;
+    }
+
     public String getAvatarHash() {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

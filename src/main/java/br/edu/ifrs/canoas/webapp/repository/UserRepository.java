@@ -30,4 +30,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
             "", nativeQuery = true)
     Long countReportedByTypeAndStatus(@Param("user") User user, @Param("type") ReportType type, @Param("status") ReportStatus status);
     Optional<User> findByIdAndStatus(Long id, UserStatus status);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
+    boolean existsByCpf(String cpf);
 }

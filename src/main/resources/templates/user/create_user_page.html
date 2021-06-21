@@ -44,15 +44,17 @@
                         <div th:replace="/user/fragments/user_animal_data" :: user_animal_data></div>
                     </div>
 
-                    <div class="row justify-content-between">
-                        <div class="col">
-                            <a class="btn btn-danger" th:text="#{user.form.cancel}">
-                            </a>
-                        </div>
+                    <div class="card-footer">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <a class="btn btn-danger" th:text="#{user.form.cancel}">
+                                </a>
+                            </div>
 
-                        <div class="col text-right">
-                            <button class="btn btn-success" th:text="#{user.form.save}">
-                            </button>
+                            <div class="col text-right">
+                                <button class="btn btn-success" th:text="#{user.form.save}">
+                                </button>
+                            </div>
                         </div>
                     </div>
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/manager/user")
@@ -61,15 +62,11 @@ public class UserManagerController {
     public String postProfileEdit(@AuthenticationPrincipal UserImpl activeUser,
                                   @Validated({UserEditGroup.class}) @ModelAttribute("form") UserCreateForm form,
                                   BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes,
                                   Model model) {
 
         User user = userService.findById(activeUser.getUser().getId());
-        if (user == null) {
-            return "/notFound";
-        }
 
-        System.out.println(bindingResult.hasErrors());
-        System.out.println(form.getUser());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("form", form);
@@ -94,7 +91,7 @@ public class UserManagerController {
         user.setName(form.getUser().getName());
 
         userService.save(user);
-
+        redirectAttributes.addFlashAttribute("success", "user.form.edit");
         return "redirect:/manager/user/profile";
     }
 

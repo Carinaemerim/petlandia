@@ -81,12 +81,29 @@ public class UserController {
             bindingResult.addError(error);
         }
 
+        if (userService.checkUsernameExists(form.getUser())) {
+            String message = messages.get("validation.user.username_exists");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "user.username", message);
+            bindingResult.addError(error);
+        }
+
+        if (userService.checkUserEmailExists(form.getUser())) {
+            String message = messages.get("validation.user.email_exists");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "user.email", message);
+            bindingResult.addError(error);
+        }
+
+        if (userService.checkUserCpfExists(form.getUser())) {
+            String message = messages.get("validation.user.cpf_exists");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "user.cpf", message);
+            bindingResult.addError(error);
+        }
+
         if (bindingResult.hasErrors()) {
             return "/user/create_user_page";
         }
 
         form.getUser().setRole(Role.ROLE_USER);
-
         userService.save(form.getUser());
         redirectAttributes.addFlashAttribute("successRegister",
                 messages.get("user.login.new"));

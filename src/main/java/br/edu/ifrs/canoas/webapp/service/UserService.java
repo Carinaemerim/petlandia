@@ -92,4 +92,16 @@ public class UserService {
         return userRepository.findByIdAndStatus(id, status)
             .orElseThrow(UserNotFoundException::new);
     }
+
+    public boolean checkUsernameExists(User user) {
+        return userRepository.existsByUsername(user.getUsername());
+    }
+
+    public boolean checkUserEmailExists(User user) {
+        return userRepository.existsByEmail(user.getEmail());
+    }
+
+    public boolean checkUserCpfExists(User user) {
+        return userRepository.existsByCpf(user.getCpf());
+    }
 }
