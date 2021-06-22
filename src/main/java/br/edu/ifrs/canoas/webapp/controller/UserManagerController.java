@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.webapp.config.Messages;
 import br.edu.ifrs.canoas.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.webapp.domain.User;
 import br.edu.ifrs.canoas.webapp.domain.validation.UserEditGroup;
+import br.edu.ifrs.canoas.webapp.forms.UserChangePasswordForm;
 import br.edu.ifrs.canoas.webapp.forms.UserCreateForm;
 import br.edu.ifrs.canoas.webapp.service.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -67,7 +69,6 @@ public class UserManagerController {
 
         User user = userService.findById(activeUser.getUser().getId());
 
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("form", form);
             setAnimalData(model);
@@ -106,12 +107,38 @@ public class UserManagerController {
     }
 
     @GetMapping("/password")
-    public String getPasswordEdit() {
+    public String getPasswordEdit(Model model) {
+        model.addAttribute("form", new UserChangePasswordForm());
         return "/manager/user/password";
     }
 
     @PostMapping("/password")
-    public String postPasswordEdit(@AuthenticationPrincipal UserImpl activeUser) {
-        return "/manager/user/password";
+    public String postPasswordEdit(
+            @AuthenticationPrincipal UserImpl activeUser,
+            @ModelAttribute("form") UserChangePasswordForm form,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        User user = userService.getOne(activeUser.getUser());
+        if (!form.isEqualCurrentPassword(user)) {
+            String message = messages.get("validation.user.password_current_mismatch");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "currentPassword", message);
+            bindingResult.addError(error);
+        }
+
+        if (!form.isEqualNewPassword()) {
+            String message = messages.get("validation.user.password_mismatch");
+            FieldError error = new FieldError(bindingResult.getObjectName(), "newPassword", message);
+            bindingResult.addError(error);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "/manager/user/password";
+        }
+
+        user.setPassword(form.getHash());
+        userService.save(user);
+        redirectAttributes.addFlashAttribute("success", "user.password.changed");
+        return "redirect:/manager/user/profile";
     }
 }

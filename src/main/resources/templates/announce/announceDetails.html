@@ -212,6 +212,7 @@
                 </div>
 
                 <div class="card-body">
+                    <h6 th:text="#{announce.comments.empty}" th:if="${comments.data.isEmpty()}"></h6>
                     <div class="direct-chat-msg"
                          th:each="comment : ${comments.data}"
                          th:classappend="${comment.user.id == announce.user.id} ? 'right'"
