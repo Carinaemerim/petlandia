@@ -105,8 +105,7 @@ public class UserController {
 
         form.getUser().setRole(Role.ROLE_USER);
         userService.save(form.getUser());
-        redirectAttributes.addFlashAttribute("successRegister",
-                messages.get("user.login.new"));
+        redirectAttributes.addFlashAttribute("success", messages.get("user.login.new"));
 
         return "redirect:/login";
     }
