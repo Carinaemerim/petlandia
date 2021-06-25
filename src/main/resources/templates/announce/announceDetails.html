@@ -248,12 +248,13 @@
                     <form th:action="@{/announce/{id}/comment(id = ${announce.id})}" method="post"
                           accept-charset="UTF-8">
                         <div class="input-group">
-                            <input type="text" name="message"
+                            <input type="text" name="message" id="comment-content-input"
                                    th:placeholder="#{announce.comment.form.input.placeholder}"
                                    class="form-control" autocomplete="off" minlength="5" maxlength="230"
                                    pattern=".{5,230}">
                             <span class="input-group-append">
-                                <button type="submit" class="btn btn-secondary"
+                                <button id="comment-submit-button"
+                                        type="submit" class="btn btn-secondary"
                                         th:text="#{announce.comment.form.send}"></button>
                             </span>
                         </div>

@@ -17,4 +17,11 @@ public class AnnounceViewPage extends GenericPage {
 
     @FindBy(id = "delete-announce-btn")
     protected FluentWebElement deleteAnnounceBtn;
+
+    @FindBy(id = "comment-submit-button")
+    protected FluentWebElement commentSubmitBtn;
+
+    @FindBy(id = "comment-content-input")
+    protected FluentWebElement commentContentInput;
+
 }

@@ -53,4 +53,13 @@ public class GenericPage extends FluentPage {
 
         return this;
     }
+
+    public void confirmModal() {
+        await().atMost(15, TimeUnit.SECONDS)
+                .until(el(".modal.show")).displayed();
+
+        FluentWebElement modal = $(".modal.show").get(0);
+
+        modal.$(".btn.btn-secondary").click();
+    }
 }
