@@ -34,7 +34,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-
 public abstract class BaseFluentTest extends FluentTest {
     private static final Logger log = LoggerFactory.getLogger(BaseFluentTest.class);
     @LocalServerPort

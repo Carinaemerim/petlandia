@@ -35,7 +35,7 @@ public class AnnounceListTest {
     }
 
     @Test
-    public void testFilteresAnnouncesNoResults(){
+    public void testFilteredAnnouncesNoResults(){
 
     }
 
@@ -45,7 +45,7 @@ public class AnnounceListTest {
     }
 
     @Test
-    public void testSeeAnnounceDetailsOnAnouncesPage(){
+    public void testSeeAnnounceDetailsOnAnnouncesPage(){
 
     }
 

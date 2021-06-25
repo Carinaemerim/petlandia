@@ -4,6 +4,7 @@
 
         <div class="card-body">
             <a class="btn btn-light btn-block text-left"
+               id="sidebar-user-my-data"
                th:href="*{userProfile.href}"
                th:classappend="*{userProfile.active} ? 'active'">
                 <i class="fa fa-user-edit mr-2"></i> <span th:text="#{ sidebar.user.myData}"></span></a>

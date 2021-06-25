@@ -46,4 +46,11 @@ public class GenericPage extends FluentPage {
         await().atMost(15, TimeUnit.SECONDS).until(field).value(value);
         return this;
     }
+
+    public GenericPage verifyAlertPresent(String className) {
+        await().atMost(15, TimeUnit.SECONDS)
+                .until($(className)).present();
+
+        return this;
+    }
 }

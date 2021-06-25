@@ -18,7 +18,9 @@
                             <div th:text="#{user.form.access.data}"></div>
                         </div>
                         <div class="col-auto">
-                            <a class="btn btn-outline-dark btn-xs" th:href="@{/manager/user/profile/edit}">
+                            <a class="btn btn-outline-dark btn-xs"
+                               id="btn-edit-user"
+                               th:href="@{/manager/user/profile/edit}">
                                 <i class="fa fa-edit"></i>
                                 <span th:text="#{announce.mod.edit}"></span>
                             </a>
@@ -60,7 +62,8 @@
                             <div class="form-group">
                                 <label th:text="#{user.form.state}"> </label>
                                 <br>
-                                <div class="form-control" th:text="${user.state}"></div>
+                                <div class="form-control" id="user_form_state"
+                                     th:text="${user.state}"></div>
                             </div>
                         </div>
 
