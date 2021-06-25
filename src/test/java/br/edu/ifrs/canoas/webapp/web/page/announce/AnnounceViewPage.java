@@ -1,0 +1,20 @@
+package br.edu.ifrs.canoas.webapp.web.page.announce;
+
+import br.edu.ifrs.canoas.webapp.web.page.GenericPage;
+import lombok.Data;
+import org.fluentlenium.core.annotation.PageUrl;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.support.FindBy;
+
+@PageUrl("/announces/{announceId}")
+@Data
+public class AnnounceViewPage extends GenericPage {
+    @FindBy(id = "announce-title")
+    private FluentWebElement announceTitle;
+
+    @FindBy(id = "edit-announce-btn")
+    protected FluentWebElement editAnnounceBtn;
+
+    @FindBy(id = "delete-announce-btn")
+    protected FluentWebElement deleteAnnounceBtn;
+}

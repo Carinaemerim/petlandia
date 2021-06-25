@@ -21,7 +21,8 @@
     </div>
 
     <div class="btn-group d-flex">
-        <button type="button" class="btn btn-block btn-outline-secondary btn-select w-100"
+        <button th:id="|cropper-modal-toggle-${photo}|"
+                type="button" class="btn btn-block btn-outline-secondary btn-select w-100"
                 th:text="#{cropper.btn.select}">open modal
         </button>
 
@@ -30,7 +31,7 @@
             <i class="fa fa-trash"></i>
         </button>
     </div>
-    <div class="modal fade in" tabindex="-1">
+    <div class="modal fade in" tabindex="-1" th:id="|cropper-modal-${photo}|">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,13 +43,16 @@
                     </div>
 
                     <input type="file" class="custom-file crop-input"
+                           th:id="|cropper-input-${photo}|"
                            th:field="*{__${photo} + '.image'__}" accept="image/*"
                            th:classappend="${#fields.hasErrors('__${photo}__')} ? is-invalid">
 
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-secondary btn-submit"
+                        <button type="button"
+                                th:id="|cropper-submit-${photo}|"
+                                class="btn btn-secondary btn-submit"
                                 th:text="#{cropper.btn.submit}">Select file
                         </button>
                     </div>

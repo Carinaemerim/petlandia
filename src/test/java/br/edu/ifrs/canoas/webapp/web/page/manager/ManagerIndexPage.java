@@ -11,4 +11,13 @@ import org.openqa.selenium.support.FindBy;
 public class ManagerIndexPage extends GenericPage {
     @FindBy(id = "sidebar-user-my-data")
     private FluentWebElement sidebarUserMyDataLink;
+
+    @FindBy(id = "blocked-announces-link")
+    protected FluentWebElement blockedAnnouncesLink;
+
+    @FindBy(id = "waiting-review-announces-link")
+    protected FluentWebElement waitingReviewAnnouncesLink;
+
+    @FindBy(id = "active-announces-link")
+    protected FluentWebElement activeAnnouncesLink;
 }

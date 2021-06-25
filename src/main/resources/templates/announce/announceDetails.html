@@ -13,7 +13,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-auto mr-auto">
-                    <div class="btn-group btn-group-sm" th:if="${announce.canEdit()}">
+                    <div id="edit-announce-btn"
+                         class="btn-group btn-group-sm" th:if="${announce.canEdit()}">
                         <a class="btn btn-info"
                            th:href="@{/announce/{id}/edit(id = ${announce.id})}">
                             <i class="fa fa-pen"></i>
@@ -22,7 +23,8 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <div class="btn-group btn-group-sm" th:if="${announce.canRemove()}">
+                    <div id="delete-announce-btn"
+                         class="btn-group btn-group-sm" th:if="${announce.canRemove()}">
                         <form class="d-none" method="post" th:action="@{/announce/{id}/remove(id = ${announce.id})}"
                               id="delete-form">
                             <input type="hidden" name="origin" th:value="${referrer}">
@@ -43,7 +45,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h3 th:text="${announce.title}"></h3>
+                            <h3 id="announce-title" th:text="${announce.title}"></h3>
                         </div>
                         <div class="col col-auto" th:if="${announce.isActive()}">
                             <a class="btn btn-light btn-sm" th:title="#{announce.report}"

@@ -19,11 +19,13 @@
 
         <div class="card-body">
             <a class="btn btn-light btn-block text-left"
+               id="active-announces-link"
                th:href="*{announceActive.href}"
                th:classappend="*{announceActive.active} ? 'active'">
                 <i class="fa fa-check-circle mr-2"></i> <span th:text="#{sidebar.user.published}"></span></a>
 
             <a class="btn btn-light btn-block text-left"
+               id="waiting-review-announces-link"
                th:href="*{announceWaitingReview.href}"
                th:classappend="*{announceWaitingReview.active} ? 'active'">
                 <i class="fa fa-exclamation-circle mr-2"></i>
@@ -34,6 +36,7 @@
             </a>
 
             <a class="btn btn-light btn-block text-left"
+               id="blocked-announces-link"
                th:href="*{announceBlocked.href}"
                th:classappend="*{announceBlocked.active} ? 'active'">
                 <i class="fa fa-ban mr-2"></i>
