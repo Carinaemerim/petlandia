@@ -6,6 +6,7 @@ import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerAnnouncesPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -43,7 +44,7 @@ public class ReviewAnnounceTest extends BaseFluentTest {
         assertThat($(managerAnnouncesPage.getItemSelector()).present()).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testSeeReviewedAnnounceDetails(){
 
     }
@@ -66,7 +67,7 @@ public class ReviewAnnounceTest extends BaseFluentTest {
         assertThat($(managerAnnouncesPage.getItemSelector()).present()).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testUserCanNotReviewAnnounce(){
 
     }

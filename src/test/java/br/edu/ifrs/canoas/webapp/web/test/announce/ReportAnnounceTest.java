@@ -6,6 +6,7 @@ import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceListGeneralPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -42,17 +43,17 @@ public class ReportAnnounceTest extends BaseFluentTest {
         assertThat(announceViewPage.getAnnounceTitle().present()).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testBlankMotiveReportAnnounce(){
 
     }
 
-    @Test
+    @Disabled
     public void testReportAnnounceUserNotLogged(){
 
     }
 
-    @Test
+    @Disabled
     public void testUserCanNotReportHisOwnAnnounce(){
 
     }

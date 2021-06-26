@@ -7,6 +7,7 @@ import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceListGeneralPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.CommentSection;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -56,17 +57,17 @@ public class CommentManageTest extends BaseFluentTest {
         assertThat(commentSection.hasCommentWithText("Que lindaaaaaaaaaa")).isTrue();
     }
 
-    @Test
+    @Disabled
     public void testCreateCommentInvalidContent(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateCommentBlank(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateCommentUserNotLogged(){
 
     }
@@ -96,17 +97,17 @@ public class CommentManageTest extends BaseFluentTest {
         )).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testDeleteAnotherUSerComment(){
 
     }
 
-    @Test
+    @Disabled
     public void testModeratorCanNotDeleteAnotherUserComment(){
 
     }
 
-    @Test
+    @Disabled
     public void testAdminCanDeleteAnotherUserComment(){
 
     }

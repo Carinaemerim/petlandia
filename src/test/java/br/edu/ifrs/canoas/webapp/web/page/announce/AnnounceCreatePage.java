@@ -212,6 +212,9 @@ public class AnnounceCreatePage extends GenericPage {
         await().atMost(15, TimeUnit.SECONDS).until(modal).displayed();
 
         input.fill().with(filePath);
+
+        await().explicitlyFor(4, TimeUnit.SECONDS);
+
         submitButton.click();
 
         await().atMost(15, TimeUnit.SECONDS).until(modal).not().displayed();

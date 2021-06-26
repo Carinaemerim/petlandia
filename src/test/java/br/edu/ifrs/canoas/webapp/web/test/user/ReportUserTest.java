@@ -54,7 +54,7 @@ public class ReportUserTest extends BaseFluentTest {
         homePage.getButtonHomeUserLogin().click();
         loginPage.isAt();
 
-        loginPage.fillAndSubmitFormAwait("r2d2", "user");
+        loginPage.fillAndSubmitForm("r2d2", "user");
         loginPage.isAt();
         loginPage.verifyAlertPresent(".alert-danger");
     }

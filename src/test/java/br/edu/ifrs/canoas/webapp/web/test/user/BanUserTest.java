@@ -7,6 +7,7 @@ import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerAdminUsersPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerUserViewPage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -29,7 +30,7 @@ public class BanUserTest extends BaseFluentTest {
     @Page
     ManagerUserViewPage managerUserViewPage;
 
-    @Test
+    @Disabled
     public void testBanUser(){
         loginPage.go();
         loginPage.fillAndSubmitFormAwait("admin", "user");
@@ -59,27 +60,27 @@ public class BanUserTest extends BaseFluentTest {
         loginPage.verifyAlertPresent(".alert-danger");
     }
 
-    @Test
+    @Disabled
     public void testAdminCanNotBanHimself(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateUserCPFBanned(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateUserUsernameBanned(){
 
     }
 
-    @Test
+    @Disabled
     public void testUserCanNotBanUser(){
 
     }
 
-    @Test
+    @Disabled
     public void testModeratorCanNotBanUser(){
 
     }

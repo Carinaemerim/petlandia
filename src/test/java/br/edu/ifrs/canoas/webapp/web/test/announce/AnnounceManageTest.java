@@ -10,6 +10,7 @@ import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceListActivePage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 import org.springframework.core.io.Resource;
@@ -63,6 +64,9 @@ public class AnnounceManageTest extends BaseFluentTest {
         announceCreatePage.fillSecondCropper(path);
         announceCreatePage.fillThirdCropper(path);
 
+        await().atMost(4, TimeUnit.SECONDS)
+                .until(announceCreatePage.getAnimalTypeCatField()).clickable();
+
         announceCreatePage.fillAnimalForm(
             announceCreatePage.getAnimalTypeDogField(),
             announceCreatePage.getAnimalGenderMale(),
@@ -94,23 +98,23 @@ public class AnnounceManageTest extends BaseFluentTest {
 
     }
 
-    @Test
+    @Disabled
     public void testCreateAnnounceUserNotLoggedIn(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateAnnounceRequiredFieldBlank(){
 
     }
 
-    @Test
+    @Disabled
     public void testCreateAnnounceLessCharactersField(){
 
     }
 
 
-    @Test
+    @Disabled
     public void testCreateAnnounceMoreCharactersField(){
 
     }
@@ -147,23 +151,23 @@ public class AnnounceManageTest extends BaseFluentTest {
         assertThat(announceViewPage.getAnnounceTitle().text()).isEqualTo("Boxer MoDeus");
     }
 
-    @Test
+    @Disabled
     public void testEditAnnounceRequiredFieldBlank(){
 
     }
 
-    @Test
+    @Disabled
     public void testEditAnnounceInvalidData(){
 
     }
 
-    @Test
+    @Disabled
     public void testEditAnnounceLessCharactersField(){
 
     }
 
 
-    @Test
+    @Disabled
     public void testEditAnnounceMoreCharactersField(){
 
     }

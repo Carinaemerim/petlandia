@@ -1,55 +1,56 @@
 package br.edu.ifrs.canoas.webapp.web.test.user;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class UserPermissionManageTest {
 
-    @Test
+    @Disabled
     public void testAdminCanModifyUserPermission(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddModeratorPermissionToUser(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddAdminPermissionToModerator(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddAdminPermissionToUser(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddUserPermissionToAdmin(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddUserPermissionToModerator(){
 
     }
 
-    @Test
+    @Disabled
     public void testAddModeratorPermissionToAdmin(){
 
     }
 
-    @Test
+    @Disabled
     public void testAdminCanNotEditItselfPermission(){
 
     }
 
-    @Test
+    @Disabled
     public void testModeratorCanNotEditUserPermissions(){
 
     }
 
-    @Test
+    @Disabled
     public void testUserCanNotEditUserPermissions(){
 
     }

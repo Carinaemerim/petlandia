@@ -6,6 +6,7 @@ import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerCommentsPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -43,7 +44,7 @@ public class ReviewCommentTest extends BaseFluentTest {
         assertThat($(managerCommentsPage.getItemSelector()).present()).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testSeeReviewedCommentDetails(){
 
     }
@@ -66,7 +67,7 @@ public class ReviewCommentTest extends BaseFluentTest {
         assertThat($(managerCommentsPage.getItemSelector()).present()).isFalse();
     }
 
-    @Test
+    @Disabled
     public void testUserCanNotReviewComment(){
 
     }

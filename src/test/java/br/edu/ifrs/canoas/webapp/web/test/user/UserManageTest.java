@@ -10,6 +10,7 @@ import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerProfilePage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerUserChangePasswordPage;
 import br.edu.ifrs.canoas.webapp.web.page.user.UserCreatePage;
 import org.fluentlenium.core.annotation.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.RetryingTest;
 
@@ -76,7 +77,7 @@ public class UserManageTest extends BaseFluentTest {
         this.userCreatePage.getSubmitButton().click();
         loginPage.isAt();
 
-        loginPage.fillAndSubmitForm("john.doe", "useras");
+        loginPage.fillAndSubmitFormAwait("john.doe", "useras");
 
         homePage.isAt();
 
@@ -84,22 +85,22 @@ public class UserManageTest extends BaseFluentTest {
         assertThat(genericPage.getTextHeaderUserName().text()).isEqualTo("John Doe");
     }
 
-    @Test
+    @Disabled
     public void testCreateUserSameCPF() {
 
     }
 
-    @Test
+    @Disabled
     public void testCreateUserSameUsername() {
 
     }
 
-    @Test
+    @Disabled
     public void testCreateUserRequiredFieldBlank() {
 
     }
 
-    @Test
+    @Disabled
     public void testCreateUserPasswordsDoesNotMatch() {
 
     }
@@ -135,27 +136,27 @@ public class UserManageTest extends BaseFluentTest {
         assertThat(this.managerProfilePage.getStateFormField().text()).isEqualTo("MG");
     }
 
-    @Test
+    @Disabled
     public void testEditUserPassword() {
 
     }
 
-    @Test
+    @Disabled
     public void testEditUserWrongActualPassword() {
 
     }
 
-    @Test
+    @Disabled
     public void testEditUserPasswordsDoesNotMatch() {
 
     }
 
-    @Test
+    @Disabled
     public void testEditUserSameCPF() {
 
     }
 
-    @Test
+    @Disabled
     public void testEditUserSameUsername() {
 
     }
@@ -187,7 +188,7 @@ public class UserManageTest extends BaseFluentTest {
         homePage.getButtonHomeUserLogin().click();
         loginPage.isAt();
 
-        loginPage.fillAndSubmitFormAwait("r2d2", "user");
+        loginPage.fillAndSubmitForm("r2d2", "user");
         loginPage.isAt();
         loginPage.verifyAlertPresent(".alert-danger");
         loginPage.fillAndSubmitFormAwait("r2d2", "useras");

@@ -1,65 +1,66 @@
 package br.edu.ifrs.canoas.webapp.web.test.announce;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class AnnounceListTest {
 
-    @Test
+    @Disabled
     public void testAnnouncesList(){
 
     }
 
-    @Test
+    @Disabled
     public void testFiveAnnouncesList(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeMoreAnnouncesOnFiveAnnouncesList(){
 
     }
 
-    @Test
+    @Disabled
     public void testSuggestedAnnouncesLoggedUser(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeMoreSuggestedAnnouncesLoggedUser(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeFilteredAnnounces(){
 
     }
 
-    @Test
+    @Disabled
     public void testFilteredAnnouncesNoResults(){
 
     }
 
-    @Test
+    @Disabled
     public void testUserNotLoggedDoesNotSeeSuggestedAnnounces(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeAnnounceDetailsOnAnnouncesPage(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeAnnounceDetailsOnFiveAnnouncesList(){
 
     }
 
-    @Test
+    @Disabled
     public void testSeeAnnounceDetailsOnSuggestedAnnounces(){
 
     }
 
-    @Test
+    @Disabled
     public void testSuggestedAnnouncesCarrouselNavigation(){
 
     }
