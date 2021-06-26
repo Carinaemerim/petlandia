@@ -39,4 +39,9 @@ public class ManagerUserViewPage extends GenericPage {
         this.userReportReasonField.fill().withText(reason);
         this.submitReportUserButton.click();
     }
+
+    public void blockUser() {
+        this.blockUserButton.click();
+        this.confirmModal();
+    }
 }
