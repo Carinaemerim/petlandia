@@ -6,6 +6,8 @@ import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
 @PageUrl("/announces/{announceId}")
 @Data
 public class AnnounceViewPage extends GenericPage {
@@ -23,5 +25,28 @@ public class AnnounceViewPage extends GenericPage {
 
     @FindBy(id = "comment-content-input")
     protected FluentWebElement commentContentInput;
+
+    @FindBy(id = "modal-announce-report")
+    protected FluentWebElement modalAnnounceReport;
+
+    @FindBy(id = "report-announce-btn")
+    protected FluentWebElement reportAnnounceBtn;
+
+    @FindBy(id = "announce_form_report")
+    protected FluentWebElement announceReportReasonField;
+
+    @FindBy(id = "submit-report-btn")
+    protected FluentWebElement submitReportButton;
+
+    public void reportAnnounce(String reason) {
+        reportAnnounceBtn.click();
+
+        await().atMost(15, TimeUnit.SECONDS)
+                .until(modalAnnounceReport).displayed();
+
+        announceReportReasonField.fill().withText(reason);
+
+        submitReportButton.click();
+    }
 
 }
