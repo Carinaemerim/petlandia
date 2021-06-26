@@ -47,6 +47,7 @@
 
         <div class="card-body" th:if="*{moderator}">
             <a class="btn btn-light btn-block text-left"
+               id="reported-announces-link"
                th:href="*{reportAnnounces.href}"
                th:classappend="*{reportAnnounces.active} ? 'active'">
                 <i class="fa fa-bullhorn mr-2"></i>
@@ -58,6 +59,7 @@
 
             <a class="btn btn-light btn-block text-left"
                th:href="*{reportComments.href}"
+               id="reported-comments-link"
                th:classappend="*{reportComments.active} ? 'active'">
                 <i class="fa fa-comments mr-2"></i>
                 <span th:text="#{sidebar.mod.comments}"> </span>
@@ -69,6 +71,7 @@
 
             <a class="btn btn-light btn-block text-left"
                th:href="*{reportUsers.href}"
+               id="reported-users-link"
                th:classappend="*{reportUsers.active} ? 'active'">
                 <i class="fa fa-user mr-2"></i>
                 <span th:text="#{sidebar.mod.users}"> </span>

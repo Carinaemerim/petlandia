@@ -8,6 +8,7 @@ import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.CommentSection;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +31,7 @@ public class ReportCommentTest extends BaseFluentTest {
     @Page
     CommentSection commentSection;
 
-    @Test
+    @RetryingTest(5)
     public void testReportComment(){
         loginPage.go();
         loginPage.fillAndSubmitFormAwait("r2d2", "user");

@@ -11,6 +11,7 @@ import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class AnnounceManageTest extends BaseFluentTest {
     @Page
     AnnounceListActivePage announceListActivePage;
 
-    @Test
+    @RetryingTest(5)
     public void testCreateAnnounce() throws IOException {
         loginPage.go();
         loginPage.fillAndSubmitFormAwait("r2d2", "user");
@@ -114,7 +115,7 @@ public class AnnounceManageTest extends BaseFluentTest {
 
     }
 
-    @Test
+    @RetryingTest(5)
     public void testEditAnnounce(){
         loginPage.go();
         loginPage.fillAndSubmitFormAwait("r2d2", "user");

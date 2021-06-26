@@ -6,6 +6,7 @@ import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import br.edu.ifrs.canoas.webapp.web.page.user.UserCreatePage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 public class HomeTest extends BaseFluentTest {
     @Page
@@ -15,14 +16,14 @@ public class HomeTest extends BaseFluentTest {
     @Page
     UserCreatePage userCreatePage;
 
-    @Test
+    @RetryingTest(5)
     public void testLoginSuggestedAnnounces(){
         homePage.go();
         homePage.getButtonHomeUserLogin().click();
         loginPage.isAt();
     }
 
-    @Test
+    @RetryingTest(5)
     public void testRegisterSuggestedAnnounces(){
         homePage.go();
         homePage.getButtonHomeUserCreate().click();

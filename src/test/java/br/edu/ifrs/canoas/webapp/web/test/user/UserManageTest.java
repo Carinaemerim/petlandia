@@ -10,6 +10,7 @@ import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerProfilePage;
 import br.edu.ifrs.canoas.webapp.web.page.user.UserCreatePage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +39,7 @@ public class UserManageTest extends BaseFluentTest {
     @Page()
     ManagerProfileEditPage managerProfileEditPage;
 
-    @Test
+    @RetryingTest(5)
     public void testCreateUser() {
         homePage.go();
         genericPage.getButtonHeaderUserCreate().click();
@@ -99,7 +100,7 @@ public class UserManageTest extends BaseFluentTest {
 
     }
 
-    @Test
+    @RetryingTest(5)
     public void testEditUser() {
         this.loginPage.go();
         this.loginPage.fillAndSubmitFormAwait(

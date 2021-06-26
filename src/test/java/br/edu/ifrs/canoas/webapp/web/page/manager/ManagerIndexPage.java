@@ -20,4 +20,13 @@ public class ManagerIndexPage extends GenericPage {
 
     @FindBy(id = "active-announces-link")
     protected FluentWebElement activeAnnouncesLink;
+
+    @FindBy(id = "reported-announces-link")
+    protected FluentWebElement reportedAnnouncesLink;
+
+    @FindBy(id = "reported-comments-link")
+    protected FluentWebElement reportedCommentsLink;
+
+    @FindBy(id = "reported-users-link")
+    protected FluentWebElement reportedUsersLink;
 }

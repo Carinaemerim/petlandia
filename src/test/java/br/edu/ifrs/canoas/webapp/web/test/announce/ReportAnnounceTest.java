@@ -7,6 +7,7 @@ import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceListGeneralPage;
 import br.edu.ifrs.canoas.webapp.web.page.announce.AnnounceViewPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +25,7 @@ public class ReportAnnounceTest extends BaseFluentTest {
     @Page
     AnnounceListGeneralPage announceListGeneralPage;
 
-    @Test
+    @RetryingTest(5)
     public void testReportAnnounce(){
         loginPage.go();
         loginPage.fillAndSubmitFormAwait("r2d2", "user");

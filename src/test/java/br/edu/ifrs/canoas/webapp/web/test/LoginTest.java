@@ -5,6 +5,7 @@ import br.edu.ifrs.canoas.webapp.web.page.HomePage;
 import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -15,7 +16,7 @@ public class LoginTest extends BaseFluentTest {
     @Page
     HomePage homePage;
 
-    @Test
+    @RetryingTest(5)
     public void testSuccessfullyLogin(){ ;
         homePage.go();
         loggedUser();
@@ -23,7 +24,7 @@ public class LoginTest extends BaseFluentTest {
         assertThat(homePage.getTextHeaderUserName().text()).isEqualTo("R2d2");
     }
 
-    @Test
+    @RetryingTest(5)
     public void testFailedLogin(){
         homePage.go();
         loginPage.go();
