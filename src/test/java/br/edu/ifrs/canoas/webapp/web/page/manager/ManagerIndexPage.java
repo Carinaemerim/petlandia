@@ -29,4 +29,7 @@ public class ManagerIndexPage extends GenericPage {
 
     @FindBy(id = "reported-users-link")
     protected FluentWebElement reportedUsersLink;
+
+    @FindBy(id = "admin-user-link")
+    protected FluentWebElement adminUsersLink;
 }

@@ -36,6 +36,9 @@ public class GenericPage extends FluentPage {
     @FindBy(id = "text-header-user-name")
     private FluentWebElement textHeaderUserName;
 
+    @FindBy(id = "user-info")
+    private FluentWebElement buttonUserInfo;
+
 
     public GenericPage deleteCookieByName(String name) {
         this.getDriver().manage().deleteCookieNamed(name);
@@ -61,5 +64,15 @@ public class GenericPage extends FluentPage {
         FluentWebElement modal = $(".modal.show").get(0);
 
         modal.$(".btn.btn-secondary").click();
+    }
+
+    public void logout() {
+        this.buttonUserInfo.click();
+
+        await().atMost(15, TimeUnit.SECONDS).until(
+            this.buttonHeaderUserLogoff
+        ).clickable();
+
+        this.buttonHeaderUserLogoff.click();
     }
 }

@@ -85,6 +85,7 @@
 
         <div class="card-body" th:if="*{moderator}">
             <a class="btn btn-light btn-block text-left"
+               id="admin-user-link"
                th:href="*{adminUsers.href}"
                th:classappend="*{adminUsers.active} ? 'active'">
                 <i class="fa fa-users mr-2"></i>

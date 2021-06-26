@@ -1,10 +1,12 @@
 package br.edu.ifrs.canoas.webapp.web.test.user;
 
+import br.edu.ifrs.canoas.webapp.web.config.BaseFluentTest;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 
-public class BanUserTest {
+public class BanUserTest extends BaseFluentTest {
 
-    @Test
+    @RetryingTest(5)
     public void testBanUser(){
 
     }

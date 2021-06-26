@@ -49,14 +49,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="user : ${users.data}">
+                        <tr th:each="user : ${users.data}" class="user-item">
                             <td th:text="${user.id}"></td>
                             <td th:text="${user.name}"></td>
                             <td th:text="${user.username}"></td>
                             <td th:text="#{${user.role.name}}"></td>
                             <td th:text="#{${user.status.name}}"></td>
                             <td class="text-center">
-                                <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}" class="btn btn-light btn-xs">
+                                <a th:href="@{/manager/admin/users/{id}(id = ${user.id})}"
+                                   class="btn btn-light btn-xs user-action-link">
                                     <i class="fa fa-eye"></i>
                                     <span th:text="#{manager.admin.user.list.action.view}"></span>
                                 </a>
