@@ -7,6 +7,7 @@ import br.edu.ifrs.canoas.webapp.web.page.LoginPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerIndexPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerProfileEditPage;
 import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerProfilePage;
+import br.edu.ifrs.canoas.webapp.web.page.manager.ManagerUserChangePasswordPage;
 import br.edu.ifrs.canoas.webapp.web.page.user.UserCreatePage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,9 @@ public class UserManageTest extends BaseFluentTest {
 
     @Page()
     ManagerProfileEditPage managerProfileEditPage;
+
+    @Page
+    ManagerUserChangePasswordPage managerUserChangePasswordPage;
 
     @RetryingTest(5)
     public void testCreateUser() {
@@ -154,5 +158,40 @@ public class UserManageTest extends BaseFluentTest {
     @Test
     public void testEditUserSameUsername() {
 
+    }
+
+    @RetryingTest(5)
+    public void testChangePassword() {
+        loginPage.go();
+        loginPage.fillAndSubmitFormAwait("r2d2", "user");
+
+        homePage.isAt();
+        homePage.getButtonHeaderManager().click();
+
+        managerIndexPage.isAt();
+        managerIndexPage.getSidebarUserChangePasswordLink().click();
+
+        managerUserChangePasswordPage.isAt();
+        managerUserChangePasswordPage.fillChangePasswordForm(
+            "user",
+            "useras",
+            "useras"
+        );
+
+        managerUserChangePasswordPage.getSubmitChangePasswordButton().click();
+        managerProfilePage.isAt();
+        managerProfilePage.verifyAlertPresent(".alert-success");
+
+        managerProfilePage.logout();
+        homePage.isAt();
+        homePage.getButtonHomeUserLogin().click();
+        loginPage.isAt();
+
+        loginPage.fillAndSubmitFormAwait("r2d2", "user");
+        loginPage.isAt();
+        loginPage.verifyAlertPresent(".alert-danger");
+        loginPage.fillAndSubmitFormAwait("r2d2", "useras");
+
+        homePage.isAt();
     }
 }

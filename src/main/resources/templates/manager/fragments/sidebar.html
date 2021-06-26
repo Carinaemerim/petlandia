@@ -10,6 +10,7 @@
                 <i class="fa fa-user-edit mr-2"></i> <span th:text="#{ sidebar.user.myData}"></span></a>
 
             <a class="btn btn-light btn-block text-left"
+               id="sidebar-user-change-password"
                th:href="*{userPassword.href}"
                th:classappend="*{userPassword.active} ? 'active'">
                 <i class="fa fa-lock mr-2"></i> <span th:text="#{sidebar.user.alterPass}"></span></a>

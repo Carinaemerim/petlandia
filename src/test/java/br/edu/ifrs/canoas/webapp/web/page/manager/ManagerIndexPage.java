@@ -12,6 +12,9 @@ public class ManagerIndexPage extends GenericPage {
     @FindBy(id = "sidebar-user-my-data")
     private FluentWebElement sidebarUserMyDataLink;
 
+    @FindBy(id = "sidebar-user-change-password")
+    private FluentWebElement sidebarUserChangePasswordLink;
+
     @FindBy(id = "blocked-announces-link")
     protected FluentWebElement blockedAnnouncesLink;
 
