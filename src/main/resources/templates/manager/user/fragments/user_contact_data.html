@@ -1,0 +1,53 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="user_contact_data">
+
+    <div class="row">
+        <div class="col col-md-5">
+            <div class="form-group">
+                <label for="user_form_name" th:text="#{user.form.name}+'*'"> </label>
+                <input type="text" class="form-control" id="user_form_name" th:field="*{user.name}" required
+                       minlength="3" maxlength="120"
+                       th:classappend="${#fields.hasErrors('user.name')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.name')}" th:errors="*{user.name}"></div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="user.form.email" th:text="#{user.form.email}+'*'"> </label>
+                <input type="text" class="form-control"
+                       id="user.form.email" th:field="*{user.email}" readonly="readonly"
+                       minlength="6" maxlength="120"
+                       th:classappend="${#fields.hasErrors('user.email')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.email')}"
+                     th:errors="*{user.email}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label for="user_form_residentialPhone" th:text="#{user.form.residentialPhone}+'*'"> </label>
+                <input type="text" class="form-control mask-celphone" id="user_form_residentialPhone"
+                       th:field="*{user.residentialPhone}" required
+                       minlength="14" maxlength="15"
+                       th:classappend="${#fields.hasErrors('user.residentialPhone')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.residentialPhone')}"
+                     th:errors="*{user.residentialPhone}"></div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="user.form.celPhone" th:text="#{user.form.celPhone}"> </label>
+                <input type="text" class="form-control mask-celphone" id="user.form.celPhone"
+                       th:field="*{user.celPhone}"
+                       minlength="14" maxlength="15"
+                       th:classappend="${#fields.hasErrors('user.celPhone')} ? is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('user.celPhone')}"
+                     th:errors="*{user.celPhone}"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
