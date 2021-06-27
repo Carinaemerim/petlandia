@@ -55,7 +55,7 @@ public class ReportsManagerController {
                                    @AuthenticationPrincipal UserImpl activeUser,
                                    RedirectAttributes redirectAttributes) {
         String page = this.reportService.action(id, activeUser.getUser(), ReportStatus.ACCEPTED);
-        redirectAttributes.addFlashAttribute("success", messages.get("report." + page + ".accepted"));
+        redirectAttributes.addFlashAttribute("success", "report." + page + ".accepted");
         return "redirect:/manager/reports/" + page;
     }
 
@@ -64,7 +64,7 @@ public class ReportsManagerController {
                                    @AuthenticationPrincipal UserImpl activeUser,
                                    RedirectAttributes redirectAttributes) {
         String page = this.reportService.action(id, activeUser.getUser(), ReportStatus.REJECTED);
-        redirectAttributes.addFlashAttribute("success", messages.get("report." + page + ".rejected"));
+        redirectAttributes.addFlashAttribute("success", "report." + page + ".rejected");
         return "redirect:/manager/reports/" + page;
     }
 }
