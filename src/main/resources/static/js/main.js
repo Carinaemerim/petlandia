@@ -14,7 +14,8 @@ function InitCropper(id, options) {
     const $input_remove = $(".input-remove", container);
 
     const $modal = $('.modal', container).modal({
-        backdrop: true,
+        backdrop: 'static',
+        keyboard: false,
         show: false,
     });
     const $btn_submit = $('.btn-submit', container);

@@ -19,6 +19,11 @@ spring:
       enabled: true
       max-file-size: 5MB
       max-request-size: 16MB
+  logging:
+    level:
+      root: INFO
+      org.springframework.web: INFO
+      org.hibernate: INFO
 server:
   error:
     whitelabel:
