@@ -218,10 +218,12 @@ public class AnnounceController {
     @PostMapping("/{id}/report")
     public String PostToReport(@AuthenticationPrincipal UserImpl activeUser,
                                @PathVariable("id") final Long id,
-                               @ModelAttribute("message") String message) {
+                               @ModelAttribute("message") String message,
+                               RedirectAttributes redirectAttributes) {
         Announce announce = announceService.findByIdAndStatusActive(id);
         reportService.save(announce, activeUser.getUser(), message);
         announceService.setStatus(announce, AnnounceStatus.WAITING_REVIEW);
+        redirectAttributes.addFlashAttribute("success", "announce.reported");
         return "redirect:/announces";
     }
 

@@ -75,21 +75,25 @@
                             class="caret"></span></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="user-header bg-white text-center" style="padding: 5px; height: 100%; width: 100%;">
+                    <li class="user-header bg-white text-center">
                         <p>
-                            <small>
-                                <a class="text-gray-dark"
-                                   href="#" th:text="${#authentication.principal.user.email}">
-                                </a>
-                            </small>
+                            <small lass="text-gray-dark" th:text="${#authentication.principal.user.email}"></small>
                         </p>
                     </li>
-                    <li class="user-footer">
-                        <div class="text-center">
-                            <a href="#" th:href="@{/logout}"
-                               id="btn-header-user-logoff"
-                               class="btn btn-secondary btn-flat" th:text="#{login.logout}"></a>
-                        </div>
+                    <li class="user-body pl-2 pr-2 pb-2">
+                        <a href="#" th:href="@{/manager/user/profile}"
+                           id="btn-header-user-profile"
+                           class="btn btn-secondary btn-block" th:text="#{sidebar.user.myData}"></a>
+                    </li>
+                    <li class="user-body pl-2 pr-2 pb-2">
+                        <a href="#" th:href="@{/manager/announces/active}"
+                           id="btn-header-user-announces"
+                           class="btn btn-secondary btn-block" th:text="#{sidebar.user.myAnnounces}"></a>
+                    </li>
+                    <li class="user-footer pl-2 pr-2    ">
+                        <a href="#" th:href="@{/logout}"
+                           id="btn-header-user-logoff"
+                           class="btn btn-secondary btn-block" th:text="#{login.logout}"></a>
                     </li>
                 </ul>
             </div>
