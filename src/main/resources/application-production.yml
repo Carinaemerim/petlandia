@@ -3,6 +3,8 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
+  datasource:
+    data:
   thymeleaf:
     cache: false
 logging:
@@ -12,6 +14,5 @@ logging:
     org.hibernate: ERROR
   file:
     name: errors.log
-    path: logs
 server:
   port: 80
