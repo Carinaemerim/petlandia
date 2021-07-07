@@ -10,7 +10,6 @@ spring:
     platform: mysql
     username: ${MYSQL_USER:petlandia}
     password: ${MYSQL_PASSWORD:petlandia}
-    data: classpath:data-mysql.sql
     initialization-mode: always
   profiles:
     active: development
