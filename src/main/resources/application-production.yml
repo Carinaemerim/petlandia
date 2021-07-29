@@ -2,9 +2,9 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: update
-  datasource:
-    data:
+      ddl-auto: create-drop
+    datasource:
+      data: classpath:data-mysql.sql
   thymeleaf:
     cache: false
 logging:
