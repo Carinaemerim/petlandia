@@ -168,7 +168,7 @@ public class ReportService {
         boolean admin = Auth.hasRole(new Role[]{Role.ROLE_ADMIN});
         if (user.getStatus().equals(UserStatus.WAITING_REVIEW) && admin) {
             if (status.equals(ReportStatus.ACCEPTED)) {
-                user.setStatus(UserStatus.ACTIVE);
+                user.setStatus(UserStatus.DELETED);
                 this.userRepository.save(user);
             }
 
